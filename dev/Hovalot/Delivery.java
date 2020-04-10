@@ -7,18 +7,17 @@ public class Delivery {
     private String DName;
     private String source;
     private int preWeight;
-    private List<Destination> destinationList;
+    private List<NumberedFile> numberedFiles;
 
-    public Delivery(String date, String dispatchTime, String TID, String DName, String source, int preWeight, List<Destination> destinationList) {
+    public Delivery(String date, String dispatchTime, String TID, String DName, String source, int preWeight, List<NumberedFile> numberedFiles) {
         this.date = date;
         this.dispatchTime = dispatchTime;
         this.TID = TID;
         this.DName = DName;
         this.source = source;
         this.preWeight = preWeight;
-        this.destinationList = destinationList;
+        this.numberedFiles = numberedFiles;
     }
-
     public String getDate() {
         return date;
     }
@@ -67,12 +66,13 @@ public class Delivery {
         this.preWeight = preWeight;
     }
 
-    public List<Destination> getDestinationList() {
-        return destinationList;
+    public List<NumberedFile> getNumberedFiles() {
+        return numberedFiles;
     }
 
-    public void setDestinationList(List<Destination> destinationList) {
-        this.destinationList = destinationList;
+    public void setNumberedFiles(List<NumberedFile> numberedFiles) {
+        this.numberedFiles = numberedFiles;
     }
+
 }
     
