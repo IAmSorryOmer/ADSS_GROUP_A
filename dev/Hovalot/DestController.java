@@ -1,5 +1,6 @@
 
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -22,8 +23,8 @@ public class DestController {
 		return getDest(address) != null;
 	}
 
-	public boolean checkAreas(String[] addresses){
-		String area = getDest(addresses[0]).getArea();
+	public boolean checkAreas(Collection<String> addresses){
+		String area = getDest(addresses.iterator().next()).getArea();
 		for (String address: addresses){
 			if (!getDest(address).getArea().equals(area)){
 				return false;
