@@ -2,20 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Discount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Report.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1arCEF7kClJCCpz4ibba27HerIP" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -52,11 +65,30 @@
       <option name="presentableId" value="Default" />
       <updated>1587484212174</updated>
       <workItem from="1587484218063" duration="19000" />
-      <workItem from="1587485834774" duration="96000" />
+      <workItem from="1587485834774" duration="287000" />
+      <workItem from="1587486142801" duration="532000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="1874" height="271" key="GridCell.Tab.0.bottom" timestamp="1587486121095">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1874" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1587486121095" />
+    <state width="1874" height="271" key="GridCell.Tab.0.center" timestamp="1587486121094">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1874" height="271" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1587486121094" />
+    <state width="1874" height="271" key="GridCell.Tab.0.left" timestamp="1587486121094">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1874" height="271" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1587486121094" />
+    <state width="1874" height="271" key="GridCell.Tab.0.right" timestamp="1587486121095">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="1874" height="271" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1587486121095" />
   </component>
 </project>
