@@ -1,27 +1,29 @@
 package com.company.LogicLayer;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReportController {
     private static List<Report> reports = new ArrayList<>();
 
-    public static void addReport(Report report, List<String> subjects) throws Exception {
+
+    public static void addInventoryReport(List<Category> categories, Report report){
+        List<ProductDetails> products = ProductDetailsController.getAllProductsOffCategory(categories);
+        report.setReportType(Report.reportType.Inventory);
+        report.setSubjects(products);
         reports.add(report);
-        for (String subject: subjects){
-            List<Discountable> reportSubjects = report.getSubjects();
-            Category category = CategoryController.getCategoryByID(subject);
-            if (category != null){
-                reportSubjects.add(category);
-            }
-            ProductDetails productDetails = ProductDetailsController.getProductDetailsById(subject);
-            if(productDetails != null){
-                reportSubjects.add(category);
-            }
-            if (productDetails == null || category == null){
-                throw new Exception("Illegal subject id given to the report");
-            }
-        }
+    }
+    public static void addDamagedReport(Report report){
+        List<Product> products = ProductController.returnAllDamaged();
+        report.setReportType(Report.reportType.Damaged);
+        report.setSubjects(products);
+        reports.add(report);
+    }
+
+    public static void addMissingReport(Report report){
+        List<ProductDetails> products = ProductDetailsController.returnAllMissing();
+        report.setReportType(Report.reportType.Missings);
+        report.setSubjects(products);
+        reports.add(report);
     }
 
     public static Report getReportById(String Id){
@@ -31,9 +33,5 @@ public class ReportController {
             }
         }
         return null;
-    }
-
-    public static void reportAllMissing(Report report){
-
     }
 }

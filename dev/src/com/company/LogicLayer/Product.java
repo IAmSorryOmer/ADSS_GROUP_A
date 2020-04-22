@@ -2,7 +2,7 @@ package com.company.LogicLayer;
 
 import java.time.LocalDate;
 
-public class Product{
+public class Product implements Reportable{
 
     private String location;
     private String id;

@@ -3,16 +3,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Report {
+    public enum reportType{Damaged, Inventory, Missings}
+    private reportType reportType;
     private String reportId;
     private String employeeId;
     private String description;
-    private List<Discountable> subjects;
+    private List<? extends Reportable> subjects;
 
-    public Report(String reportId, String employeeId, String description) {
+    public Report(Report.reportType reportType, String reportId, String employeeId, String description, List<? extends Reportable> subjects) {
+        this.reportType = reportType;
         this.reportId = reportId;
         this.employeeId = employeeId;
         this.description = description;
-        subjects = new ArrayList<>();
+        this.subjects = subjects;
+    }
+
+    public Report.reportType getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(Report.reportType reportType) {
+        this.reportType = reportType;
     }
 
     public String getReportId() {
@@ -39,7 +50,21 @@ public class Report {
         this.description = description;
     }
 
-    public List<Discountable> getSubjects() {
+    public List<? extends Reportable> getSubjects() {
         return subjects;
+    }
+
+    public void setSubjects(List<? extends Reportable> subjects) {
+        this.subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("Report number: " + reportId + "\nby employee number: " + employeeId + "\n of type: " + reportType.name() + "\n" + "Products:");
+        for(Reportable reportable: subjects){
+            stringBuilder.append("\n");
+            stringBuilder.append(reportable.toString());
+        }
+        return stringBuilder.toString();
     }
 }

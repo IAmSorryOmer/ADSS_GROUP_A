@@ -51,8 +51,8 @@ public class ProductController {
         }
     }
 
-    public static List<Product> returnAllMissing() throws Exception {
-        return products.stream().filter(product -> product.isDamaged()).collect(Collectors.toList());
+    public static List<Product> returnAllDamaged() {
+        return products.stream().filter(Product::isDamaged).collect(Collectors.toList());
     }
 
     public static String GetProductsDetails(Product product){

@@ -2,7 +2,7 @@ package com.company.LogicLayer;
 
 import java.util.List;
 
-public class ProductDetails implements Discountable{
+public class ProductDetails implements Discountable, Reportable{
     private String id;
     private String name;
     private String manufacturer;

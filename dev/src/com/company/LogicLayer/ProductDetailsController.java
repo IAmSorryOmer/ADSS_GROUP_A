@@ -31,7 +31,7 @@ public class ProductDetailsController {
         return productDetails.getMinimumQuantity() >= (productDetails.getQuantityInStorage()+productDetails.getQuantityInShelves());
     }
 
-    public static List<ProductDetails> returnAllMissing() throws Exception {
+    public static List<ProductDetails> returnAllMissing() {
         return productDetailsList.stream().filter(product -> product.getMinimumQuantity() >= (product.getQuantityInStorage()+product.getQuantityInShelves())).collect(Collectors.toList());
     }
 
@@ -43,15 +43,28 @@ public class ProductDetailsController {
         productDetails.setMinimumQuantity(newQuantity);
     }
 
-    public static List<ProductDetails> getProductDetailsByName(String name) throws Exception {
+    public static List<ProductDetails> getProductDetailsByName(String name) {
         return productDetailsList.stream().filter(product -> product.getName().equals(name)).collect(Collectors.toList());
     }
 
-    public static List<ProductDetails> getProductDetailsByStock() throws Exception {
+    public static List<ProductDetails> getProductDetailsByStock() {
         return productDetailsList.stream().filter(product -> product.getQuantityInShelves()> 0 || product.getQuantityInStorage()>0).collect(Collectors.toList());
     }
 
     public static String GetProductsDetails(ProductDetails productDetails){
         return productDetails.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(productDetails, false);
+    }
+    public static boolean isInCategory(ProductDetails productDetails, Category category){
+        Category currCategory = productDetails.getCategory();
+        while(currCategory != null){
+            if(currCategory.getID().equals(category.getID())){
+                return true;
+            }
+            currCategory = currCategory.getParent();
+        }
+        return false;
+    }
+    public static List<ProductDetails> getAllProductsOffCategory(List<Category> categories){
+        return productDetailsList.stream().filter(product -> categories.stream().anyMatch(cat -> isInCategory(product, cat))).collect(Collectors.toList());
     }
 }
