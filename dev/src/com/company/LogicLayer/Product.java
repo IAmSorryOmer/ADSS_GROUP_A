@@ -1,12 +1,12 @@
 package com.company.LogicLayer;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Product{
     private String location;
     private String id;
     private boolean isInStorage;
-    private Date expirationDate;
+    private LocalDate expirationDate;
     private boolean isDamaged;
 
 

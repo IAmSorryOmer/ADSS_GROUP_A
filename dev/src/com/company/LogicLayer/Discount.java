@@ -1,9 +1,41 @@
 package com.company.LogicLayer;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 public class Discount {
     private double percentage;
-    Date fromDate;
-    Date toDate;
+    private LocalDate fromDate;
+    private LocalDate toDate;
+
+    public Discount(double percentage, LocalDate fromDate, LocalDate toDate) {
+        this.percentage = percentage;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
+    }
+
+    public double getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(double percentage) {
+        this.percentage = percentage;
+    }
+
+    public LocalDate getFromDate() {
+        return fromDate;
+    }
+
+    public void setFromDate(LocalDate fromDate) {
+        this.fromDate = fromDate;
+    }
+
+    public LocalDate getToDate() {
+        return toDate;
+    }
+
+    public void setToDate(LocalDate toDate) {
+        this.toDate = toDate;
+    }
 }
