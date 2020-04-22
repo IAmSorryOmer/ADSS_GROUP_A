@@ -46,27 +46,26 @@ public class SingleProviderOrder {
 		return true;
 	}
 	
-	private static void setprice (SingleProviderOrder sop, CatalogItem catalogItem) {
-		
-	}
-	
 	public static boolean RemoveFromOrder (SingleProviderOrder sop, CatalogItem catalogItem) {
 		sop.removeFromItemList(catalogItem);
 		return true;
 	}
 	
-
+	private static void setprice (SingleProviderOrder sop, CatalogItem catalogItem) {
+		//to-do: implement
+	}
+	
 	//getters  & setters
-	public Map<CatalogItem, Integer> getItemList() {
+	public Map<CatalogItem, Pair<Integer, Integer>> getItemList() {
 		return ItemList_amount_price;
 	}
 
 	public void addToItemList(CatalogItem catalogItem, int orderAmount) {
-		ItemList_amount_price.put(catalogItem, new Integer(orderAmount));
+		ItemList_amount_price.put(catalogItem, new Pair(new Integer(orderAmount),new Integer(orderAmount)));
 	}
 	
 	public void editItemList(CatalogItem catalogItem, int orderAmount) {
-		ItemList_amount_price.replace(catalogItem, new Integer(orderAmount));
+		ItemList_amount_price.replace(catalogItem, new Pair(new Integer(orderAmount),new Integer(orderAmount)));
 	}
 	
 	public void removeFromItemList(CatalogItem catalogItem) {

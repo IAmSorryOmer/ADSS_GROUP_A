@@ -1,6 +1,8 @@
 package BusinessLayer;
-
+import java.util.*;
 import java.util.List;
+import java.lang.*;
+
 
 public class Provider {
 	
@@ -14,11 +16,20 @@ public class Provider {
 	private CommunicationDetails CommunicationDetails;
 	
 	//constructor
-	private Provider() {}
+	private Provider(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
+		this.ProviderID = providerID;
+		this.CreditCardNumber = CreditCardNumber;
+		this.DoesNeedTransport = DoesNeedTransport;
+		this.ArrivalDays = ArrivalDays;
+		this.Name = Name;
+		this.CommunicationDetails = CommunicationDetails;
+	}
 	
 	//creator
-	public Provider ProviderCreator() {
+	public Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
+		Provider provider = new Provider(providerID,CreditCardNumber, DoesNeedTransport, DelayDays, ArrivalDays, Name, CommunicationDetails);
 		
+		return provider;
 	}
 	
 	//getters and setters
@@ -46,10 +57,10 @@ public class Provider {
 	public void setDelayDays(int delayDays) {
 		DelayDays = delayDays;
 	}
-	public String[] getArrivalDays() {
+	public List<String> getArrivalDays() {
 		return ArrivalDays;
 	}
-	public void setArrivalDays(String[] arrivalDays) {
+	public void setArrivalDays(List<String> arrivalDays) {
 		ArrivalDays = arrivalDays;
 	}
 	public String getName() {
@@ -66,7 +77,17 @@ public class Provider {
 	}
 
 	//methods
-	
+	public static boolean editDetails(Provider provider,boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name) {
+		try {
+		provider.setDoesNeedTransport(DoesNeedTransport);
+		provider.setDelayDays(DelayDays);
+		provider.setArrivalDays(ArrivalDays);
+		return true;
+		}
+		catch(Exception e) {
+			return false;
+		}
+	}
 
 
 
