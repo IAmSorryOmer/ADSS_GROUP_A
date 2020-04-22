@@ -13,15 +13,15 @@ public class ProductDetails implements Discountable{
     private int quantityInShelves;
     private int minimumQuantity;
 
-    public ProductDetails(String id, String name, String manufacturer, double retailPrice, double supplierPrice, Category category, int quantityInStorage, int quantityInShelves, int minimumQuantity) {
+    public ProductDetails(String id, String name, String manufacturer, double retailPrice, double supplierPrice, Category category, int minimumQuantity) {
         this.id = id;
         this.name = name;
         this.manufacturer = manufacturer;
         this.retailPrice = retailPrice;
         this.supplierPrice = supplierPrice;
         this.category = category;
-        this.quantityInStorage = quantityInStorage;
-        this.quantityInShelves = quantityInShelves;
+        this.quantityInStorage = 0;
+        this.quantityInShelves = 0;
         this.minimumQuantity = minimumQuantity;
     }
 
@@ -99,5 +99,11 @@ public class ProductDetails implements Discountable{
 
     public Discountable getParent() {
         return category;
+    }
+
+    @Override
+    public String toString() {
+        return "Product type: " + name + "\nProduct type id: " + id + "\nProduct manufacturer: " + manufacturer +
+                "\n Storage Quantity: "  + quantityInStorage + "\nShelves Quantity: " + quantityInShelves;
     }
 }

@@ -8,6 +8,9 @@ public class CategoryController {
     private static List<Category> mainCategories = new ArrayList<>();
 
     public static void addCategory(Category category, String superCatId) throws Exception {
+        if (getCategoryByID(category.getId()) != null || ProductDetailsController.getProductDetailsById(category.getId()) != null){
+            throw new Exception("A category or a product with that id already exists");
+        }
         if(superCatId == null){
             mainCategories.add(category);
         }
@@ -24,6 +27,16 @@ public class CategoryController {
     }
     public static List<Category> getCategoriesByName(String name){
         return findCategory(mainCategories, (cat) -> cat.getName().equals(name), false);
+    }
+
+    public static Category getCategoryByID(String id){
+         List<Category> result =  findCategory(mainCategories, (cat) -> cat.getId().equals(id), true);
+        if (result.size() == 0){
+            return null;
+        }
+        else {
+            return result.get(0);
+        }
     }
 
     private static List<Category> findCategory(List<Category> categories, Predicate<Category> predicate, boolean shortcut){

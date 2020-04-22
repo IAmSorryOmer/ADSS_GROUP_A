@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class DiscountController {
 
-    private static List<Discount> discounts;
+    private static List<Discount> discounts = new ArrayList<>();;
     private static HashMap<Discountable, List<Discount>> retailDiscounts;
     private static HashMap<Discountable, List<Discount>> supplierDiscounts;
     public static void addDiscount(Discount discount, List<Discountable> discountables, boolean retail){
