@@ -35,8 +35,6 @@ public class SingleProviderOrder {
 		return true;
 	}
 	
-	
-
 	public static boolean EditOrder (SingleProviderOrder sop, CatalogItem catalogItem, int orderAmount) {
 		if (orderAmount < 0)
 			return false;

@@ -54,6 +54,9 @@ public class CommunicationDetails {
 	public void setAgreement(Agreement agreement) {
 		Agreement = agreement;
 	}
+	public boolean getIsFixedFays() {
+		return IsFixedDays;
+	}
 	
 	//methods
 	public static boolean editDetails(CommunicationDetails comm,boolean IsFixedDays, String PhoneNum, String Address, Agreement Agreement) {
@@ -68,5 +71,8 @@ public class CommunicationDetails {
 			return false;
 		}
 	}
-
+	public static void printDetails(CommunicationDetails c) {
+		System.out.println("Phone: "+c.PhoneNum);
+		System.out.println("Address: "+c.Address);
+	}
 }

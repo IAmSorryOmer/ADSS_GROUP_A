@@ -13,7 +13,7 @@ public class Provider {
 	private int DelayDays;
 	private List<String> ArrivalDays;
 	private String Name;
-	private CommunicationDetails CommunicationDetails;
+	private CommunicationDetails communicationDetails;
 	
 	//constructor
 	private Provider(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
@@ -22,7 +22,7 @@ public class Provider {
 		this.DoesNeedTransport = DoesNeedTransport;
 		this.ArrivalDays = ArrivalDays;
 		this.Name = Name;
-		this.CommunicationDetails = CommunicationDetails;
+		this.communicationDetails = CommunicationDetails;
 	}
 	
 	//creator
@@ -70,10 +70,10 @@ public class Provider {
 		Name = name;
 	}
 	public CommunicationDetails getCommunicationDetails() {
-		return CommunicationDetails;
+		return communicationDetails;
 	}
 	public void setCommunicationDetails(CommunicationDetails communicationDetails) {
-		CommunicationDetails = communicationDetails;
+		communicationDetails = communicationDetails;
 	}
 
 	//methods
@@ -87,6 +87,22 @@ public class Provider {
 		catch(Exception e) {
 			return false;
 		}
+	}
+	public static void printDetails(Provider p) {
+		System.out.println("details are:");
+		System.out.println("ID: "+p.ProviderID);
+		System.out.println("CreditCardNum: "+p.CreditCardNumber);
+		System.out.println("need transport: "+p.DoesNeedTransport);
+		if(!p.getCommunicationDetails().getIsFixedFays())
+			System.out.println("Delay Untill Delivery: "+p.DelayDays+" Days");
+		else {
+			System.out.print("Comes in days: ");
+			for(String s : p.ArrivalDays)
+				System.out.print(s+" ");
+			System.out.println("");
+		}
+		System.out.println("Name: "+p.Name);
+		CommunicationDetails.printDetails(p.communicationDetails);
 	}
 
 
