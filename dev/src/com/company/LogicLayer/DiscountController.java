@@ -12,30 +12,47 @@ public class DiscountController {
     private static List<Discount> discounts = new ArrayList<>();;
     private static HashMap<Discountable, List<Discount>> retailDiscounts;
     private static HashMap<Discountable, List<Discount>> supplierDiscounts;
-    public static void addDiscount(Discount discount, List<Discountable> discountables, boolean retail){
+    public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds, boolean retail) throws Exception{
         discounts.add(discount);
         HashMap<Discountable, List<Discount>> map = retail? retailDiscounts:supplierDiscounts;
-        for(Discountable discountable:discountables){
-            map.putIfAbsent(discountable, new ArrayList<>());
-            map.get(discountable).add(discount);
+        for(String productId : productsIds){
+            ProductDetails productDetails = ProductDetailsController.getProductDetailsById(productId);
+            map.putIfAbsent(productDetails, new ArrayList<>());
+            map.get(productDetails).add(discount);
+        }
+        for(String categoryId:categoriesIds){
+            Category category = CategoryController.getCategoryByID(categoryId);
+            map.putIfAbsent(category, new ArrayList<>());
+            map.get(category).add(discount);
         }
     }
 
+    public static List<Discount> getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
+        Discountable discountable = productDetails ? ProductDetailsController.getProductDetailsById(id) : CategoryController.getCategoryByID(id);
+        if(discountable == null){
+            throw new IllegalArgumentException("there is no discountable with that id");
+        }
+        return getDiscountableDiscounts(discountable, retail);
+    }
     public static List<Discount> getDiscountableDiscounts(Discountable discountable, boolean retail){
         return retail? retailDiscounts.get(discountable):supplierDiscounts.get(discountable);
     }
 
-    private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail){
+    private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail) throws Exception{
         List<Discount> discounts = getDiscountableDiscounts(product, retail);
         Discountable discountable = product.getCategory();
         while(discountable != null){
-            discounts.addAll(getDiscountableDiscounts(discountable, retail));
+            discounts.addAll(getDiscountableDiscounts(product, retail));
             discountable = discountable.getParent();
         }
         return discounts;
     }
 
-    public static double getProductDiscountPercentage(ProductDetails product, boolean retail){
+    public static double getProductDiscountPercentage(String id, boolean retail) throws Exception{
+        ProductDetails product = ProductDetailsController.getProductDetailsById(id);
+        if(product == null){
+            throw new IllegalArgumentException("there is no type with that id");
+        }
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         double max = discounts.stream()
                 .reduce(0.0, (accumulatedDouble, discount) -> {
@@ -48,10 +65,15 @@ public class DiscountController {
         return max;
     }
 
-    public static List<Double> getProductPricingHistory(ProductDetails product, boolean retail){
+    public static List<Double> getProductPricingHistory(String id, boolean retail) throws Exception{
+        ProductDetails product = ProductDetailsController.getProductDetailsById(id);
+        if(product == null){
+            throw new IllegalArgumentException("there is no type with that id");
+        }
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         discounts.sort(Comparator.comparing(Discount::getFromDate));
-        List<Double> priceHistory = discounts.stream().map(discount -> (retail?product.getRetailPrice():product.getSupplierPrice())* discount.getPercentage()/100).collect(Collectors.toList());
+        //TODO check
+        List<Double> priceHistory = discounts.stream().map(discount -> (retail?product.getRetailPrice():product.getSupplierPrice())* (1-discount.getPercentage()/100)).collect(Collectors.toList());
         return priceHistory;
     }
 

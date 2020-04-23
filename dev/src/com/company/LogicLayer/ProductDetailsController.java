@@ -7,8 +7,8 @@ public class ProductDetailsController {
     private static List<ProductDetails> productDetailsList = new ArrayList<>();
 
     public static void addProductDetails(ProductDetails productDetails, String catId) throws Exception {
-        if (getProductDetailsById(productDetails.getId()) != null  || CategoryController.getCategoryByID(productDetails.getId()) != null){
-            throw new Exception("A category or a product with that id already exists");
+        if (getProductDetailsById(productDetails.getId()) != null){
+            throw new Exception("A product type with id " + productDetails.getId() + " already exists");
         }
         Category category = CategoryController.getCategoryByID(catId);
         if(category == null){
@@ -57,7 +57,15 @@ public class ProductDetailsController {
         }
         return false;
     }
-    public static List<ProductDetails> getAllProductsOffCategory(List<Category> categories){
+    public static List<ProductDetails> getAllProductsOffCategory(List<String> categorieIds) throws Exception{
+        List<Category> categories = new ArrayList<>();
+        for(String categoryId : categorieIds){
+            Category categoryToAdd = CategoryController.getCategoryByID(categoryId);
+            if (categoryToAdd == null){
+                throw new IllegalArgumentException("there isnt category with id " + categoryId + ".");
+            }
+            categories.add(categoryToAdd);
+        }
         return productDetailsList.stream().filter(product -> categories.stream().anyMatch(cat -> isInCategory(product, cat))).collect(Collectors.toList());
     }
     public static List<ProductDetails> getProductDetailsList(){

@@ -12,7 +12,7 @@ public class ProductController {
 
     public static void addProduct(Product product, String typeId) throws Exception{
         if (getProductById(product.getId()) != null){
-            throw new Exception("product with that Id already exists");
+            throw new Exception("product with that id " + product.getId() + " already exists");
         }
         ProductDetails productDetails = ProductDetailsController.getProductDetailsById(typeId);
         if(productDetails == null){

@@ -6,8 +6,8 @@ public class ReportController {
     private static List<Report> reports = new ArrayList<>();
 
 
-    public static void addInventoryReport(List<Category> categories, Report report){
-        List<ProductDetails> products = ProductDetailsController.getAllProductsOffCategory(categories);
+    public static void addInventoryReport(List<String> categoriesIds, Report report) throws Exception{
+        List<ProductDetails> products = ProductDetailsController.getAllProductsOffCategory(categoriesIds);
         report.setReportType(Report.reportType.Inventory);
         report.setSubjects(products);
         reports.add(report);
@@ -33,5 +33,8 @@ public class ReportController {
             }
         }
         return null;
+    }
+    public static List<Report> getAllReports(){
+        return reports;
     }
 }

@@ -8,20 +8,20 @@ public class CategoryController {
     private static List<Category> mainCategories = new ArrayList<>();
 
     public static void addCategory(Category category, String superCatId) throws Exception {
-        if (getCategoryByID(category.getId()) != null || ProductDetailsController.getProductDetailsById(category.getId()) != null){
-            throw new Exception("A category or a product with that id already exists");
+        if (getCategoryByID(category.getId()) != null){
+            throw new Exception("A category with id " + category.getID() + " already exists");
         }
         if(superCatId == null){
             mainCategories.add(category);
         }
         else{
-            List<Category> parent = findCategory(mainCategories, (cat) -> cat.getID().equals(superCatId), true);
-            if(parent.size() == 1){
-                parent.get(0).addCategory(category);
-                category.setParent(parent.get(0));
+            Category supCat = getCategoryByID(superCatId);
+            if(supCat == null){
+                throw new Exception("there isnt category with the provided id");
             }
             else{
-                throw new Exception("there isnt category with the provided id");
+                supCat.addCategory(category);
+                category.setParent(supCat);
             }
         }
     }

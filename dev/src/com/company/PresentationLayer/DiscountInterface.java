@@ -1,33 +1,23 @@
 package com.company.PresentationLayer;
 
-import com.company.LogicLayer.Discount;
-import com.company.LogicLayer.DiscountController;
-import com.company.LogicLayer.Discountable;
-import com.company.LogicLayer.ProductDetails;
+import com.company.LogicLayer.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
 public class DiscountInterface {
-    public static void addDiscount(Discount discount, List<Discountable> discountables, boolean retail){
-        DiscountController.addDiscount(discount, discountables, retail);
+    public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds, boolean retail) throws Exception{
+        DiscountController.addDiscount(discount, productsIds, categoriesIds, retail);
     }
-    public static List<Discount> getDiscountableDiscounts(Discountable discountable, boolean retail){
-        return DiscountController.getDiscountableDiscounts(discountable, retail);
-    }
-    public static double getProductDiscountPercentage(ProductDetails product, boolean retail){
-        return DiscountController.getProductDiscountPercentage(product, retail);
+    public static List<Discount> getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
+        return DiscountController.getDiscountableDiscounts(id, productDetails, retail);
     }
 
-    public static List<Double> getProductPricingHistory(ProductDetails product, boolean retail){
-        return DiscountController.getProductPricingHistory(product, retail);
+    public static double getProductDiscountPercentage(String id, boolean retail) throws Exception{
+        return DiscountController.getProductDiscountPercentage(id, retail);
     }
 
-    public static void editDiscount(Discount discount, LocalDate fromDate, LocalDate toDate, double percantage){
-        DiscountController.editDiscount(discount, fromDate, toDate, percantage);
-    }
-
-    public static void removeDiscount(Discount discount){
-        DiscountController.removeDiscount(discount);
+    public static List<Double> getProductPricingHistory(String id, boolean retail) throws Exception{
+        return DiscountController.getProductPricingHistory(id, retail);
     }
 }
