@@ -44,4 +44,5 @@ public class TruckController {
 		return getTruck(ID).getWeight();
 	}
 }
+
 //Final version

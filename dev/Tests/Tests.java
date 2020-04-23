@@ -84,6 +84,8 @@ public class Tests {
         DestController.getInstance().addDestination("Yousoro1 12","5423435427", "Omer Barach", "Area C");
         List<String> l=new LinkedList<>();
         l.add("BambaLand1 18");
+
+        
         l.add("Zura1 22");
         l.add("Yousoro1 12");
         assertEquals(DestController.getInstance().checkAreas(l),false);
