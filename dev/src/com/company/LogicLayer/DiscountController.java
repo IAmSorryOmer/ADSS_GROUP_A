@@ -50,6 +50,9 @@ public class DiscountController {
 
     private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail) throws Exception{
         List<Discount> discounts = getDiscountableDiscounts(product, retail);
+        if(discounts == null){
+            discounts = new ArrayList<>();
+        }
         Discountable discountable = product.getCategory();
         while(discountable != null){
             List<Discount> toAdd = getDiscountableDiscounts(discountable, retail);
