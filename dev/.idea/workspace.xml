@@ -3,15 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetailsController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +110,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587628705942</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="basic project">
+      <created>1587634224313</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1587634224313</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -137,10 +138,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="710" y="409" width="499" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1032@0.0.1920.1032" timestamp="1587628471947" />
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1587628705865">
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1587634224241">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1587628705865" />
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1587634224241" />
     <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl" timestamp="1587548868956">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -165,10 +166,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="886" y="92" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1587548891148" />
-    <state x="1035" y="251" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1587579197314">
+    <state x="1035" y="251" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1587634232024">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="1035" y="251" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587579197314" />
+    <state x="1035" y="251" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587634232024" />
     <state x="1211" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587622799177">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

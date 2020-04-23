@@ -34,12 +34,20 @@ public class ProductController {
         return null;
     }
 
-    public static List<Product> getProductsByType(ProductDetails type){
-        List<Product> result = productTypeToProducts.get(type);
+    public static List<Product> getProductsByType(String id) throws Exception{
+        ProductDetails productDetails = ProductDetailsController.getProductDetailsById(id);
+        if(productDetails == null){
+            throw new IllegalArgumentException("there is no type with that id");
+        }
+        List<Product> result = productTypeToProducts.get(productDetails);
         return (result == null) ? new ArrayList<>() : result;
     }
 
-    public static void moveProduct(Product product, String newLocation, boolean isInStorage){
+    public static void moveProduct(String id, String newLocation, boolean isInStorage) throws IllegalArgumentException{
+        Product product = getProductById(id);
+        if(product == null){
+            throw new IllegalArgumentException("there is no product with that id");
+        }
         boolean isLocationChanged = !product.isInStorage() ^ isInStorage;
         if (isLocationChanged){
             if (product.isInStorage()){
@@ -63,7 +71,11 @@ public class ProductController {
         return product.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(product.getType(), false);
     }
 
-    public static void markAsDamaged(Product product){
+    public static void markAsDamaged(String id) throws Exception{
+        Product product = getProductById(id);
+        if(product == null){
+            throw new Exception("there is no product with this id");
+        }
         if(product.isDamaged()){
             return;
         }
@@ -74,5 +86,8 @@ public class ProductController {
         else {
             product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()-1);
         }
+    }
+    public static List<Product> getAllProducts(){
+        return products;
     }
 }

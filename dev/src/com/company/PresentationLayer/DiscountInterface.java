@@ -1,6 +1,7 @@
 package com.company.PresentationLayer;
 
 import com.company.LogicLayer.Discount;
+import com.company.LogicLayer.DiscountController;
 import com.company.LogicLayer.Discountable;
 import com.company.LogicLayer.ProductDetails;
 
@@ -9,27 +10,24 @@ import java.util.List;
 
 public class DiscountInterface {
     public static void addDiscount(Discount discount, List<Discountable> discountables, boolean retail){
-        DiscountInterface.addDiscount(discount, discountables, retail);
+        DiscountController.addDiscount(discount, discountables, retail);
     }
     public static List<Discount> getDiscountableDiscounts(Discountable discountable, boolean retail){
-        return DiscountInterface.getDiscountableDiscounts(discountable, retail);
-    }
-    private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail){
-        return DiscountInterface.getAllProductDiscounts(product, retail);
+        return DiscountController.getDiscountableDiscounts(discountable, retail);
     }
     public static double getProductDiscountPercentage(ProductDetails product, boolean retail){
-        return DiscountInterface.getProductDiscountPercentage(product, retail);
+        return DiscountController.getProductDiscountPercentage(product, retail);
     }
 
     public static List<Double> getProductPricingHistory(ProductDetails product, boolean retail){
-        return DiscountInterface.getProductPricingHistory(product, retail);
+        return DiscountController.getProductPricingHistory(product, retail);
     }
 
     public static void editDiscount(Discount discount, LocalDate fromDate, LocalDate toDate, double percantage){
-        DiscountInterface.editDiscount(discount, fromDate, toDate, percantage);
+        DiscountController.editDiscount(discount, fromDate, toDate, percantage);
     }
 
     public static void removeDiscount(Discount discount){
-        DiscountInterface.removeDiscount(discount);
+        DiscountController.removeDiscount(discount);
     }
 }

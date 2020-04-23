@@ -1,10 +1,8 @@
 package com.company.PresentationLayer;
 
-import com.company.LogicLayer.DiscountController;
-import com.company.LogicLayer.Product;
-import com.company.LogicLayer.ProductController;
-import com.company.LogicLayer.ProductDetails;
+import com.company.LogicLayer.*;
 
+import java.security.PrivilegedActionException;
 import java.util.List;
 
 public class ProductInterface {
@@ -16,11 +14,11 @@ public class ProductInterface {
         return ProductController.getProductById(Id);
     }
 
-    public static List<Product> getProductsByType(ProductDetails type){
-        return ProductController.getProductsByType(type);
+    public static List<Product> getProductsByType(String id) throws Exception{
+        return ProductController.getProductsByType(id);
     }
-    public static void moveProduct(Product product, String newLocation, boolean isInStorage){
-        ProductController.moveProduct(product, newLocation, isInStorage);
+    public static void moveProduct(String id, String newLocation, boolean isInStorage) throws IllegalArgumentException {
+        ProductController.moveProduct(id, newLocation, isInStorage);
     }
     public static List<Product> getAllDamaged() {
         return ProductController.getAllDamaged();
@@ -30,7 +28,15 @@ public class ProductInterface {
         return ProductController.GetProductsDetails(product);
     }
 
-    public static void markAsDamaged(Product product){
-        ProductController.markAsDamaged(product);
+    public static void markAsDamaged(String id) throws Exception{
+        ProductController.markAsDamaged(id);
+    }
+    public static String stringifyProducts(){
+        StringBuilder stringBuilder = new StringBuilder("Products:\n");
+
+        for(Product product : ProductController.getAllProducts()){
+            stringBuilder.append("-").append(product.toString()).append("\n");
+        }
+        return stringBuilder.toString();
     }
 }

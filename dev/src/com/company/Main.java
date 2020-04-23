@@ -10,6 +10,7 @@ import com.company.PresentationLayer.ProductInterface;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 
 public class Main {
@@ -136,7 +137,7 @@ public class Main {
     public static void manageProducts(){
         while(true) {
             System.out.println("Please select an option to perform on products types:");
-            String[] options = new String[]{"add product", "prints all products of type", "print all damaged products", "mark product as damaged", "print all products", "return to main"};
+            String[] options = new String[]{"add product", "move product", "prints all products of type", "print all damaged products", "mark product as damaged", "print all products", "return to main"};
             printOptions(options);
             int option = reader.nextInt();
             switch(option){
@@ -144,29 +145,49 @@ public class Main {
                     addProductFromUser();
                     break;
                 case 2:
-                    printNumberedList(ProductDetailsInterface.getAllMissing());
+                    System.out.println("please insert the id of the product to move:");
+                    String id = reader.next();
+                    System.out.println("please insert the new location:");
+                    String newLocation = reader.next();
+                    System.out.println("is the new location in the storage?(y for yes, else no):");
+                    String ans = reader.next();
+                    try {
+                        ProductInterface.moveProduct(id, newLocation, ans.equals("y"));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("error. " + e.getMessage());
+                    }
                     break;
                 case 3:
-                    System.out.println("please insert product type id:");
-                    String id = reader.next();
-                    System.out.println("please insert new minimum quantity");
-                    int newQuantity = reader.nextInt();
+                    System.out.println("please insert the id of the product type(to print all the products types insert @print):");
+                    String productId = reader.next();
+                    if(productId.equals("@print")){
+                        String stringifiedTypes = ProductDetailsInterface.stringifyProduct();
+                        System.out.println(stringifiedTypes);
+                        System.out.println("now insert the id:");
+                        productId = reader.next();
+                    }
                     try {
-                        ProductDetailsInterface.changeMinimalQuantity(id, newQuantity);
+                        printNumberedList(ProductInterface.getProductsByType(productId));
                     }
                     catch (Exception e){
-                        System.out.println("quantity must be greater or equal to -1(wich means no minimum quantity at all)");
+                        System.out.println("error. " + e.getMessage());
                     }
                     break;
                 case 4:
-                    System.out.println("please insert name:");
-                    String name = reader.next();
-                    printNumberedList(ProductDetailsInterface.getProductDetailsByName(name));
+                    printNumberedList(ProductInterface.getAllDamaged());
                     break;
                 case 5:
-                    printNumberedList(ProductDetailsInterface.getProductDetailsByStock());
+                    System.out.println("please insert product id:");
+                    try {
+                        ProductInterface.markAsDamaged(reader.next());
+                    } catch (Exception e) {
+                        System.out.println("error. " + e.getMessage());
+                    }
                     break;
                 case 6:
+                    System.out.println(ProductInterface.stringifyProducts());
+                    break;
+                case 7:
                     return;
                 default:
                     System.out.println("choose an option between 1 to 6");
@@ -187,7 +208,7 @@ public class Main {
             System.out.println("now insert the id:");
             productId = reader.next();
         }
-        Product product = new Product("storag", id, true, localDate, false, null);
+        Product product = new Product("storage", id, true, localDate, false, null);
         try {
             ProductInterface.addProduct(product, productId);
         } catch (Exception e) {
@@ -195,7 +216,64 @@ public class Main {
         }
     }
     public static void manageDiscounts(){
-
+        while(true) {
+            System.out.println("Please select an option to perform on discounts:");
+            String[] options = new String[]{"add product", "move product", "prints all products of type", "print all damaged products", "mark product as damaged", "print all products", "return to main"};
+            printOptions(options);
+            int option = reader.nextInt();
+            switch(option){
+                case 1:
+                    addProductFromUser();
+                    break;
+                case 2:
+                    System.out.println("please insert the id of the product to move:");
+                    String id = reader.next();
+                    System.out.println("please insert the new location:");
+                    String newLocation = reader.next();
+                    System.out.println("is the new location in the storage?(y for yes, else no):");
+                    String ans = reader.next();
+                    try {
+                        ProductInterface.moveProduct(id, newLocation, ans.equals("y"));
+                    } catch (IllegalArgumentException e) {
+                        System.out.println("error. " + e.getMessage());
+                    }
+                    break;
+                case 3:
+                    System.out.println("please insert the id of the product type(to print all the products types insert @print):");
+                    String productId = reader.next();
+                    if(productId.equals("@print")){
+                        String stringifiedTypes = ProductDetailsInterface.stringifyProduct();
+                        System.out.println(stringifiedTypes);
+                        System.out.println("now insert the id:");
+                        productId = reader.next();
+                    }
+                    try {
+                        printNumberedList(ProductInterface.getProductsByType(productId));
+                    }
+                    catch (Exception e){
+                        System.out.println("error. " + e.getMessage());
+                    }
+                    break;
+                case 4:
+                    printNumberedList(ProductInterface.getAllDamaged());
+                    break;
+                case 5:
+                    System.out.println("please insert product id:");
+                    try {
+                        ProductInterface.markAsDamaged(reader.next());
+                    } catch (Exception e) {
+                        System.out.println("error. " + e.getMessage());
+                    }
+                    break;
+                case 6:
+                    System.out.println(ProductInterface.stringifyProducts());
+                    break;
+                case 7:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 6");
+            }
+        }
     }
     public static void addDiscountFromUser(){
         System.out.println("please insert id:");
