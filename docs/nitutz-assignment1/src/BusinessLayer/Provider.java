@@ -26,9 +26,10 @@ public class Provider {
 	}
 	
 	//creator
-	public Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
+	public static Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
 		Provider provider = new Provider(providerID,CreditCardNumber, DoesNeedTransport, DelayDays, ArrivalDays, Name, CommunicationDetails);
-		
+		AllProviders ap = AllProviders.getInstance();
+		AllProviders.addProvider(ap, provider);
 		return provider;
 	}
 	
@@ -105,6 +106,7 @@ public class Provider {
 		output += p.communicationDetails;
 		return output;
 	}
+	
 
 
 

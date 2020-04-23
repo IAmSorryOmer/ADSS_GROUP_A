@@ -31,12 +31,12 @@ public class CommunicationDetails {
 	}
 	
 	//creator
-	public CommunicationDetails communicationDetailsCreatorWithAgreement(boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
+	public static CommunicationDetails communicationDetailsCreatorWithAgreement(boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
 		CommunicationDetails cd = new CommunicationDetails(IsFixedDays, PhoneNum, Address, quantityForDiscount);
 		return cd;
 	}
 	
-	public CommunicationDetails communicationDetailsCreatorNoAgreement(boolean IsFixedDays, String PhoneNum, String Address) {
+	public static CommunicationDetails communicationDetailsCreatorNoAgreement(boolean IsFixedDays, String PhoneNum, String Address) {
 		CommunicationDetails cd = new CommunicationDetails(IsFixedDays, PhoneNum, Address);
 		return cd;
 	}
