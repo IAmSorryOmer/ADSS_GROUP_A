@@ -60,11 +60,22 @@ public class CatalogItem {
 	public void setPrice(double price) {
 		Price = price;
 	}
+
 	
 	public double calculateFinalPrice(int quantity, int totalOrder, int quantityForDiscount) {
 		int amountOfDiscounts = totalOrder % quantityForDiscount;
 		double finalPrice = quantity * Price * Math.pow(1-(Discount/100),(amountOfDiscounts));
 		return finalPrice;
 	}
+
+
+ 	public static String printItem(CatalogItem c) {
+		String s = "Catalog-Number: " + c.CatalogNum+"\n";
+		s+= "Price: "+c.Price+"\n";
+		s+= "Discount: "+c.Discount+"\n";
+		s+= "Price-After-Discount: "+c.PriceAfterDiscount;
+		return s;
+	}
+	
 	
 }
