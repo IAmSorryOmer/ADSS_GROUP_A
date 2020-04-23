@@ -38,4 +38,8 @@ public class Discount {
     public void setToDate(LocalDate toDate) {
         this.toDate = toDate;
     }
+
+    public String toString() {
+        return "percentage of discount: " + percentage + ", from date: " + fromDate.toString() + ", to date: " + toDate.toString();
+    }
 }
