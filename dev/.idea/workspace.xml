@@ -6,10 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,6 +22,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1arCEF7kClJCCpz4ibba27HerIP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -62,6 +60,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -236,13 +246,18 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="886" y="92" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1587660303900" />
+    <state x="427" y="81" key="VCS.ChangeListViewerDialog" timestamp="1587660745843">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="427" y="81" key="VCS.ChangeListViewerDialog/0.0.1366.728@0.0.1366.728" timestamp="1587660745843" />
     <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1587659938180">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587659938180" />
-    <state x="1211" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587622799177">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="862" y="303" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587660732533">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
+    <state x="862" y="303" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1587660732533" />
     <state x="1211" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587622799177" />
     <state x="1034" y="366" width="524" height="478" key="extract.method.dialog" timestamp="1587639330757">
       <screen x="0" y="0" width="1920" height="1032" />
