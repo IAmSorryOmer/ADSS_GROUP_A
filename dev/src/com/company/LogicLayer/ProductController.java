@@ -21,7 +21,12 @@ public class ProductController {
         product.setType(productDetails);
         products.add(product);
         productTypeToProducts.putIfAbsent(product.getType(), new ArrayList<>());
-        product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()+1);
+        if(product.isInStorage()) {
+            product.getType().setQuantityInStorage(product.getType().getQuantityInStorage() + 1);
+        }
+        else{
+            product.getType().setQuantityInShelves(product.getType().getQuantityInShelves() + 1);
+        }
         productTypeToProducts.get(product.getType()).add(product);
     }
 
@@ -48,7 +53,7 @@ public class ProductController {
         if(product == null){
             throw new IllegalArgumentException("there is no product with that id");
         }
-        boolean isLocationChanged = !product.isInStorage() ^ isInStorage;
+        boolean isLocationChanged = product.isInStorage() ^ isInStorage;
         if (isLocationChanged){
             if (product.isInStorage()){
                 product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()+1);

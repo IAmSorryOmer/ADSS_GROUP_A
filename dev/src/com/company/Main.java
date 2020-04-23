@@ -2,6 +2,7 @@ package com.company;
 
 import com.company.LogicLayer.*;
 import com.company.PresentationLayer.*;
+import com.sun.org.apache.bcel.internal.generic.RET;
 
 import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ public class Main {
 
     public static Scanner reader = new Scanner(System.in);
     public static void main(String[] args) {
+        boolean dummyLoaded = false;
         while(true) {
             System.out.println("Please select a category to manage or operation to perform:");
             String[] options = new String[]{"product types", "products", "discounts", "categories", "reports", "load dummy data", "exit"};
@@ -35,7 +37,13 @@ public class Main {
                     manageReports();
                     break;
                 case 6:
-                    loadData();
+                    if(dummyLoaded){
+                        System.out.println("dummy data already loaded");
+                    }
+                    else {
+                        loadData();
+                        dummyLoaded = true;
+                    }
                     break;
                 case 7:
                     return;
@@ -449,9 +457,81 @@ public class Main {
             System.out.println("error. " + e.getMessage());
         }
     }
+
     private static void loadData(){
+        try {
+            Category dairyCategory = new Category("1", "dairy products");
+            Category meatCategory = new Category("2", "meat products");
+            Category fruitsCategory = new Category("3", "fruits");
+            Category milkCategory = new Category("4", "milk products");
+            Category mediumSize = new Category("5", "1-1.5 litters");
+
+            CategoryInterface.addCategory(dairyCategory, null);
+            CategoryInterface.addCategory(meatCategory, null);
+            CategoryInterface.addCategory(fruitsCategory, null);
+            CategoryInterface.addCategory(milkCategory, "1");
+            CategoryInterface.addCategory(mediumSize, "4");
+
+            ProductDetails milkProduct = new ProductDetails("1", "milk 5%", "yotvata", 3.5, 3, null, 5);
+            ProductDetails daniProduct = new ProductDetails("2", "dani", "yople", 5, 4, null, 15);
+            ProductDetails appleProduct = new ProductDetails("3", "apple", "kfar maimon", 0.1, 0.05, null, 50);
+            ProductDetails hotdogsProduct = new ProductDetails("4", "hotdogs", "zoglobek", 31, 24, null, 4);
+            ProductDetails chocholateProduct = new ProductDetails("5", "chocolate", "elit", 5.5, 4, null, 10);
+
+            ProductDetailsInterface.addProductDetails(milkProduct, "5");
+            ProductDetailsInterface.addProductDetails(daniProduct, "4");
+            ProductDetailsInterface.addProductDetails(appleProduct, "3");
+            ProductDetailsInterface.addProductDetails(hotdogsProduct, "2");
+            ProductDetailsInterface.addProductDetails(chocholateProduct, "4");
+
+            for(int i = 1;i<=9;i++){
+                String storage = i%2 == 0 ? "storage" : "cash register";
+                Product product = new Product(storage, "milk"+i, i%2 == 0, LocalDate.now().plusDays(7), i != 5, null);
+                ProductInterface.addProduct(product, "1");
+            }
+            for(int i = 1;i<=10;i++){
+                String storage = i%3 == 0 ? "refridgerators" : "storage, shelve 1";
+                Product product = new Product(storage, "dani"+i, i%3 != 0, LocalDate.now().plusDays(14), i % 4 == 0, null);
+                ProductInterface.addProduct(product, "2");
+            }
+            for(int i = 1;i <= 20;i++){
+                String storage = i%6 == 0? "fruit department" : "storage";
+                Product product = new Product(storage, "apple"+i, i%6 != 0, LocalDate.now().plusDays(6), false, null);
+                ProductInterface.addProduct(product, "3");
+            }
+            for(int i = 1;i <= 5;i++){
+                Product product = new Product("refridgerators", "hotdogs"+i, false, LocalDate.now().plusDays(15), i != 5, null);
+                ProductInterface.addProduct(product, "4");
+            }
+
+            Discount fruitsMealsDiscount = new Discount(10, LocalDate.now().plusDays(1), LocalDate.now().plusDays(15));
+            List<String> firstDiscountCatIds = new ArrayList<>();
+            firstDiscountCatIds.add("2");
+            firstDiscountCatIds.add("3");
+            Discount milkDiscount = new Discount(20, LocalDate.now().plusDays(7), LocalDate.now().plusDays(14));
+            List<String> secondDiscountProductIds = new ArrayList<>();
+            secondDiscountProductIds.add("1");
+            DiscountInterface.addDiscount(fruitsMealsDiscount, new ArrayList<>(), firstDiscountCatIds, true);
+            DiscountInterface.addDiscount(milkDiscount, secondDiscountProductIds, new ArrayList<>(), true);
+
+            System.out.println("Dummy data loaded.");
+            System.out.println("summary:");
+            System.out.println("Category that were added:");
+            System.out.println(CategoryInterface.stringifyCategories());
+            System.out.println("Products types that were added:");
+            System.out.println(ProductDetailsInterface.stringifyProduct());
+            System.out.println("Products that were added:");
+            System.out.println(ProductInterface.stringifyProducts());
+            System.out.println("in addition, there is 2 discounts that were added.");
+            System.out.println("the first one, of ten percents, from tomorrow and for two weeks, on the fruits and meat category");
+            System.out.println("the second one, of twenty percents, from one more week, and for week, on the milk 5% product type");
+            System.out.println("............");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
+
     private static void printOptions(String[] array){
         int i = 1;
         for(String str: array)
