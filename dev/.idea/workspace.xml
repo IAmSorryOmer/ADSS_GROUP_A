@@ -2,13 +2,22 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="untitled104:jar" />
+      <artifact name="adss2020_v01:jar" />
+      <artifact name="adss2020_v01_tests:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/app_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/test_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Tests/META-INF/MANIFEST.MF" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Tests/TestsMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/untitled104_jar.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/untitled104_jar/untitled104.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/StorageTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Tests/StorageTests.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,13 +49,13 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/company" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="JUnit.StorageTests">
+  <component name="RunManager" selected="Application.Unnamed">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
       <module name="untitled104" />
@@ -57,21 +66,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.company.Tests.TestsMain" />
+      <module name="untitled104" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="StorageTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="untitled104" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.company.LogicLayer.*" />
+          <option name="PATTERN" value="com.company.Tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.company.LogicLayer" />
-      <option name="MAIN_CLASS_NAME" value="com.company.LogicLayer.StorageTests" />
+      <option name="PACKAGE_NAME" value="com.company.Tests" />
+      <option name="MAIN_CLASS_NAME" value="com.company.Tests.StorageTests" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="JUnit.StorageTests" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.StorageTests" />
@@ -95,6 +116,7 @@
       <workItem from="1587540831448" duration="12155000" />
       <workItem from="1587659849480" duration="695000" />
       <workItem from="1587660559166" duration="4213000" />
+      <workItem from="1587665321365" duration="1184000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1587486727196</created>
@@ -220,15 +242,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="basic project" />
   </component>
   <component name="WindowStateProjectService">
+    <state x="418" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1587665817482">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="418" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587665817482" />
     <state x="1248" y="234" width="328" height="397" key="#com.intellij.ide.util.MemberChooser" timestamp="1587661701960">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="748" y="168" width="328" height="397" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587573681066" />
     <state x="1248" y="234" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1587661701960" />
-    <state x="1126" y="307" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1587660619436">
+    <state x="1126" y="307" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1587666483641">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="1126" y="307" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587660619436" />
+    <state x="1126" y="307" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587666483641" />
     <state x="710" y="409" width="499" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587628471947">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -241,26 +267,26 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="469" height="506" key="DebuggerActiveHint/0.0.1920.1032@0.0.1920.1032" timestamp="1587664480253" />
-    <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl" timestamp="1587660611338">
+    <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl" timestamp="1587666491185">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1587660611338" />
-    <state width="1874" height="335" key="GridCell.Tab.0.bottom" timestamp="1587664772914">
+    <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1587666491185" />
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom" timestamp="1587666022035">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1587664772914" />
-    <state width="1874" height="335" key="GridCell.Tab.0.center" timestamp="1587664772913">
+    <state width="1874" height="287" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1587666022035" />
+    <state width="1874" height="287" key="GridCell.Tab.0.center" timestamp="1587666022034">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="335" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1587664772913" />
-    <state width="1874" height="335" key="GridCell.Tab.0.left" timestamp="1587664772913">
+    <state width="1874" height="287" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1587666022034" />
+    <state width="1874" height="287" key="GridCell.Tab.0.left" timestamp="1587666022034">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="335" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1587664772913" />
-    <state width="1874" height="335" key="GridCell.Tab.0.right" timestamp="1587664772914">
+    <state width="1874" height="287" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1587666022034" />
+    <state width="1874" height="287" key="GridCell.Tab.0.right" timestamp="1587666022035">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="335" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1587664772914" />
+    <state width="1874" height="287" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1587666022035" />
     <state width="1874" height="335" key="GridCell.Tab.1.bottom" timestamp="1587664772915">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -281,18 +307,18 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="361" y="383" width="476" height="264" key="MultipleFileMergeDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587661405401" />
-    <state x="886" y="92" width="1024" height="845" key="SettingsEditor" timestamp="1587660643600">
+    <state x="886" y="92" width="1024" height="845" key="SettingsEditor" timestamp="1587666504324">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="886" y="92" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1587660643600" />
+    <state x="886" y="92" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1587666504324" />
     <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1587664730330">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587664730330" />
-    <state x="1211" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587622799177">
+    <state x="1211" y="430" width="448" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587665605735">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="1211" y="430" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587622799177" />
+    <state x="1211" y="430" width="448" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587665605735" />
     <state x="1034" y="366" width="524" height="478" key="extract.method.dialog" timestamp="1587639330757">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

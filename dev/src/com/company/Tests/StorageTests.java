@@ -1,5 +1,6 @@
-package com.company.LogicLayer;
+package com.company.Tests;
 
+import com.company.LogicLayer.*;
 import org.junit.*;
 
 import java.time.LocalDate;
