@@ -42,7 +42,10 @@ public class DiscountController {
         List<Discount> discounts = getDiscountableDiscounts(product, retail);
         Discountable discountable = product.getCategory();
         while(discountable != null){
-            discounts.addAll(getDiscountableDiscounts(product, retail));
+            List<Discount> toAdd = getDiscountableDiscounts(discountable, retail);
+            if(toAdd != null) {
+                discounts.addAll(toAdd);
+            }
             discountable = discountable.getParent();
         }
         return discounts;
@@ -72,7 +75,6 @@ public class DiscountController {
         }
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         discounts.sort(Comparator.comparing(Discount::getFromDate));
-        //TODO check
         List<Double> priceHistory = discounts.stream().map(discount -> (retail?product.getRetailPrice():product.getSupplierPrice())* (1-discount.getPercentage()/100)).collect(Collectors.toList());
         return priceHistory;
     }
