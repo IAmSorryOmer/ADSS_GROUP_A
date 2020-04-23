@@ -88,21 +88,22 @@ public class Provider {
 			return false;
 		}
 	}
-	public static void printDetails(Provider p) {
-		System.out.println("details are:");
-		System.out.println("ID: "+p.ProviderID);
-		System.out.println("CreditCardNum: "+p.CreditCardNumber);
-		System.out.println("need transport: "+p.DoesNeedTransport);
+	public static String printDetails(Provider p) {
+		String output = "provider details:\n";
+		output += "ID: " + p.ProviderID + "\n";
+		output += "CreditCardNum: " + p.CreditCardNumber + "\n";
+		output += "need transport: "+p.DoesNeedTransport + "\n";
 		if(!p.getCommunicationDetails().getIsFixedFays())
-			System.out.println("Delay Untill Delivery: "+p.DelayDays+" Days");
+			output += "Delay Untill Delivery: " + p.DelayDays + " Days\n";
 		else {
-			System.out.print("Comes in days: ");
+			output += "Comes in days: ";
 			for(String s : p.ArrivalDays)
-				System.out.print(s+" ");
-			System.out.println("");
+				output += s+", ";
+			output = output.substring(0, output.length()-2) + "\n";
 		}
-		System.out.println("Name: "+p.Name);
-		CommunicationDetails.printDetails(p.communicationDetails);
+		output += "Name: "+p.Name + "\n";
+		output += p.communicationDetails;
+		return output;
 	}
 
 

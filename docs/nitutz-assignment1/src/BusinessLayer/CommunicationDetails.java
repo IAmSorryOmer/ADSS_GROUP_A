@@ -1,27 +1,46 @@
 package BusinessLayer;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class CommunicationDetails {
 
+	//fields
 	private boolean IsFixedDays;
 	private String PhoneNum;
 	private String Address;
 	private Agreement Agreement;
+	private List<CatalogItem> catalogItems; //details of the produts included in the agreement wiht the provider
 	
 	
 	//constructor
-	private CommunicationDetails(boolean IsFixedDays, String PhoneNum, String Address, Agreement Agreement) {
+	private CommunicationDetails(boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
 		this.IsFixedDays = IsFixedDays;
 		this.PhoneNum  = PhoneNum;
 		this.Address = Address;
-		this.Agreement =  Agreement;
+		this.Agreement = BusinessLayer.Agreement.AgreementCreator(quantityForDiscount);
+		this.catalogItems = new LinkedList<CatalogItem>();
+	}
+	
+	private CommunicationDetails(boolean IsFixedDays, String PhoneNum, String Address) {
+		this.IsFixedDays = IsFixedDays;
+		this.PhoneNum  = PhoneNum;
+		this.Address = Address;
+		this.Agreement = null;
+		this.catalogItems = new LinkedList<CatalogItem>();
 	}
 	
 	//creator
-	public CommunicationDetails communicationDetailsCreate(boolean IsFixedDays, String PhoneNum, String Address, Agreement Agreement) {
-		CommunicationDetails comm = new CommunicationDetails(IsFixedDays, PhoneNum, Address, Agreement);
-		
-		return comm;
+	public CommunicationDetails communicationDetailsCreatorWithAgreement(boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
+		CommunicationDetails cd = new CommunicationDetails(IsFixedDays, PhoneNum, Address, quantityForDiscount);
+		return cd;
 	}
+	
+	public CommunicationDetails communicationDetailsCreatorNoAgreement(boolean IsFixedDays, String PhoneNum, String Address) {
+		CommunicationDetails cd = new CommunicationDetails(IsFixedDays, PhoneNum, Address);
+		return cd;
+	}
+	
 	//getters and setters
 	public boolean isIsFixedDays() {
 		return IsFixedDays;
@@ -47,32 +66,45 @@ public class CommunicationDetails {
 		Address = address;
 	}
 
-	public Agreement getAgreement() {
-		return Agreement;
+	public int getQuantityForDiscount() {
+		if (isAgreement())
+			return Agreement.getQuantityForDiscount();
+		else
+			return 0;
 	}
 
-	public void setAgreement(Agreement agreement) {
-		Agreement = agreement;
+	public void setQuantityForDiscount(int quantityForDiscount) {
+		if (isAgreement())
+			Agreement.setQuantityForDiscount(quantityForDiscount);
+		else
+			this.Agreement = BusinessLayer.Agreement.AgreementCreator(quantityForDiscount);
 	}
+	
 	public boolean getIsFixedFays() {
 		return IsFixedDays;
 	}
 	
+	
 	//methods
-	public static boolean editDetails(CommunicationDetails comm,boolean IsFixedDays, String PhoneNum, String Address, Agreement Agreement) {
-		try {
-			comm.setAddress(Address);
-			comm.setAgreement(Agreement);
-			comm.setIsFixedDays(IsFixedDays);
-			comm.setAgreement(Agreement);
-			return true;
-		}
-		catch(Exception e) {
-			return false;
-		}
+	private boolean isAgreement() {
+		return (this.Agreement != null);
 	}
-	public static void printDetails(CommunicationDetails c) {
-		System.out.println("Phone: "+c.PhoneNum);
-		System.out.println("Address: "+c.Address);
+	
+	public static boolean editDetails(CommunicationDetails cd, boolean ssFixedDays, String phoneNum, String address, int quantityForDiscount) {
+		cd.setIsFixedDays(ssFixedDays);	
+		cd.setPhoneNum(phoneNum);
+		cd.setAddress(address);
+		cd.setQuantityForDiscount(quantityForDiscount);
+		return true;
 	}
+	
+	
+	public static String printDetails(CommunicationDetails cd) {
+		String output = "Phone: "+cd.PhoneNum + "\n";
+		output += "Address: " + cd.Address + "\n";
+		if (cd.isAgreement())
+			output += "Amount of items needed for discount: " + cd.getQuantityForDiscount();
+		return output;
+	}
+	
 }

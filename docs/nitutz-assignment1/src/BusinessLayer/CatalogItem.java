@@ -3,11 +3,11 @@ package BusinessLayer;
 public class CatalogItem {
 	
 	//fields
-	//private int PriceAfterDiscount;
+	private int PriceAfterDiscount=0; //not nedeed
 	private int Discount; //discount percentage to apply, example: 5%
 	private String CatalogNum;
 	private double Price; //regular item price, example: 19.90
-	//private int OrderQuantity;
+	private int OrderQuantity=0; //not nedeed
 	
 	//consructors
 	private CatalogItem (int discount, String catalogNum, double price) {
