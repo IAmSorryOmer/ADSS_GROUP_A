@@ -39,11 +39,10 @@ public class AllOrders {
 		return Orders.orders.remove(sop);
 	}
 	
-	public static List<SingleProviderOrder> getOrdersFromProvider(AllOrders Orders,Provider p){
-		List<SingleProviderOrder> ans = new LinkedList<>();
+	public static SingleProviderOrder getOrdersFromProvider(AllOrders Orders,Provider p){
 		for(SingleProviderOrder sop : Orders.getOrders())
-			if(sop.getProvider().equals(p))
-				ans.add(sop);
-		return ans;
+			if(sop.getProvider().getProviderID().equals(p.getProviderID()))
+				return sop;
+		return null;
 	}
 }

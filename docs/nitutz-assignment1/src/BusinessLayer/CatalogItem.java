@@ -16,12 +16,23 @@ public class CatalogItem {
 		this.Price = price;	
 	}
 	
+	private CatalogItem (String catalogNum, double price) {
+		this.Discount = 0;
+		this.CatalogNum = catalogNum;
+		this.Price = price;	
+	}
+	
 	//creators
 	public static CatalogItem CatalogItemCreator (int discount, String catalogNum, double price) {
 		CatalogItem ci = new CatalogItem(discount, catalogNum, price);
 		return ci;
 	}
 
+	public static CatalogItem CatalogItemNoDiscountCreator (String catalogNum, double price) {
+		CatalogItem ci = new CatalogItem(catalogNum, price);
+		return ci;
+	}
+	
 	//methods
 	
 	
@@ -50,6 +61,10 @@ public class CatalogItem {
 		Price = price;
 	}
 	
-	
+	public double calculateFinalPrice(int quantity, int totalOrder, int quantityForDiscount) {
+		int amountOfDiscounts = totalOrder % quantityForDiscount;
+		double finalPrice = quantity * Price * Math.pow(1-(Discount/100),(amountOfDiscounts));
+		return finalPrice;
+	}
 	
 }
