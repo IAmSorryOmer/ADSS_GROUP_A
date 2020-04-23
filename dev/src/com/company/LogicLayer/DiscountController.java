@@ -10,20 +10,30 @@ import java.util.stream.Collectors;
 public class DiscountController {
 
     private static List<Discount> discounts = new ArrayList<>();;
-    private static HashMap<Discountable, List<Discount>> retailDiscounts;
-    private static HashMap<Discountable, List<Discount>> supplierDiscounts;
+    private static HashMap<Discountable, List<Discount>> retailDiscounts = new HashMap<>();
+    private static HashMap<Discountable, List<Discount>> supplierDiscounts = new HashMap<>();
     public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds, boolean retail) throws Exception{
         discounts.add(discount);
         HashMap<Discountable, List<Discount>> map = retail? retailDiscounts:supplierDiscounts;
-        for(String productId : productsIds){
-            ProductDetails productDetails = ProductDetailsController.getProductDetailsById(productId);
-            map.putIfAbsent(productDetails, new ArrayList<>());
-            map.get(productDetails).add(discount);
+        if(productsIds != null) {
+            for (String productId : productsIds) {
+                ProductDetails productDetails = ProductDetailsController.getProductDetailsById(productId);
+                if (productDetails == null){
+                    throw new IllegalArgumentException("there is no type with id " + productId);
+                }
+                map.putIfAbsent(productDetails, new ArrayList<>());
+                map.get(productDetails).add(discount);
+            }
         }
-        for(String categoryId:categoriesIds){
-            Category category = CategoryController.getCategoryByID(categoryId);
-            map.putIfAbsent(category, new ArrayList<>());
-            map.get(category).add(discount);
+        if(categoriesIds != null) {
+            for (String categoryId : categoriesIds) {
+                Category category = CategoryController.getCategoryByID(categoryId);
+                if (category == null){
+                    throw new IllegalArgumentException("there is no type with id " + categoryId);
+                }
+                map.putIfAbsent(category, new ArrayList<>());
+                map.get(category).add(discount);
+            }
         }
     }
 

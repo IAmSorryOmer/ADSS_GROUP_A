@@ -17,7 +17,7 @@ public class Main {
             System.out.println("Please select a category to manage or operation to perform:");
             String[] options = new String[]{"product types", "products", "discounts", "categories", "reports", "load dummy data", "exit"};
             printOptions(options);
-            int option = reader.nextInt();
+            int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
                     manageProductdTypes();
@@ -50,7 +50,7 @@ public class Main {
             System.out.println("Please select an option to perform on products types:");
             String[] options = new String[]{"add type", "print all missings products", "modify minimum quantity", "print all products with name", "print all products within storage","print all products", "return to main"};
             printOptions(options);
-            int option = reader.nextInt();
+            int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
                     addProductDetailsFromUser();
@@ -62,7 +62,7 @@ public class Main {
                     System.out.println("please insert product type id:");
                     String id = reader.nextLine();
                     System.out.println("please insert new minimum quantity");
-                    int newQuantity = reader.nextInt();
+                    int newQuantity = Integer.parseInt(reader.nextLine());
                     try {
                         ProductDetailsInterface.changeMinimalQuantity(id, newQuantity);
                     }
@@ -80,6 +80,7 @@ public class Main {
                     break;
                 case 6:
                     printNumberedList(ProductDetailsInterface.getAllProducts());
+                    break;
                 case 7:
                     return;
                 default:
@@ -95,11 +96,11 @@ public class Main {
         System.out.println("please insert manufacturer:");
         String manufacturer = reader.nextLine();
         System.out.println("please insert retail price:");
-        double retailPrice = reader.nextDouble();
+        double retailPrice = Double.parseDouble(reader.nextLine());
         System.out.println("please insert supplier price:");
-        double supplierPrice = reader.nextDouble();
+        double supplierPrice = Double.parseDouble(reader.nextLine());
         System.out.println("please insert minimum quantity(-1 means no minimum quantity):");
-        int minimumQuantity = reader.nextInt();
+        int minimumQuantity = Integer.parseInt(reader.nextLine());
         System.out.println("please insert the id of the category of the product(to print all the categories insert @print):");
         String catId = reader.nextLine();
         if(catId.equals("@print")){
@@ -121,7 +122,7 @@ public class Main {
             System.out.println("Please select an option to perform on products:");
             String[] options = new String[]{"add product", "move product", "prints all products of type", "print all damaged products", "mark product as damaged", "print all products", "return to main"};
             printOptions(options);
-            int option = reader.nextInt();
+            int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
                     addProductFromUser();
@@ -188,6 +189,16 @@ public class Main {
         System.out.println("please insert expiration date(format in YYYY-MM-DD):");
         String date = reader.nextLine();
         LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.println("if you want to add multiple products insert y(the id will be the id you inserted, followed by running number):");
+        String ans = reader.nextLine();
+        int multiples = -1;
+        if(ans.equals("y")){
+            System.out.println("alright, please insert the number of products to add:");
+            multiples = Integer.parseInt(reader.nextLine());
+            if(multiples <= 0){
+                System.out.println("the number must be greater than zero. canceling operation");
+            }
+        }
         System.out.println("please insert the id of the product type which this product is a type of(to print all the products types insert @print): ");
         String productId = reader.nextLine();
         if(productId.equals("@print")){
@@ -196,11 +207,14 @@ public class Main {
             System.out.println("now insert the id:");
             productId = reader.nextLine();
         }
-        Product product = new Product("storage", id, true, localDate, false, null);
-        try {
-            ProductInterface.addProduct(product, productId);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
+        for(int i = 1; i<= multiples; i++){
+            String idToAssign = multiples != 1 ? id + i:id;
+            Product product = new Product("storage", idToAssign, true, localDate, false, null);
+            try {
+                ProductInterface.addProduct(product, productId);
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
         }
     }
 
@@ -209,7 +223,7 @@ public class Main {
             System.out.println("Please select an option to perform on discounts:");
             String[] options = new String[]{"add discount", "print discounts of certain type or category", "print current discount percentage of certain type","print pricing history of certain type",  "return to main"};
             printOptions(options);
-            int option = reader.nextInt();
+            int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
                     addDiscountFromUser();
@@ -288,7 +302,7 @@ public class Main {
     }
     private static void addDiscountFromUser(){
         System.out.println("please insert the percentage of the discount:");
-        double percentage = reader.nextDouble();
+        double percentage = Double.parseDouble(reader.nextLine());
         System.out.println("please insert the starting date of the discount(format like YYYY-MM-DD):");
         String startDateStr = reader.nextLine();
         LocalDate startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
@@ -330,7 +344,7 @@ public class Main {
             System.out.println("Please select an option to perform on categories:");
             String[] options = new String[]{"add category", "print all categories", "return to main"};
             printOptions(options);
-            int option = reader.nextInt();
+            int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
                     addCategoryFromUser();
@@ -374,7 +388,7 @@ public class Main {
             System.out.println("Please select an option to perform on reports:");
             String[] options = new String[]{"add report", "print all reports", "return to main"};
             printOptions(options);
-            int option = reader.nextInt();
+            int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
                     addReportFromUser();
@@ -401,7 +415,7 @@ public class Main {
         System.out.println("1) inventory");
         System.out.println("2) damaged products");
         System.out.println("3) missing products");
-        int option = reader.nextInt();
+        int option = Integer.parseInt(reader.nextLine());
         switch (option){
             case 1:
                 createInventoryReportFromUser(report);
@@ -413,6 +427,7 @@ public class Main {
             case 3:
                 report.setReportType(Report.reportType.Missings);
                 ReportInterface.addMissingReport(report);
+                break;
             default:
                 System.out.println("this isnt an option. operation canceled");
         }
