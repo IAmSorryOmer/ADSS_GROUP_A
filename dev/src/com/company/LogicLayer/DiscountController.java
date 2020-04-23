@@ -29,7 +29,7 @@ public class DiscountController {
             for (String categoryId : categoriesIds) {
                 Category category = CategoryController.getCategoryByID(categoryId);
                 if (category == null){
-                    throw new IllegalArgumentException("there is no type with id " + categoryId);
+                    throw new IllegalArgumentException("there is no category with id " + categoryId);
                 }
                 map.putIfAbsent(category, new ArrayList<>());
                 map.get(category).add(discount);
