@@ -30,7 +30,7 @@ public class CategoryController {
     }
 
     public static Category getCategoryByID(String id){
-         List<Category> result =  findCategory(mainCategories, (cat) -> cat.getId().equals(id), true);
+        List<Category> result =  findCategory(mainCategories, (cat) -> cat.getId().equals(id), true);
         if (result.size() == 0){
             return null;
         }

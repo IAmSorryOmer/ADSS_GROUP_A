@@ -1,5 +1,4 @@
 package com.company.LogicLayer;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,23 +14,12 @@ public class ProductDetailsController {
     }
 
     public static ProductDetails getProductDetailsById(String id){
-        for ( ProductDetails productDetails: productDetailsList){
-            if (productDetails.getId().equals(id)){
-                return  productDetails;
-            }
-        }
-        return null;
+        //return first product with id
+        return productDetailsList.stream().filter(product -> product.getId().equals(id)).findFirst().orElse(null);
     }
 
-    public static boolean lowQuantityOfProduct(String id) throws Exception {
-        ProductDetails productDetails = getProductDetailsById(id);
-        if (productDetails == null){
-            throw new Exception("A product with that ID does not exist");
-        }
-        return productDetails.getMinimumQuantity() >= (productDetails.getQuantityInStorage()+productDetails.getQuantityInShelves());
-    }
-
-    public static List<ProductDetails> returnAllMissing() {
+    public static List<ProductDetails> getAllMissing() {
+        //this function return all the products that in shortage
         return productDetailsList.stream().filter(product -> product.getMinimumQuantity() >= (product.getQuantityInStorage()+product.getQuantityInShelves())).collect(Collectors.toList());
     }
 
@@ -54,7 +42,7 @@ public class ProductDetailsController {
     public static String GetProductsDetails(ProductDetails productDetails){
         return productDetails.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(productDetails, false);
     }
-    public static boolean isInCategory(ProductDetails productDetails, Category category){
+    private static boolean isInCategory(ProductDetails productDetails, Category category){
         Category currCategory = productDetails.getCategory();
         while(currCategory != null){
             if(currCategory.getID().equals(category.getID())){

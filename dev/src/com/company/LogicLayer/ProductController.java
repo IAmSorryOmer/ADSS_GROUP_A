@@ -44,18 +44,29 @@ public class ProductController {
                 product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()-1);
                 product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()+1);
             }
-        }
-        product.setLocation(newLocation);
-        if (isLocationChanged) {
             product.setInStorage(!product.isInStorage());
         }
+        product.setLocation(newLocation);
     }
 
-    public static List<Product> returnAllDamaged() {
+    public static List<Product> getAllDamaged() {
         return products.stream().filter(Product::isDamaged).collect(Collectors.toList());
     }
 
     public static String GetProductsDetails(Product product){
         return product.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(product.getType(), false);
+    }
+
+    public static void markAsDamaged(Product product){
+        if(product.isDamaged()){
+            return;
+        }
+        product.setDamaged(true);
+        if (product.isInStorage()){
+            product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()-1);
+        }
+        else {
+            product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()-1);
+        }
     }
 }

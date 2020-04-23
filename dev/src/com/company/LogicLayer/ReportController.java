@@ -13,14 +13,14 @@ public class ReportController {
         reports.add(report);
     }
     public static void addDamagedReport(Report report){
-        List<Product> products = ProductController.returnAllDamaged();
+        List<Product> products = ProductController.getAllDamaged();
         report.setReportType(Report.reportType.Damaged);
         report.setSubjects(products);
         reports.add(report);
     }
 
     public static void addMissingReport(Report report){
-        List<ProductDetails> products = ProductDetailsController.returnAllMissing();
+        List<ProductDetails> products = ProductDetailsController.getAllMissing();
         report.setReportType(Report.reportType.Missings);
         report.setSubjects(products);
         reports.add(report);

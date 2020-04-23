@@ -25,7 +25,6 @@ public class DiscountController {
         return retail? retailDiscounts.get(discountable):supplierDiscounts.get(discountable);
     }
 
-
     private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail){
         List<Discount> discounts = getDiscountableDiscounts(product, retail);
         Discountable discountable = product.getCategory();
@@ -36,7 +35,7 @@ public class DiscountController {
         return discounts;
     }
 
-    public static double getProductDiscount(ProductDetails product, boolean retail){
+    public static double getProductDiscountPercentage(ProductDetails product, boolean retail){
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         double max = discounts.stream()
                 .reduce(0.0, (accumulatedDouble, discount) -> {
@@ -49,11 +48,26 @@ public class DiscountController {
         return max;
     }
 
-    public static List<Double> getPricingHistory(ProductDetails product, boolean retail){
+    public static List<Double> getProductPricingHistory(ProductDetails product, boolean retail){
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         discounts.sort(Comparator.comparing(Discount::getFromDate));
         List<Double> priceHistory = discounts.stream().map(discount -> (retail?product.getRetailPrice():product.getSupplierPrice())* discount.getPercentage()/100).collect(Collectors.toList());
         return priceHistory;
     }
 
+    public static void editDiscount(Discount discount, LocalDate fromDate, LocalDate toDate, double percantage){
+        discount.setFromDate(fromDate);
+        discount.setToDate(toDate);
+        discount.setPercentage(percantage);
+    }
+
+    public static void removeDiscount(Discount discount){
+        discounts.remove(discount);
+        for(Map.Entry<Discountable, List<Discount>> entry : retailDiscounts.entrySet()){
+            entry.getValue().remove(discount);
+        }
+        for(Map.Entry<Discountable, List<Discount>> entry : supplierDiscounts.entrySet()){
+            entry.getValue().remove(discount);
+        }
+    }
 }
