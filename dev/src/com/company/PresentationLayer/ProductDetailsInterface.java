@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDetailsInterface {
-    public static void addProductDetails(ProductDetails productDetails) throws Exception {
-        ProductDetailsController.addProductDetails(productDetails);
+    public static void addProductDetails(ProductDetails productDetails, String catId) throws Exception {
+        ProductDetailsController.addProductDetails(productDetails, catId);
     }
 
     public static ProductDetails getProductDetailsById(String id){
@@ -33,7 +33,16 @@ public class ProductDetailsInterface {
     public static String GetProductsDetails(ProductDetails productDetails){
         return ProductDetailsController.GetProductsDetails(productDetails);
     }
-    public static List<ProductDetails> getAllProductsOffCategory(List<Category> categories){
-        return ProductDetailsController.getAllProductsOffCategory(categories);
+    public static List<ProductDetails> getAllProducts(){
+        return ProductDetailsController.getProductDetailsList();
+    }
+
+    public static String stringifyProduct(){
+        StringBuilder stringBuilder = new StringBuilder("Products:\n");
+
+        for(ProductDetails productDetails : ProductDetailsController.getProductDetailsList()){
+            stringBuilder.append("-").append(productDetails.toString()).append("\n");
+        }
+        return stringBuilder.toString();
     }
 }

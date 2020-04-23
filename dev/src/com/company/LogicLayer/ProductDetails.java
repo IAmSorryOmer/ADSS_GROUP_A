@@ -103,7 +103,7 @@ public class ProductDetails implements Discountable, Reportable{
 
     @Override
     public String toString() {
-        return "Product type: " + name + "\nProduct type id: " + id + "\nProduct manufacturer: " + manufacturer +
-                "\n Storage Quantity: "  + quantityInStorage + "\nShelves Quantity: " + quantityInShelves;
+        return "Product type: " + name + ", Product type id: " + id + ", Product manufacturer: " + manufacturer +
+                "\nStorage Quantity: "  + quantityInStorage + ", Shelves Quantity: " + quantityInShelves;
     }
 }

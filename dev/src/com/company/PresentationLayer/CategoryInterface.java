@@ -15,4 +15,16 @@ public class CategoryInterface {
     public static Category getCategoryByID(String id){
         return CategoryController.getCategoryByID(id);
     }
+    public static String stringifyCategories(){
+        StringBuilder stringBuilder = new StringBuilder("Categories: \n");
+        printCategory(stringBuilder, CategoryController.getAllMainCategories(), "");
+        return stringBuilder.toString();
+    }
+
+    private static void printCategory(StringBuilder stringBuilder, List<Category> categories, String spaces){
+        for(Category category: categories){
+            stringBuilder.append(spaces).append(category.toString()).append("\n");
+            printCategory(stringBuilder, category.getSubCategories(), spaces + "  ");
+        }
+    }
 }

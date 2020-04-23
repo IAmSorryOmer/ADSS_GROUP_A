@@ -51,4 +51,9 @@ public class Category implements Discountable{
     public void addCategory(Category category){
         subCategories.add(category);
     }
+
+    @Override
+    public String toString() {
+        return "name: " + name + ", Id:" + ID;
+    }
 }

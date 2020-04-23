@@ -71,6 +71,6 @@ public class Product implements Reportable{
 
     @Override
     public String toString() {
-        return "Product id: " + id + "\nProduct location: " + location + "\n" + type;
+        return "Product id: " + id + ", Product location: " + location + ", name: " + type.getName();
     }
 }

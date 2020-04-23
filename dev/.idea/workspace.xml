@@ -2,18 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/DiscountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ReportController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ReportInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ReportInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +109,14 @@
       <option name="project" value="LOCAL" />
       <updated>1587579190440</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="basic project">
+      <created>1587628705942</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1587628705942</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,19 +128,19 @@
     <option name="LAST_COMMIT_MESSAGE" value="basic project" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="1248" y="234" width="328" height="397" key="#com.intellij.ide.util.MemberChooser" timestamp="1587578747120">
+    <state x="1248" y="234" width="328" height="397" key="#com.intellij.ide.util.MemberChooser" timestamp="1587631332773">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="748" y="168" width="328" height="397" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587573681066" />
-    <state x="1248" y="234" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1587578747120" />
+    <state x="1248" y="234" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1587631332773" />
     <state x="710" y="409" width="499" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587628471947">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="710" y="409" width="499" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1032@0.0.1920.1032" timestamp="1587628471947" />
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1587579190277">
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1587628705865">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1587579190277" />
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1587628705865" />
     <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl" timestamp="1587548868956">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

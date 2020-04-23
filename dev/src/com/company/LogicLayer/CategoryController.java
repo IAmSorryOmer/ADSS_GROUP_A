@@ -57,4 +57,7 @@ public class CategoryController {
             }
         }
     }
+    public static List<Category> getAllMainCategories(){
+        return mainCategories;
+    }
 }

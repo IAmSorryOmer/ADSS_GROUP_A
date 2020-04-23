@@ -6,10 +6,15 @@ import java.util.stream.Collectors;
 public class ProductDetailsController {
     private static List<ProductDetails> productDetailsList = new ArrayList<>();
 
-    public static void addProductDetails(ProductDetails productDetails) throws Exception {
+    public static void addProductDetails(ProductDetails productDetails, String catId) throws Exception {
         if (getProductDetailsById(productDetails.getId()) != null  || CategoryController.getCategoryByID(productDetails.getId()) != null){
             throw new Exception("A category or a product with that id already exists");
         }
+        Category category = CategoryController.getCategoryByID(catId);
+        if(category == null){
+            throw new IllegalArgumentException("there is no such category id");
+        }
+        productDetails.setCategory(category);
         productDetailsList.add(productDetails);
     }
 
@@ -54,5 +59,8 @@ public class ProductDetailsController {
     }
     public static List<ProductDetails> getAllProductsOffCategory(List<Category> categories){
         return productDetailsList.stream().filter(product -> categories.stream().anyMatch(cat -> isInCategory(product, cat))).collect(Collectors.toList());
+    }
+    public static List<ProductDetails> getProductDetailsList(){
+        return productDetailsList;
     }
 }

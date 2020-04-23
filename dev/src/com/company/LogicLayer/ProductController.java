@@ -10,10 +10,15 @@ public class ProductController {
     private static List<Product> products;
     private static HashMap<ProductDetails, List<Product>> productTypeToProducts = new HashMap<>();
 
-    public static void addProduct(Product product) throws Exception {
+    public static void addProduct(Product product, String typeId) throws Exception{
         if (getProductById(product.getId()) != null){
             throw new Exception("product with that Id already exists");
         }
+        ProductDetails productDetails = ProductDetailsController.getProductDetailsById(typeId);
+        if(productDetails == null){
+            throw new IllegalArgumentException("there is no type with that id");
+        }
+        product.setType(productDetails);
         products.add(product);
         productTypeToProducts.putIfAbsent(product.getType(), new ArrayList<>());
         product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()+1);
@@ -34,7 +39,8 @@ public class ProductController {
         return (result == null) ? new ArrayList<>() : result;
     }
 
-    private static void changeStorageShelvesQuantity(Product product, String newLocation, boolean isLocationChanged){
+    public static void moveProduct(Product product, String newLocation, boolean isInStorage){
+        boolean isLocationChanged = !product.isInStorage() ^ isInStorage;
         if (isLocationChanged){
             if (product.isInStorage()){
                 product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()+1);

@@ -8,8 +8,8 @@ import com.company.LogicLayer.ProductDetails;
 import java.util.List;
 
 public class ProductInterface {
-    public static void addProduct(Product product) throws Exception{
-        ProductController.addProduct(product);
+    public static void addProduct(Product product, String typeId) throws Exception {
+        ProductController.addProduct(product, typeId);
     }
 
     public static Product getProductById(String Id){
@@ -19,7 +19,9 @@ public class ProductInterface {
     public static List<Product> getProductsByType(ProductDetails type){
         return ProductController.getProductsByType(type);
     }
-
+    public static void moveProduct(Product product, String newLocation, boolean isInStorage){
+        ProductController.moveProduct(product, newLocation, isInStorage);
+    }
     public static List<Product> getAllDamaged() {
         return ProductController.getAllDamaged();
     }
