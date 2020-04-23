@@ -106,5 +106,10 @@ public class CommunicationDetails {
 			output += "Amount of items needed for discount: " + cd.getQuantityForDiscount();
 		return output;
 	}
-	
+	public static String printItems(CommunicationDetails cd) {
+		String s = "";
+		for(CatalogItem cde : cd.catalogItems)
+		s += CatalogItem.printItem(cde)+"\n";
+		return s;
+	}
 }

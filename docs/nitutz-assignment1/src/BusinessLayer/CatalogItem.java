@@ -49,7 +49,14 @@ public class CatalogItem {
 	public void setPrice(double price) {
 		Price = price;
 	}
-	
+
+public static String printItem(CatalogItem c) {
+		String s = "Catalog-Number: " + c.CatalogNum+"\n";
+		s+= "Price: "+c.Price+"\n";
+		s+= "Discount: "+c.Discount+"\n";
+		s+= "Price-After-Discount: "+c.PriceAfterDiscount;
+		return s;
+	}
 	
 	
 }
