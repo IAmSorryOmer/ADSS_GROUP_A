@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ProductController {
-    private static List<Product> products;
+    private static List<Product> products = new ArrayList<>();
     private static HashMap<ProductDetails, List<Product>> productTypeToProducts = new HashMap<>();
 
     public static void addProduct(Product product, String typeId) throws Exception{

@@ -7,11 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/untitled104_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/untitled104_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/untitled104_jar/untitled104.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +78,7 @@
       <workItem from="1587486142801" duration="3977000" />
       <workItem from="1587540831448" duration="12155000" />
       <workItem from="1587659849480" duration="695000" />
-      <workItem from="1587660559166" duration="95000" />
+      <workItem from="1587660559166" duration="779000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1587486727196</created>
