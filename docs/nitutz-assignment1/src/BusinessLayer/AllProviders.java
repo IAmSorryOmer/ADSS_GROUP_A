@@ -26,4 +26,5 @@ public class AllProviders {
 		}
 		return list;
 	}
+	
 }

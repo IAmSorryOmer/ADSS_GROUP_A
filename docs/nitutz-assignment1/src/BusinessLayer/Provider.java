@@ -103,7 +103,8 @@ public class Provider {
 			output = output.substring(0, output.length()-2) + "\n";
 		}
 		output += "Name: "+p.Name + "\n";
-		output += p.communicationDetails;
+		output += CommunicationDetails.printDetails(p.communicationDetails)+"\n";
+		output += CommunicationDetails.printItems(p.communicationDetails);
 		return output;
 	}
 	

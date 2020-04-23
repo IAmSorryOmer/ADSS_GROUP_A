@@ -96,5 +96,10 @@ public class SingleProviderOrder{
 	public int getSpecificItemAmount (CatalogItem catalogItem) {
 		return ItemList_amount_price.get(catalogItem).getFirst();
 	}
-	
+public static String printItems(SingleProviderOrder spo) {	
+	String s = "";
+	for(CatalogItem cde : spo.ItemList_amount_price.keySet())
+	s += CatalogItem.printItem(cde)+"\n";
+	return s;
+	}
 }

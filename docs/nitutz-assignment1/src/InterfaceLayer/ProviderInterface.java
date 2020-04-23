@@ -9,7 +9,7 @@ import BusinessLayer.Provider;
 
 public class ProviderInterface {
 	//Provider
-	public Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
+	public static Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
 		CommunicationDetails cd;
 		if(quantityForDiscount > 0)
 			cd = communicationDetailsCreatorWithAgreement(IsFixedDays, PhoneNum, Address, quantityForDiscount);
@@ -43,7 +43,7 @@ public class ProviderInterface {
 		CommunicationDetails cd = CommunicationDetails.communicationDetailsCreatorNoAgreement(IsFixedDays, PhoneNum, Address);
 		return cd;
 	}
-	public CommunicationDetails communicationDetailsCreatorWithAgreement(boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
+	public static CommunicationDetails communicationDetailsCreatorWithAgreement(boolean IsFixedDays, String PhoneNum, String Address, int quantityForDiscount) {
 		CommunicationDetails cd = CommunicationDetails.communicationDetailsCreatorWithAgreement(IsFixedDays, PhoneNum, Address, quantityForDiscount);
 		return cd;
 	}

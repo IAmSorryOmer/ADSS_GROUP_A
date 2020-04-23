@@ -51,4 +51,14 @@ public class OrdersInterface {
 			return false;
 		return SingleProviderOrder.RemoveFromOrder(sop, catalogItem);
 	}
+	public static String printItems(String ID) {
+		AllOrders ao = AllOrders.getInstance();
+		AllProviders ap = AllProviders.getInstance();
+		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
+		if  (sop == null)
+			return "no order found";
+		String s = SingleProviderOrder.printItems(sop);
+		return s;
+	}
 }
