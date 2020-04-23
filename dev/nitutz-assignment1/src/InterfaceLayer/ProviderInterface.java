@@ -39,7 +39,7 @@ public class ProviderInterface {
 			}
 	}
 	//CommunicationDetails
-	public CommunicationDetails communicationDetailsCreatorNoAgreement(boolean IsFixedDays, String PhoneNum, String Address) {
+	public static CommunicationDetails communicationDetailsCreatorNoAgreement(boolean IsFixedDays, String PhoneNum, String Address) {
 		CommunicationDetails cd = CommunicationDetails.communicationDetailsCreatorNoAgreement(IsFixedDays, PhoneNum, Address);
 		return cd;
 	}

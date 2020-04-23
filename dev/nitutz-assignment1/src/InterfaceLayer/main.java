@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class main {
 	public static Scanner reader = new Scanner(System.in);
-public static void main(String[] args) {
+public static void Main(String[] args) {
 	String choice = "";
 	while(true) {
 		switch (choice) {
