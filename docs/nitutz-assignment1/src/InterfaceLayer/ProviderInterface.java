@@ -57,4 +57,15 @@ public class ProviderInterface {
 			return false;
 			}
 	}
+	public static String printItems(String ID) {
+		try {
+			AllProviders ap = AllProviders.getInstance();
+			Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+			CommunicationDetails cd = p.getCommunicationDetails();
+			return CommunicationDetails.printDetails(cd);
+			}
+			catch(Exception e) {
+			return "no provider with this id";
+			}
+	}
 }
