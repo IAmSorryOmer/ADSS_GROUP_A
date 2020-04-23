@@ -1,5 +1,4 @@
 package com.company.LogicLayer;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Report {

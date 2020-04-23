@@ -1,8 +1,6 @@
 package com.company.LogicLayer;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
 
 public class Discount {
     private double percentage;
