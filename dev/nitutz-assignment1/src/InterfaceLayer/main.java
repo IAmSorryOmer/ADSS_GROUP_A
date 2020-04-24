@@ -6,6 +6,18 @@ import java.util.Scanner;
 public class mainRunner{
 public static Scanner reader = new Scanner(System.in);
 
+static String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
+
+public static LinkedList<String> daysInWeek(){
+	LinkedList<String> worksOnDays = new LinkedList<String>(); 
+	for(int i = 1; i <= 7; i ++) {
+		System.out.println("does the supplier works on day "+i+" ?");
+		boolean ans = reader.nextBoolean();
+		if(ans)
+			worksOnDays.add(days[i-1]);
+	}
+	return worksOnDays;
+}
 public static void main(String[] args) {
 	ProviderInterface.ProviderCreator("1", "1234123412341234", false, 0, new LinkedList<String>(), "Bob", false, "0541212312", "SomeAddress 1", 0);
 	ProviderInterface.ProviderCreator("2", "1234123412341235", false, 0, new LinkedList<String>(), "Jhon", false, "0541444312", "SomeAddress 2", 0);
@@ -41,7 +53,7 @@ public static void main(String[] args) {
 				String Address = reader.nextLine();
 				System.out.println("\nquantityForDiscount(0 if not specified in contract):");
 				int quantityForDiscount = Integer.parseInt(reader.nextLine());
-				ProviderInterface.ProviderCreator(id, card, needTransport, DelayDays, new LinkedList<String>(), name, IsFixedDays, PhoneNum, Address, quantityForDiscount);
+				ProviderInterface.ProviderCreator(id, card, needTransport, DelayDays, daysInWeek(), name, IsFixedDays, PhoneNum, Address, quantityForDiscount);
 				break;
 			case "3":
 				System.out.println("\nID:");
@@ -67,7 +79,7 @@ public static void main(String[] args) {
 				String Address1 = reader.nextLine();
 				System.out.println("\nquantityForDiscount(0 if not specified in contract):");
 				int quantityForDiscount1 = Integer.parseInt(reader.nextLine());
-				ProviderInterface.editDetails(id1, needTransport1, DelayDays1, new LinkedList<String>(), name1);
+				ProviderInterface.editDetails(id1, needTransport1, DelayDays1, daysInWeek(), name1);
 				ProviderInterface.editDetails(id1, IsFixedDays1, PhoneNum1, Address1, quantityForDiscount1);
 				break;
 			case "4":
@@ -98,4 +110,5 @@ public static void main(String[] args) {
 		}
 	}
 }
+
 }
