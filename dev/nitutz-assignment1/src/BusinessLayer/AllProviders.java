@@ -18,10 +18,7 @@ public class AllProviders {
 		return ap.providers.add(p);
 	}
 	public static Provider getProvidersByID(AllProviders ap, String ID){
-		
-		System.out.println(ID);
 		for(Provider prov : ap.providers) {
-			System.out.println("Id ="+prov.getProviderID());
 			if(prov.getProviderID().equals(ID))
 				return prov;
 		}
