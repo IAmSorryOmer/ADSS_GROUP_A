@@ -106,20 +106,23 @@ public class CommunicationDetails {
 			output += "Amount of items needed for discount: " + cd.getQuantityForDiscount();
 		return output;
 	}
+	
 	public static String printItems(CommunicationDetails cd) {
 		String s = "";
 		for(CatalogItem cde : cd.catalogItems)
 		s += CatalogItem.printItem(cde)+"\n";
 		return s;
 	}
-public static CatalogItem getItemByID(CommunicationDetails cd, String CatalogItemID) {
+	
+	public static CatalogItem getItemByID(CommunicationDetails cd, String CatalogItemID) {
 		for(CatalogItem c : cd.catalogItems)
 			if(c.getCatalogNum().equals(CatalogItemID))
 				return c;
 		return null;
 	}
-public static boolean addCatalogItem(CommunicationDetails cd, CatalogItem c) {
-	return cd.catalogItems.add(c);
-}
+	
+	public static boolean addCatalogItem(CommunicationDetails cd, CatalogItem c) {
+		return cd.catalogItems.add(c);
+	}
 
 }

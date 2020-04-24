@@ -31,16 +31,16 @@ public class AllOrders {
 	
 	
 	//methods
-	public static boolean addOrder(AllOrders Orders, SingleProviderOrder sop) {
-		return Orders.orders.add(sop);
+	public boolean addOrder(SingleProviderOrder sop) {
+		return orders.add(sop);
 	}
 	
-	public static boolean removeOrder(AllOrders Orders, SingleProviderOrder sop) {
-		return Orders.orders.remove(sop);
+	public boolean removeOrder(SingleProviderOrder sop) {
+		return orders.remove(sop);
 	}
 	
-	public static SingleProviderOrder getOrdersFromProvider(AllOrders Orders,Provider p){
-		for(SingleProviderOrder sop : Orders.getOrders())
+	public SingleProviderOrder getOrdersFromProvider(Provider p){
+		for(SingleProviderOrder sop : getOrders())
 			if(sop.getProvider().getProviderID().equals(p.getProviderID()))
 				return sop;
 		return SingleProviderOrder.SingleProviderOrderCreator(p);

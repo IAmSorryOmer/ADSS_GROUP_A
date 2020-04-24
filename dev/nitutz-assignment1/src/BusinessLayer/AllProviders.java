@@ -14,11 +14,11 @@ public class AllProviders {
 	public static AllProviders getInstance() {
 		return SingeltonHolder.instance;
 	}
-	public static boolean addProvider(AllProviders ap, Provider p) {
-		return ap.providers.add(p);
+	public boolean addProvider(Provider p) {
+		return providers.add(p);
 	}
-	public static Provider getProvidersByID(AllProviders ap, String ID){
-		for(Provider prov : ap.providers) {
+	public Provider getProvidersByID(String ID){
+		for(Provider prov : providers) {
 			if(prov.getProviderID().equals(ID))
 				return prov;
 		}

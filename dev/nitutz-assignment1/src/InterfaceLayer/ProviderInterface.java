@@ -6,6 +6,7 @@ import BusinessLayer.Agreement;
 import BusinessLayer.AllProviders;
 import BusinessLayer.CatalogItem;
 import BusinessLayer.CommunicationDetails;
+import BusinessLayer.Product;
 import BusinessLayer.Provider;
 
 public class ProviderInterface {
@@ -21,8 +22,7 @@ public class ProviderInterface {
 	}
 	public static boolean editDetails(String ID,boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name) {
 		try {
-		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID));
+		Provider p = (AllProviders.getInstance().getProvidersByID(ID));
 		return Provider.editDetails(p, DoesNeedTransport, DelayDays, ArrivalDays, Name);
 		}
 		catch(Exception e) {
@@ -31,8 +31,7 @@ public class ProviderInterface {
 	}
 	public static String printDetails(String ID) {
 		try {
-			AllProviders ap = AllProviders.getInstance();
-			Provider p = (AllProviders.getProvidersByID(ap, ID));
+			Provider p = (AllProviders.getInstance().getProvidersByID(ID));
 			return Provider.printDetails(p);
 		}
 		catch(Exception e) {
@@ -50,8 +49,7 @@ public class ProviderInterface {
 	}
 	public static boolean editDetails(String ID, boolean ssFixedDays, String phoneNum, String address, int quantityForDiscount) {
 		try {
-			AllProviders ap = AllProviders.getInstance();
-			Provider p = (AllProviders.getProvidersByID(ap, ID));
+			Provider p = (AllProviders.getInstance().getProvidersByID(ID));
 			return CommunicationDetails.editDetails(p.getCommunicationDetails(), ssFixedDays, phoneNum, address, quantityForDiscount);
 			}
 			catch(Exception e) {
@@ -60,8 +58,7 @@ public class ProviderInterface {
 	}
 	public static String printItems(String ID) {
 		try {
-			AllProviders ap = AllProviders.getInstance();
-			Provider p = (AllProviders.getProvidersByID(ap, ID));
+			Provider p = (AllProviders.getInstance().getProvidersByID(ID));
 			CommunicationDetails cd = p.getCommunicationDetails();
 			return CommunicationDetails.printDetails(cd);
 			}
@@ -70,13 +67,11 @@ public class ProviderInterface {
 			}
 	}
 	
-	public static boolean addItem(String providerID, int discount, String catalogNum, double price) {
+	public static boolean addItem(String providerID, int discount, String catalogNum, Product describedProduct, double price) {
 		try {
-			AllProviders ap = AllProviders.getInstance();
-			Provider p = (AllProviders.getProvidersByID(ap, providerID));
-			CommunicationDetails cd = p.getCommunicationDetails();
-			CatalogItem c = CatalogItem.CatalogItemCreator(discount, catalogNum, price);
-			return CommunicationDetails.addCatalogItem(cd, c);
+			Provider p = (AllProviders.getInstance().getProvidersByID(providerID));
+			CatalogItem c = CatalogItem.CatalogItemCreator(discount, catalogNum, describedProduct, price);
+			return CommunicationDetails.addCatalogItem(p.getCommunicationDetails(), c);
 		}
 		catch(Exception e) {
 		return false;

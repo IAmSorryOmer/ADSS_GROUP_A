@@ -7,13 +7,13 @@ import BusinessLayer.CatalogItem;
 import BusinessLayer.CommunicationDetails;
 import BusinessLayer.Provider;
 import BusinessLayer.SingleProviderOrder;
+import sun.security.jca.GetInstance;
 import BusinessLayer.Provider;
 public class OrdersInterface {
 	
 	public SingleProviderOrder SingleProviderOrderCreator (String ID) {
 		try {
-			AllProviders ap = AllProviders.getInstance();
-			Provider p = (AllProviders.getProvidersByID(ap, ID));
+			Provider p = (AllProviders.getInstance().getProvidersByID(ID));
 			SingleProviderOrder spo = SingleProviderOrder.SingleProviderOrderCreator(p);
 			return spo;
 			}
@@ -23,10 +23,8 @@ public class OrdersInterface {
 	}
 	
 	public static boolean AddToOrder (String ID, String ItemID, int orderAmount) {
-		AllOrders ao = AllOrders.getInstance();
-		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID));
-		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
+		Provider p = (AllProviders.getInstance().getProvidersByID(ID));
+		SingleProviderOrder sop = AllOrders.getInstance().getOrdersFromProvider(p);
 		CatalogItem ci = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
 		if (sop == null | ci == null)
 			return false;
@@ -34,10 +32,8 @@ public class OrdersInterface {
 	}
 	
 	public static boolean EditOrder (String ID, String ItemID, int orderAmount) {
-		AllOrders ao = AllOrders.getInstance();
-		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID));
-		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
+		Provider p = (AllProviders.getInstance().getProvidersByID(ID));
+		SingleProviderOrder sop = AllOrders.getInstance().getOrdersFromProvider(p);
 		CatalogItem catalogItem = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
 		if (sop == null | catalogItem == null)
 			return false;
@@ -45,20 +41,16 @@ public class OrdersInterface {
 	}
 	
 	public static boolean RemoveFromOrder (String ID, String ItemID) {
-		AllOrders ao = AllOrders.getInstance();
-		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID));
-		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
+		Provider p = (AllProviders.getInstance().getProvidersByID(ID));
+		SingleProviderOrder sop = AllOrders.getInstance().getOrdersFromProvider(p);
 		CatalogItem catalogItem = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
 		if (sop == null | catalogItem == null)
 			return false;
 		return SingleProviderOrder.RemoveFromOrder(sop, catalogItem);
 	}
 	public static String printItems(String ID) {
-		AllOrders ao = AllOrders.getInstance();
-		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID));
-		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
+		Provider p = (AllProviders.getInstance().getProvidersByID(ID));
+		SingleProviderOrder sop = AllOrders.getInstance().getOrdersFromProvider(p);
 		if  (sop == null)
 			return "no order found";
 		String s = SingleProviderOrder.printItems(sop);

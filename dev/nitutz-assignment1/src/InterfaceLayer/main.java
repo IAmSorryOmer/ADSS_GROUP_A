@@ -3,7 +3,9 @@ package InterfaceLayer;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class mainRunner{
+import BusinessLayer.Product;
+
+public class main{
 public static Scanner reader = new Scanner(System.in);
 
 static String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};
@@ -18,16 +20,16 @@ public static LinkedList<String> daysInWeek(){
 	}
 	return worksOnDays;
 }
-public static void main(String[] args) {
+public static void Main(String[] args) {
 	ProviderInterface.ProviderCreator("1", "1234123412341234", false, 0, new LinkedList<String>(), "Bob", false, "0541212312", "SomeAddress 1", 0);
 	ProviderInterface.ProviderCreator("2", "1234123412341235", false, 0, new LinkedList<String>(), "Jhon", false, "0541444312", "SomeAddress 2", 0);
 	ProviderInterface.ProviderCreator("3", "1767673412341234", false, 0, new LinkedList<String>(), "Rose", false, "0541287654", "SomeAddress 3", 0);
 	ProviderInterface.ProviderCreator("4", "9874123412341234", false, 0, new LinkedList<String>(), "Iris", false, "0566662312", "SomeAddress 1", 0);
-	ProviderInterface.addItem("1", 0, "10", 10.99);
-	ProviderInterface.addItem("1", 0, "12", 99.99);
-	ProviderInterface.addItem("1", 0, "11", 29.99);
-	ProviderInterface.addItem("2", 0, "10", 10.99);
-	ProviderInterface.addItem("4", 0, "17", 1.99);
+	ProviderInterface.addItem("1", 0, "10", Product.ProductCreator("tomato 1kg"), 10.99);
+	ProviderInterface.addItem("1", 0, "12", Product.ProductCreator("bread"), 99.99);
+	ProviderInterface.addItem("1", 0, "11", Product.ProductCreator("tooth brush"), 29.99);
+	ProviderInterface.addItem("2", 0, "10", Product.ProductCreator("pizza"), 10.99);
+	ProviderInterface.addItem("4", 0, "17", Product.ProductCreator("gold bar"), 1.99);
 	
 	
 	while(true) {

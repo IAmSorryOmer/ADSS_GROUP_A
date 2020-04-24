@@ -26,8 +26,7 @@ public class Provider {
 	//creator
 	public static Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
 		Provider provider = new Provider(providerID,CreditCardNumber, DoesNeedTransport, DelayDays, ArrivalDays, Name, CommunicationDetails);
-		AllProviders ap = AllProviders.getInstance();
-		AllProviders.addProvider(ap, provider);
+		AllProviders.getInstance().addProvider(provider);
 		return provider;
 	}
 	
@@ -71,9 +70,7 @@ public class Provider {
 	public CommunicationDetails getCommunicationDetails() {
 		return communicationDetails;
 	}
-	public void setCommunicationDetails(CommunicationDetails communicationDetails) {
-		communicationDetails = communicationDetails;
-	}
+
 
 	//methods
 	public static boolean editDetails(Provider provider,boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name) {
@@ -87,6 +84,7 @@ public class Provider {
 			return false;
 		}
 	}
+	
 	public static String printDetails(Provider p) {
 		String output = "provider details:\n";
 		output += "ID: " + p.ProviderID + "\n";
