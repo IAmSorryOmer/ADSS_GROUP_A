@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import BusinessLayer.Product;
 
-public class main{
+public class mainRunner{
 public static Scanner reader = new Scanner(System.in);
 
 static String[] days = {"Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"};

@@ -1,6 +1,5 @@
 package BusinessLayer;
 
-import sun.security.jca.GetInstance;
 
 public class CatalogItem {
 	
