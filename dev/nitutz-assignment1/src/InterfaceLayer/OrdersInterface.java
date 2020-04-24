@@ -1,14 +1,7 @@
 package InterfaceLayer;
 
 
-import BusinessLayer.AllOrders;
-import BusinessLayer.AllProviders;
-import BusinessLayer.CatalogItem;
-import BusinessLayer.CommunicationDetails;
-import BusinessLayer.Provider;
-import BusinessLayer.SingleProviderOrder;
-import sun.security.jca.GetInstance;
-import BusinessLayer.Provider;
+import BusinessLayer.*;
 public class OrdersInterface {
 	
 	public SingleProviderOrder SingleProviderOrderCreator (String ID) {
