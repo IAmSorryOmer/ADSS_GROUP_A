@@ -7,7 +7,7 @@ import BusinessLayer.CatalogItem;
 import BusinessLayer.CommunicationDetails;
 import BusinessLayer.Provider;
 import BusinessLayer.SingleProviderOrder;
-
+import BusinessLayer.Provider;
 public class OrdersInterface {
 	
 	public SingleProviderOrder SingleProviderOrderCreator (String ID) {
@@ -22,32 +22,35 @@ public class OrdersInterface {
 			}
 	}
 	
-	public static boolean AddToOrder (String ID, CatalogItem catalogItem, int orderAmount) {
+	public static boolean AddToOrder (String ID, String ItemID, int orderAmount) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
 		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
-		if (sop == null)
+		CatalogItem ci = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
+		if (sop == null | ci == null)
 			return false;
-		return SingleProviderOrder.AddToOrder(sop, catalogItem, orderAmount);
+		return SingleProviderOrder.AddToOrder(sop, ci, orderAmount);
 	}
 	
-	public static boolean EditOrder (String ID, CatalogItem catalogItem, int orderAmount) {
+	public static boolean EditOrder (String ID, String ItemID, int orderAmount) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
 		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
-		if (sop == null)
+		CatalogItem catalogItem = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
+		if (sop == null | catalogItem == null)
 			return false;
 		return SingleProviderOrder.EditOrder(sop, catalogItem, orderAmount);
 	}
 	
-	public static boolean RemoveFromOrder (String ID, CatalogItem catalogItem) {
+	public static boolean RemoveFromOrder (String ID, String ItemID) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
 		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
-		if  (sop == null)
+		CatalogItem catalogItem = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
+		if (sop == null | catalogItem == null)
 			return false;
 		return SingleProviderOrder.RemoveFromOrder(sop, catalogItem);
 	}

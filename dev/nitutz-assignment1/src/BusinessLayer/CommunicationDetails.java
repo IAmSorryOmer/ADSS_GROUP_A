@@ -112,4 +112,14 @@ public class CommunicationDetails {
 		s += CatalogItem.printItem(cde)+"\n";
 		return s;
 	}
+public static CatalogItem getItemByID(CommunicationDetails cd, String CatalogItemID) {
+		for(CatalogItem c : cd.catalogItems)
+			if(c.getCatalogNum().equals(CatalogItemID))
+				return c;
+		return null;
+	}
+public static boolean addCatalogItem(CommunicationDetails cd, CatalogItem c) {
+	return cd.catalogItems.add(c);
+}
+
 }

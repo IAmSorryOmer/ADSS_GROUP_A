@@ -4,6 +4,7 @@ import java.util.List;
 
 import BusinessLayer.Agreement;
 import BusinessLayer.AllProviders;
+import BusinessLayer.CatalogItem;
 import BusinessLayer.CommunicationDetails;
 import BusinessLayer.Provider;
 
@@ -67,5 +68,18 @@ public class ProviderInterface {
 			catch(Exception e) {
 			return "no provider with this id";
 			}
+	}
+	
+	public static boolean addItem(String providerID, int discount, String catalogNum, double price) {
+		try {
+			AllProviders ap = AllProviders.getInstance();
+			Provider p = (AllProviders.getProvidersByID(ap, providerID).get(0));
+			CommunicationDetails cd = p.getCommunicationDetails();
+			CatalogItem c = CatalogItem.CatalogItemCreator(discount, catalogNum, price);
+			return CommunicationDetails.addCatalogItem(cd, c);
+		}
+		catch(Exception e) {
+		return false;
+		}
 	}
 }

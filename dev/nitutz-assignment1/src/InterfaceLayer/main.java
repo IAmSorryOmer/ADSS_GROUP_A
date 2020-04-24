@@ -6,8 +6,20 @@ import java.util.Scanner;
 public class main {
 	public static Scanner reader = new Scanner(System.in);
 public static void Main(String[] args) {
-	String choice = "";
+	ProviderInterface.ProviderCreator("1", "1234123412341234", false, 0, new LinkedList<String>(), "Bob", false, "0541212312", "SomeAddress 1", 0);
+	ProviderInterface.ProviderCreator("2", "1234123412341235", false, 0, new LinkedList<String>(), "Jhon", false, "0541444312", "SomeAddress 2", 0);
+	ProviderInterface.ProviderCreator("3", "1767673412341234", false, 0, new LinkedList<String>(), "Rose", false, "0541287654", "SomeAddress 3", 0);
+	ProviderInterface.ProviderCreator("4", "9874123412341234", false, 0, new LinkedList<String>(), "Iris", false, "0566662312", "SomeAddress 1", 0);
+	ProviderInterface.addItem("1", 0, "10", 10.99);
+	ProviderInterface.addItem("1", 0, "12", 99.99);
+	ProviderInterface.addItem("1", 0, "11", 29.99);
+	ProviderInterface.addItem("2", 0, "10", 10.99);
+	ProviderInterface.addItem("4", 0, "17", 1.99);
+	
+	
 	while(true) {
+		System.out.println("\nChoose Option");
+		String choice = reader.nextLine();
 		switch (choice) {
 			case "1":
 				System.out.println("\nname:");
@@ -61,6 +73,25 @@ public static void Main(String[] args) {
 				System.out.println("\nID:");
 				String ID1 = reader.nextLine();
 				System.out.println(OrdersInterface.printItems(ID1));
+				break;
+			case "5":
+				System.out.println("\nID:");
+				String ID2 = reader.nextLine();
+				System.out.println("\nProductIDInCatalog:");
+				String catalogItemID = reader.nextLine();
+				System.out.println("\nAmount");
+				int Amount = reader.nextInt();
+				OrdersInterface.AddToOrder(ID2, catalogItemID, Amount);
+				break;
+			case "6":
+				System.out.println("\nID:");
+				String ID3 = reader.nextLine();
+				System.out.println("\nProductIDInCatalog:");
+				String catalogItemID1 = reader.nextLine();
+				System.out.println("\nAmount");
+				int Amount2 = reader.nextInt();
+				OrdersInterface.EditOrder(ID3, catalogItemID1, Amount2);
+				break;
 			case "7":
 				System.exit(0);
 		}
