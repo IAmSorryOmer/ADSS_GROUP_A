@@ -3,9 +3,10 @@ package InterfaceLayer;
 import java.util.LinkedList;
 import java.util.Scanner;
 
-public class main {
-	public static Scanner reader = new Scanner(System.in);
-public static void Main(String[] args) {
+public class mainRunner{
+public static Scanner reader = new Scanner(System.in);
+
+public static void main(String[] args) {
 	ProviderInterface.ProviderCreator("1", "1234123412341234", false, 0, new LinkedList<String>(), "Bob", false, "0541212312", "SomeAddress 1", 0);
 	ProviderInterface.ProviderCreator("2", "1234123412341235", false, 0, new LinkedList<String>(), "Jhon", false, "0541444312", "SomeAddress 2", 0);
 	ProviderInterface.ProviderCreator("3", "1767673412341234", false, 0, new LinkedList<String>(), "Rose", false, "0541287654", "SomeAddress 3", 0);
