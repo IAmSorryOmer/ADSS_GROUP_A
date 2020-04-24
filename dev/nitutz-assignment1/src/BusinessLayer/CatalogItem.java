@@ -63,9 +63,12 @@ public class CatalogItem {
 
 	
 	public double calculateFinalPrice(int quantity, int totalOrder, int quantityForDiscount) {
+		if(quantityForDiscount > 0) {
 		int amountOfDiscounts = totalOrder % quantityForDiscount;
 		double finalPrice = quantity * Price * Math.pow(1-(Discount/100),(amountOfDiscounts));
 		return finalPrice;
+		}
+		return quantity*Price;
 	}
 
 

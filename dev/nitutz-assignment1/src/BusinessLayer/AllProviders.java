@@ -17,13 +17,15 @@ public class AllProviders {
 	public static boolean addProvider(AllProviders ap, Provider p) {
 		return ap.providers.add(p);
 	}
-	public static List<Provider> getProvidersByID(AllProviders ap, String ID){
-		List<Provider> list = new LinkedList<Provider>();
+	public static Provider getProvidersByID(AllProviders ap, String ID){
+		
+		System.out.println(ID);
 		for(Provider prov : ap.providers) {
+			System.out.println("Id ="+prov.getProviderID());
 			if(prov.getProviderID().equals(ID))
-				list.add(prov);
+				return prov;
 		}
-		return list;
+		return null;
 	}
 	
 }

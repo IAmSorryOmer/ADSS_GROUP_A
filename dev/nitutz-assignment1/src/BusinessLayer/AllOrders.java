@@ -43,6 +43,6 @@ public class AllOrders {
 		for(SingleProviderOrder sop : Orders.getOrders())
 			if(sop.getProvider().getProviderID().equals(p.getProviderID()))
 				return sop;
-		return null;
+		return SingleProviderOrder.SingleProviderOrderCreator(p);
 	}
 }

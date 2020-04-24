@@ -13,7 +13,7 @@ public class OrdersInterface {
 	public SingleProviderOrder SingleProviderOrderCreator (String ID) {
 		try {
 			AllProviders ap = AllProviders.getInstance();
-			Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+			Provider p = (AllProviders.getProvidersByID(ap, ID));
 			SingleProviderOrder spo = SingleProviderOrder.SingleProviderOrderCreator(p);
 			return spo;
 			}
@@ -25,7 +25,7 @@ public class OrdersInterface {
 	public static boolean AddToOrder (String ID, String ItemID, int orderAmount) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+		Provider p = (AllProviders.getProvidersByID(ap, ID));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
 		CatalogItem ci = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
 		if (sop == null | ci == null)
@@ -36,7 +36,7 @@ public class OrdersInterface {
 	public static boolean EditOrder (String ID, String ItemID, int orderAmount) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+		Provider p = (AllProviders.getProvidersByID(ap, ID));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
 		CatalogItem catalogItem = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
 		if (sop == null | catalogItem == null)
@@ -47,7 +47,7 @@ public class OrdersInterface {
 	public static boolean RemoveFromOrder (String ID, String ItemID) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+		Provider p = (AllProviders.getProvidersByID(ap, ID));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
 		CatalogItem catalogItem = CommunicationDetails.getItemByID(p.getCommunicationDetails(),ItemID);
 		if (sop == null | catalogItem == null)
@@ -57,7 +57,7 @@ public class OrdersInterface {
 	public static String printItems(String ID) {
 		AllOrders ao = AllOrders.getInstance();
 		AllProviders ap = AllProviders.getInstance();
-		Provider p = (AllProviders.getProvidersByID(ap, ID).get(0));
+		Provider p = (AllProviders.getProvidersByID(ap, ID));
 		SingleProviderOrder sop = AllOrders.getOrdersFromProvider(ao, p);
 		if  (sop == null)
 			return "no order found";

@@ -23,6 +23,8 @@ public class SingleProviderOrder{
 	//creators
 	public static SingleProviderOrder SingleProviderOrderCreator (Provider provider) {
 		SingleProviderOrder spo = new SingleProviderOrder(provider);
+		AllOrders ao = AllOrders.getInstance();
+		AllOrders.addOrder(ao, spo);
 		return spo;
 	}
 	
