@@ -14,7 +14,7 @@ public class Provider {
 	private CommunicationDetails communicationDetails;
 	
 	//constructor
-	private Provider(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
+	public Provider(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
 		this.ProviderID = providerID;
 		this.CreditCardNumber = CreditCardNumber;
 		this.DoesNeedTransport = DoesNeedTransport;
@@ -23,12 +23,7 @@ public class Provider {
 		this.communicationDetails = CommunicationDetails;
 	}
 	
-	//creator
-	public static Provider ProviderCreator(String providerID, String CreditCardNumber, boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name, CommunicationDetails CommunicationDetails) {
-		Provider provider = new Provider(providerID,CreditCardNumber, DoesNeedTransport, DelayDays, ArrivalDays, Name, CommunicationDetails);
-		AllProviders.getInstance().addProvider(provider);
-		return provider;
-	}
+	
 	
 	//getters and setters
 	public String getProviderID() {

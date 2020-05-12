@@ -9,8 +9,9 @@ public class SingleProviderOrder{
 	//fields
 	private String OrderID;
 	private Provider Provider;
-	private Map<CatalogItem, Pair<Integer, Double>> ItemList_amount_price; //catalog item - amount of item - price each
+	private Map<CatalogItem, Pair<Integer, Double>> ItemList_amount_price; //catalog item - amount of item - total price
 	private int totalItemAmount;
+	private double finalPrice;
 	
 	//consructors
 	private SingleProviderOrder (Provider provider) {
@@ -28,12 +29,12 @@ public class SingleProviderOrder{
 	}
 	
 	//methods
-	public static boolean AddToOrder (SingleProviderOrder sop, CatalogItem catalogItem, int orderAmount) {
+	public static boolean AddToOrder (SingleProviderOrder spo, CatalogItem catalogItem, int orderAmount) {
 		if (orderAmount < 1)
 			return false;
-		sop.addToItemList(catalogItem, orderAmount);
-		sop.setTotalItemAmount(sop.getTotalItemAmount() + orderAmount);
-		sop.setprices();
+		spo.addToItemList(catalogItem, orderAmount);
+		spo.setTotalItemAmount(spo.getTotalItemAmount() + orderAmount);
+		spo.setprices();
 		return true;
 	}
 	
@@ -58,6 +59,22 @@ public class SingleProviderOrder{
 		return true;
 	}
 	
+	/*
+	public double calculateFinalPrice(int quantity, int totalOrder, int quantityForDiscount) {
+		if(quantityForDiscount > 0) {
+		int amountOfDiscounts = totalOrder % quantityForDiscount;
+		double finalPrice = quantity * Price * Math.pow(1-(Discount/100),(amountOfDiscounts));
+		return finalPrice;
+		}
+		return quantity*Price; }
+	*/
+	public static double calcItemCategoryPrice (Provider provier, CatalogItem catalogItem, int amount) {
+		double percentDiscount = 1;
+		if (provier.getCommunicationDetails().getAgreement().getPercentItemDiscount(catalogItem))
+		return catalogItem.getPrice() *amount *provier.getCommunicationDetails().getQuantityForDiscount()
+	}
+	
+	//calculates total price of item ordered(single item price * cost) and the final order price
 	private void setprices() {
 		for (Map.Entry<CatalogItem, Pair<Integer, Double>> mapEntry : ItemList_amount_price.entrySet()) {
 			int itemAmount = mapEntry.getValue().getFirst();
@@ -99,7 +116,8 @@ public class SingleProviderOrder{
 	public int getSpecificItemAmount (CatalogItem catalogItem) {
 		return ItemList_amount_price.get(catalogItem).getFirst();
 	}
-public static String printItems(SingleProviderOrder spo) {	
+	
+	public static String printItems(SingleProviderOrder spo) {	
 	String s = "";
 	for(CatalogItem cde : spo.ItemList_amount_price.keySet())
 	s += CatalogItem.printItem(cde)+"\n";

@@ -17,7 +17,7 @@ public class ProviderInterface {
 			cd = communicationDetailsCreatorWithAgreement(IsFixedDays, PhoneNum, Address, quantityForDiscount);
 		else
 			cd = communicationDetailsCreatorNoAgreement(IsFixedDays, PhoneNum, Address);
-		Provider p = BusinessLayer.Provider.ProviderCreator(providerID, CreditCardNumber, DoesNeedTransport, DelayDays, ArrivalDays, Name, cd);
+		Provider p = BusinessLayer.ProviderController.ProviderCreator(providerID, CreditCardNumber, DoesNeedTransport, DelayDays, ArrivalDays, Name, cd);
 		return p;
 	}
 	public static boolean editDetails(String ID,boolean DoesNeedTransport, int DelayDays, List<String> ArrivalDays, String Name) {
