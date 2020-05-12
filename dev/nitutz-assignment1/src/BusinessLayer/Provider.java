@@ -73,7 +73,6 @@ public class Provider {
 		provider.setDoesNeedTransport(DoesNeedTransport);
 		provider.setDelayDays(DelayDays);
 		provider.setArrivalDays(ArrivalDays);
-		provider.setName(Name);
 		return true;
 		}
 		catch(Exception e) {

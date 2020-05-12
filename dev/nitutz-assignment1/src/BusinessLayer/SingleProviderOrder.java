@@ -50,11 +50,8 @@ public class SingleProviderOrder{
 	}
 	
 	public static boolean RemoveFromOrder (SingleProviderOrder sop, CatalogItem catalogItem) {
-		if (!sop.ItemList_amount_price.containsKey(catalogItem))
-			return false;
-		int oldAmount =  sop.getSpecificItemAmount(catalogItem);
 		sop.removeFromItemList(catalogItem);
-		sop.setTotalItemAmount(sop.getTotalItemAmount() - oldAmount);
+		sop.setTotalItemAmount(sop.getTotalItemAmount() - sop.getSpecificItemAmount(catalogItem));
 		sop.setprices();
 		return true;
 	}
@@ -85,6 +82,7 @@ public class SingleProviderOrder{
 	}
 	
 	//getters  & setters
+
 	public void addToItemList(CatalogItem catalogItem, int orderAmount) {
 		ItemList_amount_price.put(catalogItem, new Pair<Integer,Double>(new Integer(orderAmount),new Double(0)));
 	}
