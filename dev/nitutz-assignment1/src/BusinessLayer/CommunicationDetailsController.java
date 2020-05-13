@@ -8,8 +8,8 @@ public class CommunicationDetailsController {
 	
 	
 	//creator
-	public static CommunicationDetails communicationDetailsCreatorWithAgreement(boolean IsFixedDays, String PhoneNum, String Address, boolean isAgreement) {
-		CommunicationDetails commDetails = new CommunicationDetails(IsFixedDays, PhoneNum, Address, isAgreement);
+	public static CommunicationDetails communicationDetailsCreator(String ProviderID, boolean IsFixedDays, String PhoneNum, String Address, boolean isAgreement) {
+		CommunicationDetails commDetails = new CommunicationDetails(ProviderID, IsFixedDays, PhoneNum, Address, isAgreement);
 		return commDetails;
 	}	
 	
@@ -27,7 +27,7 @@ public class CommunicationDetailsController {
 		output += "Address: " + commDetails.getAddress() + "\n";
 		output += "Items: \n";
 		for (CatalogItem catalogItem : commDetails.getCatalogItems()) {
-			output += CatalogItem.printItem(catalogItem);
+			output += CatalogItemController.printItem(catalogItem);
 			if (commDetails.isAgreement())
 				output += ", " + AgreementController.printItemDetails(commDetails.getAgreement(), catalogItem) + "\n";
 		}

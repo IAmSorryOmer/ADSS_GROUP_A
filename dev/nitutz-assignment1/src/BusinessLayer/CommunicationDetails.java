@@ -6,6 +6,7 @@ import java.util.List;
 public class CommunicationDetails {
 
 	//fields
+	private final String ProviderID;
 	private boolean IsFixedDays;
 	private String PhoneNum;
 	private String Address;
@@ -14,12 +15,13 @@ public class CommunicationDetails {
 	
 	
 	//constructor
-	public CommunicationDetails(boolean IsFixedDays, String PhoneNum, String Address, boolean isAgreement) {
+	public CommunicationDetails(String ProviderID, boolean IsFixedDays, String PhoneNum, String Address, boolean isAgreement) {		
+		this.ProviderID = ProviderID;
 		this.IsFixedDays = IsFixedDays;
 		this.PhoneNum  = PhoneNum;
 		this.Address = Address;
 		if (isAgreement)
-			this.agreement = BusinessLayer.AgreementController.AgreementCreator();
+			this.agreement = BusinessLayer.AgreementController.AgreementCreator(ProviderID);
 		else
 			this.agreement = null;
 		this.catalogItems = new LinkedList<CatalogItem>();
@@ -27,6 +29,10 @@ public class CommunicationDetails {
 	
 	
 	//getters and setters
+	public String getProviderID() {
+		return ProviderID;
+	}
+	
 	public boolean getIsFixedDays() {
 		return IsFixedDays;
 	}

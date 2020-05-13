@@ -7,8 +7,8 @@ public class AgreementController {
 	public static List<Agreement> agreementList;
 	
 	//creators
-	public static Agreement AgreementCreator() {
-		Agreement agreement = new Agreement();
+	public static Agreement AgreementCreator(String ProviderID) {
+		Agreement agreement = new Agreement(ProviderID);
 		agreementList.add(agreement);
 		return agreement;
 	}
@@ -43,21 +43,6 @@ public class AgreementController {
 		return true;
 	}
 	
-	/*
-	public static boolean editItemDiscountPercent (Agreement agreement, CatalogItem catalogItem, int discount) {
-		if (discount < 0 | !agreement.doesDiscountExist(catalogItem))
-			return false;
-		agreement.setItemDiscountPercent(catalogItem, discount);
-		return true;
-	}
-	
-	public static boolean editItemQuantityForDiscount (Agreement agreement, CatalogItem catalogItem, int quantity) {
-		if (quantity <= 0 | !agreement.doesDiscountExist(catalogItem))
-			return false;
-		agreement.setItemQuantityForDiscount(catalogItem, quantity);
-		return true;
-	}
-	*/
 	public static boolean removeItemDiscount (Agreement agreement, CatalogItem catalogItem) {
 		if (!agreement.doesDiscountExist(catalogItem))
 			return false;
