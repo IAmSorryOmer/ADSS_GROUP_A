@@ -1,30 +1,30 @@
-package com.company.LogicLayer;
+package com.company.Entities;
 
-import java.util.List;
-
-public class ProductDetails implements Discountable, Reportable{
+public class ProductDetails implements Discountable, Reportable {
     private String id;
     private String name;
     private String manufacturer;
     private double retailPrice;
-    private double supplierPrice;
+    private int daysToExpiration;
     private Category category;
     private int quantityInStorage;
     private int quantityInShelves;
     private int minimumQuantity;
 
-    public ProductDetails(String id, String name, String manufacturer, double retailPrice, double supplierPrice, Category category, int minimumQuantity) {
+
+    public ProductDetails(String id, String name, String manufacturer, double retailPrice, int daysOfExpiration, Category category, int minimumQuantity) {
         this.id = id;
         this.name = name;
         this.manufacturer = manufacturer;
         this.retailPrice = retailPrice;
-        this.supplierPrice = supplierPrice;
+        this.daysToExpiration = daysOfExpiration;
         this.category = category;
         this.quantityInStorage = 0;
         this.quantityInShelves = 0;
         this.minimumQuantity = minimumQuantity;
     }
 
+    @Override
     public String getId() {
         return id;
     }
@@ -57,12 +57,12 @@ public class ProductDetails implements Discountable, Reportable{
         this.retailPrice = retailPrice;
     }
 
-    public double getSupplierPrice() {
-        return supplierPrice;
+    public int getDaysToExpiration() {
+        return daysToExpiration;
     }
 
-    public void setSupplierPrice(double supplierPrice) {
-        this.supplierPrice = supplierPrice;
+    public void setDaysToExpiration(int daysToExpiration) {
+        this.daysToExpiration = daysToExpiration;
     }
 
     public Category getCategory() {
@@ -97,6 +97,7 @@ public class ProductDetails implements Discountable, Reportable{
         this.minimumQuantity = minimumQuantity;
     }
 
+    @Override
     public Discountable getParent() {
         return category;
     }

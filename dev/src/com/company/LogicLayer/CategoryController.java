@@ -1,5 +1,7 @@
 package com.company.LogicLayer;
 
+import com.company.Entities.Category;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;

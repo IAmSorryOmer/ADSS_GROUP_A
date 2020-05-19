@@ -1,4 +1,4 @@
-package com.company.LogicLayer;
+package com.company.Entities;
 
 public interface Reportable {
 

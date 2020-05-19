@@ -1,4 +1,5 @@
-package com.company.LogicLayer;
+package com.company.Entities;
+
 import java.util.List;
 
 public class Report {

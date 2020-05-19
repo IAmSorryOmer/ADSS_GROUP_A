@@ -1,8 +1,8 @@
-package com.company.LogicLayer;
+package com.company.Entities;
 
 import java.time.LocalDate;
 
-public class Product implements Reportable{
+public class Product implements Reportable {
 
     private String location;
     private String id;
@@ -12,11 +12,11 @@ public class Product implements Reportable{
     private ProductDetails type;
 
 
-    public Product(String location, String id, boolean isInStorage, LocalDate expirationDate, boolean isDamaged, ProductDetails type) {
+    public Product(String location, String id, boolean isInStorage, boolean isDamaged, ProductDetails type) {
         this.location = location;
         this.id = id;
         this.isInStorage = isInStorage;
-        this.expirationDate = expirationDate;
+        this.expirationDate = null;
         this.isDamaged = isDamaged;
         this.type = type;
     }

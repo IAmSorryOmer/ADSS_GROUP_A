@@ -1,5 +1,6 @@
 package com.company.PresentationLayer;
 
+import com.company.Entities.Report;
 import com.company.LogicLayer.*;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public class ReportInterface {
         ReportController.addDamagedReport(report);
     }
 
-    public static void addMissingReport(Report report){
-        ReportController.addMissingReport(report);
+    public static void addMissingReport(Report report, boolean autoOrder){
+        ReportController.addMissingReport(report, autoOrder);
     }
 
     public static Report getReportById(String Id){

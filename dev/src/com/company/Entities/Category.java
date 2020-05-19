@@ -1,9 +1,9 @@
-package com.company.LogicLayer;
+package com.company.Entities;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Category implements Discountable{
+public class Category implements Discountable {
     private String ID;
     private String name;
     private Category parent;

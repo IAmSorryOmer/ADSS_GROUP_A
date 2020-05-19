@@ -1,4 +1,7 @@
 package com.company.LogicLayer;
+import com.company.Entities.Category;
+import com.company.Entities.ProductDetails;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

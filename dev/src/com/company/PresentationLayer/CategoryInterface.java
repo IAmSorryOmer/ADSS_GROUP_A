@@ -1,6 +1,6 @@
 package com.company.PresentationLayer;
 
-import com.company.LogicLayer.Category;
+import com.company.Entities.Category;
 import com.company.LogicLayer.CategoryController;
 
 import java.util.List;

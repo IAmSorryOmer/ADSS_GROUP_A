@@ -1,8 +1,10 @@
 package com.company.LogicLayer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.company.Entities.*;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
+
+import java.time.LocalDate;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductController {
@@ -10,14 +12,19 @@ public class ProductController {
     private static HashMap<ProductDetails, List<Product>> productTypeToProducts = new HashMap<>();
 
     public static void addProduct(Product product, String typeId) throws Exception{
-        if (getProductById(product.getId()) != null){
-            throw new Exception("product with that id " + product.getId() + " already exists");
-        }
         ProductDetails productDetails = ProductDetailsController.getProductDetailsById(typeId);
         if(productDetails == null){
             throw new IllegalArgumentException("there is no type with that id");
         }
+        addProductWithObject(product, productDetails);
+    }
+
+    public static void addProductWithObject(Product product, ProductDetails productDetails){
+        if (getProductById(product.getId()) != null){
+            throw new IllegalArgumentException("product with that id " + product.getId() + " already exists");
+        }
         product.setType(productDetails);
+        product.setExpirationDate(LocalDate.now().plusDays(productDetails.getDaysToExpiration()));
         products.add(product);
         productTypeToProducts.putIfAbsent(product.getType(), new ArrayList<>());
         if(product.isInStorage()) {
@@ -28,7 +35,6 @@ public class ProductController {
         }
         productTypeToProducts.get(product.getType()).add(product);
     }
-
     public static Product getProductById(String Id) {
         for(Product product: products){
             if (product.getId().equals(Id)){
@@ -89,6 +95,17 @@ public class ProductController {
         }
         else {
             product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()-1);
+        }
+    }
+    public static void handleOrder(SingleProviderOrder singleProviderOrder){
+        for(Map.Entry<CatalogItem, Integer> entry : singleProviderOrder.getOrderItems().entrySet()){
+            String id = UUID.randomUUID().toString();//generate random id for the catalog items
+            ProductDetails productDetails = entry.getKey().getProductDetails();
+            for(int i = 1; i <= entry.getValue(); i++){
+                Product product = new Product("storage", id + i, true, false, null);
+                ProductController.addProductWithObject(product, productDetails);
+                System.out.println("added " + product.toString());
+            }
         }
     }
     public static List<Product> getAllProducts(){

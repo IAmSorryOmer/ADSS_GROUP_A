@@ -1,9 +1,9 @@
 package com.company.PresentationLayer;
 
+import com.company.Entities.ProductDetails;
 import com.company.LogicLayer.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ProductDetailsInterface {
     public static void addProductDetails(ProductDetails productDetails, String catId) throws Exception {

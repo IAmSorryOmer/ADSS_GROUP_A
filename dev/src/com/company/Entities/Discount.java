@@ -1,16 +1,26 @@
-package com.company.LogicLayer;
+package com.company.Entities;
 
 import java.time.LocalDate;
 
 public class Discount {
+    private String id;
     private double percentage;
     private LocalDate fromDate;
     private LocalDate toDate;
 
-    public Discount(double percentage, LocalDate fromDate, LocalDate toDate) {
+    public Discount(String id, double percentage, LocalDate fromDate, LocalDate toDate) {
+        this.id = id;
         this.percentage = percentage;
         this.fromDate = fromDate;
         this.toDate = toDate;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getPercentage() {
@@ -38,6 +48,6 @@ public class Discount {
     }
 
     public String toString() {
-        return "percentage of discount: " + percentage + ", from date: " + fromDate.toString() + ", to date: " + toDate.toString();
+        return "percentage id: " + id + ", percentage of discount: " + percentage + ", from date: " + fromDate.toString() + ", to date: " + toDate.toString();
     }
 }

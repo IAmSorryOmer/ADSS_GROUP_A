@@ -1,5 +1,8 @@
 package com.company.LogicLayer;
+import com.company.Entities.*;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ReportController {
@@ -19,8 +22,11 @@ public class ReportController {
         reports.add(report);
     }
 
-    public static void addMissingReport(Report report){
+    public static void addMissingReport(Report report, boolean autoOrder){
         List<ProductDetails> products = ProductDetailsController.getAllMissing();
+        if(autoOrder) {
+            SingleProviderOrderController.autoOrderListOfProducts(products);
+        }
         report.setReportType(Report.reportType.Missings);
         report.setSubjects(products);
         reports.add(report);

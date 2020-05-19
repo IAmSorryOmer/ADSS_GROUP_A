@@ -1,12 +1,9 @@
 package com.company;
 
-import com.company.LogicLayer.*;
+import com.company.Entities.*;
 import com.company.PresentationLayer.*;
-import com.sun.org.apache.bcel.internal.generic.RET;
 
-import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
@@ -17,26 +14,35 @@ public class Main {
         boolean dummyLoaded = false;
         while(true) {
             System.out.println("Please select a category to manage or operation to perform:");
-            String[] options = new String[]{"product types", "products", "discounts", "categories", "reports", "load dummy data", "exit"};
+            String[] options = new String[]{"product types", "products", "discounts", "categories", "reports(including auto order missing items)", "orders", "providers and catalogs", "agreements", "load dummy data", "exit"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
-                    manageProductdTypes();
+                    manageProductdTypesMenu();
                     break;
                 case 2:
-                    manageProducts();
+                    manageProductsMenu();
                     break;
                 case 3:
-                    manageDiscounts();
+                    manageDiscountsMenu();
                     break;
                 case 4:
-                    manageCategories();
+                    manageCategoriesMenu();
                     break;
                 case 5:
-                    manageReports();
+                    manageReportsMenu();
                     break;
                 case 6:
+                    manageOrdersMenu();
+                    break;
+                case 7:
+                    manageProvidersMenu();
+                    break;
+                case 8:
+                    manageAgreementsMenu();
+                    break;
+                case 9:
                     if(dummyLoaded){
                         System.out.println("dummy data already loaded");
                     }
@@ -45,15 +51,15 @@ public class Main {
                         dummyLoaded = true;
                     }
                     break;
-                case 7:
+                case 10:
                     return;
                 default:
-                    System.out.println("choose an option between 1 to 7");
+                    System.out.println("choose an option between 1 to 10");
             }
         }
     }
 
-    private static void manageProductdTypes(){
+    private static void manageProductdTypesMenu(){
         while(true) {
             System.out.println("Please select an option to perform on products types:");
             String[] options = new String[]{"add type", "print all missings products", "modify minimum quantity", "print all products with name", "print all products within storage","print all products", "return to main"};
@@ -105,8 +111,8 @@ public class Main {
         String manufacturer = reader.nextLine();
         System.out.println("please insert retail price:");
         double retailPrice = Double.parseDouble(reader.nextLine());
-        System.out.println("please insert supplier price:");
-        double supplierPrice = Double.parseDouble(reader.nextLine());
+        System.out.println("please insert days until expiration:");
+        int daysUntilExpiration = Integer.parseInt(reader.nextLine());
         System.out.println("please insert minimum quantity(-1 means no minimum quantity):");
         int minimumQuantity = Integer.parseInt(reader.nextLine());
         System.out.println("please insert the id of the category of the product(to print all the categories insert @print):");
@@ -117,7 +123,7 @@ public class Main {
             System.out.println("now insert the id:");
             catId = reader.nextLine();
         }
-        ProductDetails productDetails = new ProductDetails(id, name, manufacturer, retailPrice, supplierPrice, null, minimumQuantity);
+        ProductDetails productDetails = new ProductDetails(id, name, manufacturer, retailPrice, daysUntilExpiration, null, minimumQuantity);
         try {
             ProductDetailsInterface.addProductDetails(productDetails, catId);
         } catch (Exception e) {
@@ -125,7 +131,7 @@ public class Main {
         }
     }
 
-    private static void manageProducts(){
+    private static void manageProductsMenu(){
         while(true) {
             System.out.println("Please select an option to perform on products:");
             String[] options = new String[]{"add product", "move product", "prints all products of type", "print all damaged products", "mark product as damaged", "print all products", "return to main"};
@@ -153,12 +159,21 @@ public class Main {
                     }
                     break;
                 case 6:
-                    System.out.println(ProductInterface.stringifyProducts());
+                    manageOrdersMenu();
                     break;
                 case 7:
+                    manageProvidersMenu();
+                    break;
+                case 8:
+                    manageAgreementsMenu();
+                    break;
+                case 9:
+                    System.out.println(ProductInterface.stringifyProducts());
+                    break;
+                case 10:
                     return;
                 default:
-                    System.out.println("choose an option between 1 to 6");
+                    System.out.println("choose an option between 1 to 10");
             }
         }
     }
@@ -194,9 +209,6 @@ public class Main {
     private static void addProductFromUser(){
         System.out.println("please insert id:");
         String id = reader.nextLine();
-        System.out.println("please insert expiration date(format in YYYY-MM-DD):");
-        String date = reader.nextLine();
-        LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
         System.out.println("if you want to add multiple products insert y(the id will be the id you inserted, followed by running number):");
         String ans = reader.nextLine();
         int multiples = -1;
@@ -217,7 +229,7 @@ public class Main {
         }
         for(int i = 1; i<= multiples; i++){
             String idToAssign = multiples != 1 ? id + i:id;
-            Product product = new Product("storage", idToAssign, true, localDate, false, null);
+            Product product = new Product("storage", idToAssign, true, false, null);
             try {
                 ProductInterface.addProduct(product, productId);
             } catch (Exception e) {
@@ -226,7 +238,7 @@ public class Main {
         }
     }
 
-    private static void manageDiscounts(){
+    private static void manageDiscountsMenu(){
         while(true) {
             System.out.println("Please select an option to perform on discounts:");
             String[] options = new String[]{"add discount", "print discounts of certain type or category", "print current discount percentage of certain type","print pricing history of certain type",  "return to main"};
@@ -266,7 +278,7 @@ public class Main {
             productId = reader.nextLine();
         }
         try {
-            printNumberedList(DiscountInterface.getDiscountableDiscounts(productId, ans.equals("y"), ans2.equals("y") ));
+            System.out.println(DiscountInterface.getDiscountableDiscounts(productId, ans.equals("y"), ans2.equals("y")));
         }
         catch (Exception e){
             System.out.println("error. " + e.getMessage());
@@ -309,6 +321,8 @@ public class Main {
         }
     }
     private static void addDiscountFromUser(){
+        System.out.println("please insert the id of the discount:");
+        String discId = reader.nextLine();
         System.out.println("please insert the percentage of the discount:");
         double percentage = Double.parseDouble(reader.nextLine());
         System.out.println("please insert the starting date of the discount(format like YYYY-MM-DD):");
@@ -318,7 +332,7 @@ public class Main {
         String endDateStr = reader.nextLine();
         LocalDate endDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
 
-        Discount discount = new Discount(percentage, startDate, endDate);
+        Discount discount = new Discount(discId, percentage, startDate, endDate);
         System.out.println("is the discount is on retail prices?(y for yes, else for no):");
         String ans = reader.nextLine();
         boolean retail = ans.equals("y");
@@ -347,7 +361,7 @@ public class Main {
         }
     }
 
-    private static void manageCategories(){
+    private static void manageCategoriesMenu(){
         while(true) {
             System.out.println("Please select an option to perform on categories:");
             String[] options = new String[]{"add category", "print all categories", "return to main"};
@@ -391,7 +405,7 @@ public class Main {
 
     }
 
-    private static void manageReports(){
+    private static void manageReportsMenu(){
         while(true) {
             System.out.println("Please select an option to perform on reports:");
             String[] options = new String[]{"add report", "print all reports", "return to main"};
@@ -433,8 +447,10 @@ public class Main {
                 ReportInterface.addDamagedReport(report);
                 break;
             case 3:
+                System.out.println("do you want to auto order missing products?(y for yes else no)");
+                boolean autoOrder = reader.nextLine().equals("y");
                 report.setReportType(Report.reportType.Missings);
-                ReportInterface.addMissingReport(report);
+                ReportInterface.addMissingReport(report, autoOrder);
                 break;
             default:
                 System.out.println("this isnt an option. operation canceled");
@@ -458,6 +474,563 @@ public class Main {
         }
     }
 
+    private static void manageOrdersMenu(){
+        while(true) {
+            System.out.println("Please select an option to perform on orders of the selected provider: ");
+            String[] options = new String[]{"manage provider orders", "print all orders", "print all automatic orders", "return to main"};
+            printOptions(options);
+            int option = Integer.parseInt(reader.nextLine());
+            switch(option){
+                case 1:
+                    manageProviderOrdersMenu();
+                    break;
+                case 2:
+                    printNumberedList(OrdersInterface.getAllOrders());
+                    break;
+                case 3:
+                    printNumberedList(OrdersInterface.getAllAutomaticsOrders());
+                    break;
+                case 4:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 4");
+            }
+        }
+
+    }
+    private static void manageProviderOrdersMenu(){
+        String message = "please insert the id of the provider that you want to manage his orders";
+        String providerId = selectProvider(message);
+        while(true) {
+            System.out.println("Please select an option to perform on orders of the selected provider: ");
+            String[] options = new String[]{"add order", "add automatic order", "manage order items", "print all orders of provider", "print expanded order(with items)", "select another provider to manage", "return to order manage menu"};
+            printOptions(options);
+            int option = Integer.parseInt(reader.nextLine());
+            switch(option){
+                case 1:
+                    addOrderFromUser(providerId);
+                    break;
+                case 2:
+                    addAutomaticOrderFromUser(providerId);
+                    break;
+                case 3:
+                    manageOrderItemsMenu(providerId);
+                    break;
+                case 4:
+                    printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
+                    break;
+                case 5:
+                    printSpecificOrder(providerId);
+                    break;
+                case 6:
+                    providerId = selectProvider(message);
+                    break;
+                case 7:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 7");
+            }
+        }
+    }
+
+    private static void addOrderFromUser(String providerId){
+        System.out.println("please insert the order id: ");
+        String orderId = reader.nextLine();
+        System.out.println("please insert the order date: ");
+        String orderDateStr = reader.nextLine();
+        LocalDate orderDate = LocalDate.parse(orderDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, orderId, orderDate);
+        try {
+            OrdersInterface.SingleProviderOrderCreator(singleProviderOrder, providerId);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void addAutomaticOrderFromUser(String providerId){
+        System.out.println("please insert the order id: ");
+        String orderId = reader.nextLine();
+        System.out.println("please insert the initial order date");
+        String orderDateStr = reader.nextLine();
+        LocalDate orderDate = LocalDate.parse(orderDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+        System.out.println("please insert the interval between orders(in days):");
+        int daysInterval = Integer.parseInt(reader.nextLine());
+        AutomaticOrder automaticOrder = new AutomaticOrder(null, orderId, orderDate, daysInterval);
+        try {
+            OrdersInterface.SingleProviderOrderCreator(automaticOrder, providerId);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void printSpecificOrder(String providerId){
+        System.out.println("please insert the order id(to print all the orders of the provider insert @print): ");
+        String orderId = reader.nextLine();
+        if(orderId.equals("@print")){
+            try {
+                printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
+                System.out.println("now insert the order id: ");
+                orderId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        System.out.println(OrdersInterface.printOrderExpanded(providerId, orderId));
+    }
+
+    private static void manageOrderItemsMenu(String providerId){
+        String orderId = null;
+        try {
+            orderId = selectOrder(providerId);
+        }
+        catch (Exception e){
+            System.out.println("error. " + e.getMessage());
+            return;
+        }
+        while(true) {
+            System.out.println("Please select an option to perform on items of the selected order: ");
+            String[] options = new String[]{"add item to order", "edit item on order", "remove item from order", "choose another order to manage", "return to manage provider orders"};
+            printOptions(options);
+            int option = Integer.parseInt(reader.nextLine());
+            switch(option){
+                case 1:
+                    addItemToOrder(providerId, orderId);
+                    break;
+                case 2:
+                    editItemOfOrder(providerId, orderId);
+                    break;
+                case 3:
+                    removeItemFromOrder(providerId, orderId);
+                    break;
+                case 4:
+                    try {
+                        orderId = selectOrder(providerId);
+                    }
+                    catch (Exception e){
+                        System.out.println("error. " + e.getMessage());
+                        return;
+                    }
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 5");
+            }
+        }
+    }
+    private static void addItemToOrder(String providerId, String orderId){
+        System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        System.out.println("please insert the amount to order: ");
+        int orderAmount = Integer.parseInt(reader.nextLine());
+        try {
+            OrdersInterface.AddToOrder(providerId, orderId, catalogItemId, orderAmount);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void editItemOfOrder(String providerId, String orderId){
+        System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        System.out.println("please insert the new amount: ");
+        int orderAmount = Integer.parseInt(reader.nextLine());
+        try {
+            OrdersInterface.EditOrder(providerId, orderId, catalogItemId, orderAmount);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void removeItemFromOrder(String providerId, String orderId){
+        System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        try {
+            OrdersInterface.RemoveFromOrder(providerId, orderId, catalogItemId);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+
+
+    private static void manageProvidersMenu(){
+        while(true) {
+            System.out.println("Please select an option to perform on providers:");
+            String[] options = new String[]{"add provider", "edit provider details", "manage provider catalog", "print all providers", "return to main"};
+            printOptions(options);
+            int option = Integer.parseInt(reader.nextLine());
+            switch(option){
+                case 1:
+                    addProviderFromUser();
+                    break;
+                case 2:
+                    editProviderDetails();
+                    break;
+                case 3:
+                    manageProviderCatalogMenu();
+                    break;
+                case 4:
+                    printProviders();
+                    break;
+                case 5:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 5");
+            }
+        }
+
+    }
+    private static void addProviderFromUser(){
+        System.out.println("please insert id:");
+        String providerId = reader.nextLine();
+        System.out.println("please insert provider name:");
+        String providerName = reader.nextLine();
+        System.out.println("please insert credit card number:");
+        String creditCardNumber = reader.nextLine();
+        System.out.println("is the provider need transport?(y for yes, else no):");
+        boolean needTransport = reader.nextLine().equals("y");
+        System.out.println("is the provider comes in fixed days?(y for yes, else no):");
+        boolean fixedDays = reader.nextLine().equals("y");
+        int arrivalDays = -1;
+        int delayDays = 0;
+        if(fixedDays) {
+            System.out.println("please insert the arrival days of the provider as binary string.\nfor example if a provider comes in sunday, monday and friday insert 0100011):");
+            while (arrivalDays == -1) {
+                String arrivalString = reader.nextLine();
+                if (arrivalString.length() != 7) {
+                    System.out.println("the string size should be seven(a digit for each day)");
+                    continue;
+                }
+                try {
+                    arrivalDays = Integer.parseInt(arrivalString, 2);
+                } catch (Exception e) {
+                    System.out.println("you inserted invalid binary string. try again:");
+                }
+            }
+        }
+        else{
+            System.out.println("insert the number of days until the provider provides:");
+            delayDays = Integer.parseInt(reader.nextLine());
+        }
+        System.out.println("please insert a phone to contact with the provider:");
+        String phoneNumber = reader.nextLine();
+        System.out.println("please insert the adress of the provider:");
+        String adress = reader.nextLine();
+        Provider provider = new Provider(providerId, creditCardNumber, needTransport, delayDays, arrivalDays, providerName, null);
+        CommunicationDetails communicationDetails = new CommunicationDetails(provider, fixedDays, phoneNumber, adress, null);
+        provider.setCommunicationDetails(communicationDetails);
+        try {
+            ProviderInterface.ProviderCreator(provider, communicationDetails);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void editProviderDetails(){
+        String providerId = selectProvider("please insert the id of the provider to edit");
+        System.out.println("please insert provider new name, or @none for keep it unchanged:");
+        String providerName = reader.nextLine();
+        if(providerName.equals("@none"))
+            providerName = null;
+        System.out.println("is the provider need transport?(y for yes, else no, or @none for keep it unchanged):");
+        String needTransportStr = reader.nextLine();
+        Boolean needTransport = needTransportStr.equals("@none") ? null : needTransportStr.equals("y");
+        System.out.println("is the provider comes in fixed days?(y for yes, else no, or @none for keep it unchanged):");
+        String fixedDaysStr = reader.nextLine();
+        Boolean fixedDays = fixedDaysStr.equals("@none") ? null : fixedDaysStr.equals("y");
+        Integer arrivalDays = -1;
+        if(fixedDays != null && fixedDays) {
+            System.out.println("please insert the new arrival days of the provider as binary string, or @none for keep it unchanged.\nfor example if a provider comes in sunday, monday and friday insert 0100011):");
+            while (arrivalDays == -1) {
+                String arrivalString = reader.nextLine();
+                if(arrivalString.equals("@none")){
+                    arrivalDays = null;
+                    break;
+                }
+                if (arrivalString.length() != 7) {
+                    System.out.println("the string size should be seven(a digit for each day)");
+                }
+                try {
+                    arrivalDays = Integer.parseInt(arrivalString, 2);
+                } catch (Exception e) {
+                    System.out.println("you inserted invalid binary string. try again:");
+                }
+            }
+        }
+        System.out.println("please insert the new phone of the provider, or @none for keep it unchanged:");
+        String phoneNumber = reader.nextLine();
+        if(phoneNumber.equals("@none"))
+            phoneNumber = null;
+        System.out.println("please insert the new adress of the provider, or @none for keep it unchanged:");
+        String address = reader.nextLine();
+        if(address.equals("@none"))
+            address = null;
+        try {
+            ProviderInterface.editDetails(providerId, needTransport, null, arrivalDays, providerName, fixedDays, phoneNumber, address);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void printProviders(){
+        printNumberedList(ProviderInterface.getAllProviders());
+    }
+
+    private static void manageProviderCatalogMenu(){
+        String providerId = selectProvider("select provider to manage his items");
+        while(true) {
+            System.out.println("Please select an option to perform on items of the selected provider: ");
+            String[] options = new String[]{"add item to catalog", "edit item on catalog", "remove item from catalog", "print provider catalog","choose another provider to manage", "return to manage provider menu"};
+            printOptions(options);
+            int option = Integer.parseInt(reader.nextLine());
+            switch(option){
+                case 1:
+                    addItemToCatalog(providerId);
+                    break;
+                case 2:
+                    editItemOfCatalog(providerId);
+                    break;
+                case 3:
+                    removeItemFromCatalog(providerId);
+                    break;
+                case 4:
+                    printProviderCatalog(providerId);
+                    break;
+                case 5:
+                    providerId = selectProvider("select provider to manage his items");
+                    break;
+                case 6:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 6");
+            }
+        }
+    }
+    private static void addItemToCatalog(String providerId){
+        System.out.println("please insert the catalog item number:");
+        String catalogItemId = reader.nextLine();
+        System.out.println("please insert the price of the item: ");
+        double price = Double.parseDouble(reader.nextLine());
+        System.out.println("please insert the id of the product details that the catalog item represent(to print all the product details insert @print): ");
+        String productDetailsId = reader.nextLine();
+        if(productDetailsId.equals("@print")){
+            String stringifiedTypes = ProductDetailsInterface.stringifyProduct();
+            System.out.println(stringifiedTypes);
+            System.out.println("now insert the id:");
+            productDetailsId = reader.nextLine();
+        }
+        CatalogItem catalogItem = new CatalogItem(providerId, catalogItemId, price, null);
+        try {
+            CatalogItemsInterface.addItem(providerId, catalogItem, productDetailsId);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void editItemOfCatalog(String providerId){
+        System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        System.out.println("please insert the new price: ");
+        double newPrice = Double.parseDouble(reader.nextLine());
+        try {
+            CatalogItemsInterface.editItem(providerId, catalogItemId, newPrice);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void removeItemFromCatalog(String providerId){
+        System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        try {
+            CatalogItemsInterface.removeItem(providerId, catalogItemId);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void printProviderCatalog(String providerId){
+        try {
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+        }
+        catch (Exception e){
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+
+    private static void manageAgreementsMenu(){
+        String message = "please insert the id of the provider that you want to manage his orders";
+        String providerId = selectProvider(message);
+        while(true) {
+            System.out.println("Please select an option to perform on agreements:");
+            String[] options = new String[]{"create agreement", "add item to agreement", "edit item of agreement", "remove item from agreement", "print all items of agreement", "select another provider to manage his agreement", "return to main"};
+            printOptions(options);
+            int option = Integer.parseInt(reader.nextLine());
+            switch(option){
+                case 1:
+                    createAgreement(providerId);
+                    break;
+                case 2:
+                    addItemToAgreement(providerId);
+                    break;
+                case 3:
+                    editItemOfAgreement(providerId);
+                    break;
+                case 4:
+                    removeItemFromAgreement(providerId);
+                    break;
+                case 5:
+                    printItemsOfAgreement(providerId);
+                    break;
+                case 6:
+                    providerId = selectProvider(message);
+                    break;
+                case 7:
+                    return;
+                default:
+                    System.out.println("choose an option between 1 to 7");
+            }
+        }
+    }
+    private static void createAgreement(String providerId){
+        Agreement agreement = new Agreement(providerId);
+        try {
+            AgreementsInterface.createAgreement(agreement);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void addItemToAgreement(String providerId){
+        System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        System.out.println("please insert minimum amount to get discount:");
+        int minAmount = Integer.parseInt(reader.nextLine());
+        System.out.println("please insert percentage of discount:");
+        double discount = Double.parseDouble(reader.nextLine());
+        try {
+            AgreementsInterface.addItemToAgreement(providerId, catalogItemId, minAmount, discount);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void editItemOfAgreement(String providerId){
+        System.out.println("please insert the catalog item id(to print all the items of agreement insert @print):");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
+                System.out.println(stringifiedItems);
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        System.out.println("please insert the new minimum amount to get discount(or @none to keep it unchanged):");
+        String minAmountStr = reader.nextLine();
+        Integer minAmount = minAmountStr.equals("@none") ? null : Integer.parseInt(minAmountStr);
+        System.out.println("please insert the new percentage of discount(or @none to keep it unchanged):");
+        String discountStr = reader.nextLine();
+        Double discount = discountStr.equals("@none") ? null : Double.parseDouble(minAmountStr);
+        try {
+            AgreementsInterface.editItemAgreement(providerId, catalogItemId, minAmount, discount);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void removeItemFromAgreement(String providerId){
+        System.out.println("please insert the catalog item id(to print all the items of agreement insert @print):");
+        String catalogItemId = reader.nextLine();
+        if(catalogItemId.equals("@print")){
+            try {
+                String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
+                System.out.println(stringifiedItems);
+                System.out.println("now insert the catalog item id: ");
+                catalogItemId = reader.nextLine();
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+                return;
+            }
+        }
+        try {
+            AgreementsInterface.removeItemFromAgreement(providerId, catalogItemId);
+        } catch (Exception e) {
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+    private static void printItemsOfAgreement(String providerId){
+        try {
+            String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
+            System.out.println(stringifiedItems);
+        }
+        catch (Exception e){
+            System.out.println("error. " + e.getMessage());
+        }
+    }
+
+
     private static void loadData(){
         try {
             Category dairyCategory = new Category("1", "dairy products");
@@ -474,9 +1047,9 @@ public class Main {
 
             ProductDetails milkProduct = new ProductDetails("1", "milk 5%", "yotvata", 3.5, 3, null, 5);
             ProductDetails daniProduct = new ProductDetails("2", "dani", "yople", 5, 4, null, 15);
-            ProductDetails appleProduct = new ProductDetails("3", "apple", "kfar maimon", 0.1, 0.05, null, 50);
-            ProductDetails hotdogsProduct = new ProductDetails("4", "hotdogs", "zoglobek", 31, 24, null, 4);
-            ProductDetails chocholateProduct = new ProductDetails("5", "chocolate", "elit", 5.5, 4, null, 10);
+            ProductDetails appleProduct = new ProductDetails("3", "apple", "kfar maimon", 0.1, 6, null, 50);
+            ProductDetails hotdogsProduct = new ProductDetails("4", "hotdogs", "zoglobek", 31, 7, null, 4);
+            ProductDetails chocholateProduct = new ProductDetails("5", "chocolate", "elit", 5.5, 9, null, 10);
 
             ProductDetailsInterface.addProductDetails(milkProduct, "5");
             ProductDetailsInterface.addProductDetails(daniProduct, "4");
@@ -486,29 +1059,29 @@ public class Main {
 
             for(int i = 1;i<=9;i++){
                 String storage = i%2 == 0 ? "storage" : "cash register";
-                Product product = new Product(storage, "milk"+i, i%2 == 0, LocalDate.now().plusDays(7), i != 5, null);
+                Product product = new Product(storage, "milk"+i, i%2 == 0, i != 5, null);
                 ProductInterface.addProduct(product, "1");
             }
             for(int i = 1;i<=10;i++){
                 String storage = i%3 == 0 ? "refridgerators" : "storage, shelve 1";
-                Product product = new Product(storage, "dani"+i, i%3 != 0, LocalDate.now().plusDays(14), i % 4 == 0, null);
+                Product product = new Product(storage, "dani"+i, i%3 != 0, i % 4 == 0, null);
                 ProductInterface.addProduct(product, "2");
             }
             for(int i = 1;i <= 20;i++){
                 String storage = i%6 == 0? "fruit department" : "storage";
-                Product product = new Product(storage, "apple"+i, i%6 != 0, LocalDate.now().plusDays(6), false, null);
+                Product product = new Product(storage, "apple"+i, i%6 != 0,  false, null);
                 ProductInterface.addProduct(product, "3");
             }
             for(int i = 1;i <= 5;i++){
-                Product product = new Product("refridgerators", "hotdogs"+i, false, LocalDate.now().plusDays(15), i != 5, null);
+                Product product = new Product("refridgerators", "hotdogs"+i, false, i != 5, null);
                 ProductInterface.addProduct(product, "4");
             }
 
-            Discount fruitsMealsDiscount = new Discount(10, LocalDate.now().plusDays(1), LocalDate.now().plusDays(15));
+            Discount fruitsMealsDiscount = new Discount("discount1",10, LocalDate.now().plusDays(1), LocalDate.now().plusDays(15));
             List<String> firstDiscountCatIds = new ArrayList<>();
             firstDiscountCatIds.add("2");
             firstDiscountCatIds.add("3");
-            Discount milkDiscount = new Discount(20, LocalDate.now().plusDays(7), LocalDate.now().plusDays(14));
+            Discount milkDiscount = new Discount("discount2",20, LocalDate.now().plusDays(7), LocalDate.now().plusDays(14));
             List<String> secondDiscountProductIds = new ArrayList<>();
             secondDiscountProductIds.add("1");
             DiscountInterface.addDiscount(fruitsMealsDiscount, new ArrayList<>(), firstDiscountCatIds, true);
@@ -532,6 +1105,26 @@ public class Main {
 
     }
 
+    private static String selectOrder(String providerId) throws Exception{
+        System.out.println("please insert the id of the order that you want to manage her items(to print all the orders of provider insert @print): ");
+        String orderId = reader.nextLine();
+        if(orderId.equals("@print")){
+            printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
+            System.out.println("now insert the id of the provider: ");
+            providerId = reader.nextLine();
+        }
+        return providerId;
+    }
+    private static String selectProvider(String message){
+        System.out.println(message + "(to print all providers insert @print):");
+        String providerId = reader.nextLine();
+        if(providerId.equals("@print")){
+            printProviders();
+            System.out.println("now insert the id of the provider: ");
+            providerId = reader.nextLine();
+        }
+        return providerId;
+    }
     private static void printOptions(String[] array){
         int i = 1;
         for(String str: array)

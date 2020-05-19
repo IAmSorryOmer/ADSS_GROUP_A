@@ -7,7 +7,47 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="" />
+    <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/Agreement.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/AutomaticOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/CatalogItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/CommunicationDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/Pair.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/Provider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/Entities/SingleProviderOrder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/AgreementController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/CatalogItemController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/CommunicationDetailsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/OrderTask.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProviderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/SingleProviderOrderController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/AgreementsInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/CatalogItemsInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/OrdersInterface.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProviderInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/Tests/StorageTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/Tests/StorageTests.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Discount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/DiscountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Discountable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Discountable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/ProductDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/Reportable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Reportable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ReportInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/ReportInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/StorageTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Tests/StorageTests.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,13 +78,23 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/company" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/company/PresentationLayer" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="Application.Unnamed">
+  <component name="RecentsManager">
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.company.PresentationLayer" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/company/PresentationLayer" />
+      <recent name="$PROJECT_DIR$/src/com/company/LogicLayer" />
+      <recent name="$PROJECT_DIR$/src/com/company/Entities" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true">
       <option name="MAIN_CLASS_NAME" value="com.company.Main" />
       <module name="untitled104" />
@@ -84,8 +134,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.StorageTests" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.StorageTests" />
       </list>
     </recent_temporary>
   </component>
@@ -106,6 +156,12 @@
       <workItem from="1587659849480" duration="695000" />
       <workItem from="1587660559166" duration="4213000" />
       <workItem from="1587665321365" duration="1426000" />
+      <workItem from="1587673218921" duration="1372000" />
+      <workItem from="1588000976249" duration="116000" />
+      <workItem from="1588007151216" duration="66000" />
+      <workItem from="1588868528870" duration="2067000" />
+      <workItem from="1589372114209" duration="44095000" />
+      <workItem from="1589792893582" duration="22696000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1587486727196</created>
@@ -235,19 +291,31 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="418" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587665817482" />
-    <state x="1248" y="234" width="328" height="397" key="#com.intellij.ide.util.MemberChooser" timestamp="1587661701960">
+    <state x="1248" y="234" width="328" height="397" key="#com.intellij.ide.util.MemberChooser" timestamp="1589884292190">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="748" y="168" width="328" height="397" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1587573681066" />
-    <state x="1248" y="234" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1587661701960" />
+    <state x="1248" y="234" width="374" height="562" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1589884292190" />
+    <state x="689" y="297" width="524" height="444" key="#com.intellij.ide.util.PackageChooserDialog" timestamp="1589535881289">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="689" y="297" width="524" height="444" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589535881289" />
     <state x="1126" y="307" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1587666483641">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="1126" y="307" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587666483641" />
-    <state x="710" y="409" width="499" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1587628471947">
+    <state x="710" y="409" width="491" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1589535893841">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="710" y="409" width="499" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1032@0.0.1920.1032" timestamp="1587628471947" />
+    <state x="710" y="409" width="491" height="219" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1920.1032@0.0.1920.1032" timestamp="1589535893841" />
+    <state x="664" y="212" width="581" height="605" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog" timestamp="1589868883936">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="664" y="212" width="581" height="605" key="#com.intellij.refactoring.move.moveMembers.MoveMembersDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589868883936" />
+    <state x="36" y="18" width="1838" height="993" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1589876547818">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="36" y="18" width="1838" height="993" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589876547818" />
     <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1587664719982">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -260,22 +328,22 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="1181" y="258" width="424" height="513" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1587666491185" />
-    <state width="1874" height="165" key="GridCell.Tab.0.bottom" timestamp="1587666746756">
+    <state width="937" height="448" key="GridCell.Tab.0.bottom" timestamp="1589887848870">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="165" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1587666746756" />
-    <state width="1874" height="165" key="GridCell.Tab.0.center" timestamp="1587666746755">
+    <state width="937" height="448" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1589887848870" />
+    <state width="937" height="448" key="GridCell.Tab.0.center" timestamp="1589887848870">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="165" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1587666746755" />
-    <state width="1874" height="165" key="GridCell.Tab.0.left" timestamp="1587666746755">
+    <state width="937" height="448" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1589887848870" />
+    <state width="937" height="448" key="GridCell.Tab.0.left" timestamp="1589887848869">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="165" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1587666746755" />
-    <state width="1874" height="165" key="GridCell.Tab.0.right" timestamp="1587666746756">
+    <state width="937" height="448" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1589887848869" />
+    <state width="937" height="448" key="GridCell.Tab.0.right" timestamp="1589887848870">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="1874" height="165" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1587666746756" />
+    <state width="937" height="448" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1589887848870" />
     <state width="1874" height="335" key="GridCell.Tab.1.bottom" timestamp="1587664772915">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -304,6 +372,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1587664730330" />
+    <state x="100" y="98" width="1720" height="834" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589531964841">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="100" y="98" width="1720" height="834" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589531964841" />
     <state x="1211" y="430" width="448" height="170" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1587665605735">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -312,21 +384,21 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="1034" y="366" width="524" height="478" key="extract.method.dialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587639330757" />
-    <state x="1104" y="234" key="run.anything.popup" timestamp="1587492197365">
+    <state x="1104" y="234" key="run.anything.popup" timestamp="1589536427076">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="1104" y="234" key="run.anything.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1587492197365" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1587663985107">
+    <state x="1104" y="234" key="run.anything.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1589536427076" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1589793922060">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1587663985107" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1589793922060" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
-          <line>488</line>
+          <url>file://$PROJECT_DIR$/src/com/company/LogicLayer/AgreementController.java</url>
+          <line>83</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

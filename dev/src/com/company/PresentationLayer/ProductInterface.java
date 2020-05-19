@@ -1,8 +1,8 @@
 package com.company.PresentationLayer;
 
+import com.company.Entities.Product;
 import com.company.LogicLayer.*;
 
-import java.security.PrivilegedActionException;
 import java.util.List;
 
 public class ProductInterface {

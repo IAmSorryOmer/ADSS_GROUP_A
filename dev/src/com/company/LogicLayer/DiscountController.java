@@ -1,10 +1,9 @@
 package com.company.LogicLayer;
 
-import javax.security.auth.callback.Callback;
-import java.lang.invoke.CallSite;
+import com.company.Entities.*;
+
 import java.time.LocalDate;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class DiscountController {
@@ -13,6 +12,9 @@ public class DiscountController {
     private static HashMap<Discountable, List<Discount>> retailDiscounts = new HashMap<>();
     private static HashMap<Discountable, List<Discount>> supplierDiscounts = new HashMap<>();
     public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds, boolean retail) throws Exception{
+        if (getDiscountById(discount.getId()) != null){
+            throw new Exception("A discount with id " + discount.getId() + " already exists");
+        }
         discounts.add(discount);
         HashMap<Discountable, List<Discount>> map = retail? retailDiscounts:supplierDiscounts;
         if(productsIds != null) {
@@ -36,13 +38,29 @@ public class DiscountController {
             }
         }
     }
-
-    public static List<Discount> getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
+    private static Discount getDiscountById(String id){
+        for(Discount discount: discounts){
+            if (discount.getId().equals(id)){
+                return discount;
+            }
+        }
+        return null;
+    }
+    public static String getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
         Discountable discountable = productDetails ? ProductDetailsController.getProductDetailsById(id) : CategoryController.getCategoryByID(id);
         if(discountable == null){
             throw new IllegalArgumentException("there is no discountable with that id");
         }
-        return getDiscountableDiscounts(discountable, retail);
+        List<Discount> discounts = getDiscountableDiscounts(discountable, retail);
+        StringBuilder toReturn = new StringBuilder();
+        if(productDetails){
+            toReturn.append("Original price: ").append(((ProductDetails)discountable).getRetailPrice()).append("\n");
+        }
+        for(Discount discount: discounts){
+            toReturn.append("a discount of: ").append(discount.getPercentage()).append(" from date: ").append(discount.getFromDate().toString()).
+                    append(" to date: ").append(discount.getToDate().toString()).append("\n");
+        }
+        return toReturn.toString();
     }
     public static List<Discount> getDiscountableDiscounts(Discountable discountable, boolean retail){
         return retail? retailDiscounts.get(discountable):supplierDiscounts.get(discountable);
@@ -88,7 +106,7 @@ public class DiscountController {
         }
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         discounts.sort(Comparator.comparing(Discount::getFromDate));
-        List<Double> priceHistory = discounts.stream().map(discount -> (retail?product.getRetailPrice():product.getSupplierPrice())* (1-discount.getPercentage()/100)).collect(Collectors.toList());
+        List<Double> priceHistory = discounts.stream().map(discount -> product.getRetailPrice()* (1-discount.getPercentage()/100)).collect(Collectors.toList());
         return priceHistory;
     }
 

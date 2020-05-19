@@ -1,5 +1,9 @@
 package com.company.Tests;
 
+import com.company.Entities.Category;
+import com.company.Entities.Discount;
+import com.company.Entities.Product;
+import com.company.Entities.ProductDetails;
 import com.company.LogicLayer.*;
 import org.junit.*;
 
@@ -25,11 +29,11 @@ public class StorageTests {
     @BeforeClass
     public static void setup() {
         category = new Category("2", "Snacks");
-        productDetails = new ProductDetails("1", "Bamba", "Osem", 10.00, 5.00, category, 20);
-        productDetails2 = new ProductDetails("2", "Bisli", "Osem", 10.00, 5.00, category, 20);
-        product3 = new Product("Storage", "3", true, LocalDate.of(2020, 5, 10), false, productDetails2);
-        product = new Product("Storage", "1", true, LocalDate.of(2020, 5, 10), false, productDetails);
-        product2 = new Product("Shelf", "2", false, LocalDate.of(2020, 5, 10), false, productDetails);
+        productDetails = new ProductDetails("1", "Bamba", "Osem", 10.00, 5, category, 20);
+        productDetails2 = new ProductDetails("2", "Bisli", "Osem", 10.00, 54, category, 20);
+        product3 = new Product("Storage", "3", true,false, productDetails2);
+        product = new Product("Storage", "1", true, false, productDetails);
+        product2 = new Product("Shelf", "2", false, false, productDetails);
         discList = new ArrayList<>();
         discList2 = new ArrayList<>();
         discList3 = new ArrayList<>();
@@ -75,7 +79,7 @@ public class StorageTests {
     @Test
     public void discountOnProductTest(){
         try {
-            discount = new Discount(15, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
+            discount = new Discount("disc1",15, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
             DiscountController.addDiscount(discount, discList, new ArrayList<>(), true);
             double priceAfterDiscount = productDetails.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails.getId(), true) / 100));
             Assert.assertEquals("Discount given on product succeeded", 8.5, priceAfterDiscount, 0);
@@ -89,7 +93,7 @@ public class StorageTests {
     @Test
     public void editDiscountOnProductTest(){
         try {
-            discount = new Discount(20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
+            discount = new Discount("disc3",20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
             DiscountController.addDiscount(discount, discList, new ArrayList<>(), true);
             DiscountController.editDiscount(discount, LocalDate.of(2020, 4, 23), LocalDate.of(2020, 4, 27), 30);
             double priceAfterDiscount = productDetails.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails.getId(), true) / 100));
@@ -103,8 +107,8 @@ public class StorageTests {
     @Test
     public void multipleDiscountsTest(){
         try {
-            discount = new Discount(15, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
-            discount2 = new Discount(20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
+            discount = new Discount("disc4",15, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
+            discount2 = new Discount("disc5", 20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
             DiscountController.addDiscount(discount, discList2, new ArrayList<>(), true);
             DiscountController.addDiscount(discount2, discList2, new ArrayList<>(), true);
             double priceAfterDiscount = productDetails2.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails2.getId(), true) / 100));
@@ -120,7 +124,7 @@ public class StorageTests {
     @Test
     public void removeDiscountOnProductTest(){
         try {
-            discount = new Discount(20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
+            discount = new Discount("disc6", 20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
             DiscountController.addDiscount(discount, discList, new ArrayList<>(), true);
             DiscountController.removeDiscount(discount);
             double priceAfterDiscount = productDetails.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails.getId(), true) / 100));
