@@ -17,7 +17,7 @@ public class CategoryInterface {
     }
     public static String stringifyCategories(){
         StringBuilder stringBuilder = new StringBuilder("Categories: \n");
-        printCategory(stringBuilder, CategoryController.getAllMainCategories(), "");
+        printCategory(stringBuilder, CategoryController.getMainCategories(), "");
         return stringBuilder.toString();
     }
 

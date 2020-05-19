@@ -7,7 +7,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="" />
+    <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CategoryDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/AutomaticOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/AutomaticOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/SingleProviderOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -121,7 +130,7 @@
       <workItem from="1588007151216" duration="66000" />
       <workItem from="1588868528870" duration="2067000" />
       <workItem from="1589372114209" duration="44095000" />
-      <workItem from="1589792893582" duration="23387000" />
+      <workItem from="1589792893582" duration="27725000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1587486727196</created>
@@ -249,7 +258,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589888410419</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="basic project">
+      <created>1589888889179</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1589888889179</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -290,10 +306,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="36" y="18" width="1838" height="993" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589876547818" />
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1589888410339">
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1589888889130">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1589888410339" />
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1589888889130" />
     <state width="469" height="506" key="DebuggerActiveHint" timestamp="1587664480253">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -342,10 +358,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="886" y="92" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1587666504324" />
-    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589888418332">
+    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589888899027">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1589888418332" />
+    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1589888899027" />
     <state x="100" y="98" width="1720" height="834" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589531964841">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

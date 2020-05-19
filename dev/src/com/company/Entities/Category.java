@@ -4,16 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Category implements Discountable {
+
     private String ID;
     private String name;
     private Category parent;
     private List<Category> subCategories;
+    private boolean updated;
 
     public Category(String ID, String name) {
         this.ID = ID;
         this.name = name;
         this.parent = null;
         this.subCategories = new ArrayList<>();
+        this.updated = false;
     }
 
     public String getID() {
@@ -45,13 +48,19 @@ public class Category implements Discountable {
         this.parent = parent;
     }
 
-    public List<Category> getSubCategories() {
-        return subCategories;
-    }
     public void addCategory(Category category){
         subCategories.add(category);
     }
 
+    public boolean isUpdated(){
+        return updated;
+    }
+    public void setUpdated(boolean val){
+        this.updated = val;
+    }
+    public List<Category> getSubCategories(){
+        return subCategories;
+    }
     @Override
     public String toString() {
         return "name: " + name + ", Id:" + ID;

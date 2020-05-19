@@ -549,12 +549,26 @@ public class Main {
     private static void addAutomaticOrderFromUser(String providerId){
         System.out.println("please insert the order id: ");
         String orderId = reader.nextLine();
-        System.out.println("please insert the initial order date");
-        String orderDateStr = reader.nextLine();
-        LocalDate orderDate = LocalDate.parse(orderDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
         System.out.println("please insert the interval between orders(in days):");
-        int daysInterval = Integer.parseInt(reader.nextLine());
-        AutomaticOrder automaticOrder = new AutomaticOrder(null, orderId, orderDate, daysInterval);
+        int orderDays = -1;
+        System.out.println("please insert the order days(when to auto create the order) as binary string.\nfor example if an order is to be sent every thursday, insert 0000100):");
+        while (orderDays == -1) {
+            String orderDaysString = reader.nextLine();
+            if (orderDaysString.length() != 7) {
+                System.out.println("the string size should be seven(a digit for each day)");
+                continue;
+            }
+            try {
+                orderDays = Integer.parseInt(orderDaysString, 2);
+                if(orderDays == 0 ){
+                    System.out.println("you cant add order which never get ordered. please select at least one day");
+                    orderDays = -1;
+                }
+            } catch (Exception e) {
+                System.out.println("you inserted invalid binary string. try again:");
+            }
+        }
+        AutomaticOrder automaticOrder = new AutomaticOrder(null, orderId, orderDays);
         try {
             OrdersInterface.SingleProviderOrderCreator(automaticOrder, providerId);
         } catch (Exception e) {
