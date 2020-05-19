@@ -20,9 +20,10 @@ public class OrderTask extends TimerTask {
     @Override
     public void run() {
         LocalDate nextTimerDate = SingleProviderOrderController.getNextAutoOrderDate(automaticOrder);
-        long time = LocalDateTime.now().until(nextTimerDate, ChronoUnit.MILLIS);
+        long time = LocalDateTime.now().until(nextTimerDate, ChronoUnit.HOURS);//TODO change to millis
         Timer nextTimer = new Timer();
-        nextTimer.schedule(new OrderTask(automaticOrder), time);//TODO 24*60*60*1000);
+        System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
+        nextTimer.schedule(new OrderTask(automaticOrder), time);
         SingleProviderOrder singleProviderOrder = new SingleProviderOrder(automaticOrder.getOrderID() + LocalDate.now().toString(), automaticOrder.getProvider(), automaticOrder.getOrderItems(), LocalDate.now());
         try {
             SingleProviderOrderController.SingleProviderOrderCreator(singleProviderOrder, automaticOrder.getProvider().getProviderID());
