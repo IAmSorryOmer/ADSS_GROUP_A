@@ -1108,9 +1108,9 @@ public class Main {
         if(orderId.equals("@print")){
             printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
             System.out.println("now insert the id of the provider: ");
-            providerId = reader.nextLine();
+            orderId = reader.nextLine();
         }
-        return providerId;
+        return orderId;
     }
     private static String selectProvider(String message){
         System.out.println(message + "(to print all providers insert @print):");
