@@ -42,7 +42,7 @@ public class SingleProviderOrderController {
 			}
 		}
 		LocalDate nextDate = getNextAutoOrderDate(automaticOrder);
-		long time = LocalDateTime.now().until(nextDate, ChronoUnit.HOURS);//TODO change to millis
+		long time = LocalDateTime.now().until(nextDate.atStartOfDay(), ChronoUnit.HOURS);//TODO change to millis
 		Timer timer = new Timer();
 		System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
 		timer.schedule(new OrderTask(automaticOrder), time*1000);

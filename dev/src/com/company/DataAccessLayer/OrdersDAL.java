@@ -21,7 +21,7 @@ public class OrdersDAL {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, singleProviderOrder.getOrderID());
             preparedStatement.setString(2, singleProviderOrder.getProvider().getProviderID());
-            preparedStatement.setString(3, singleProviderOrder.getOrderDate().toString());
+            preparedStatement.setString(3, singleProviderOrder.getOrderDate() == null ? null : singleProviderOrder.getOrderDate().toString());
             preparedStatement.executeUpdate();
             mapper.put(new Pair<>(singleProviderOrder.getProvider().getProviderID(), singleProviderOrder.getOrderID()), singleProviderOrder);
             for(Map.Entry<CatalogItem, Integer> entry: singleProviderOrder.getOrderItems().entrySet()){
@@ -123,7 +123,7 @@ public class OrdersDAL {
 
 
     public static List<SingleProviderOrder> loadAll(){
-        String sql = "select * from SingleProviderOrder;";
+        String sql = "select * from SingleProviderOrder left join AutomaticOrder AO on SingleProviderOrder.OrderId = AO.OrderId and SingleProviderOrder.ProviderId = AO.ProviderId;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());

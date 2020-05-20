@@ -451,6 +451,7 @@ public class Main {
                 System.out.println("this isnt an option. operation canceled");
         }
     }
+
     private static void createInventoryReportFromUser(Report report){
         report.setReportType(Report.reportType.Inventory);
         System.out.println("please insert the id's of the category to track separated by line breaks.");
@@ -531,7 +532,7 @@ public class Main {
     private static void addOrderFromUser(String providerId){
         System.out.println("please insert the order id: ");
         String orderId = reader.nextLine();
-        System.out.println("please insert the order date: ");
+        System.out.println("please insert the order date(format like YYYY-MM-DD): ");
         String orderDateStr = reader.nextLine();
         LocalDate orderDate = LocalDate.parse(orderDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
         SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, orderId, orderDate);
