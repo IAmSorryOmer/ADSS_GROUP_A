@@ -36,7 +36,7 @@ public class OrdersInterface {
 	public static List<SingleProviderOrder> getAllOrders(){
 		return SingleProviderOrderController.getAllOrders();
 	}
-	public static List<AutomaticOrder> getAllAutomaticsOrders(){
+	public static List<SingleProviderOrder> getAllAutomaticsOrders(){
 		return SingleProviderOrderController.getAllAutomaticsOrders();
 	}
 }

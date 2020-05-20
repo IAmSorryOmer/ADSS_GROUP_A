@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import com.company.DataAccessLayer.ProductDAL;
 import com.company.Entities.*;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
@@ -8,8 +9,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductController {
-    private static List<Product> products = new ArrayList<>();
-    private static HashMap<ProductDetails, List<Product>> productTypeToProducts = new HashMap<>();
 
     public static void addProduct(Product product, String typeId) throws Exception{
         ProductDetails productDetails = ProductDetailsController.getProductDetailsById(typeId);
@@ -25,23 +24,12 @@ public class ProductController {
         }
         product.setType(productDetails);
         product.setExpirationDate(LocalDate.now().plusDays(productDetails.getDaysToExpiration()));
-        products.add(product);
-        productTypeToProducts.putIfAbsent(product.getType(), new ArrayList<>());
-        if(product.isInStorage()) {
-            product.getType().setQuantityInStorage(product.getType().getQuantityInStorage() + 1);
-        }
-        else{
-            product.getType().setQuantityInShelves(product.getType().getQuantityInShelves() + 1);
-        }
-        productTypeToProducts.get(product.getType()).add(product);
+        ProductDetailsController.updateQuantity(product.getType(), 1, product.isInStorage());
+        ProductDAL.insertProduct(product);
     }
+
     public static Product getProductById(String Id) {
-        for(Product product: products){
-            if (product.getId().equals(Id)){
-                return product;
-            }
-        }
-        return null;
+        return ProductDAL.getProductById(Id);
     }
 
     public static List<Product> getProductsByType(String id) throws Exception{
@@ -49,8 +37,7 @@ public class ProductController {
         if(productDetails == null){
             throw new IllegalArgumentException("there is no type with that id");
         }
-        List<Product> result = productTypeToProducts.get(productDetails);
-        return (result == null) ? new ArrayList<>() : result;
+        return ProductDAL.getProductByType(id);
     }
 
     public static void moveProduct(String id, String newLocation, boolean isInStorage) throws IllegalArgumentException{
@@ -61,20 +48,21 @@ public class ProductController {
         boolean isLocationChanged = product.isInStorage() ^ isInStorage;
         if (isLocationChanged){
             if (product.isInStorage()){
-                product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()+1);
-                product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()-1);
+                ProductDetailsController.updateQuantity(product.getType(), 1, false);
+                ProductDetailsController.updateQuantity(product.getType(), -1, true);
             }
             else {
-                product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()-1);
-                product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()+1);
+                ProductDetailsController.updateQuantity(product.getType(), 1, true);
+                ProductDetailsController.updateQuantity(product.getType(), -1, false);
             }
             product.setInStorage(!product.isInStorage());
         }
         product.setLocation(newLocation);
+        ProductDAL.editProduct(product);
     }
 
     public static List<Product> getAllDamaged() {
-        return products.stream().filter(Product::isDamaged).collect(Collectors.toList());
+        return ProductDAL.getDamagedProducts();
     }
 
     public static String GetProductsDetails(Product product){
@@ -91,11 +79,12 @@ public class ProductController {
         }
         product.setDamaged(true);
         if (product.isInStorage()){
-            product.getType().setQuantityInStorage(product.getType().getQuantityInStorage()-1);
+            ProductDetailsController.updateQuantity(product.getType(), -1, true);
         }
         else {
-            product.getType().setQuantityInShelves(product.getType().getQuantityInShelves()-1);
+            ProductDetailsController.updateQuantity(product.getType(), -1, false);
         }
+        ProductDAL.editProduct(product);
     }
     public static void handleOrder(SingleProviderOrder singleProviderOrder){
         for(Map.Entry<CatalogItem, Integer> entry : singleProviderOrder.getOrderItems().entrySet()){
@@ -109,6 +98,6 @@ public class ProductController {
         }
     }
     public static List<Product> getAllProducts(){
-        return products;
+        return ProductDAL.loadAll();
     }
 }

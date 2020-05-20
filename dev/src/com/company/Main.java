@@ -23,7 +23,7 @@ public class Main {
             int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
-                    manageProductdTypesMenu();
+                    manageProductTypesMenu();
                     break;
                 case 2:
                     manageProductsMenu();
@@ -63,7 +63,7 @@ public class Main {
         }
     }
 
-    private static void manageProductdTypesMenu(){
+    private static void manageProductTypesMenu(){
         while(true) {
             System.out.println("Please select an option to perform on products types:");
             String[] options = new String[]{"add type", "print all missings products", "modify minimum quantity", "print all products with name", "print all products within storage","print all products", "return to main"};
@@ -334,7 +334,7 @@ public class Main {
         LocalDate startDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
         System.out.println("please insert the ending date of the discount(format like YYYY-MM-DD):");
         String endDateStr = reader.nextLine();
-        LocalDate endDate = LocalDate.parse(startDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
+        LocalDate endDate = LocalDate.parse(endDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
 
         Discount discount = new Discount(discId, percentage, startDate, endDate);
         System.out.println("is the discount is on retail prices?(y for yes, else for no):");
@@ -401,6 +401,7 @@ public class Main {
         if(catId.equals("@none"))
             catId = null;
         Category category = new Category(id, name);
+        category.setUpdated(true);
         try {
             CategoryInterface.addCategory(category, catId);
         } catch (Exception e) {
@@ -767,6 +768,7 @@ public class Main {
         String adress = reader.nextLine();
         Provider provider = new Provider(providerId, creditCardNumber, needTransport, delayDays, arrivalDays, providerName, null);
         CommunicationDetails communicationDetails = new CommunicationDetails(provider, fixedDays, phoneNumber, adress, null);
+        communicationDetails.setUpdated(true);
         provider.setCommunicationDetails(communicationDetails);
         try {
             ProviderInterface.ProviderCreator(provider, communicationDetails);
@@ -926,41 +928,30 @@ public class Main {
         String providerId = selectProvider(message);
         while(true) {
             System.out.println("Please select an option to perform on agreements:");
-            String[] options = new String[]{"create agreement", "add item to agreement", "edit item of agreement", "remove item from agreement", "print all items of agreement", "select another provider to manage his agreement", "return to main"};
+            String[] options = new String[]{"add item to agreement", "edit item of agreement", "remove item from agreement", "print all items of agreement", "select another provider to manage his agreement", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
             switch(option){
                 case 1:
-                    createAgreement(providerId);
-                    break;
-                case 2:
                     addItemToAgreement(providerId);
                     break;
-                case 3:
+                case 2:
                     editItemOfAgreement(providerId);
                     break;
-                case 4:
+                case 3:
                     removeItemFromAgreement(providerId);
                     break;
-                case 5:
+                case 4:
                     printItemsOfAgreement(providerId);
                     break;
-                case 6:
+                case 5:
                     providerId = selectProvider(message);
                     break;
-                case 7:
+                case 6:
                     return;
                 default:
-                    System.out.println("choose an option between 1 to 7");
+                    System.out.println("choose an option between 1 to 6");
             }
-        }
-    }
-    private static void createAgreement(String providerId){
-        Agreement agreement = new Agreement(providerId);
-        try {
-            AgreementsInterface.createAgreement(agreement);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
         }
     }
     private static void addItemToAgreement(String providerId){

@@ -15,7 +15,7 @@ public class CategoryDAL {
     private static boolean updated = false;
 
     public static List<Category> loadMainCategories(){
-        String sql = "select * from Category where ParentCategory = null";
+        String sql = "select * from Category where ParentCategory is null";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             return resultSetToCategory(preparedStatement.executeQuery());

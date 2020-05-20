@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import com.company.DataAccessLayer.OrdersDAL;
 import com.company.Entities.*;
 import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
@@ -14,12 +15,7 @@ import java.util.*;
 
 public class SingleProviderOrderController {
 
-	private static List<AutomaticOrder> automaticOrders = new LinkedList<>();
 
-	private static List<SingleProviderOrder> singleProviderOrderList = new LinkedList<>();
-	private static HashMap<Provider, List<SingleProviderOrder>> providerToOrders = new HashMap<>();
-
-	private static List<Timer> timers = new LinkedList<>();
 	//creators
 	public static void SingleProviderOrderCreator (SingleProviderOrder singleProviderOrder, String providerId) {
 		Provider provider = ProviderController.getProvierByID(providerId);
@@ -33,12 +29,10 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("there is already order with id " + singleProviderOrder.getOrderID() + " for provider with id "+provider.getProviderID());
 		}
 		singleProviderOrder.setProvider(provider);
+		OrdersDAL.insertOrder(singleProviderOrder);
 		if(singleProviderOrder instanceof AutomaticOrder){
 			handleAutomaticOrder((AutomaticOrder)singleProviderOrder, provider);
 		}
-		singleProviderOrderList.add(singleProviderOrder);
-		providerToOrders.putIfAbsent(provider, new LinkedList<>());
-		providerToOrders.get(provider).add(singleProviderOrder);
 	}
 
 	private static void handleAutomaticOrder(AutomaticOrder automaticOrder, Provider provider){
@@ -47,13 +41,12 @@ public class SingleProviderOrderController {
 				throw new IllegalArgumentException("the provider not coming at one of the selected order days");
 			}
 		}
-		automaticOrders.add(automaticOrder);
 		LocalDate nextDate = getNextAutoOrderDate(automaticOrder);
 		long time = LocalDateTime.now().until(nextDate, ChronoUnit.HOURS);//TODO change to millis
 		Timer timer = new Timer();
 		System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
 		timer.schedule(new OrderTask(automaticOrder), time*1000);
-		//timers.add(timer);
+		OrdersDAL.insertAutomaticOrder(automaticOrder);
 	}
 
 	public static LocalDate getNextAutoOrderDate(AutomaticOrder automaticOrder){
@@ -90,6 +83,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("item with id " + catalogItem.getCatalogNum() + " is already in the order.");
 		}
 		singleProviderOrder.addToItemList(catalogItem, orderAmount);
+		OrdersDAL.insertItemToOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
 		
 	public static void EditOrder (String providerId, String orderId, String ItemID, int orderAmount) {
@@ -111,6 +105,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("item with id " + catalogItem.getCatalogNum() + " isnt in the order.");
 		}
 		singleProviderOrder.editItemList(catalogItem, orderAmount);
+		OrdersDAL.editItemOnOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
 		
 	public static void RemoveFromOrder (String providerId, String orderId, String ItemID) {
@@ -130,6 +125,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("item with id " + catalogItem.getCatalogNum() + " isnt already in the order.");
 		}
 		singleProviderOrder.removeFromItemList(catalogItem);
+		OrdersDAL.removeItemFromOrder(singleProviderOrder, catalogItem);
 	}
 	private static void ensureTimes(SingleProviderOrder singleProviderOrder){
 		if(singleProviderOrder instanceof AutomaticOrder){
@@ -141,12 +137,12 @@ public class SingleProviderOrderController {
 		}
 	}
 	public static SingleProviderOrder getOrderByIdAndProvider(String id, Provider provider){
-		return singleProviderOrderList.stream().filter(singleProviderOrder -> singleProviderOrder.getOrderID().equals(id) && singleProviderOrder.getProvider().getProviderID().equals(provider.getProviderID())).findFirst().orElse(null);
+		return OrdersDAL.getOrderById(id, provider.getProviderID());
 	}
 
 	public static double calcItemCategoryPrice (Provider provider, CatalogItem catalogItem, int amountOrdered) {
 		double itemSum = amountOrdered * catalogItem.getPrice();
-		Agreement agreement = provider.getCommunicationDetails().getAgreement();
+		Agreement agreement = AgreementController.getProviderAgreement(provider);
 		if(agreement != null && agreement.doesDiscountExist(catalogItem)){
 			int minAmount = agreement.getItemQuantityForDiscount(catalogItem);
 			if(amountOrdered >= minAmount){
@@ -156,9 +152,10 @@ public class SingleProviderOrderController {
 		}
 		return itemSum;
 	}
+
 	public static double calculateOrderPrice(SingleProviderOrder singleProviderOrder){
 		double sum = 0;
-		Agreement agreement = singleProviderOrder.getProvider().getCommunicationDetails().getAgreement();
+		Agreement agreement = AgreementController.getProviderAgreement(singleProviderOrder.getProvider());
 		for(Map.Entry<CatalogItem, Integer> entry : singleProviderOrder.getOrderItems().entrySet()){
 			double itemSum = entry.getValue() * entry.getKey().getPrice();
 			if(agreement != null && agreement.doesDiscountExist(entry.getKey())){
@@ -171,14 +168,6 @@ public class SingleProviderOrderController {
 			sum += itemSum;
 		}
 		return sum;
-	}
-
-	public static int getOrderItemAmount(SingleProviderOrder singleProviderOrder) {
-		int amount = 0;
-		for (Map.Entry<CatalogItem, Integer> entry : singleProviderOrder.getOrderItems().entrySet()) {
-			amount += entry.getValue();
-		}
-		return amount;
 	}
 
 	public static String printOrder(String providerId, String orderId) {
@@ -224,12 +213,12 @@ public class SingleProviderOrderController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		return providerToOrders.get(provider);
+		return OrdersDAL.getOrdersOfProvider(providerId);
 	}
 	public static List<SingleProviderOrder> getAllOrders(){
-		return singleProviderOrderList;
+		return OrdersDAL.loadAll();
 	}
-	public static List<AutomaticOrder> getAllAutomaticsOrders(){
-		return automaticOrders;
+	public static List<SingleProviderOrder> getAllAutomaticsOrders(){
+		return OrdersDAL.getAutomaticOrders();
 	}
 }

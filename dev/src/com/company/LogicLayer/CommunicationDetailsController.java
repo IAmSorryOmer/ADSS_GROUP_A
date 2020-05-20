@@ -30,10 +30,11 @@ public class CommunicationDetailsController {
 		String output = "Phone: "+commDetails.getPhoneNum() + "\n";
 		output += "Address: " + commDetails.getAddress() + "\n";
 		output += "Items: \n";
+		Agreement agreement = AgreementController.getProviderAgreement(commDetails.getProvider());
 		for (CatalogItem catalogItem : getProviderItems(commDetails.getProvider())) {
 			output += CatalogItemController.printItem(catalogItem);
 			//TODO agreement shit
-			if (commDetails.isAgreement() && commDetails.getAgreement().doesDiscountExist(catalogItem))
+			if (agreement != null && agreement.doesDiscountExist(catalogItem))
 				output += ", " + AgreementController.printItemDetails(commDetails.getAgreement(), catalogItem) + "\n";
 		}
 		return output;
@@ -60,7 +61,7 @@ public class CommunicationDetailsController {
 	public static void removeCatalogItem (CommunicationDetails commDetails, CatalogItem catalogItem) {
 		commDetails.getCatalogItems().remove(catalogItem);
 		if (commDetails.isAgreement()) {
-			if(AgreementController.doesDiscountExist(commDetails.getAgreement(), catalogItem))
+			if(AgreementController.isDiscountExist(catalogItem, commDetails.getProvider()))
 				AgreementController.removeItem(commDetails.getProvider(), catalogItem);
 		}
 	}

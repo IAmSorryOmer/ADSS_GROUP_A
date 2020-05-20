@@ -21,6 +21,15 @@ public class Product implements Reportable {
         this.type = type;
     }
 
+    public Product(String location, String id, boolean isInStorage, LocalDate expirationDate, boolean isDamaged, ProductDetails type) {
+        this.location = location;
+        this.id = id;
+        this.isInStorage = isInStorage;
+        this.expirationDate = expirationDate;
+        this.isDamaged = isDamaged;
+        this.type = type;
+    }
+
     public String getLocation() {
         return location;
     }

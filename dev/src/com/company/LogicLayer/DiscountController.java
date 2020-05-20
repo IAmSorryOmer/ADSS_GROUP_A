@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import com.company.DataAccessLayer.DiscountDAL;
 import com.company.Entities.*;
 
 import java.time.LocalDate;
@@ -8,23 +9,18 @@ import java.util.stream.Collectors;
 
 public class DiscountController {
 
-    private static List<Discount> discounts = new ArrayList<>();;
-    private static HashMap<Discountable, List<Discount>> retailDiscounts = new HashMap<>();
-    private static HashMap<Discountable, List<Discount>> supplierDiscounts = new HashMap<>();
-    public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds, boolean retail) throws Exception{
+    public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds) throws Exception{
         if (getDiscountById(discount.getId()) != null){
             throw new Exception("A discount with id " + discount.getId() + " already exists");
         }
-        discounts.add(discount);
-        HashMap<Discountable, List<Discount>> map = retail? retailDiscounts:supplierDiscounts;
+        DiscountDAL.insertDiscount(discount);
         if(productsIds != null) {
             for (String productId : productsIds) {
                 ProductDetails productDetails = ProductDetailsController.getProductDetailsById(productId);
                 if (productDetails == null){
                     throw new IllegalArgumentException("there is no type with id " + productId);
                 }
-                map.putIfAbsent(productDetails, new ArrayList<>());
-                map.get(productDetails).add(discount);
+                DiscountDAL.insertDiscountRelation(discount, productDetails);
             }
         }
         if(categoriesIds != null) {
@@ -33,25 +29,20 @@ public class DiscountController {
                 if (category == null){
                     throw new IllegalArgumentException("there is no category with id " + categoryId);
                 }
-                map.putIfAbsent(category, new ArrayList<>());
-                map.get(category).add(discount);
+                DiscountDAL.insertDiscountRelation(discount, category);
             }
         }
     }
+
     private static Discount getDiscountById(String id){
-        for(Discount discount: discounts){
-            if (discount.getId().equals(id)){
-                return discount;
-            }
-        }
-        return null;
+        return DiscountDAL.getDiscountById(id);
     }
     public static String getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
         Discountable discountable = productDetails ? ProductDetailsController.getProductDetailsById(id) : CategoryController.getCategoryByID(id);
         if(discountable == null){
             throw new IllegalArgumentException("there is no discountable with that id");
         }
-        List<Discount> discounts = getDiscountableDiscounts(discountable, retail);
+        List<Discount> discounts = getDiscountableDiscounts(discountable, productDetails);
         StringBuilder toReturn = new StringBuilder();
         if(productDetails){
             toReturn.append("Original price: ").append(((ProductDetails)discountable).getRetailPrice()).append("\n");
@@ -62,21 +53,16 @@ public class DiscountController {
         }
         return toReturn.toString();
     }
-    public static List<Discount> getDiscountableDiscounts(Discountable discountable, boolean retail){
-        return retail? retailDiscounts.get(discountable):supplierDiscounts.get(discountable);
+    public static List<Discount> getDiscountableDiscounts(Discountable discountable, boolean isProductDetails){
+        return DiscountDAL.getDisccountableDiscounts(discountable, isProductDetails);
     }
 
     private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail) throws Exception{
-        List<Discount> discounts = getDiscountableDiscounts(product, retail);
-        if(discounts == null){
-            discounts = new ArrayList<>();
-        }
+        List<Discount> discounts = getDiscountableDiscounts(product, true);
         Discountable discountable = product.getCategory();
         while(discountable != null){
-            List<Discount> toAdd = getDiscountableDiscounts(discountable, retail);
-            if(toAdd != null) {
-                discounts.addAll(toAdd);
-            }
+            List<Discount> toAdd = getDiscountableDiscounts(discountable, false);
+            discounts.addAll(toAdd);
             discountable = discountable.getParent();
         }
         return discounts;
@@ -114,15 +100,10 @@ public class DiscountController {
         discount.setFromDate(fromDate);
         discount.setToDate(toDate);
         discount.setPercentage(percantage);
+        DiscountDAL.editItem(discount);
     }
 
     public static void removeDiscount(Discount discount){
-        discounts.remove(discount);
-        for(Map.Entry<Discountable, List<Discount>> entry : retailDiscounts.entrySet()){
-            entry.getValue().remove(discount);
-        }
-        for(Map.Entry<Discountable, List<Discount>> entry : supplierDiscounts.entrySet()){
-            entry.getValue().remove(discount);
-        }
+        //TODO maybe delete
     }
 }

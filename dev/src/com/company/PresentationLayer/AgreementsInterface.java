@@ -4,9 +4,6 @@ import com.company.Entities.Agreement;
 import com.company.LogicLayer.AgreementController;
 
 public class AgreementsInterface {
-    public static void createAgreement(Agreement agreement){
-        AgreementController.AgreementCreator(agreement);
-    }
     public static void addItemToAgreement(String providerId, String catalogItemId, int minAmount, double discount){
         AgreementController.addItem(providerId, catalogItemId, minAmount, discount);
     }

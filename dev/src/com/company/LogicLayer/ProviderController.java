@@ -10,13 +10,12 @@ import java.util.List;
 public class ProviderController {
 
 	//creator
-	public static Provider ProviderCreator(Provider provider, CommunicationDetails communicationDetails) {
+	public static void ProviderCreator(Provider provider, CommunicationDetails communicationDetails) {
 		if(getProvierByID(provider.getProviderID()) != null){
 			throw new IllegalArgumentException("there is already provider with id " + provider.getProviderID());
 		}
 		provider.setCommunicationDetails(communicationDetails);
 		ProviderDAL.insertProvider(provider);
-		return provider;
 	}
 	
 	

@@ -12,7 +12,6 @@ public class SingleProviderOrder{
 	private Provider provider;
 	private Map<CatalogItem, Integer> orderItems; //catalog item - amount of item - total price
 	private LocalDate orderDate;
-	private boolean updated;
 
 	
 	//consructors
@@ -21,7 +20,6 @@ public class SingleProviderOrder{
 		this.provider = provider;
 		this.orderItems = new HashMap<CatalogItem, Integer>();
 		this.orderDate = orderDate;
-		this.updated = false;
 	}
 
 	public SingleProviderOrder(String orderID, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
@@ -29,7 +27,6 @@ public class SingleProviderOrder{
 		this.provider = provider;
 		this.orderItems = orderItems;
 		this.orderDate = orderDate;
-		this.updated = false;
 	}
 
 	//getters  & setters
@@ -69,13 +66,6 @@ public class SingleProviderOrder{
 		this.orderItems = orderItems;
 	}
 
-	public boolean isUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(boolean updated) {
-		this.updated = updated;
-	}
 	public boolean isItemExist(CatalogItem catalogItem){
 		return orderItems.containsKey(catalogItem);
 	}

@@ -7,7 +7,7 @@ import java.util.List;
 
 public class DiscountInterface {
     public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds, boolean retail) throws Exception{
-        DiscountController.addDiscount(discount, productsIds, categoriesIds, retail);
+        DiscountController.addDiscount(discount, productsIds, categoriesIds);
     }
     public static String getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
         return DiscountController.getDiscountableDiscounts(id, productDetails, retail);

@@ -24,6 +24,18 @@ public class ProductDetails implements Discountable, Reportable {
         this.minimumQuantity = minimumQuantity;
     }
 
+    public ProductDetails(String id, String name, String manufacturer, double retailPrice, int daysToExpiration, Category category, int quantityInStorage, int quantityInShelves, int minimumQuantity) {
+        this.id = id;
+        this.name = name;
+        this.manufacturer = manufacturer;
+        this.retailPrice = retailPrice;
+        this.daysToExpiration = daysToExpiration;
+        this.category = category;
+        this.quantityInStorage = quantityInStorage;
+        this.quantityInShelves = quantityInShelves;
+        this.minimumQuantity = minimumQuantity;
+    }
+
     @Override
     public String getId() {
         return id;

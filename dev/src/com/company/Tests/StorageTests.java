@@ -80,7 +80,7 @@ public class StorageTests {
     public void discountOnProductTest(){
         try {
             discount = new Discount("disc1",15, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
-            DiscountController.addDiscount(discount, discList, new ArrayList<>(), true);
+            DiscountController.addDiscount(discount, discList, new ArrayList<>());
             double priceAfterDiscount = productDetails.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails.getId(), true) / 100));
             Assert.assertEquals("Discount given on product succeeded", 8.5, priceAfterDiscount, 0);
             DiscountController.removeDiscount(discount);
@@ -94,7 +94,7 @@ public class StorageTests {
     public void editDiscountOnProductTest(){
         try {
             discount = new Discount("disc3",20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
-            DiscountController.addDiscount(discount, discList, new ArrayList<>(), true);
+            DiscountController.addDiscount(discount, discList, new ArrayList<>());
             DiscountController.editDiscount(discount, LocalDate.of(2020, 4, 23), LocalDate.of(2020, 4, 27), 30);
             double priceAfterDiscount = productDetails.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails.getId(), true) / 100));
             Assert.assertEquals("Discount given on product succeeded", 7, priceAfterDiscount, 0);
@@ -109,8 +109,8 @@ public class StorageTests {
         try {
             discount = new Discount("disc4",15, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
             discount2 = new Discount("disc5", 20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
-            DiscountController.addDiscount(discount, discList2, new ArrayList<>(), true);
-            DiscountController.addDiscount(discount2, discList2, new ArrayList<>(), true);
+            DiscountController.addDiscount(discount, discList2, new ArrayList<>());
+            DiscountController.addDiscount(discount2, discList2, new ArrayList<>());
             double priceAfterDiscount = productDetails2.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails2.getId(), true) / 100));
             Assert.assertEquals("Selected max between given discounts", 8, priceAfterDiscount, 0);
             DiscountController.removeDiscount(discount);
@@ -125,7 +125,7 @@ public class StorageTests {
     public void removeDiscountOnProductTest(){
         try {
             discount = new Discount("disc6", 20, LocalDate.of(2020, 4, 22), LocalDate.of(2020, 4, 29));
-            DiscountController.addDiscount(discount, discList, new ArrayList<>(), true);
+            DiscountController.addDiscount(discount, discList, new ArrayList<>());
             DiscountController.removeDiscount(discount);
             double priceAfterDiscount = productDetails.getRetailPrice() * (1 - (DiscountController.getProductDiscountPercentage(productDetails.getId(), true) / 100));
             Assert.assertEquals("Price returns to original after discount removal", 10, priceAfterDiscount, 0);

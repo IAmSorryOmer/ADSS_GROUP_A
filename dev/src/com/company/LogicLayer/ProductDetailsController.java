@@ -1,4 +1,5 @@
 package com.company.LogicLayer;
+import com.company.DataAccessLayer.ProductDetailsDAL;
 import com.company.Entities.Category;
 import com.company.Entities.ProductDetails;
 
@@ -7,7 +8,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductDetailsController {
-    private static List<ProductDetails> productDetailsList = new ArrayList<>();
 
     public static void addProductDetails(ProductDetails productDetails, String catId) throws Exception {
         if (getProductDetailsById(productDetails.getId()) != null){
@@ -18,38 +18,38 @@ public class ProductDetailsController {
             throw new IllegalArgumentException("there is no such category id");
         }
         productDetails.setCategory(category);
-        productDetailsList.add(productDetails);
+        ProductDetailsDAL.insertProductDetails(productDetails);
     }
 
     public static ProductDetails getProductDetailsById(String id){
-        //return first product with id
-        return productDetailsList.stream().filter(product -> product.getId().equals(id)).findFirst().orElse(null);
+        return ProductDetailsDAL.getProductDetailsById(id);
     }
 
     public static List<ProductDetails> getAllMissing() {
-        //this function return all the products that in shortage
-        return productDetailsList.stream().filter(product -> product.getMinimumQuantity() >= (product.getQuantityInStorage()+product.getQuantityInShelves())).collect(Collectors.toList());
+        return ProductDetailsDAL.getMissingProducts();
     }
 
     public static void changeMinimalQuantity(String id, int newQuantity) throws Exception {
         ProductDetails productDetails = getProductDetailsById(id);
-        if (productDetails == null || newQuantity<-1){
+        if(productDetails == null || newQuantity < -1){
             throw new Exception("A product with that ID does not exist or illegal quantity");
         }
         productDetails.setMinimumQuantity(newQuantity);
+        ProductDetailsDAL.editProductDetails(productDetails);
     }
 
     public static List<ProductDetails> getProductDetailsByName(String name) {
-        return productDetailsList.stream().filter(product -> product.getName().equals(name)).collect(Collectors.toList());
+        return ProductDetailsDAL.getProductDetailsByName(name);
     }
 
     public static List<ProductDetails> getProductDetailsByStock() {
-        return productDetailsList.stream().filter(product -> product.getQuantityInShelves()> 0 || product.getQuantityInStorage()>0).collect(Collectors.toList());
+        return ProductDetailsDAL.getProductDetailsInStock();
     }
 
     public static String GetProductsDetails(ProductDetails productDetails){
         return productDetails.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(productDetails, false);
     }
+
     private static boolean isInCategory(ProductDetails productDetails, Category category){
         Category currCategory = productDetails.getCategory();
         while(currCategory != null){
@@ -60,6 +60,16 @@ public class ProductDetailsController {
         }
         return false;
     }
+    public static void updateQuantity(ProductDetails productDetails, int toAdd, boolean storage){
+        if(storage){
+            productDetails.setQuantityInStorage(productDetails.getQuantityInStorage() + toAdd);
+        }
+        else{
+            productDetails.setQuantityInShelves(productDetails.getQuantityInShelves() + toAdd);
+        }
+        ProductDetailsDAL.editProductDetails(productDetails);
+    }
+
     public static List<ProductDetails> getAllProductsOffCategory(List<String> categorieIds) throws Exception{
         List<Category> categories = new ArrayList<>();
         for(String categoryId : categorieIds){
@@ -69,9 +79,9 @@ public class ProductDetailsController {
             }
             categories.add(categoryToAdd);
         }
-        return productDetailsList.stream().filter(product -> categories.stream().anyMatch(cat -> isInCategory(product, cat))).collect(Collectors.toList());
+        return getProductDetailsList().stream().filter(product -> categories.stream().anyMatch(cat -> isInCategory(product, cat))).collect(Collectors.toList());
     }
     public static List<ProductDetails> getProductDetailsList(){
-        return productDetailsList;
+        return ProductDetailsDAL.loadAll();
     }
 }

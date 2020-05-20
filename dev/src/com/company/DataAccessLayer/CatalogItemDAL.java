@@ -12,7 +12,6 @@ import java.util.List;
 
 public class CatalogItemDAL {
     private static HashMap<Pair<String, String>, CatalogItem> mapper = new HashMap<>();
-    private static boolean updated = false;
 
     public static void insertItem(CatalogItem catalogItem){
         String sql = "INSERT INTO CatalogItem(CatalogNum, ProviderId, Price, ProductDetailsId) values (?,?,?,?);";
@@ -101,7 +100,7 @@ public class CatalogItemDAL {
             String catalogNum = resultSet.getString("CatalogNum");
             double price = resultSet.getDouble("Price");
             String productDetailsId = resultSet.getString("ProductDetailsId");
-            ProductDetails productDetails = null;//TODO get from product details dal
+            ProductDetails productDetails = ProductDetailsDAL.getProductDetailsById(productDetailsId);
             Pair key = new Pair(providerId, catalogNum);
             if(mapper.containsKey(key)){
                 toReturn.add(mapper.get(key));
