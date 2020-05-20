@@ -67,40 +67,40 @@ public class Main {
             String[] options = new String[]{"add type", "print all missings products", "modify minimum quantity", "print all products with name", "print all products within storage","print all products", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addProductDetailsFromUser();
-                    break;
-                case 2:
-                    printNumberedList(ProductDetailsInterface.getAllMissing());
-                    break;
-                case 3:
-                    System.out.println("please insert product type id:");
-                    String id = reader.nextLine();
-                    System.out.println("please insert new minimum quantity");
-                    int newQuantity = Integer.parseInt(reader.nextLine());
-                    try {
+            try {
+                switch (option) {
+                    case 1:
+                        addProductDetailsFromUser();
+                        break;
+                    case 2:
+                        printNumberedList(ProductDetailsInterface.getAllMissing());
+                        break;
+                    case 3:
+                        System.out.println("please insert product type id:");
+                        String id = reader.nextLine();
+                        System.out.println("please insert new minimum quantity");
+                        int newQuantity = Integer.parseInt(reader.nextLine());
                         ProductDetailsInterface.changeMinimalQuantity(id, newQuantity);
-                    }
-                    catch (Exception e){
-                        System.out.println("quantity must be greater or equal to -1(wich means no minimum quantity at all)");
-                    }
-                    break;
-                case 4:
-                    System.out.println("please insert name:");
-                    String name = reader.nextLine();
-                    printNumberedList(ProductDetailsInterface.getProductDetailsByName(name));
-                    break;
-                case 5:
-                    printNumberedList(ProductDetailsInterface.getProductDetailsByStock());
-                    break;
-                case 6:
-                    printNumberedList(ProductDetailsInterface.getAllProducts());
-                    break;
-                case 7:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 7");
+                        break;
+                    case 4:
+                        System.out.println("please insert name:");
+                        String name = reader.nextLine();
+                        printNumberedList(ProductDetailsInterface.getProductDetailsByName(name));
+                        break;
+                    case 5:
+                        printNumberedList(ProductDetailsInterface.getProductDetailsByStock());
+                        break;
+                    case 6:
+                        printNumberedList(ProductDetailsInterface.getAllProducts());
+                        break;
+                    case 7:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 7");
+                }
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -139,34 +139,34 @@ public class Main {
             String[] options = new String[]{"add product", "move product", "prints all products of type", "print all damaged products", "mark product as damaged", "print all products", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addProductFromUser();
-                    break;
-                case 2:
-                    moveProduct();
-                    break;
-                case 3:
-                    printAllProductsOfType();
-                    break;
-                case 4:
-                    printNumberedList(ProductInterface.getAllDamaged());
-                    break;
-                case 5:
-                    System.out.println("please insert product id:");
-                    try {
+            try {
+                switch(option){
+                    case 1:
+                        addProductFromUser();
+                        break;
+                    case 2:
+                        moveProduct();
+                        break;
+                    case 3:
+                        printAllProductsOfType();
+                        break;
+                    case 4:
+                        printNumberedList(ProductInterface.getAllDamaged());
+                        break;
+                    case 5:
+                        System.out.println("please insert product id:");
                         ProductInterface.markAsDamaged(reader.nextLine());
-                    } catch (Exception e) {
-                        System.out.println("error. " + e.getMessage());
-                    }
-                    break;
-                case 6:
-                    System.out.println(ProductInterface.stringifyProducts());
-                    break;
-                case 7:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 7");
+                        break;
+                    case 6:
+                        System.out.println(ProductInterface.stringifyProducts());
+                        break;
+                    case 7:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 7");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -237,23 +237,27 @@ public class Main {
             String[] options = new String[]{"add discount", "print discounts of certain type or category", "print current discount percentage of certain type","print pricing history of certain type",  "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addDiscountFromUser();
-                    break;
-                case 2:
-                    printDiscountsOfDiscountable();
-                    break;
-                case 3:
-                    printDiscountPercentageOfDiscountable();
-                    break;
-                case 4:
-                    printPricingHistoryOfCertainProduct();
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 5");
+            try {
+                switch(option){
+                    case 1:
+                        addDiscountFromUser();
+                        break;
+                    case 2:
+                        printDiscountsOfDiscountable();
+                        break;
+                    case 3:
+                        printDiscountPercentageOfDiscountable();
+                        break;
+                    case 4:
+                        printPricingHistoryOfCertainProduct();
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 5");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -361,17 +365,22 @@ public class Main {
             String[] options = new String[]{"add category", "print all categories", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addCategoryFromUser();
-                    break;
-                case 2:
-                    System.out.println(CategoryInterface.stringifyCategories());
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 3");
+            try {
+                switch(option){
+                    case 1:
+                        addCategoryFromUser();
+                        break;
+                    case 2:
+                        System.out.println(CategoryInterface.stringifyCategories());
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 3");
+                }
+            }
+            catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -476,20 +485,25 @@ public class Main {
             String[] options = new String[]{"manage provider orders", "print all orders", "print all automatic orders", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    manageProviderOrdersMenu();
-                    break;
-                case 2:
-                    printNumberedList(OrdersInterface.getAllOrders());
-                    break;
-                case 3:
-                    printNumberedList(OrdersInterface.getAllAutomaticsOrders());
-                    break;
-                case 4:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 4");
+            try {
+                switch(option){
+                    case 1:
+                        manageProviderOrdersMenu();
+                        break;
+                    case 2:
+                        printNumberedList(OrdersInterface.getAllOrders());
+                        break;
+                    case 3:
+                        printNumberedList(OrdersInterface.getAllAutomaticsOrders());
+                        break;
+                    case 4:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 4");
+                }
+            }
+            catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
 
@@ -502,29 +516,33 @@ public class Main {
             String[] options = new String[]{"add order", "add automatic order", "manage order items", "print all orders of provider", "print expanded order(with items)", "select another provider to manage", "return to order manage menu"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addOrderFromUser(providerId);
-                    break;
-                case 2:
-                    addAutomaticOrderFromUser(providerId);
-                    break;
-                case 3:
-                    manageOrderItemsMenu(providerId);
-                    break;
-                case 4:
-                    printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
-                    break;
-                case 5:
-                    printSpecificOrder(providerId);
-                    break;
-                case 6:
-                    providerId = selectProvider(message);
-                    break;
-                case 7:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 7");
+            try {
+                switch(option){
+                    case 1:
+                        addOrderFromUser(providerId);
+                        break;
+                    case 2:
+                        addAutomaticOrderFromUser(providerId);
+                        break;
+                    case 3:
+                        manageOrderItemsMenu(providerId);
+                        break;
+                    case 4:
+                        printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
+                        break;
+                    case 5:
+                        printSpecificOrder(providerId);
+                        break;
+                    case 6:
+                        providerId = selectProvider(message);
+                        break;
+                    case 7:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 7");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -602,29 +620,27 @@ public class Main {
             String[] options = new String[]{"add item to order", "edit item on order", "remove item from order", "choose another order to manage", "return to manage provider orders"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addItemToOrder(providerId, orderId);
-                    break;
-                case 2:
-                    editItemOfOrder(providerId, orderId);
-                    break;
-                case 3:
-                    removeItemFromOrder(providerId, orderId);
-                    break;
-                case 4:
-                    try {
+            try {
+                switch(option){
+                    case 1:
+                        addItemToOrder(providerId, orderId);
+                        break;
+                    case 2:
+                        editItemOfOrder(providerId, orderId);
+                        break;
+                    case 3:
+                        removeItemFromOrder(providerId, orderId);
+                        break;
+                    case 4:
                         orderId = selectOrder(providerId);
-                    }
-                    catch (Exception e){
-                        System.out.println("error. " + e.getMessage());
+                        break;
+                    case 5:
                         return;
-                    }
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 5");
+                    default:
+                        System.out.println("choose an option between 1 to 5");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -700,23 +716,27 @@ public class Main {
             String[] options = new String[]{"add provider", "edit provider details", "manage provider catalog", "print all providers", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addProviderFromUser();
-                    break;
-                case 2:
-                    editProviderDetails();
-                    break;
-                case 3:
-                    manageProviderCatalogMenu();
-                    break;
-                case 4:
-                    printProviders();
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 5");
+            try {
+                switch(option){
+                    case 1:
+                        addProviderFromUser();
+                        break;
+                    case 2:
+                        editProviderDetails();
+                        break;
+                    case 3:
+                        manageProviderCatalogMenu();
+                        break;
+                    case 4:
+                        printProviders();
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 5");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
 
@@ -823,23 +843,27 @@ public class Main {
             String[] options = new String[]{"add item to catalog", "edit item on catalog", "print provider catalog","choose another provider to manage", "return to manage provider menu"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addItemToCatalog(providerId);
-                    break;
-                case 2:
-                    editItemOfCatalog(providerId);
-                    break;
-                case 3:
-                    printProviderCatalog(providerId);
-                    break;
-                case 4:
-                    providerId = selectProvider("select provider to manage his items");
-                    break;
-                case 5:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 5");
+            try {
+                switch(option){
+                    case 1:
+                        addItemToCatalog(providerId);
+                        break;
+                    case 2:
+                        editItemOfCatalog(providerId);
+                        break;
+                    case 3:
+                        printProviderCatalog(providerId);
+                        break;
+                    case 4:
+                        providerId = selectProvider("select provider to manage his items");
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 5");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
@@ -922,26 +946,30 @@ public class Main {
             String[] options = new String[]{"add item to agreement", "edit item of agreement", "remove item from agreement", "print all items of agreement", "select another provider to manage his agreement", "return to main"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
-            switch(option){
-                case 1:
-                    addItemToAgreement(providerId);
-                    break;
-                case 2:
-                    editItemOfAgreement(providerId);
-                    break;
-                case 3:
-                    removeItemFromAgreement(providerId);
-                    break;
-                case 4:
-                    printItemsOfAgreement(providerId);
-                    break;
-                case 5:
-                    providerId = selectProvider(message);
-                    break;
-                case 6:
-                    return;
-                default:
-                    System.out.println("choose an option between 1 to 6");
+            try {
+                switch(option){
+                    case 1:
+                        addItemToAgreement(providerId);
+                        break;
+                    case 2:
+                        editItemOfAgreement(providerId);
+                        break;
+                    case 3:
+                        removeItemFromAgreement(providerId);
+                        break;
+                    case 4:
+                        printItemsOfAgreement(providerId);
+                        break;
+                    case 5:
+                        providerId = selectProvider(message);
+                        break;
+                    case 6:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 6");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
             }
         }
     }
