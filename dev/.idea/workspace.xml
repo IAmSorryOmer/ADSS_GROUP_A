@@ -3,18 +3,14 @@
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
       <artifact name="app:jar" />
-      <artifact name="test:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/artifacts/app_jar.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/artifacts/app_jar.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/DB/SuperLi" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/DataAccessLayer/DBHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/DataAccessLayer/DBHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/LogicLayer/SingleProviderOrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/LogicLayer/SingleProviderOrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLi" beforeDir="false" afterPath="$PROJECT_DIR$/SuperLi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/DBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DataAccessLayer/DBHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SuperLi" beforeDir="false" afterPath="$PROJECT_DIR$/SuperLi" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/app_jar/untitled104.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/app_jar/untitled104.jar" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +50,7 @@
     <property name="aspect.path.notification.shown" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/sqlite-jdbc-3.30.1.jar!/" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
@@ -141,7 +137,7 @@
       <workItem from="1588007151216" duration="66000" />
       <workItem from="1588868528870" duration="2067000" />
       <workItem from="1589372114209" duration="44095000" />
-      <workItem from="1589792893582" duration="89127000" />
+      <workItem from="1589792893582" duration="90617000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1587486727196</created>
@@ -346,7 +342,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589995982393</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="added dal">
+      <created>1589996068117</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1589996068117</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -404,14 +407,18 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589932892165" />
+    <state x="245" y="285" width="524" height="484" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog" timestamp="1589997062093">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="245" y="285" width="524" height="484" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589997062093" />
     <state x="696" y="368" width="518" height="294" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1589973866943">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="696" y="368" width="518" height="294" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1032@0.0.1920.1032" timestamp="1589973866943" />
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1589995982327">
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1589996068039">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1589995982327" />
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1589996068039" />
     <state width="543" height="506" key="DebuggerActiveHint" timestamp="1589992071326">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -420,10 +427,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="100" y="98" width="760" height="834" key="DiffContextDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589902493500" />
-    <state x="319" y="324" width="735" height="513" key="FileChooserDialogImpl" timestamp="1589984482313">
+    <state x="319" y="324" width="735" height="513" key="FileChooserDialogImpl" timestamp="1589997182628">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="319" y="324" width="735" height="513" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1589984482313" />
+    <state x="319" y="324" width="735" height="513" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1589997182628" />
     <state width="937" height="422" key="GridCell.Tab.0.bottom" timestamp="1589996031715">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -464,14 +471,14 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="361" y="383" width="476" height="264" key="MultipleFileMergeDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1587661405401" />
-    <state x="0" y="105" width="1024" height="845" key="SettingsEditor" timestamp="1589984489874">
+    <state x="0" y="105" width="1024" height="845" key="SettingsEditor" timestamp="1589997186763">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="0" y="105" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1589984489874" />
-    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589994718287">
+    <state x="0" y="105" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1589997186763" />
+    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589996074573">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1589994718287" />
+    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1589996074573" />
     <state x="841" y="404" width="228" height="221" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog" timestamp="1589980465748">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
