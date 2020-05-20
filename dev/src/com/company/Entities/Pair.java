@@ -1,5 +1,7 @@
 package com.company.Entities;
 
+import java.util.Objects;
+
 public class Pair <F,S>{
 
 	public F first;
@@ -35,5 +37,10 @@ public class Pair <F,S>{
 		}
 		Pair toCompare = (Pair) obj;
 		return first.equals(toCompare.getFirst()) && second.equals(toCompare.getSecond());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(first, second);
 	}
 }

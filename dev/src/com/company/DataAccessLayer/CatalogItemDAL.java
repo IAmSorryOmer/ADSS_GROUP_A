@@ -44,6 +44,9 @@ public class CatalogItemDAL {
 
     public static CatalogItem getCatalogItemByIdAndProvider(String providerId, String catalogNum){
         Pair key = new Pair(providerId, catalogNum);
+        System.out.println("from get catalog item by provider and cat num.");
+        System.out.println(mapper.toString());
+        System.out.println(key.first + " s " + key.second);
         if(mapper.containsKey(key)){
             return mapper.get(key);
         }

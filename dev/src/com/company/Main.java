@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.DataAccessLayer.CategoryDAL;
 import com.company.DataAccessLayer.DBHandler;
 import com.company.Entities.*;
 import com.company.PresentationLayer.*;
@@ -9,12 +10,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Main {
-
     public static Scanner reader = new Scanner(System.in);
     public static void main(String[] args) {
-
         DBHandler.connect();
-        if(true) return;
         boolean dummyLoaded = false;
         while(true) {
             System.out.println("Please select a category to manage or operation to perform:");
@@ -163,21 +161,12 @@ public class Main {
                     }
                     break;
                 case 6:
-                    manageOrdersMenu();
-                    break;
-                case 7:
-                    manageProvidersMenu();
-                    break;
-                case 8:
-                    manageAgreementsMenu();
-                    break;
-                case 9:
                     System.out.println(ProductInterface.stringifyProducts());
                     break;
-                case 10:
+                case 7:
                     return;
                 default:
-                    System.out.println("choose an option between 1 to 10");
+                    System.out.println("choose an option between 1 to 7");
             }
         }
     }
@@ -268,6 +257,7 @@ public class Main {
             }
         }
     }
+
     private static void printDiscountsOfDiscountable() {
         System.out.println("is this product type?(y for product, else for category):");
         String ans = reader.nextLine();
