@@ -10,11 +10,8 @@
     <list default="true" id="22a1a1c1-aab3-4364-9940-1ab818cefb52" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/DB/SuperLi" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/DB/SuperLi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/LogicLayer/AgreementController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/LogicLayer/AgreementController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/untitled104/com/company/DataAccessLayer/CatalogItemDAL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/untitled104/com/company/DataAccessLayer/CatalogItemDAL.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLi" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DB/SuperLi" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CatalogItemDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CatalogItemDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/AgreementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/AgreementController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -141,7 +138,7 @@
       <workItem from="1588007151216" duration="66000" />
       <workItem from="1588868528870" duration="2067000" />
       <workItem from="1589372114209" duration="44095000" />
-      <workItem from="1589792893582" duration="79513000" />
+      <workItem from="1589792893582" duration="80071000" />
     </task>
     <task id="LOCAL-00001" summary="aaaaa">
       <created>1587486727196</created>
@@ -304,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1589984917710</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="added dal">
+      <created>1589986633266</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1589986633266</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,10 +370,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="696" y="368" width="518" height="294" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1920.1032@0.0.1920.1032" timestamp="1589973866943" />
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1589984917616">
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2" timestamp="1589986633169">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1589984917616" />
+    <state x="979" y="63" width="912" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1589986633169" />
     <state width="469" height="506" key="DebuggerActiveHint" timestamp="1587664480253">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -382,38 +386,38 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="319" y="324" width="735" height="513" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1589984482313" />
-    <state width="937" height="335" key="GridCell.Tab.0.bottom" timestamp="1589986330686">
+    <state width="937" height="455" key="GridCell.Tab.0.bottom" timestamp="1589986846793">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1589986330686" />
-    <state width="937" height="335" key="GridCell.Tab.0.center" timestamp="1589986330684">
+    <state width="937" height="455" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846793" />
+    <state width="937" height="455" key="GridCell.Tab.0.center" timestamp="1589986846793">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1589986330684" />
-    <state width="937" height="335" key="GridCell.Tab.0.left" timestamp="1589986330683">
+    <state width="937" height="455" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846793" />
+    <state width="937" height="455" key="GridCell.Tab.0.left" timestamp="1589986846792">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1589986330683" />
-    <state width="937" height="335" key="GridCell.Tab.0.right" timestamp="1589986330685">
+    <state width="937" height="455" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846792" />
+    <state width="937" height="455" key="GridCell.Tab.0.right" timestamp="1589986846793">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1589986330685" />
-    <state width="457" height="335" key="GridCell.Tab.1.bottom" timestamp="1589986315703">
+    <state width="937" height="455" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846793" />
+    <state width="937" height="455" key="GridCell.Tab.1.bottom" timestamp="1589986846794">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="457" height="335" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1589986315703" />
-    <state width="457" height="335" key="GridCell.Tab.1.center" timestamp="1589986315702">
+    <state width="937" height="455" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846794" />
+    <state width="937" height="455" key="GridCell.Tab.1.center" timestamp="1589986846794">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="457" height="335" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1589986315702" />
-    <state width="457" height="335" key="GridCell.Tab.1.left" timestamp="1589986315702">
+    <state width="937" height="455" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846794" />
+    <state width="937" height="455" key="GridCell.Tab.1.left" timestamp="1589986846793">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="457" height="335" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1589986315702" />
-    <state width="457" height="335" key="GridCell.Tab.1.right" timestamp="1589986315703">
+    <state width="937" height="455" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846793" />
+    <state width="937" height="455" key="GridCell.Tab.1.right" timestamp="1589986846794">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="457" height="335" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1589986315703" />
+    <state width="937" height="455" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1589986846794" />
     <state width="263" height="500" key="HiddenNamespacesPopup" timestamp="1589899088172">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -426,10 +430,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="0" y="105" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1589984489874" />
-    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589984925159">
+    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1589986643827">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1589984925159" />
+    <state x="610" y="236" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1589986643827" />
     <state x="841" y="404" width="228" height="221" key="com.intellij.database.actions.ToolActions$ScriptingActionBase$MyDatabaseScriptDialog" timestamp="1589980465748">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -438,10 +442,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="713" y="332" width="484" height="349" key="com.intellij.database.psi.DbRenamePsiElementProcessor.DbRenameDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589967680770" />
-    <state x="905" y="514" width="690" height="518" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589986296428">
+    <state x="660" y="232" width="690" height="666" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1589986603958">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="905" y="514" width="690" height="518" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589986296428" />
+    <state x="660" y="232" width="690" height="666" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1589986603958" />
     <state x="100" y="98" width="1720" height="834" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1589965910013">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

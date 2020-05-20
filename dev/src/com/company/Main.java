@@ -988,7 +988,7 @@ public class Main {
         Integer minAmount = minAmountStr.equals("@none") ? null : Integer.parseInt(minAmountStr);
         System.out.println("please insert the new percentage of discount(or @none to keep it unchanged):");
         String discountStr = reader.nextLine();
-        Double discount = discountStr.equals("@none") ? null : Double.parseDouble(minAmountStr);
+        Double discount = discountStr.equals("@none") ? null : Double.parseDouble(discountStr);
         try {
             AgreementsInterface.editItemAgreement(providerId, catalogItemId, minAmount, discount);
         } catch (Exception e) {
