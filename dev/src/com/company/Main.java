@@ -16,7 +16,7 @@ public class Main {
         boolean dummyLoaded = false;
         while(true) {
             System.out.println("Please select a category to manage or operation to perform:");
-            String[] options = new String[]{"product types", "products", "discounts", "categories", "reports(including auto order missing items)", "orders", "providers and catalogs", "agreements", "load dummy data", "exit"};
+            String[] options = new String[]{"product types", "products", "discounts", "categories", "reports(including auto order missing items)", "orders", "providers and catalogs", "agreements", "exit"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
             switch(option){
@@ -45,18 +45,9 @@ public class Main {
                     manageAgreementsMenu();
                     break;
                 case 9:
-                    if(dummyLoaded){
-                        System.out.println("dummy data already loaded");
-                    }
-                    else {
-                        loadData();
-                        dummyLoaded = true;
-                    }
-                    break;
-                case 10:
                     return;
                 default:
-                    System.out.println("choose an option between 1 to 10");
+                    System.out.println("choose an option between 1 to 9");
             }
         }
     }
