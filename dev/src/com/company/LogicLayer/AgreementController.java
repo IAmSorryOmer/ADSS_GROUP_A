@@ -23,6 +23,7 @@ public class AgreementController {
 		if(isDiscountExist(catalogItem,provider))
 			throw new IllegalArgumentException("there is already item with id " + catalogItemId + " in this agreement. you can edit him instead");
 		provider.getCommunicationDetails().getAgreement().addItem(catalogItem, minAmount, discount);
+		AgreementDAL.insertItem(catalogItem, discount, minAmount);
 	}
 	
 	public static void editItem (String providerId, String catalogItemId, Integer minAmount, Double discount) {
@@ -64,6 +65,7 @@ public class AgreementController {
 
 	public static boolean isDiscountExist(CatalogItem catalogItem, Provider provider){
 		if(!provider.getCommunicationDetails().isAgreement() || !provider.getCommunicationDetails().getAgreement().isUpdated()){
+			System.out.println("loading agreement");
 			AgreementDAL.loadProviderAgreement(provider);
 		}
 		return provider.getCommunicationDetails().getAgreement().getAgreementItems().containsKey(catalogItem);
@@ -79,9 +81,6 @@ public class AgreementController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		if(!provider.getCommunicationDetails().isAgreement()){
-			throw new IllegalArgumentException("the provider with id " + providerId + " doesnt have an agreement");
-		}
 		Agreement agreement = getProviderAgreement(provider);
 		int counter = 1;
 		StringBuilder toReturn = new StringBuilder();

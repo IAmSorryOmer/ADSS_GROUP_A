@@ -778,10 +778,10 @@ public class Main {
         System.out.println("is the provider comes in fixed days?(y for yes, else no, or @none for keep it unchanged):");
         String fixedDaysStr = reader.nextLine();
         Boolean fixedDays = fixedDaysStr.equals("@none") ? null : fixedDaysStr.equals("y");
-        Integer arrivalDays = -1;
+        Integer arrivalDays = null;
         if(fixedDays != null && fixedDays) {
             System.out.println("please insert the new arrival days of the provider as binary string, or @none for keep it unchanged.\nfor example if a provider comes in sunday, monday and friday insert 0100011):");
-            while (arrivalDays == -1) {
+            while (arrivalDays == null) {
                 String arrivalString = reader.nextLine();
                 if(arrivalString.equals("@none")){
                     arrivalDays = null;
