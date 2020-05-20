@@ -563,7 +563,6 @@ public class Main {
     private static void addAutomaticOrderFromUser(String providerId){
         System.out.println("please insert the order id: ");
         String orderId = reader.nextLine();
-        System.out.println("please insert the interval between orders(in days):");
         int orderDays = -1;
         System.out.println("please insert the order days(when to auto create the order) as binary string.\nfor example if an order is to be sent every thursday, insert 0000100):");
         while (orderDays == -1) {

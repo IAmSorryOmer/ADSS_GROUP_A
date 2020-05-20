@@ -186,7 +186,7 @@ public class SingleProviderOrderController {
 			double finalPrice = calcItemCategoryPrice(provider, catalogItem, entry.getValue());
 			double discount = (1 - (finalPrice/originalPrice)) * 100;
 			toReturn.append("Item Id: ").append(catalogItem.getCatalogNum()).append(", Item Name: ").append(catalogItem.GetDescribedProductName()).append(", amount: ").
-					append(entry.getValue()).append("Original Price: ").append(originalPrice).append(", discount: ").append(discount).append("%, final price: ").append(finalPrice).append(".\n");
+					append(" ").append(entry.getValue()).append("Original Price: ").append(originalPrice).append(", discount: ").append(discount).append("%, final price: ").append(finalPrice).append(".\n");
 		}
 		return toReturn.toString();
 	}
