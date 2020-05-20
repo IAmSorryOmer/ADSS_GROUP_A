@@ -25,4 +25,15 @@ public class Pair <F,S>{
 	public void setSecond(S second) {
 		this.second = second;
 	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == this)
+			return true;
+		if(!(obj instanceof Pair)){
+			return false;
+		}
+		Pair toCompare = (Pair) obj;
+		return first.equals(toCompare.getFirst()) && second.equals(toCompare.getSecond());
+	}
 }

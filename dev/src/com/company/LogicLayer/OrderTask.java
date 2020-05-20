@@ -6,6 +6,7 @@ import com.company.Entities.SingleProviderOrder;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.HashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -24,7 +25,7 @@ public class OrderTask extends TimerTask {
         Timer nextTimer = new Timer();
         System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
         nextTimer.schedule(new OrderTask(automaticOrder), time);
-        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(automaticOrder.getOrderID() + LocalDate.now().toString(), automaticOrder.getProvider(), automaticOrder.getOrderItems(), LocalDate.now());
+        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(automaticOrder.getOrderID() + LocalDate.now().toString(), automaticOrder.getProvider(), new HashMap<>(automaticOrder.getOrderItems()), LocalDate.now());
         try {
             SingleProviderOrderController.SingleProviderOrderCreator(singleProviderOrder, automaticOrder.getProvider().getProviderID());
         }

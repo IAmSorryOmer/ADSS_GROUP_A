@@ -16,7 +16,7 @@ public class SingleProviderOrderController {
 
 	private static List<AutomaticOrder> automaticOrders = new LinkedList<>();
 
-	public static List<SingleProviderOrder> singleProviderOrderList = new LinkedList<>();
+	private static List<SingleProviderOrder> singleProviderOrderList = new LinkedList<>();
 	private static HashMap<Provider, List<SingleProviderOrder>> providerToOrders = new HashMap<>();
 
 	private static List<Timer> timers = new LinkedList<>();

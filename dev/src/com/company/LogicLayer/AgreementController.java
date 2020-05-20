@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import com.company.DataAccessLayer.AgreementDAL;
 import com.company.Entities.Agreement;
 import com.company.Entities.CatalogItem;
 import com.company.Entities.CommunicationDetails;
@@ -11,15 +12,12 @@ import java.util.Map;
 
 public class AgreementController {
 
-	public static List<Agreement> agreementList;
-
 	//creators
 	public static Agreement AgreementCreator(Agreement agreement) {
 		Provider provider = ProviderController.getProvierByID(agreement.getProviderID());
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + agreement.getProviderID());
 		provider.getCommunicationDetails().setAgreement(agreement);
-		agreementList.add(agreement);
 		return agreement;
 	}
 

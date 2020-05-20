@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import com.company.DataAccessLayer.CatalogItemDAL;
 import com.company.Entities.CatalogItem;
 import com.company.Entities.CommunicationDetails;
 import com.company.Entities.ProductDetails;
@@ -12,12 +13,10 @@ import java.util.List;
 
 public class CatalogItemController {
 
-	public static List<CatalogItem> catalogItemList = new ArrayList<>();
-
 	//creators
 	public static void CatalogItemCreator(Provider provider, CatalogItem catalogItem, ProductDetails productDetails) {
 		catalogItem.setProductDetails(productDetails);
-		catalogItemList.add(catalogItem);
+		CatalogItemDAL.insertItem(catalogItem);
 	}
 	
 	public static CatalogItem getCatalogItemById(Provider provider, String catalogNum){
@@ -32,6 +31,7 @@ public class CatalogItemController {
 		if (price <= 0)
 			throw new IllegalArgumentException("price should be positive");
 		catalogItem.setPrice(price);
+		CatalogItemDAL.editItem(catalogItem);
 	}
 
 	public static void removeItem(Provider provider, String catalogItemId){
@@ -39,7 +39,6 @@ public class CatalogItemController {
 		if(catalogItem == null)
 			throw new IllegalArgumentException("there is no item with id " + catalogItemId + " for provider number " + provider.getProviderID());
 		CommunicationDetailsController.removeCatalogItem(provider.getCommunicationDetails(), catalogItem);
-		catalogItemList.remove(catalogItem);
 	}
 
  	public static String printItem(CatalogItem c) {

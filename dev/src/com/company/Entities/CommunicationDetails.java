@@ -13,6 +13,7 @@ public class CommunicationDetails {
 	private String PhoneNum;
 	private String Address;
 	private Agreement agreement;
+	//TODO when loading catalog items, load to this list
 	private List<CatalogItem> catalogItems; //details of the produts included in the agreement wiht the provider
 	private boolean updated;
 	
@@ -86,6 +87,10 @@ public class CommunicationDetails {
 
 	public boolean isUpdated() {
 		return updated;
+	}
+
+	public void setProvider(com.company.Entities.Provider provider) {
+		Provider = provider;
 	}
 
 	public void setUpdated(boolean updated) {

@@ -1,5 +1,7 @@
 package com.company.LogicLayer;
 
+import com.company.DataAccessLayer.CatalogItemDAL;
+import com.company.DataAccessLayer.ProviderDAL;
 import com.company.Entities.*;
 
 import java.util.LinkedList;
@@ -7,16 +9,13 @@ import java.util.List;
 
 public class ProviderController {
 
-	public static List<Provider> providerList = new LinkedList<>();
-	
 	//creator
 	public static Provider ProviderCreator(Provider provider, CommunicationDetails communicationDetails) {
 		if(getProvierByID(provider.getProviderID()) != null){
 			throw new IllegalArgumentException("there is already provider with id " + provider.getProviderID());
 		}
-		CommunicationDetailsController.communicationDetailsCreator(communicationDetails);
 		provider.setCommunicationDetails(communicationDetails);
-		providerList.add(provider);
+		ProviderDAL.insertProvider(provider);
 		return provider;
 	}
 	
@@ -39,18 +38,16 @@ public class ProviderController {
 			provider.setName(Name);
 		}
 		CommunicationDetailsController.editDetails(provider, isFixedDays, phoneNum, address);
+		ProviderDAL.updateProvider(provider);
 	}
 	
 	/*
 	 * @return returns provider by id, or null if no such provider exists
 	 */
 	public static Provider getProvierByID (String providerID) {
-		for (Provider provider : providerList) {
-			if (provider.getProviderID().equals(providerID))
-				return provider;
-		}
-		return null;
+		return ProviderDAL.getProviderById(providerID);
 	}
+
 
 	public static void addCatalogItem(String providerId, CatalogItem catalogItem, String productDetailsId) {
 		Provider provider = ProviderController.getProvierByID(providerId);
@@ -97,8 +94,10 @@ public class ProviderController {
 		Provider p = ProviderController.getProvierByID(providerId);
 		if(p == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		return p.getCommunicationDetails().getCatalogItems();
+		return CommunicationDetailsController.getProviderItems(p);
 	}
+
+
 	public static String printDetails(String providerId) {
 		Provider p = ProviderController.getProvierByID(providerId);
 		if(p == null)
@@ -116,10 +115,12 @@ public class ProviderController {
 		output += CommunicationDetailsController.printDetails(p.getCommunicationDetails())+"\n";
 		return output;
 	}
+
 	public static Pair<Provider, CatalogItem> getBestProviderForProduct(ProductDetails productDetails, int amount){
 		Provider minProvider = null;
 		CatalogItem minItem = null;
 		double minPrice = 0;
+		List<Provider> providerList = ProviderDAL.loadAll();//must first load all providers
 		for(Provider provider : providerList){
 			CatalogItem providerItem = CommunicationDetailsController.getItemByProductDetails(provider.getCommunicationDetails(), productDetails.getId());
 			if(providerItem != null){
@@ -134,6 +135,6 @@ public class ProviderController {
 		return new Pair<>(minProvider, minItem);
 	}
 	public static List<Provider> getAllProviders(){
-		return providerList;
+		return ProviderDAL.loadAll();
 	}
 }

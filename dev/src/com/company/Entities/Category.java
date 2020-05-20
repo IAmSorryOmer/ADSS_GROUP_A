@@ -1,6 +1,7 @@
 package com.company.Entities;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Category implements Discountable {
@@ -15,6 +16,14 @@ public class Category implements Discountable {
         this.ID = ID;
         this.name = name;
         this.parent = null;
+        this.subCategories = new ArrayList<>();
+        this.updated = false;
+    }
+
+    public Category(String ID, String name, Category parent) {
+        this.ID = ID;
+        this.name = name;
+        this.parent = parent;
         this.subCategories = new ArrayList<>();
         this.updated = false;
     }
@@ -50,6 +59,10 @@ public class Category implements Discountable {
 
     public void addCategory(Category category){
         subCategories.add(category);
+    }
+
+    public void setSubCategories(List<Category> subCategories) {
+        this.subCategories = subCategories;
     }
 
     public boolean isUpdated(){

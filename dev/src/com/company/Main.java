@@ -1,5 +1,6 @@
 package com.company;
 
+import com.company.DataAccessLayer.DBHandler;
 import com.company.Entities.*;
 import com.company.PresentationLayer.*;
 
@@ -11,6 +12,9 @@ public class Main {
 
     public static Scanner reader = new Scanner(System.in);
     public static void main(String[] args) {
+
+        DBHandler.connect();
+        if(true) return;
         boolean dummyLoaded = false;
         while(true) {
             System.out.println("Please select a category to manage or operation to perform:");
@@ -823,7 +827,7 @@ public class Main {
         String providerId = selectProvider("select provider to manage his items");
         while(true) {
             System.out.println("Please select an option to perform on items of the selected provider: ");
-            String[] options = new String[]{"add item to catalog", "edit item on catalog", "remove item from catalog", "print provider catalog","choose another provider to manage", "return to manage provider menu"};
+            String[] options = new String[]{"add item to catalog", "edit item on catalog", "print provider catalog","choose another provider to manage", "return to manage provider menu"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
             switch(option){
@@ -834,18 +838,15 @@ public class Main {
                     editItemOfCatalog(providerId);
                     break;
                 case 3:
-                    removeItemFromCatalog(providerId);
-                    break;
-                case 4:
                     printProviderCatalog(providerId);
                     break;
-                case 5:
+                case 4:
                     providerId = selectProvider("select provider to manage his items");
                     break;
-                case 6:
+                case 5:
                     return;
                 default:
-                    System.out.println("choose an option between 1 to 6");
+                    System.out.println("choose an option between 1 to 5");
             }
         }
     }
