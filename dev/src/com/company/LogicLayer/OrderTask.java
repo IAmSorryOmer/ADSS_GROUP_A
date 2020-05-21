@@ -22,7 +22,7 @@ public class OrderTask extends TimerTask {
     @Override
     public void run() {
         LocalDate nextTimerDate = SingleProviderOrderController.getNextAutoOrderDate(automaticOrder);
-        long time = LocalDateTime.now().until(nextTimerDate.atStartOfDay(), ChronoUnit.HOURS);//TODO change to millis
+        long time = LocalDateTime.now().until(nextTimerDate.atStartOfDay(), ChronoUnit.SECONDS);//TODO change to millis
         Timer nextTimer = new Timer();
         System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
         nextTimer.schedule(new OrderTask(automaticOrder), time*1000);
