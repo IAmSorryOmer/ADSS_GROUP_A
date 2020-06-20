@@ -3,6 +3,8 @@ package BL;
 import DAL.DDay;
 import DAL.Mapper;
 
+import java.time.LocalDate;
+
 public class WeekSchedule {
     private Day[] days;
 
@@ -12,9 +14,21 @@ public class WeekSchedule {
     }
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
+        LocalDate localDate =  LocalDate.of(2020,6,21);
+        StoreController.current_date = localDate
+        mapper.saveCurrent_Date();
+
+//        LocalDate dt = LocalDate.now();
+//        dt.getDayOfMonth();
+//        System.out.println(dt.getDayOfWeek().getValue());
+
+
         for(int i = 0; i < 7; i++)
         {
-            days[i] = new Day("" + (day+i) + "." + month);
+            LocalDate tmp = localDate.plusDays(i);//LocalDate.of(localDate.getYear(),localDate.getMonth().getValue(),localDate.getDayOfMonth() + i);
+
+            days[i] = new Day(tmp.toString());
+         //   days[i] = new Day("" + (day+i) + "." + month);
             mapper.saveDay(days[i].getDate(),store_num,i,0);
             mapper.saveAssignments_To_Shifts(days[i].getDate(),"shift manager",0,i,0,0,store_num);
             mapper.saveAssignments_To_Shifts(days[i].getDate(),"shift manager",1,i,0,0,store_num);
