@@ -1,5 +1,7 @@
 package com.company.Entities;
 
+import BL.Store;
+
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,24 +11,27 @@ public class SingleProviderOrder{
 	
 	//fields
 	private final String orderID;
+	private final int storeID;
 	private Provider provider;
 	private Map<CatalogItem, Integer> orderItems; //catalog item - amount of item - total price
 	private LocalDate orderDate;
 
 	
 	//consructors
-	public SingleProviderOrder (Provider provider, String orderId, LocalDate orderDate) {
+	public SingleProviderOrder (Provider provider, String orderId, int storeId, LocalDate orderDate) {
 		this.orderID = orderId;
+		this.storeID = storeId;
 		this.provider = provider;
 		this.orderItems = new HashMap<CatalogItem, Integer>();
 		this.orderDate = orderDate;
 	}
 
-	public SingleProviderOrder(String orderID, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
+	public SingleProviderOrder(String orderID, int storeId, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
 		this.orderID = orderID;
 		this.provider = provider;
 		this.orderItems = orderItems;
 		this.orderDate = orderDate;
+		this.storeID = storeId;
 	}
 
 	//getters  & setters
@@ -44,6 +49,10 @@ public class SingleProviderOrder{
 
 	public String getOrderID() {
 		return orderID;
+	}
+
+	public int getStoreID() {
+		return storeID;
 	}
 
 	public Provider getProvider() {
