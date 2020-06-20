@@ -78,6 +78,19 @@ public class ReportDAL {
         return null;
     }
 
+    public static List<Report> loadAllInStore(){
+        String sql = "select * from Report where storeId = ?;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            List<Report> resultList = resultSetToCategory(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     private static List<Report> resultSetToCategory(ResultSet resultSet) throws SQLException{
         List<Report> toReturn = new LinkedList<>();
         while(resultSet.next()){

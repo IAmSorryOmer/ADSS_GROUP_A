@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import BL.Store;
 import com.company.DataAccessLayer.ProductDAL;
 import com.company.Entities.*;
 import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
@@ -28,7 +29,7 @@ public class ProductController {
         ProductDAL.insertProduct(product);
     }
 
-    public static Product getProductById(String Id) {
+    public static Product getProductByIdAndStore(String Id, int storeNum) {
         return ProductDAL.getProductById(Id);
     }
 
@@ -61,15 +62,15 @@ public class ProductController {
         ProductDAL.editProduct(product);
     }
 
-    public static List<Product> getAllDamaged() {
-        return ProductDAL.getDamagedProducts();
+    public static List<Product> getAllDamaged(int storeNum) {
+        return ProductDAL.getDamagedProducts(storeNum);
     }
 
     public static String GetProductsDetails(Product product){
         return product.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(product.getType(), false);
     }
 
-    public static void markAsDamaged(String id) throws Exception{
+    public static void markAsDamaged(String id, int storeNum) throws Exception{
         Product product = getProductById(id);
         if(product == null){
             throw new Exception("there is no product with this id");
@@ -86,7 +87,7 @@ public class ProductController {
         }
         ProductDAL.editProduct(product);
     }
-    public static void handleOrder(SingleProviderOrder singleProviderOrder){
+    /*public void handleOrder(SingleProviderOrder singleProviderOrder){
         for(Map.Entry<CatalogItem, Integer> entry : singleProviderOrder.getOrderItems().entrySet()){
             String id = UUID.randomUUID().toString();//generate random id for the catalog items
             ProductDetails productDetails = entry.getKey().getProductDetails();
@@ -96,8 +97,11 @@ public class ProductController {
                 System.out.println("added " + product.toString());
             }
         }
-    }
+    }*/
     public static List<Product> getAllProducts(){
         return ProductDAL.loadAll();
+    }
+    public static List<Product> getAllProductsInStore(int storeNum){
+        return ProductDAL.loadAllInStore(storeNum);
     }
 }

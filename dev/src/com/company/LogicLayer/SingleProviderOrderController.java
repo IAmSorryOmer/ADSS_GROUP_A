@@ -192,7 +192,7 @@ public class SingleProviderOrderController {
 		return toReturn.toString();
 	}
 
-	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder, Store store){
+	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder, int storeNum){
 		HashMap<Provider, SingleProviderOrder> orders = new HashMap<>();
 		for(ProductDetails productDetails : productDetailsToOrder){
 			int amountToOrder = (productDetails.getMinimumQuantity() - productDetails.getQuantityInStorage() - productDetails.getQuantityInShelves()) + 10;

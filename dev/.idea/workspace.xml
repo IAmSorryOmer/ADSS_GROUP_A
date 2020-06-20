@@ -3,6 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProductDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProductDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ReportDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ReportDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/OrderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/OrderTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/LogicLayer/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/LogicLayer/SingleProviderOrderController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -11,6 +18,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="UPDATE_TYPE" value="MERGE" />
   </component>
   <component name="ProjectId" id="1ZZC4lEncAxyjptAxVSFYb4pQYC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -22,8 +30,8 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="ServiceViewManager">
@@ -49,24 +57,64 @@
       <option name="presentableId" value="Default" />
       <updated>1585037039812</updated>
     </task>
+    <task id="LOCAL-00001" summary="Updated project structure">
+      <created>1592666989004</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1592666989004</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Updated project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated project structure" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="275" y="23" key="#Project_Structure" timestamp="1592667893548">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="23" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1592667893548" />
+    <state x="488" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1592674200092">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="488" y="49" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592674200092" />
     <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1592666810131">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1366.728@0.0.1366.728" timestamp="1592666810131" />
-    <state x="414" y="240" key="FileChooserDialogImpl" timestamp="1585037271246">
+    <state x="479" y="250" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1592673697773">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="414" y="240" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1585037271246" />
+    <state x="479" y="250" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1592673697773" />
+    <state x="333" y="0" key="CommitChangelistDialog2" timestamp="1592666987422">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592666987422" />
+    <state x="414" y="159" key="FileChooserDialogImpl" timestamp="1592667491314">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="414" y="159" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592667491314" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1592666943017">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1592666992785">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592666992785" />
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog" timestamp="1592666753352">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592666753352" />
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592672826340">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592672826340" />
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592667606943">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="346" y="49" width="672" height="678" key="search.everywhere.popup/0.0.1366.728@0.0.1366.728" timestamp="1592667606943" />
   </component>
 </project>
