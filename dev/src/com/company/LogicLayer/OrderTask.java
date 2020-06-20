@@ -26,7 +26,7 @@ public class OrderTask extends TimerTask {
         Timer nextTimer = new Timer();
         System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
         nextTimer.schedule(new OrderTask(automaticOrder), time*1000);
-        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(UUID.randomUUID().toString(), automaticOrder.getProvider(), new HashMap<>(automaticOrder.getOrderItems()), LocalDate.now());
+        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(UUID.randomUUID().toString(), automaticOrder.getStoreID(), automaticOrder.getProvider(), new HashMap<>(automaticOrder.getOrderItems()), LocalDate.now());
         try {
             SingleProviderOrderController.SingleProviderOrderCreator(singleProviderOrder, automaticOrder.getProvider().getProviderID());
         }
