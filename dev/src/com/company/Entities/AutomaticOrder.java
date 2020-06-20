@@ -7,8 +7,8 @@ public class AutomaticOrder extends SingleProviderOrder {
 
     private int orderDays;
 
-    public AutomaticOrder(Provider provider, String orderId, int orderDays) {
-        super(provider, orderId, null);
+    public AutomaticOrder(Provider provider, String orderId, int StoreId, int orderDays) {
+        super(provider, orderId, StoreId, null);
         this.orderDays = orderDays;
     }
 

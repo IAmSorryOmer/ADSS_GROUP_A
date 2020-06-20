@@ -1,5 +1,6 @@
 package com.company.LogicLayer;
 
+import BL.Store;
 import com.company.DataAccessLayer.OrdersDAL;
 import com.company.Entities.*;
 import com.sun.org.apache.xml.internal.resolver.readers.ExtendedXMLCatalogReader;
@@ -64,7 +65,7 @@ public class SingleProviderOrderController {
 	}
 
 	//methods
-	public static void AddToOrder (String providerId, String orderId, String ItemID, int orderAmount) {
+	public  static void AddToOrder (String providerId, String orderId, String ItemID, int orderAmount) {
 		if (orderAmount < 1)
 			throw new IllegalArgumentException("order amount must be positive");
 		Provider provider = ProviderController.getProvierByID(providerId);
@@ -191,7 +192,7 @@ public class SingleProviderOrderController {
 		return toReturn.toString();
 	}
 
-	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder){
+	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder, Store store){
 		HashMap<Provider, SingleProviderOrder> orders = new HashMap<>();
 		for(ProductDetails productDetails : productDetailsToOrder){
 			int amountToOrder = (productDetails.getMinimumQuantity() - productDetails.getQuantityInStorage() - productDetails.getQuantityInShelves()) + 10;
@@ -201,7 +202,7 @@ public class SingleProviderOrderController {
 			}
 			else{
 				if(!orders.containsKey(minProviderPair.getFirst())){
-					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), LocalDate.now());
+					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), store.getStore_num(), LocalDate.now());
 					createWithProviderObj(orderToAdd, minProviderPair.getFirst());
 					orders.put(minProviderPair.getFirst(), orderToAdd);
 				}
