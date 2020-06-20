@@ -50,8 +50,8 @@ public class ProductDAL {
         }
     }
 
-    public static Product getProductById(String id){
-        if(mapper.containsKey(id)){
+    public static Product getProductById(String id, int storeNum){
+        if(mapper.containsKey(id) && mapper.get(id).getStoreNum() ==){
             return mapper.get(id);
         }
         else{
@@ -83,10 +83,11 @@ public class ProductDAL {
         }
         return null;
     }
-    public static List<Product> getDamagedProducts(){
-        String sql = "select * from Product where IsDamaged = 1;";
+    public static List<Product> getDamagedProducts(int storeID){
+        String sql = "select * from Product where IsDamaged = 1 and storeId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, Integer.toString(storeID));
             List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -107,7 +108,20 @@ public class ProductDAL {
             System.out.println(e.getMessage());
         }
         return null;
+    }
 
+    public static List<Product> loadAllInStore(int storeID){
+        String sql = "select * from Product where storeId = ?;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, Integer.toString(storeID));
+            List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 
     private static List<Product> resultSetToCategory(ResultSet resultSet) throws SQLException{
