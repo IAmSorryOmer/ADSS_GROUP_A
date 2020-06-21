@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="Updated classes (product/report) 2">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -78,14 +76,22 @@
       <option name="project" value="LOCAL" />
       <updated>1592674865987</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Moved controllers of stock+providers">
+      <created>1592735545725</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1592735545725</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated project structure" />
     <MESSAGE value="Updated classes (product/report)" />
     <MESSAGE value="Updated classes (product/report) 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated classes (product/report) 2" />
+    <MESSAGE value="Moved controllers of stock+providers" />
+    <option name="LAST_COMMIT_MESSAGE" value="Moved controllers of stock+providers" />
   </component>
   <component name="WindowStateProjectService">
     <state x="275" y="23" key="#Project_Structure" timestamp="1592667893548">
@@ -104,34 +110,34 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="479" y="250" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1592673697773" />
-    <state x="333" y="0" key="CommitChangelistDialog2" timestamp="1592675072320">
+    <state x="333" y="0" key="CommitChangelistDialog2" timestamp="1592735541647">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592675072320" />
+    <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592735541647" />
     <state x="414" y="159" key="FileChooserDialogImpl" timestamp="1592667491314">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="414" y="159" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592667491314" />
-    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592674715281">
+    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592735568799">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592674715281" />
+    <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592735568799" />
     <state x="142" y="0" key="SettingsEditor" timestamp="1592666943017">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1592674869346">
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1592735550791">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592674869346" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592735550791" />
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog" timestamp="1592735438796">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592735438796" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592674740906">
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592735583056">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592674740906" />
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592735583056" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592667606943">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
