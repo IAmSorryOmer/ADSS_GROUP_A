@@ -243,4 +243,12 @@ public class Store {
         }
         return null;
     }
+
+    //=----------------------------------------------ass3
+
+
+    public void passDay(Mapper mapper) {
+
+    }
 }
+

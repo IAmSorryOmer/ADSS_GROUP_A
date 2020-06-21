@@ -94,5 +94,21 @@ public class WeekSchedule {
     }
 
 
+    //-----------------
+
+    public void passDay(Mapper mapper) {
+
+        // @TODO לשנות את השמה למשמרת שתפעל לפי היום שכרגע נמצא במיקום ה 0 לא להניח שזה ראשון
+        //@TODO לשנות את יצירת התאריכים לימים לפונקציה של נריה
+        //@TODO עובדים יכולים רק פעם אחת לשים משמרות לתמיד
+
+        mapper.setAssignments_History(days[0].getDate());// Makes all the assignments at this date to be history
+        mapper.setDay_History(days[0].getDate()); // Makes the Day history
+        for (int i=0; i < 5; i++) //SHIFT RIGHT DAYS
+        {
+            days[i] = days[i+1];
+        }
+        days[7] = new Day();
+    }
 
 }

@@ -222,12 +222,6 @@ public class ManagerController {
 
     //---------------------------------------------------------------
 
-
-//    public static void addDelivery(String date, String hour, String tid, String driverName, String source, int weightBeforeGo, List<String> numberedFiles, HashMap<String,String> adresses, HashMap<String,HashMap<String,Integer>> products ){
-//        Callback c=DeliveryController.getInstance().addDelivery(date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products);
-//        c.run(date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products);
-//    }
-
     public String addDelivery(int store_num,String date, String hour, String tid, String driverName, String source, int weightBeforeGo,
                               List<String> numberedFiles, HashMap<String,String> adresses,
                               HashMap<String,HashMap<String,Integer>> products,String returnHour)
@@ -235,8 +229,6 @@ public class ManagerController {
 
         return storeController.addDelivery(store_num,date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products,returnHour);
 
-     //   Callback c = stores.get(1).addDelivery(date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products);
-   //     c.run(date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products);
     }
 
     public String viewDeliveries (int store_num){

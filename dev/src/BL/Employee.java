@@ -126,3 +126,13 @@ public class Employee {
         return hasAssignedShifts;
     }
 }
+
+
+    public boolean isStorage(){
+        for(int i=0;i<capable_jobs.length;++i){
+            if(capable_jobs[i].equals("Storage")){
+                return true;
+            }
+        }
+        return false;
+    }

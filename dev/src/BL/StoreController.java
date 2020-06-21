@@ -499,4 +499,15 @@ public class StoreController {
     public String getSundayDate() {
         return "sunday is : " +mapper.getSundayDate();
     }
+
+
+    //------------------------------------- ass 3
+    public void passDay() {
+        for (Store store :  stores)
+        {
+            store.passDay(mapper);
+        }
+
+    }
 }
+

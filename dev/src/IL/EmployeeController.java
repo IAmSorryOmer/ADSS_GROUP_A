@@ -105,5 +105,9 @@ public class EmployeeController {
         return result;
     }
 
+// assignment 3
+    public boolean isStorage(){
+        return activeUserEmployee.isStorage();
+    }
 
 }

@@ -24,6 +24,30 @@ public class CLI {
         System.out.println("13.saturday morning   14.saturday evening");
 
     }
+    public static void print_Storage_employee_menu()
+    {
+        System.out.println("1. Insert available times for shifts");
+        System.out.println("2. Watch shifts of this week");
+        System.out.println("3. Log out");
+    }
+    public static void print_employee_menu()
+    {
+        System.out.println("1. Insert available times for shifts");
+        System.out.println("2. Watch shifts of this week");
+        System.out.println("3. Log out");
+    }
+    public static void print_store_manager_menu()
+    {
+       // @TODO
+
+    }
+    public static void print_logistic_manager_menu()
+    {
+        // @TODO
+    }
+
+
+
     public static boolean isCorrectHour(String x){
         if(x.length()!=5){return false;}
         if(x.charAt(0)=='2'){
@@ -70,12 +94,14 @@ public class CLI {
 
 
         int choice = 0;
-        while (choice != 3) {
+        while (choice != 5) {
             System.out.println("Hello, Welcome To Super-Li System");
             System.out.println("Choose Your Role Manager/Employee or exit program");
             System.out.println("1.Manager");
             System.out.println("2.Employee");
-            System.out.println("3.Exit");
+            System.out.println("3.Store manager");
+            System.out.println("4.Logistic manager");
+            System.out.println("5.Exit");
             choice = scanner.nextInt();
 //            scanner.nextLine();
 
@@ -443,13 +469,26 @@ public class CLI {
 
 
                 if (employeeController.connect(eID,store_num)) {
+
+                    if (employeeController.isStorage())
+                    {
+                        System.out.println("hello storage employee " + employeeController.getActiveName() + "\nchoose operation:");
+                        int operationNum = 0;
+                        operationNum = scanner.nextInt();
+                        scanner.nextLine();
+                        print_Storage_employee_menu();
+                        while (operationNum != 3) {
+
+
+
+                        }
+                    }
+
                     System.out.println("hello employee " + employeeController.getActiveName() + "\nchoose operation:");
                     int operationNum = 0;
                     while (operationNum != 3) {
 
-                        System.out.println("1. Insert available times for shifts");
-                        System.out.println("2. Watch shifts of this week");
-                        System.out.println("3. Log out");
+                        print_employee_menu();
                         operationNum = scanner.nextInt();
                         scanner.nextLine();
                         switch (operationNum) {
@@ -486,6 +525,26 @@ public class CLI {
                     System.out.println("there is no employee with that id \n");
                 }
 
+            }
+            if (choice ==3) //STORE MANAGER
+            {
+                print_store_manager_menu();
+                System.out.println("hello Store manager" + "\nchoose operation:");
+                int operationNum = 0;
+                while (operationNum != 3) {
+
+
+                }
+
+            }
+            if (choice ==4) //LOGISTIC
+            {
+                print_logistic_manager_menu();
+                System.out.println("hello Logistic Manager" + employeeController.getActiveName() + "\nchoose operation:");
+                int operationNum = 0;
+                while (operationNum != 3) {
+                    
+                }
             }
         }
         System.out.println("BYE BYE");

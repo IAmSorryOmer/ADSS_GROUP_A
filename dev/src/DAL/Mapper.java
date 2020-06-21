@@ -733,4 +733,31 @@ public class Mapper {
         return "1.5";
     }
 
+
+    public void setAssignments_History(String date){
+        try{
+            String query="UPDATE Assignments_To_Shifts SET is_history=1 WHERE date=?";
+            PreparedStatement stmt=conn.prepareStatement(query);
+            stmt.setString(1,date);
+            stmt.executeUpdate();
+
+            String query2="UPDATE Role_Shift SET is_history=1 WHERE date=?";
+            PreparedStatement stmt2=conn.prepareStatement(query2);
+            stmt2.setString(1,date);
+            stmt2.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    public void setDay_History(String date){
+        try{
+            String query="UPDATE Days SET is_history=1 WHERE date=?";
+            PreparedStatement stmt=conn.prepareStatement(query);
+            stmt.setString(1,date);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
