@@ -4,7 +4,7 @@ import DAL.DDriver;
 
 public class Driver{
 
-//t
+
     private License license;
     private String name;
     private int id;

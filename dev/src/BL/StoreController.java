@@ -5,6 +5,7 @@ import DAL.DEmployee_Details;
 import DAL.Mapper;
 import IL.Callback;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +15,9 @@ public class StoreController {
     private int storeNumbers = 2;
     private Mapper mapper;
     private String sundayDate;
+
+    static LocalDate current_date;
+    static int Day_In_Week = 1;
 
     public StoreController()
     {
