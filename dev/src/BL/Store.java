@@ -2,8 +2,11 @@ package BL;
 
 import DAL.DEmployee;
 import DAL.Mapper;
+import Entities.Pair;
+import Entities.SingleProviderOrder;
 import IL.Callback;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -248,6 +251,50 @@ public class Store {
 
 
     public void passDay(Mapper mapper) {
+
+
+        checkAutomaticOrders(mapper);
+        schedule.passDay(mapper);
+    }
+
+    public Pair<Integer[],LocalDate> findDateForOrder(){
+        return  schedule.findDateForOrder();
+    }
+
+    public void checkAutomaticOrders(Mapper mapper){
+        List<SingleProviderOrder> orders;
+
+        for(int i=0; i<orders.size();++i){
+            SingleProviderOrder order=orders.get(i);
+            if(Integer.parseInt( order.getOrderID())==store_num){
+
+                Pair<Integer[], LocalDate> deliveryInfo=schedule.findDateForOrder();
+                if(deliveryInfo==null){
+                    //TODO @TODO Add alert to human resource manager
+                }
+                else{
+                    String hour="";
+                    String returnhour="";
+                    if(deliveryInfo.first[0]==0){
+                        hour="6:00";
+                        returnhour="7:00";
+
+                    }
+                    else{
+                        hour="22:00";
+                        returnhour="23:00";
+                    }
+                    //TODO Update order with new delivery details
+
+
+                }
+
+                deliveryController.addDelivery(mapper,order.getOrderDate(),)
+            }
+
+        }
+
+
 
     }
 }

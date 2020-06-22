@@ -2,8 +2,10 @@ package BL;
 
 import DAL.DDay;
 import DAL.Mapper;
+import Entities.Pair;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 
 public class WeekSchedule {
     private Day[] days;
@@ -15,7 +17,7 @@ public class WeekSchedule {
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
         LocalDate localDate =  LocalDate.of(2020,6,21);
-        StoreController.current_date = localDate
+        StoreController.current_date = localDate;
         mapper.saveCurrent_Date();
 
 //        LocalDate dt = LocalDate.now();
@@ -27,13 +29,13 @@ public class WeekSchedule {
         {
             LocalDate tmp = localDate.plusDays(i);//LocalDate.of(localDate.getYear(),localDate.getMonth().getValue(),localDate.getDayOfMonth() + i);
 
-            days[i] = new Day(tmp.toString());
+            days[i] = new Day(tmp);
          //   days[i] = new Day("" + (day+i) + "." + month);
-            mapper.saveDay(days[i].getDate(),store_num,i,0);
-            mapper.saveAssignments_To_Shifts(days[i].getDate(),"shift manager",0,i,0,0,store_num);
-            mapper.saveAssignments_To_Shifts(days[i].getDate(),"shift manager",1,i,0,0,store_num);
-            mapper.saveRoleInShift("shift manager",days[i].getDate(),"morning",store_num,1);
-            mapper.saveRoleInShift("shift manager",days[i].getDate(),"evening",store_num,1);
+            mapper.saveDay(days[i].getDate().toString(),store_num,i,0);
+            mapper.saveAssignments_To_Shifts(days[i].getDate().toString(),"shift manager",0,i,0,0,store_num);
+            mapper.saveAssignments_To_Shifts(days[i].getDate().toString(),"shift manager",1,i,0,0,store_num);
+            mapper.saveRoleInShift("shift manager",days[i].getDate().toString(),"morning",store_num,1);
+            mapper.saveRoleInShift("shift manager",days[i].getDate().toString(),"evening",store_num,1);
         }
 
     }
@@ -109,6 +111,97 @@ public class WeekSchedule {
             days[i] = days[i+1];
         }
         days[7] = new Day();
+    }
+
+
+    //RETURN PAIR OF INTEGER ARRAY [MorningOrEvening(0 morning 1 evening), id of driver], and the date of the delivery
+    public Pair<Integer[],LocalDate> findDateForOrder(){
+        boolean foundBoth=false;
+        int morOrEve=-1;
+        int id1=0;
+        int id2=0;
+        LocalDate d=null;
+        for(int i=0;i<7&&!foundBoth;++i){
+            HashMap<String,Integer[]> m=days[i].getMorning();
+            boolean foundDriver=false;
+            boolean foundStorage=false;
+
+
+            for ( String role:m.keySet()
+                 ) {
+                if(role.equals("Driver")){
+                    for (int id: m.get(role)
+                         ) {
+                        if(id!=0){
+                            id1=id;
+                            foundDriver=true;
+                        }
+                    }
+                }
+
+                if(role.equals("storage")){
+                    for (int id: m.get(role)
+                    ) {
+                        if(id!=0){
+                            id2=id;
+                            foundStorage=true;
+                        }
+                    }
+                }
+
+            }
+            if(foundDriver&&foundStorage){
+                foundBoth=true;
+                morOrEve=0;
+                d=days[i].getDate();
+
+            }
+            foundDriver=false;
+            foundStorage=false;
+
+        }
+
+        for(int i=0;i<7&&!foundBoth;++i){
+            HashMap<String,Integer[]> m=days[i].getEvening();
+            boolean foundDriver=false;
+            boolean foundStorage=false;
+
+
+            for ( String role:m.keySet()
+            ) {
+                if(role.equals("Driver")){
+                    for (int id: m.get(role)
+                    ) {
+                        if(id!=0){
+                            id1=id;
+                            foundDriver=true;
+                        }
+                    }
+                }
+
+                if(role.equals("storage")){
+                    for (int id: m.get(role)
+                    ) {
+                        if(id!=0){
+                            id2=id;
+                            foundStorage=true;
+                        }
+                    }
+                }
+
+            }
+            if(foundDriver&&foundStorage){
+                foundBoth=true;
+                morOrEve=1;
+                d=days[i].getDate();
+            }
+
+        }
+        if(!foundBoth){
+            return null;
+        }
+        Integer[] zura={morOrEve,id1};
+        return new Pair(zura,d);
     }
 
 }
