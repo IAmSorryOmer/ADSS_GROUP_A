@@ -8,23 +8,23 @@ public class ReportController {
 
     //TODO: include workers in signatures
 
-    public static void addInventoryReport(List<String> categoriesIds, Report report, int storeNum) throws Exception{
+    public static void addInventoryReport(List<String> categoriesIds, Report report) throws Exception{
         List<ProductDetails> products = ProductDetailsController.getAllProductsOffCategory(categoriesIds);
         report.setReportType(Report.reportType.Inventory);
         report.setSubjects(products);
         ReportDAL.insertReport(report);
     }
-    public static void addDamagedReport(Report report, int storeNum){
-        List<Product> products = ProductController.getAllDamaged(storeNum);
+    public static void addDamagedReport(Report report){
+        List<Product> products = ProductController.getAllDamaged();
         report.setReportType(Report.reportType.Damaged);
         report.setSubjects(products);
         ReportDAL.insertReport(report);
     }
 
-    public static void addMissingReport(Report report, boolean autoOrder, int storeNum){
+    public static void addMissingReport(Report report, boolean autoOrder){
         List<ProductDetails> products = ProductDetailsController.getAllMissing();
         if(autoOrder) {
-            SingleProviderOrderController.autoOrderListOfProducts(products, storeNum);
+            SingleProviderOrderController.autoOrderListOfProducts(products);
         }
         report.setReportType(Report.reportType.Missings);
         report.setSubjects(products);

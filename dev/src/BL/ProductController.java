@@ -6,6 +6,7 @@ import Entities.*;
 import java.time.LocalDate;
 import java.util.*;
 
+
 public class ProductController {
 
     public static void addProduct(Product product, String typeId) throws Exception{
@@ -26,8 +27,8 @@ public class ProductController {
         ProductDAL.insertProduct(product);
     }
 
-    public static Product getProductByIdAndStore(String Id, int storeNum) {
-        return ProductDAL.getProductById(Id);
+    public static Product getProductById(String Id) {
+        return getProductById(Id);
     }
 
     public static List<Product> getProductsByType(String id) throws Exception{
@@ -59,15 +60,15 @@ public class ProductController {
         ProductDAL.editProduct(product);
     }
 
-    public static List<Product> getAllDamaged(int storeNum) {
-        return ProductDAL.getDamagedProducts(storeNum);
+    public static List<Product> getAllDamaged() {
+        return ProductDAL.getDamagedProducts();
     }
 
     public static String GetProductsDetails(Product product){
         return product.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(product.getType(), false);
     }
 
-    public static void markAsDamaged(String id, int storeNum) throws Exception{
+    public static void markAsDamaged(String id) throws Exception{
         Product product = getProductById(id);
         if(product == null){
             throw new Exception("there is no product with this id");

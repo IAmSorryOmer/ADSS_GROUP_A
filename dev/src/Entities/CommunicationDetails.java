@@ -1,6 +1,5 @@
 package Entities;
 
-import com.company.LogicLayer.AgreementController;
 
 import java.util.LinkedList;
 import java.util.List;

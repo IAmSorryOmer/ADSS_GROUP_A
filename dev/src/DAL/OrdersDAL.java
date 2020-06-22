@@ -15,13 +15,12 @@ public class OrdersDAL {
     public static HashMap<Pair<String, String>, SingleProviderOrder> mapper = new HashMap<>();
 
     public static void insertOrder(SingleProviderOrder singleProviderOrder){
-        String sql = "INSERT INTO SingleProviderOrder(OrderId, ProviderId, StoreId, Date) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO SingleProviderOrder(OrderId, ProviderId, Date) VALUES (?,?,?)";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, singleProviderOrder.getOrderID());
             preparedStatement.setString(2, singleProviderOrder.getProvider().getProviderID());
-            preparedStatement.setInt(3, singleProviderOrder.getStoreID());
-            preparedStatement.setString(4, singleProviderOrder.getOrderDate() == null ? null : singleProviderOrder.getOrderDate().toString());
+            preparedStatement.setString(3, singleProviderOrder.getOrderDate() == null ? null : singleProviderOrder.getOrderDate().toString());
             preparedStatement.executeUpdate();
             mapper.put(new Pair<>(singleProviderOrder.getProvider().getProviderID(), singleProviderOrder.getOrderID()), singleProviderOrder);
             for(Map.Entry<CatalogItem, Integer> entry: singleProviderOrder.getOrderItems().entrySet()){
@@ -40,13 +39,12 @@ public class OrdersDAL {
     }
 
     public static void insertAutomaticOrder(AutomaticOrder automaticOrder){
-        String sql = "INSERT INTO AutomaticOrder(OrderId, StoreId OrderDays, ProviderId) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO AutomaticOrder(OrderId, OrderDays, ProviderId) VALUES (?,?,?)";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, automaticOrder.getOrderID());
-            preparedStatement.setInt(2, automaticOrder.getStoreID());
-            preparedStatement.setInt(3, automaticOrder.getOrderDays());
-            preparedStatement.setString(4, automaticOrder.getProvider().getProviderID());
+            preparedStatement.setInt(2, automaticOrder.getOrderDays());
+            preparedStatement.setString(3, automaticOrder.getProvider().getProviderID());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
@@ -150,7 +148,21 @@ public class OrdersDAL {
         }
         return null;
     }
+    public static List<SingleProviderOrder> getOrdersToSupply(LocalDate localDate){
+        String sql = "select * from SingleProviderOrder left join AutomaticOrder AO on SingleProviderOrder.OrderId = AO.OrderId and SingleProviderOrder.ProviderId = AO.ProviderId " +
+                "left join Provider P on SingleProviderOrder.ProviderId = P.ProviderId where P.NeedsTransport = 1;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            //preparedStatement.setString(1, localDate.toString());
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
 
+    }
     public static List<SingleProviderOrder> getAutomaticOrders(){
         //here only because i want to get only the ones who have a matching record in the automatic orders table
         String sql = "select * from SingleProviderOrder join AutomaticOrder AO on SingleProviderOrder.OrderId = AO.OrderId and SingleProviderOrder.ProviderId = AO.ProviderId;";

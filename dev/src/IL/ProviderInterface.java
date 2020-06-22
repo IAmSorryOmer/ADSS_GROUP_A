@@ -2,9 +2,9 @@ package IL;
 
 import Entities.CommunicationDetails;
 import Entities.Provider;
-import com.company.LogicLayer.AgreementController;
-import com.company.LogicLayer.CatalogItemController;
-import com.company.LogicLayer.ProviderController;
+import BL.AgreementController;
+import BL.CatalogItemController;
+import BL.ProviderController;
 
 import java.util.List;
 

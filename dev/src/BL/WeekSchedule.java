@@ -15,8 +15,8 @@ public class WeekSchedule {
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
         LocalDate localDate =  LocalDate.of(2020,6,21);
-        StoreController.current_date = localDate
-        mapper.saveCurrent_Date();
+        //StoreController.current_date = localDate
+        //mapper.saveCurrent_Date();
 
 //        LocalDate dt = LocalDate.now();
 //        dt.getDayOfMonth();
@@ -108,7 +108,7 @@ public class WeekSchedule {
         {
             days[i] = days[i+1];
         }
-        days[7] = new Day();
+        //days[7] = new Day();
     }
 
 }

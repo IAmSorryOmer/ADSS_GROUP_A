@@ -48,8 +48,8 @@ public class ProductDAL {
         }
     }
 
-    public static Product getProductById(String id, int storeNum){
-        if(mapper.containsKey(id) && mapper.get(id).getStoreNum() ==){
+    public static Product getProductById(String id){
+        if(mapper.containsKey(id)){
             return mapper.get(id);
         }
         else{
@@ -81,11 +81,10 @@ public class ProductDAL {
         }
         return null;
     }
-    public static List<Product> getDamagedProducts(int storeID){
-        String sql = "select * from Product where IsDamaged = 1 and storeId = ?;";
+    public static List<Product> getDamagedProducts(){
+        String sql = "select * from Product where IsDamaged = 1;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, Integer.toString(storeID));
             List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -109,10 +108,9 @@ public class ProductDAL {
     }
 
     public static List<Product> loadAllInStore(int storeID){
-        String sql = "select * from Product where storeId = ?;";
+        String sql = "select * from Product;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, Integer.toString(storeID));
             List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }

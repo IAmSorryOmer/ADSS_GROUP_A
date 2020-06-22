@@ -17,11 +17,10 @@ public class Employee {
     private boolean hasAssignedShifts;
 
 
-    public Employee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date)
-    {
+    public Employee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date) {
         capable_shifts = new String[7];
-        for (int i =0; i < 7; i++)
-            capable_shifts[i]="";
+        for (int i = 0; i < 7; i++)
+            capable_shifts[i] = "";
         capable_jobs = jobs;
         ID = id;
         this.name = name;
@@ -31,8 +30,8 @@ public class Employee {
         this.salary = salary;
         this.store_num = store_num;
     }
-    public Employee(DEmployee dEmployee)
-    {
+
+    public Employee(DEmployee dEmployee) {
         capable_jobs = dEmployee.getCapable_jobs();
         capable_shifts = dEmployee.getCapable_shifts();
         name = dEmployee.getName();
@@ -44,6 +43,7 @@ public class Employee {
         start_date = dEmployee.getStart_date();
         hasAssignedShifts = dEmployee.isHasAssignedShifts();
     }
+
     public String[] getJobs() {
         return capable_jobs;
     }
@@ -85,8 +85,7 @@ public class Employee {
     }
 
 
-    public void updateEmployee(String name, String bankAccount, int store_num, int salary, String employee_conditions)
-    {
+    public void updateEmployee(String name, String bankAccount, int store_num, int salary, String employee_conditions) {
 
         this.name = name;
         this.bankAccount = bankAccount;
@@ -104,10 +103,10 @@ public class Employee {
         hasAssignedShifts = true;
     }
 
-    public void setHasAssignedShifts(boolean b)
-    {
+    public void setHasAssignedShifts(boolean b) {
         hasAssignedShifts = b;
     }
+
     public String toString() {
 
         String result;
@@ -125,14 +124,14 @@ public class Employee {
     public boolean getHasAssignedShifts() {
         return hasAssignedShifts;
     }
-}
 
 
-    public boolean isStorage(){
-        for(int i=0;i<capable_jobs.length;++i){
-            if(capable_jobs[i].equals("Storage")){
+    public boolean isStorage() {
+        for (int i = 0; i < capable_jobs.length; ++i) {
+            if (capable_jobs[i].equals("Storage")) {
                 return true;
             }
         }
         return false;
     }
+}
