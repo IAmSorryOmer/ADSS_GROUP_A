@@ -1,7 +1,7 @@
 package BL;
 
-import com.company.Entities.AutomaticOrder;
-import com.company.Entities.SingleProviderOrder;
+import Entities.AutomaticOrder;
+import Entities.SingleProviderOrder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

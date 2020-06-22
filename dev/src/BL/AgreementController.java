@@ -1,10 +1,10 @@
 package BL;
 
-import com.company.DataAccessLayer.AgreementDAL;
-import com.company.Entities.Agreement;
-import com.company.Entities.CatalogItem;
-import com.company.Entities.Pair;
-import com.company.Entities.Provider;
+import DAL.AgreementDAL;
+import Entities.Agreement;
+import Entities.CatalogItem;
+import Entities.Pair;
+import Entities.Provider;
 
 import java.util.Map;
 

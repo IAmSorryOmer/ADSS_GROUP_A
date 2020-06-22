@@ -1,10 +1,8 @@
 package BL;
 
-import com.company.DataAccessLayer.CatalogItemDAL;
-import com.company.DataAccessLayer.ProviderDAL;
-import com.company.Entities.*;
+import DAL.ProviderDAL;
+import Entities.*;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class ProviderController {

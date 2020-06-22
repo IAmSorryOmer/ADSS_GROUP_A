@@ -1,13 +1,11 @@
 package BL;
 
-import com.company.DataAccessLayer.CatalogItemDAL;
-import com.company.Entities.Agreement;
-import com.company.Entities.CatalogItem;
-import com.company.Entities.CommunicationDetails;
-import com.company.Entities.Provider;
+import DAL.CatalogItemDAL;
+import Entities.Agreement;
+import Entities.CatalogItem;
+import Entities.CommunicationDetails;
+import Entities.Provider;
 
-import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 
 public class CommunicationDetailsController {

@@ -1,15 +1,9 @@
 package BL;
 
-import com.company.DataAccessLayer.CatalogItemDAL;
-import com.company.Entities.CatalogItem;
-import com.company.Entities.CommunicationDetails;
-import com.company.Entities.ProductDetails;
-import com.company.Entities.Provider;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import DAL.CatalogItemDAL;
+import Entities.CatalogItem;
+import Entities.ProductDetails;
+import Entities.Provider;
 
 public class CatalogItemController {
 

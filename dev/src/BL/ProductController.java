@@ -1,13 +1,10 @@
 package BL;
 
-import BL.Store;
-import com.company.DataAccessLayer.ProductDAL;
-import com.company.Entities.*;
-import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
+import DAL.ProductDAL;
+import Entities.*;
 
 import java.time.LocalDate;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ProductController {
 

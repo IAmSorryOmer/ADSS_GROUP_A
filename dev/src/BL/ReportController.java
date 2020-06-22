@@ -1,9 +1,7 @@
 package BL;
-import com.company.DataAccessLayer.ReportDAL;
-import com.company.Entities.*;
+import DAL.ReportDAL;
+import Entities.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class ReportController {

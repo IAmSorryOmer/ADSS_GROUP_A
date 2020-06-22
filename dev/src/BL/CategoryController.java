@@ -1,7 +1,7 @@
 package BL;
 
-import com.company.DataAccessLayer.CategoryDAL;
-import com.company.Entities.Category;
+import DAL.CategoryDAL;
+import Entities.Category;
 
 import java.util.ArrayList;
 import java.util.LinkedList;

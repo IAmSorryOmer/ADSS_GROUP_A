@@ -2,17 +2,63 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/Employee.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/StoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/WeekSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/WeekSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Mapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/EmployeeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/EmployeeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/ManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PL/CLI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/CLI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/AgreementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/AgreementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/CatalogItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CatalogItemController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/CommunicationDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CommunicationDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/DiscountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/OrderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/OrderTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ProviderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProviderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ReportController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLi (copy)" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLi.sqbpro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLiempty" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/AgreementDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CatalogItemDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CatalogItemDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CategoryDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CategoryDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/DBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/DBHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/DiscountDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/DiscountDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProductDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProductDetailsDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProviderDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProviderDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ReportDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ReportDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Agreement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/AutomaticOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/AutomaticOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/CatalogItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/CatalogItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/CommunicationDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/CommunicationDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Discount.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Discountable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Discountable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/ProductDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Reportable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Reportable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/SingleProviderOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/AgreementsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/AgreementsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CatalogItemsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/CatalogItemsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/CategoryInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/DiscountInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/OrdersInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/OrdersInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductDetailsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProviderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProviderInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ReportInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ReportInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/StorageTests.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/TestsMain.java" beforeDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,27 +72,18 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="D:/Employees" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -58,6 +95,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585037039812</updated>
+      <workItem from="1592822422377" duration="553000" />
     </task>
     <task id="LOCAL-00001" summary="Updated project structure">
       <created>1592666989004</created>
@@ -104,6 +142,9 @@
     <option name="localTasksCounter" value="7" />
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -114,6 +155,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated project structure" />

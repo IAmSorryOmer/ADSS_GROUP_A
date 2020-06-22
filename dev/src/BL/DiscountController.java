@@ -1,7 +1,7 @@
 package BL;
 
-import com.company.DataAccessLayer.DiscountDAL;
-import com.company.Entities.*;
+import DAL.DiscountDAL;
+import Entities.*;
 
 import java.time.LocalDate;
 import java.util.*;
