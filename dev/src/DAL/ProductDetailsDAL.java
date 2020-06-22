@@ -14,7 +14,7 @@ public class ProductDetailsDAL {
     public static HashMap<String, ProductDetails> mapper = new HashMap<>();
 
     public static void insertProductDetails(ProductDetails productDetails){
-        String sql = "INSERT INTO ProductDetails(Id, Name, Manufacturer, RetailPrice, MinQuantity, QuantityInShelves, QuantityInStorage, Category, daysToExpiration) VALUES (?,?,?,?,?,?,?,?,?);";
+        String sql = "INSERT INTO ProductDetails(Id, Name, Manufacturer, RetailPrice, MinQuantity, Category, daysToExpiration) VALUES (?,?,?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, productDetails.getId());
@@ -22,10 +22,8 @@ public class ProductDetailsDAL {
             preparedStatement.setString(3, productDetails.getManufacturer());
             preparedStatement.setDouble(4, productDetails.getRetailPrice());
             preparedStatement.setInt(5, productDetails.getMinimumQuantity());
-            preparedStatement.setInt(6, productDetails.getQuantityInShelves());
-            preparedStatement.setInt(7, productDetails.getQuantityInStorage());
-            preparedStatement.setString(8, productDetails.getCategory().getID());
-            preparedStatement.setInt(9, productDetails.getDaysToExpiration());
+            preparedStatement.setString(6, productDetails.getCategory().getID());
+            preparedStatement.setInt(7, productDetails.getDaysToExpiration());
             preparedStatement.executeUpdate();
             mapper.put(productDetails.getId(), productDetails);
         }
@@ -35,17 +33,15 @@ public class ProductDetailsDAL {
     }
 
     public static void editProductDetails(ProductDetails productDetails){
-        String sql = "update ProductDetails set Name = ?, Manufacturer = ?, RetailPrice = ?, MinQuantity = ?, QuantityInShelves = ?, QuantityInStorage = ?, daysToExpiration = ? where Id = ?";
+        String sql = "update ProductDetails set Name = ?, Manufacturer = ?, RetailPrice = ?, MinQuantity = ?, daysToExpiration = ? where Id = ?";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, productDetails.getName());
             preparedStatement.setString(2, productDetails.getManufacturer());
             preparedStatement.setDouble(3, productDetails.getRetailPrice());
             preparedStatement.setInt(4, productDetails.getMinimumQuantity());
-            preparedStatement.setInt(5, productDetails.getQuantityInShelves());
-            preparedStatement.setInt(6, productDetails.getQuantityInStorage());
-            preparedStatement.setInt(7, productDetails.getDaysToExpiration());
-            preparedStatement.setString(8, productDetails.getId());
+            preparedStatement.setInt(5, productDetails.getDaysToExpiration());
+            preparedStatement.setString(6, productDetails.getId());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
@@ -74,10 +70,13 @@ public class ProductDetailsDAL {
         return null;
     }
 
-    public static List<ProductDetails> getMissingProducts(){
-        String sql = "select * from ProductDetails where (ProductDetails.QuantityInShelves + ProductDetails.QuantityInStorage < ProductDetails.MinQuantity);";
+    public static List<ProductDetails> getStoreMissingProducts(int storeId){
+        String sql = "select ProductDetails.* from ProductDetails " +
+                "left join Product P on ProductDetails.Id = P.type and P.StoreId = ? and P.IsDamaged = 0 " +
+                "group by ProductDetails.Id having count(P.Id) < ProductDetails.MinQuantity;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
             List<ProductDetails> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -100,10 +99,13 @@ public class ProductDetailsDAL {
         }
         return null;
     }
-    public static List<ProductDetails> getProductDetailsInStock(){
-        String sql = "select * from ProductDetails where (QuantityInStorage > 0 or QuantityInShelves > 0);";
+    public static List<ProductDetails> getStoreProductDetailsInStock(int storeId){
+        String sql = "select ProductDetails.* from ProductDetails " +
+                "left join Product P on ProductDetails.Id = P.type and P.StoreId = ? and P.IsDamaged = 0 " +
+                "group by ProductDetails.Id having count(P.Id) > 0";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
             List<ProductDetails> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -111,6 +113,22 @@ public class ProductDetailsDAL {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public static int getStoreProductDetailsQuantity(int storeId, String productDetailsId){
+        String sql = "select count() as quantity from Product where StoreId = ? and type = ? and IsDamaged = 0;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
+            preparedStatement.setString(2, productDetailsId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt("quantity");
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return -1;
     }
 
     public static List<ProductDetails> loadAll(){
@@ -135,8 +153,6 @@ public class ProductDetailsDAL {
             String manufacturer = resultSet.getString("Manufacturer");
             double price = resultSet.getDouble("RetailPrice");
             int minQuantity = resultSet.getInt("MinQuantity");
-            int quantityInShelves = resultSet.getInt("QuantityInShelves");
-            int quantityInStorage = resultSet.getInt("QuantityInStorage");
             String categoryId = resultSet.getString("Category");
             int dayToExpire = resultSet.getInt("daysToExpiration");
             if(mapper.containsKey(id)){
@@ -144,7 +160,7 @@ public class ProductDetailsDAL {
             }
             else {
                 Category category = CategoryDAL.getCategoryById(categoryId);
-                ProductDetails productDetails = new ProductDetails(id, name, manufacturer, price, dayToExpire, category, quantityInStorage, quantityInShelves, minQuantity);
+                ProductDetails productDetails = new ProductDetails(id, name, manufacturer, price, dayToExpire, category, minQuantity);
                 mapper.put(productDetails.getId(), productDetails);
                 toReturn.add(productDetails);
             }

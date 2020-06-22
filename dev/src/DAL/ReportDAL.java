@@ -16,13 +16,14 @@ public class ReportDAL {
     public static HashMap<String, Report> mapper = new HashMap<>();
 
     public static void insertReport(Report report){
-        String sql = "INSERT INTO Report(ReportId, EmployeeID, Description, Type) VALUES (?,?,?,?);";
+        String sql = "INSERT INTO Report(ReportId, EmployeeID, Description, Type, StoreId) VALUES (?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, report.getReportId());
             preparedStatement.setString(2, report.getEmployeeId());
             preparedStatement.setString(3, report.getDescription());
             preparedStatement.setInt(4, report.getReportType().ordinal());
+            preparedStatement.setInt(5, report.getStoreId());
             preparedStatement.executeUpdate();
             mapper.put(report.getReportId(), report);
             for(Reportable reportable : report.getSubjects()){
@@ -61,23 +62,11 @@ public class ReportDAL {
     }
 
 
-    public static List<Report> loadAll(){
-        String sql = "select * from Report;";
+    public static List<Report> loadStoreAll(int storeId){
+        String sql = "select * from Report where StoreId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            List<Report> resultList = resultSetToCategory(preparedStatement.executeQuery());
-            return resultList;
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
-    public static List<Report> loadAllInStore(){
-        String sql = "select * from Report ;";//where storeId = ?;";
-        try {
-            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
             List<Report> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -91,6 +80,7 @@ public class ReportDAL {
         List<Report> toReturn = new LinkedList<>();
         while(resultSet.next()){
             String reportId = resultSet.getString("ReportId");
+            int storeId = resultSet.getInt("StoreId");
             String employeeId = resultSet.getString("EmployeeID");
             String description = resultSet.getString("Description");
             int type = resultSet.getInt("Type");
@@ -101,7 +91,7 @@ public class ReportDAL {
                 toReturn.add(toEdit);
             }
             else {
-                toEdit = new Report(typeEnum, reportId, employeeId, description, null);
+                toEdit = new Report(reportId, storeId, employeeId, description, null, typeEnum);
                 mapper.put(reportId, toEdit);
                 toReturn.add(toEdit);
                 addSubjectsToReport(toEdit);

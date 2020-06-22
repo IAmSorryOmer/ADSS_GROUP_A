@@ -7,8 +7,6 @@ public class ProductDetails implements Discountable, Reportable {
     private double retailPrice;
     private int daysToExpiration;
     private Category category;
-    private int quantityInStorage;
-    private int quantityInShelves;
     private int minimumQuantity;
 
 
@@ -19,20 +17,6 @@ public class ProductDetails implements Discountable, Reportable {
         this.retailPrice = retailPrice;
         this.daysToExpiration = daysOfExpiration;
         this.category = category;
-        this.quantityInStorage = 0;
-        this.quantityInShelves = 0;
-        this.minimumQuantity = minimumQuantity;
-    }
-
-    public ProductDetails(String id, String name, String manufacturer, double retailPrice, int daysToExpiration, Category category, int quantityInStorage, int quantityInShelves, int minimumQuantity) {
-        this.id = id;
-        this.name = name;
-        this.manufacturer = manufacturer;
-        this.retailPrice = retailPrice;
-        this.daysToExpiration = daysToExpiration;
-        this.category = category;
-        this.quantityInStorage = quantityInStorage;
-        this.quantityInShelves = quantityInShelves;
         this.minimumQuantity = minimumQuantity;
     }
 
@@ -85,22 +69,6 @@ public class ProductDetails implements Discountable, Reportable {
         this.category = category;
     }
 
-    public int getQuantityInStorage() {
-        return quantityInStorage;
-    }
-
-    public void setQuantityInStorage(int quantityInStorage) {
-        this.quantityInStorage = quantityInStorage;
-    }
-
-    public int getQuantityInShelves() {
-        return quantityInShelves;
-    }
-
-    public void setQuantityInShelves(int quantityInShelves) {
-        this.quantityInShelves = quantityInShelves;
-    }
-
     public int getMinimumQuantity() {
         return minimumQuantity;
     }
@@ -116,7 +84,6 @@ public class ProductDetails implements Discountable, Reportable {
 
     @Override
     public String toString() {
-        return "Product type: " + name + ", Product type id: " + id + ", Product manufacturer: " + manufacturer +
-                "\nStorage Quantity: "  + quantityInStorage + ", Shelves Quantity: " + quantityInShelves;
+        return "Product type: " + name + ", Product type id: " + id + ", Product manufacturer: " + manufacturer;
     }
 }

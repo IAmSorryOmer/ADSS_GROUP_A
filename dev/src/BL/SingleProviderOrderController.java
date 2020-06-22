@@ -50,15 +50,15 @@ public class SingleProviderOrderController {
 	}*/
 
 	//methods
-	public  static void AddToOrder (String providerId, String orderId, String ItemID, int orderAmount) {
+	public  static void AddToOrder (String providerId, String orderId, int storeId, String ItemID, int orderAmount) {
 		if (orderAmount < 1)
 			throw new IllegalArgumentException("order amount must be positive");
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
 		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
-		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
-			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId) || singleProviderOrder.getStoreId() != storeId){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		//TODO what the meaning of this now?
 		ensureTimes(singleProviderOrder);
@@ -73,15 +73,15 @@ public class SingleProviderOrderController {
 		OrdersDAL.insertItemToOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
 		
-	public static void EditOrder (String providerId, String orderId, String ItemID, int orderAmount) {
+	public static void EditOrder (String providerId, String orderId, int storeId, String ItemID, int orderAmount) {
 		if (orderAmount < 1)
 			throw new IllegalArgumentException("order amount must be positive");
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
 		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
-		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
-			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId) || singleProviderOrder.getStoreId() != storeId){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		ensureTimes(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
@@ -95,13 +95,13 @@ public class SingleProviderOrderController {
 		OrdersDAL.editItemOnOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
 		
-	public static void RemoveFromOrder (String providerId, String orderId, String ItemID) {
+	public static void RemoveFromOrder (String providerId, String orderId, int storeId, String ItemID) {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
 		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
-		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
-			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId) || singleProviderOrder.getStoreId() != storeId){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		ensureTimes(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
@@ -158,13 +158,13 @@ public class SingleProviderOrderController {
 		return sum;
 	}
 
-	public static String printOrder(String providerId, String orderId) {
+	public static String printOrder(String providerId, String orderId, int storeId) {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
 		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
-		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
-			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId) || singleProviderOrder.getStoreId() != storeId){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		StringBuilder toReturn = new StringBuilder();
 		toReturn.append(singleProviderOrder.toString());
@@ -179,34 +179,42 @@ public class SingleProviderOrderController {
 		return toReturn.toString();
 	}
 
-	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder){
+	public static void autoOrderListOfProductsInStore(int storeId, List<ProductDetails> productDetailsToOrder){
 		HashMap<Provider, SingleProviderOrder> orders = new HashMap<>();
 		for(ProductDetails productDetails : productDetailsToOrder){
-			int amountToOrder = (productDetails.getMinimumQuantity() - productDetails.getQuantityInStorage() - productDetails.getQuantityInShelves()) + 10;
+			int amountToOrder = (productDetails.getMinimumQuantity() - ProductDetailsController.getProductDetailsQuantityInStore(storeId, productDetails.getId())) + 10;
+			if(amountToOrder <= 0){
+				continue;
+			}
 			Pair<Provider, CatalogItem> minProviderPair = ProviderController.getBestProviderForProduct(productDetails, amountToOrder);
 			if(minProviderPair.getFirst() == null){
 				//TODO there is no provider which provides the item. maybe print something
 			}
 			else{
 				if(!orders.containsKey(minProviderPair.getFirst())){
-					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), LocalDate.now(), 0);
-					createWithProviderObj(orderToAdd, minProviderPair.getFirst());
+					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), storeId, UUID.randomUUID().toString(), LocalDate.now(), 0);
 					orders.put(minProviderPair.getFirst(), orderToAdd);
 				}
 				orders.get(minProviderPair.getFirst()).addToItemList(minProviderPair.getSecond(), amountToOrder);
 			}
 		}
+		for(Map.Entry<Provider, SingleProviderOrder> entry : orders.entrySet()){
+			SingleProviderOrderController.createWithProviderObj(entry.getValue(), entry.getKey());
+		}
 	}
-	public static List<SingleProviderOrder> getAllOrdersOfProvider(String providerId){
+	public static List<SingleProviderOrder> getAllStoreOrdersOfProvider(int storeId, String providerId){
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		return OrdersDAL.getOrdersOfProvider(providerId);
+		return OrdersDAL.getStoreOrdersOfProvider(storeId, providerId);
 	}
-	public static List<SingleProviderOrder> getAllOrders(){
-		return OrdersDAL.loadAll();
+	public static List<SingleProviderOrder> getAllAutomaticOrdersToSupply(LocalDate date){
+		return OrdersDAL.getOrdersToSupply(date);
 	}
-	public static List<SingleProviderOrder> getAllAutomaticsOrders(){
-		return OrdersDAL.getAutomaticOrders();
+	public static List<SingleProviderOrder> getAllStoreOrders(int storeId){
+		return OrdersDAL.getOrdersOfStore(storeId);
+	}
+	public static List<SingleProviderOrder> getAllStoreAutomaticsOrders(int storeId){
+		return OrdersDAL.getAutomaticOrdersOfStore(storeId);
 	}
 }

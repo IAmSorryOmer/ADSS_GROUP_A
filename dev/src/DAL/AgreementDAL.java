@@ -72,7 +72,7 @@ public class AgreementDAL {
             String catalogNum = resultSet.getString("itemId");
             int minAmount = resultSet.getInt("minAmount");
             double discount = resultSet.getDouble("discount");
-            CatalogItem catalogItem = CatalogItemDAL.getCatalogItemByIdAndProvider(providerId, catalogNum);
+            CatalogItem catalogItem = CatalogItemDAL.getCatalogItemById(catalogNum);
             Provider provider = ProviderDAL.getProviderById(providerId);
             if(!provider.getCommunicationDetails().isAgreement()) {
                 Agreement agreement = new Agreement(providerId);

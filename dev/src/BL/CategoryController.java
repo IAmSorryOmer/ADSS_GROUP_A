@@ -13,9 +13,9 @@ public class CategoryController {
     private static List<Category> mainCategories = new LinkedList<>();
     private static boolean updated = false;
 
-    public static void addCategory(Category category, String superCatId) throws Exception {
+    public static void addCategory(Category category, String superCatId) {
         if (getCategoryByID(category.getId()) != null){
-            throw new Exception("A category with id " + category.getID() + " already exists");
+            throw new IllegalArgumentException("A category with id " + category.getID() + " already exists");
         }
         if(superCatId == null){
             //if not updated then it will be overwritten so no point in add
@@ -26,7 +26,7 @@ public class CategoryController {
         else{
             Category supCat = getCategoryByID(superCatId);
             if(supCat == null){
-                throw new Exception("there isnt category with the provided id");
+                throw new IllegalArgumentException("there isnt category with the provided id");
             }
             else{
                 if(supCat.isUpdated())
