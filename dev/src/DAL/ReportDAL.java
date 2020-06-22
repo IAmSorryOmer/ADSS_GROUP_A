@@ -75,7 +75,7 @@ public class ReportDAL {
     }
 
     public static List<Report> loadAllInStore(){
-        String sql = "select * from Report where storeId = ?;";
+        String sql = "select * from Report ;";//where storeId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             List<Report> resultList = resultSetToCategory(preparedStatement.executeQuery());

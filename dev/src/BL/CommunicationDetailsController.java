@@ -38,18 +38,11 @@ public class CommunicationDetailsController {
 		return output;
 	}
 
-	public static CatalogItem getItemByID (CommunicationDetails commDetails, String CatalogItemID) {
-		return CatalogItemDAL.getCatalogItemByIdAndProvider(commDetails.getProvider().getProviderID(), CatalogItemID);
+	public static CatalogItem getProviderItemByProductDetails(CommunicationDetails commDetails, String productDetailsId){
+		return CatalogItemDAL.getProviderCatalogItemByProductDetail(commDetails.getProvider().getProviderID(), productDetailsId);
 	}
 
-	public static CatalogItem getItemByProductDetails(CommunicationDetails commDetails, String productDetailsId){
-		return CatalogItemDAL.getCatalogItemByProductDetail(commDetails.getProvider().getProviderID(), productDetailsId);
-	}
-	
 	public static void addCatalogItem (CommunicationDetails commDetails, CatalogItem catalogItem) {
-		if(getItemByID(commDetails, catalogItem.getCatalogNum()) != null){
-			throw new IllegalArgumentException("there is already an item with number " + catalogItem.getCatalogNum() + " for provider number " + commDetails.getProvider().getProviderID());
-		}
 		if(commDetails.isUpdated()) {
 			//if not updated then in the next access everything will be overwritten so that pointless
 			commDetails.getCatalogItems().add(catalogItem);
