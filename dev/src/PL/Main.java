@@ -504,7 +504,7 @@ public class Main {
         String providerId = selectProvider(message);
         while(true) {
             System.out.println("Please select an option to perform on orders of the selected provider: ");
-            String[] options = new String[]{"add order", "add automatic order", "manage order items", "print all orders of provider", "print expanded order(with items)", "select another provider to manage", "return to order manage menu"};
+            String[] options = new String[]{"add order(regular or automatic)", "manage order items", "print all orders of provider", "print expanded order(with items)", "select another provider to manage", "return to order manage menu"};
             printOptions(options);
             int option = Integer.parseInt(reader.nextLine());
             try {
@@ -513,24 +513,21 @@ public class Main {
                         addOrderFromUser(providerId);
                         break;
                     case 2:
-                        addAutomaticOrderFromUser(providerId);
-                        break;
-                    case 3:
                         manageOrderItemsMenu(providerId);
                         break;
-                    case 4:
+                    case 3:
                         printNumberedList(OrdersInterface.getAllProviderOrders(providerId));
                         break;
-                    case 5:
+                    case 4:
                         printSpecificOrder(providerId);
                         break;
-                    case 6:
+                    case 5:
                         providerId = selectProvider(message);
                         break;
-                    case 7:
+                    case 6:
                         return;
                     default:
-                        System.out.println("choose an option between 1 to 7");
+                        System.out.println("choose an option between 1 to 6");
                 }
             } catch (Exception e) {
                 System.out.println("error. " + e.getMessage());
@@ -541,40 +538,30 @@ public class Main {
     private static void addOrderFromUser(String providerId){
         System.out.println("please insert the order id: ");
         String orderId = reader.nextLine();
-        System.out.println("please insert the order date(format like YYYY-MM-DD): ");
-        String orderDateStr = reader.nextLine();
-        LocalDate orderDate = LocalDate.parse(orderDateStr, DateTimeFormatter.ISO_LOCAL_DATE);
-        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, orderId, orderDate);
+        System.out.println("is this an automatic order?(y for yes else for no)");
+        int orderDays = 0;
+        Boolean answer = reader.nextLine().equals("y");
+        if(answer){
+            System.out.println("please insert the order days(when to auto create the order) as binary string.\nfor example if an order is to be sent every thursday, insert 0000100):");
+            while (orderDays == 0) {
+                String orderDaysString = reader.nextLine();
+                if (orderDaysString.length() != 7) {
+                    System.out.println("the string size should be seven(a digit for each day)");
+                    continue;
+                }
+                try {
+                    orderDays = Integer.parseInt(orderDaysString, 2);
+                    if(orderDays == 0 ){
+                        System.out.println("you cant add order which never get ordered. please select at least one day");
+                    }
+                } catch (Exception e) {
+                    System.out.println("you inserted invalid binary string. try again:");
+                }
+            }
+        }
+        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, orderId, answer ? null:LocalDate.now(), orderDays);
         try {
             OrdersInterface.SingleProviderOrderCreator(singleProviderOrder, providerId);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
-    }
-    private static void addAutomaticOrderFromUser(String providerId){
-        System.out.println("please insert the order id: ");
-        String orderId = reader.nextLine();
-        int orderDays = -1;
-        System.out.println("please insert the order days(when to auto create the order) as binary string.\nfor example if an order is to be sent every thursday, insert 0000100):");
-        while (orderDays == -1) {
-            String orderDaysString = reader.nextLine();
-            if (orderDaysString.length() != 7) {
-                System.out.println("the string size should be seven(a digit for each day)");
-                continue;
-            }
-            try {
-                orderDays = Integer.parseInt(orderDaysString, 2);
-                if(orderDays == 0 ){
-                    System.out.println("you cant add order which never get ordered. please select at least one day");
-                    orderDays = -1;
-                }
-            } catch (Exception e) {
-                System.out.println("you inserted invalid binary string. try again:");
-            }
-        }
-        AutomaticOrder automaticOrder = new AutomaticOrder(null, orderId, orderDays);
-        try {
-            OrdersInterface.SingleProviderOrderCreator(automaticOrder, providerId);
         } catch (Exception e) {
             System.out.println("error. " + e.getMessage());
         }

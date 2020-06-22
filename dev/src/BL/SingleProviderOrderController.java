@@ -20,31 +20,21 @@ public class SingleProviderOrderController {
 	}
 
 	public static void createWithProviderObj(SingleProviderOrder singleProviderOrder, Provider provider){
-		if(getOrderByIdAndProvider(singleProviderOrder.getOrderID(), provider) != null){
-			throw new IllegalArgumentException("there is already order with id " + singleProviderOrder.getOrderID() + " for provider with id "+provider.getProviderID());
+		if(getOrderById(singleProviderOrder.getOrderID()) != null){
+			throw new IllegalArgumentException("there is already order with id " + singleProviderOrder.getOrderID());
 		}
 		singleProviderOrder.setProvider(provider);
 		OrdersDAL.insertOrder(singleProviderOrder);
-		if(singleProviderOrder instanceof AutomaticOrder){
-			handleAutomaticOrder((AutomaticOrder)singleProviderOrder, provider);
+		if(singleProviderOrder.isAutomatic()){
+			handleAutomaticOrder(singleProviderOrder);
 		}
 	}
 
-	private static void handleAutomaticOrder(AutomaticOrder automaticOrder, Provider provider){
-		for(int i = 0;i<7;i++){
-			if(automaticOrder.isComingAtDay(i) && !provider.isWorkingAtDay(i)){
-				throw new IllegalArgumentException("the provider not coming at one of the selected order days");
-			}
-		}
-		LocalDate nextDate = getNextAutoOrderDate(automaticOrder);
-		long time = LocalDateTime.now().until(nextDate.atStartOfDay(), ChronoUnit.SECONDS);//TODO change to millis
-		Timer timer = new Timer();
-		System.out.println("scheduling order to " + LocalDateTime.now().plus(time, ChronoUnit.SECONDS).toString());
-		timer.schedule(new OrderTask(automaticOrder), time*1000);
-		OrdersDAL.insertAutomaticOrder(automaticOrder);
+	private static void handleAutomaticOrder(SingleProviderOrder automaticOrder){
+		//TODO insert here automatic order logic
 	}
 
-	public static LocalDate getNextAutoOrderDate(AutomaticOrder automaticOrder){
+	/*public static LocalDate getNextAutoOrderDate(AutomaticOrder automaticOrder){
 		LocalDate minDate = null;
 		for(int i = 0; i < 7 ;i++){
 			if(automaticOrder.isComingAtDay(i)){
@@ -56,7 +46,7 @@ public class SingleProviderOrderController {
 			}
 		}
 		return minDate;
-	}
+	}*/
 
 	//methods
 	public  static void AddToOrder (String providerId, String orderId, String ItemID, int orderAmount) {
@@ -65,13 +55,14 @@ public class SingleProviderOrderController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		SingleProviderOrder singleProviderOrder = getOrderByIdAndProvider(orderId, provider);
-		if(singleProviderOrder == null){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
 		}
+		//TODO what the meaning of this now?
 		ensureTimes(singleProviderOrder);
-		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(provider, ItemID);
-		if(catalogItem == null){
+		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
+		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
 		}
 		else if(singleProviderOrder.isItemExist(catalogItem)){
@@ -87,13 +78,13 @@ public class SingleProviderOrderController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		SingleProviderOrder singleProviderOrder = getOrderByIdAndProvider(orderId, provider);
-		if(singleProviderOrder == null){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
 		}
 		ensureTimes(singleProviderOrder);
-		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(provider, ItemID);
-		if(catalogItem == null){
+		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
+		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
 		}
 		else if(!singleProviderOrder.isItemExist(catalogItem)){
@@ -107,13 +98,13 @@ public class SingleProviderOrderController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		SingleProviderOrder singleProviderOrder = getOrderByIdAndProvider(orderId, provider);
-		if(singleProviderOrder == null){
-			throw new IllegalArgumentException("there is no order with id " + singleProviderOrder.getOrderID() + " for provider with id "+provider.getProviderID());
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
 		}
 		ensureTimes(singleProviderOrder);
-		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(provider, ItemID);
-		if(catalogItem == null){
+		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
+		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
 		}
 		else if(!singleProviderOrder.isItemExist(catalogItem)){
@@ -123,16 +114,17 @@ public class SingleProviderOrderController {
 		OrdersDAL.removeItemFromOrder(singleProviderOrder, catalogItem);
 	}
 	private static void ensureTimes(SingleProviderOrder singleProviderOrder){
-		if(singleProviderOrder instanceof AutomaticOrder){
-			LocalDate nextDate = getNextAutoOrderDate((AutomaticOrder)singleProviderOrder);
+		if(singleProviderOrder.isAutomatic()){
+			//TODO replace logic here
+			LocalDate nextDate = null; //TODO here need to decide when is the next date. getNextAutoOrderDate((AutomaticOrder)singleProviderOrder);
 			long hoursUntil = LocalDateTime.now().until(nextDate, ChronoUnit.HOURS);
 			if(hoursUntil <= 24){
 				throw new IllegalArgumentException("you cant edit automatic order less than a day before order");
 			}
 		}
 	}
-	public static SingleProviderOrder getOrderByIdAndProvider(String id, Provider provider){
-		return OrdersDAL.getOrderById(id, provider.getProviderID());
+	public static SingleProviderOrder getOrderById(String id){
+		return OrdersDAL.getOrderById(id);
 	}
 
 	public static double calcItemCategoryPrice (Provider provider, CatalogItem catalogItem, int amountOrdered) {
@@ -169,9 +161,9 @@ public class SingleProviderOrderController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		SingleProviderOrder singleProviderOrder = getOrderByIdAndProvider(orderId, provider);
-		if(singleProviderOrder == null){
-			throw new IllegalArgumentException("there is no order with id " + singleProviderOrder.getOrderID() + " for provider with id "+provider.getProviderID());
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId)){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID());
 		}
 		StringBuilder toReturn = new StringBuilder();
 		toReturn.append(singleProviderOrder.toString());
@@ -196,7 +188,7 @@ public class SingleProviderOrderController {
 			}
 			else{
 				if(!orders.containsKey(minProviderPair.getFirst())){
-					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), LocalDate.now());
+					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), LocalDate.now(), 0);
 					createWithProviderObj(orderToAdd, minProviderPair.getFirst());
 					orders.put(minProviderPair.getFirst(), orderToAdd);
 				}

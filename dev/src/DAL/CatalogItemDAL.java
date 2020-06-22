@@ -10,7 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class CatalogItemDAL {
-    private static HashMap<Pair<String, String>, CatalogItem> mapper = new HashMap<>();
+    private static HashMap<String, CatalogItem> mapper = new HashMap<>();
 
     public static void insertItem(CatalogItem catalogItem){
         String sql = "INSERT INTO CatalogItem(CatalogNum, ProviderId, Price, ProductDetailsId) values (?,?,?,?);";
@@ -21,19 +21,18 @@ public class CatalogItemDAL {
             preparedStatement.setDouble(3, catalogItem.getPrice());
             preparedStatement.setString(4, catalogItem.getProductDetails().getId());
             preparedStatement.executeUpdate();
-            mapper.put(new Pair<>(catalogItem.getProviderID(), catalogItem.getCatalogNum()), catalogItem);
+            mapper.put(catalogItem.getCatalogNum(), catalogItem);
         }
         catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
     public static void editItem(CatalogItem catalogItem){
-        String sql = "update CatalogItem set Price = ? where ProviderId = ? and CatalogNum = ?;";
+        String sql = "update CatalogItem set Price = ? where CatalogNum = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setDouble(1, catalogItem.getPrice());
-            preparedStatement.setString(2, catalogItem.getProviderID());
-            preparedStatement.setString(3, catalogItem.getCatalogNum());
+            preparedStatement.setString(2, catalogItem.getCatalogNum());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
@@ -41,17 +40,15 @@ public class CatalogItemDAL {
         }
     }
 
-    public static CatalogItem getCatalogItemByIdAndProvider(String providerId, String catalogNum){
-        Pair key = new Pair(providerId, catalogNum);
-        if(mapper.containsKey(key)){
-            return mapper.get(key);
+    public static CatalogItem getCatalogItemById(String catalogNum){
+        if(mapper.containsKey(catalogNum)){
+            return mapper.get(catalogNum);
         }
         else {
-            String sql = "SELECT * FROM CatalogItem where ProviderId = ? and CatalogNum = ?;";
+            String sql = "SELECT * FROM CatalogItem where CatalogNum = ?;";
             try {
                 PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-                preparedStatement.setString(1, providerId);
-                preparedStatement.setString(2, catalogNum);
+                preparedStatement.setString(1, catalogNum);
                 List<CatalogItem> toReturn = resultSetToItems(preparedStatement.executeQuery());
                 if (toReturn.size() == 0)
                     return null;
@@ -63,7 +60,7 @@ public class CatalogItemDAL {
         return null;
     }
 
-    public static CatalogItem getCatalogItemByProductDetail(String providerId, String productDetailsId){
+    public static CatalogItem getProviderCatalogItemByProductDetail(String providerId, String productDetailsId){
         String sql = "SELECT * FROM CatalogItem where ProviderId = ? and ProductDetailsId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
@@ -100,13 +97,12 @@ public class CatalogItemDAL {
             double price = resultSet.getDouble("Price");
             String productDetailsId = resultSet.getString("ProductDetailsId");
             ProductDetails productDetails = ProductDetailsDAL.getProductDetailsById(productDetailsId);
-            Pair key = new Pair(providerId, catalogNum);
-            if(mapper.containsKey(key)){
-                toReturn.add(mapper.get(key));
+            if(mapper.containsKey(catalogNum)){
+                toReturn.add(mapper.get(catalogNum));
             }
             else {
                 CatalogItem catalogItem = new CatalogItem(providerId, catalogNum, price, productDetails);
-                mapper.put(key, catalogItem);
+                mapper.put(catalogNum, catalogItem);
                 toReturn.add(catalogItem);
             }
         }

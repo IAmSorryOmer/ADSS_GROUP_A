@@ -13,21 +13,25 @@ public class SingleProviderOrder{
 	private Provider provider;
 	private Map<CatalogItem, Integer> orderItems; //catalog item - amount of item - total price
 	private LocalDate orderDate;
+	private int orderDays;
 
 	
 	//consructors
-	public SingleProviderOrder (Provider provider, String orderId, LocalDate orderDate) {
+	public SingleProviderOrder (Provider provider, String orderId, LocalDate orderDate, int orderDays) {
 		this.orderID = orderId;
 		this.provider = provider;
 		this.orderItems = new HashMap<CatalogItem, Integer>();
 		this.orderDate = orderDate;
+		this.orderDays = orderDays;
 	}
 
+	//constructor for regular order with prepared items
 	public SingleProviderOrder(String orderID, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
 		this.orderID = orderID;
 		this.provider = provider;
 		this.orderItems = orderItems;
 		this.orderDate = orderDate;
+		this.orderDays = 0;
 	}
 
 	//getters  & setters
@@ -80,11 +84,42 @@ public class SingleProviderOrder{
 		this.orderDate = orderDate;
 	}
 
+	public void setOrderDays(int orderDays) {
+		this.orderDays = orderDays;
+	}
+	public int getOrderDays(){
+		return  this.orderDays;
+	}
+
+	public boolean isAutomatic(){
+		return  this.orderDays != 0;
+	}
+
+	public boolean isComingAtDay(int day){
+		return (orderDays & (1 << day)) != 0;
+	}
+	public String stringifyArrivalDays(){
+		String arr[] = new String[]{"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
+		String result = "";
+		for(int i = 0; i< 7;i++){
+			if(isComingAtDay(i))
+				result += arr[i] + ", ";
+		}
+		if(result.length() != 0)
+			result = result.substring(0,result.length()-2);
+		return result;
+	}
+
+	@Override
 	public String toString() {
-		StringBuilder toReturn = new StringBuilder();
-		toReturn.append("Provider name: ").append(provider.getName()).append(", Provider Id: ").append(provider.getProviderID()).
-				append(".\nProvider address: ").append(provider.getCommunicationDetails().getAddress()).append(", Order Date: ").append(orderDate)
+		StringBuilder stringBuilder = new StringBuilder();
+		if(isAutomatic()){
+			stringBuilder.append("automatic order. come at days: ").append(stringifyArrivalDays())
+					.append(", order details: ").append("\n");
+		}
+		stringBuilder.append("Provider name: ").append(provider.getName()).append(", Provider Id: ").append(provider.getProviderID()).
+				append(".\nProvider address: ").append(provider.getCommunicationDetails().getAddress())
 				.append(".\n").append("Order ID: ").append(orderID).append(", contact phone: ").append(provider.getCommunicationDetails().getPhoneNum()).append(".\n");
-		return toReturn.toString();
+		return stringBuilder.toString();
 	}
 }

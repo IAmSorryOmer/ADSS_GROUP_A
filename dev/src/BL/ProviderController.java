@@ -54,8 +54,8 @@ public class ProviderController {
 		if(productDetails == null){
 			throw new IllegalArgumentException("there is no product details with id " + productDetailsId + ".");
 		}
+		CatalogItemController.CatalogItemCreator(catalogItem, productDetails);
 		CommunicationDetailsController.addCatalogItem(provider.getCommunicationDetails(), catalogItem);
-		CatalogItemController.CatalogItemCreator(provider, catalogItem, productDetails);
 	}
 
 	public static void editCatalogItem (String providerId, String catalogItemId, double price) {
@@ -119,7 +119,7 @@ public class ProviderController {
 		double minPrice = 0;
 		List<Provider> providerList = ProviderDAL.loadAll();//must first load all providers
 		for(Provider provider : providerList){
-			CatalogItem providerItem = CommunicationDetailsController.getItemByProductDetails(provider.getCommunicationDetails(), productDetails.getId());
+			CatalogItem providerItem = CommunicationDetailsController.getProviderItemByProductDetails(provider.getCommunicationDetails(), productDetails.getId());
 			if(providerItem != null){
 				double providerPrice = SingleProviderOrderController.calcItemCategoryPrice(provider, providerItem, amount);
 				if(minProvider == null || providerPrice < minPrice){
