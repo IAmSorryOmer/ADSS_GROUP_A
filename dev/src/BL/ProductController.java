@@ -9,7 +9,7 @@ import java.util.*;
 
 public class ProductController {
 
-    public static void addProduct(Product product, String typeId) throws Exception{
+    public static void addProduct(Product product, String typeId){
         ProductDetails productDetails = ProductDetailsController.getProductDetailsById(typeId);
         if(productDetails == null){
             throw new IllegalArgumentException("there is no type with that id");
@@ -23,66 +23,48 @@ public class ProductController {
         }
         product.setType(productDetails);
         product.setExpirationDate(LocalDate.now().plusDays(productDetails.getDaysToExpiration()));
-        ProductDetailsController.updateQuantity(product.getType(), 1, product.isInStorage());
         ProductDAL.insertProduct(product);
     }
 
     public static Product getProductById(String Id) {
-        return getProductById(Id);
+        return ProductDAL.getProductById(Id);
     }
 
-    public static List<Product> getProductsByType(String id) throws Exception{
+    public static List<Product> getStoreProductsByType(String id, int storeId){
         ProductDetails productDetails = ProductDetailsController.getProductDetailsById(id);
         if(productDetails == null){
             throw new IllegalArgumentException("there is no type with that id");
         }
-        return ProductDAL.getProductByType(id);
+        return ProductDAL.getStoreProductsByType(id, storeId);
     }
 
-    public static void moveProduct(String id, String newLocation, boolean isInStorage) throws IllegalArgumentException{
+    public static void moveProduct(String id, int storeId, String newLocation, boolean isInStorage) throws IllegalArgumentException{
         Product product = getProductById(id);
-        if(product == null){
-            throw new IllegalArgumentException("there is no product with that id");
-        }
-        boolean isLocationChanged = product.isInStorage() ^ isInStorage;
-        if (isLocationChanged){
-            if (product.isInStorage()){
-                ProductDetailsController.updateQuantity(product.getType(), 1, false);
-                ProductDetailsController.updateQuantity(product.getType(), -1, true);
-            }
-            else {
-                ProductDetailsController.updateQuantity(product.getType(), 1, true);
-                ProductDetailsController.updateQuantity(product.getType(), -1, false);
-            }
-            product.setInStorage(!product.isInStorage());
+        if(product == null || product.getStoreId() != storeId){
+            throw new IllegalArgumentException("there is no product with that id for store number " + storeId);
         }
         product.setLocation(newLocation);
+        product.setInStorage(isInStorage);
         ProductDAL.editProduct(product);
     }
 
-    public static List<Product> getAllDamaged() {
-        return ProductDAL.getDamagedProducts();
+    public static List<Product> getAllDamagedInStore(int storeId) {
+        return ProductDAL.getStoreDamagedProducts(storeId);
     }
 
     public static String GetProductsDetails(Product product){
         return product.toString() + "\nSupplier discounts: " + DiscountController.getDiscountableDiscounts(product.getType(), false);
     }
 
-    public static void markAsDamaged(String id) throws Exception{
+    public static void markAsDamaged(String id, int storeId){
         Product product = getProductById(id);
-        if(product == null){
-            throw new Exception("there is no product with this id");
+        if(product == null || product.getStoreId() != storeId){
+            throw new IllegalArgumentException("there is no product with this id");
         }
         if(product.isDamaged()){
             return;
         }
         product.setDamaged(true);
-        if (product.isInStorage()){
-            ProductDetailsController.updateQuantity(product.getType(), -1, true);
-        }
-        else {
-            ProductDetailsController.updateQuantity(product.getType(), -1, false);
-        }
         ProductDAL.editProduct(product);
     }
     /*public void handleOrder(SingleProviderOrder singleProviderOrder){
@@ -96,10 +78,7 @@ public class ProductController {
             }
         }
     }*/
-    public static List<Product> getAllProducts(){
-        return ProductDAL.loadAll();
-    }
-    public static List<Product> getAllProductsInStore(int storeNum){
-        return ProductDAL.loadAllInStore(storeNum);
+    public static List<Product> getAllStoreProducts(int storeId){
+        return ProductDAL.loadStoreAll(storeId);
     }
 }

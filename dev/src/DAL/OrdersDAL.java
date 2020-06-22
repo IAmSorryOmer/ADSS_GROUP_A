@@ -15,13 +15,14 @@ public class OrdersDAL {
     public static HashMap<String, SingleProviderOrder> mapper = new HashMap<>();
 
     public static void insertOrder(SingleProviderOrder singleProviderOrder){
-        String sql = "INSERT INTO SingleProviderOrder(OrderId, ProviderId, Date, OrderDays) VALUES (?,?,?,?)";
+        String sql = "INSERT INTO SingleProviderOrder(OrderId, ProviderId, Date, OrderDays, StoreId) VALUES (?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, singleProviderOrder.getOrderID());
             preparedStatement.setString(2, singleProviderOrder.getProvider().getProviderID());
             preparedStatement.setString(3, singleProviderOrder.getOrderDate() == null ? null : singleProviderOrder.getOrderDate().toString());
             preparedStatement.setInt(4, singleProviderOrder.getOrderDays());
+            preparedStatement.setInt(5, singleProviderOrder.getStoreId());
             preparedStatement.executeUpdate();
             mapper.put(singleProviderOrder.getOrderID(), singleProviderOrder);
             for(Map.Entry<CatalogItem, Integer> entry: singleProviderOrder.getOrderItems().entrySet()){
@@ -100,10 +101,11 @@ public class OrdersDAL {
     }
 
 
-    public static List<SingleProviderOrder> loadAll(){
-        String sql = "select * from SingleProviderOrder;";
+    public static List<SingleProviderOrder> getOrdersOfStore(int storeId){
+        String sql = "select * from SingleProviderOrder where SingleProviderOrder.StoreId =  ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
             List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
             return resultList;
         }
@@ -113,11 +115,27 @@ public class OrdersDAL {
         return null;
     }
 
-    public static List<SingleProviderOrder> getOrdersOfProvider(String providerId){
-        String sql = "select * from SingleProviderOrder where SingleProviderOrder.ProviderId =  ?;";
+    public static List<SingleProviderOrder> getAutomaticOrdersOfStore(int storeId){
+        //here only because i want to get only the ones who have a matching record in the automatic orders table
+        String sql = "select * from SingleProviderOrder where OrderDays != 0 and StoreId = ?;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
+    public static List<SingleProviderOrder> getStoreOrdersOfProvider(int storeId, String providerId){
+        String sql = "select * from SingleProviderOrder where SingleProviderOrder.ProviderId =  ? and SingleProviderOrder.StoreId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, providerId);
+            preparedStatement.setInt(2, storeId);
             List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
             return resultList;
         }
@@ -140,19 +158,6 @@ public class OrdersDAL {
         return null;
 
     }
-    public static List<SingleProviderOrder> getAutomaticOrders(){
-        //here only because i want to get only the ones who have a matching record in the automatic orders table
-        String sql = "select * from SingleProviderOrder where OrderDays != 0;";
-        try {
-            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
-            return resultList;
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
 
 
 
@@ -160,6 +165,7 @@ public class OrdersDAL {
         List<SingleProviderOrder> toReturn = new LinkedList<>();
         while(resultSet.next()){
             String orderId = resultSet.getString("OrderId");
+            int storeId = resultSet.getInt("StoreId");
             String providerId = resultSet.getString("ProviderId");
             String dateStr = resultSet.getString("Date");
             LocalDate date = dateStr == null ? null : LocalDate.parse(dateStr);
@@ -168,7 +174,7 @@ public class OrdersDAL {
                 toReturn.add(mapper.get(orderId));
             }
             else{
-                SingleProviderOrder singleProviderOrder = new SingleProviderOrder(ProviderDAL.getProviderById(providerId), orderId, date, orderDays);
+                SingleProviderOrder singleProviderOrder = new SingleProviderOrder(ProviderDAL.getProviderById(providerId), storeId, orderId, date, orderDays);
                 mapper.put(orderId, singleProviderOrder);
                 toReturn.add(singleProviderOrder);
                 addItemsToOrder(singleProviderOrder);
@@ -185,7 +191,7 @@ public class OrdersDAL {
             while (resultSet.next()){
                 String catalogNum = resultSet.getString("CatalogNumber");
                 int quantity = resultSet.getInt("Quantity");
-                CatalogItem catalogItem = CatalogItemDAL.getCatalogItemByIdAndProvider(singleProviderOrder.getProvider().getProviderID(), catalogNum);
+                CatalogItem catalogItem = CatalogItemDAL.getCatalogItemById(catalogNum);
                 singleProviderOrder.getOrderItems().put(catalogItem, quantity);
             }
         }

@@ -6,7 +6,7 @@ import BL.*;
 import java.util.List;
 
 public class ReportInterface {
-    public static void addInventoryReport(List<String> categoriesIds, Report report) throws Exception{
+    public static void addInventoryReport(List<String> categoriesIds, Report report){
         ReportController.addInventoryReport(categoriesIds, report);
     }
     public static void addDamagedReport(Report report){
@@ -21,10 +21,10 @@ public class ReportInterface {
         return ReportController.getReportById(Id);
     }
 
-    public static String stringifyReports(){
+    public static String stringifyStoreReports(int storeId){
         StringBuilder stringBuilder = new StringBuilder("Reports:\n");
 
-        for(Report report : ReportController.getAllReports()){
+        for(Report report : ReportController.getAllStoreReports(storeId)){
             stringBuilder.append("-").append(report.toString()).append("\n");
         }
         return stringBuilder.toString();

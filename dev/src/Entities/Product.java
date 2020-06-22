@@ -4,35 +4,29 @@ import java.time.LocalDate;
 
 public class Product implements Reportable {
 
-    private String location;
-    private String storeNum;
     private String id;
+    private int storeId;
+    private String location;
     private boolean isInStorage;
     private LocalDate expirationDate;
     private boolean isDamaged;
     private ProductDetails type;
 
 
-    public Product(String location, String id, boolean isInStorage, boolean isDamaged, ProductDetails type) {
-        this.location = location;
+    public Product(String id, int storeId, String location, boolean isInStorage, boolean isDamaged, ProductDetails type) {
         this.id = id;
+        this.storeId = storeId;
+        this.location = location;
         this.isInStorage = isInStorage;
         this.expirationDate = null;
         this.isDamaged = isDamaged;
         this.type = type;
     }
 
-    public String getStoreNum() {
-        return storeNum;
-    }
-
-    public void setStoreNum(String storeNum) {
-        this.storeNum = storeNum;
-    }
-
-    public Product(String location, String id, boolean isInStorage, LocalDate expirationDate, boolean isDamaged, ProductDetails type) {
-        this.location = location;
+    public Product(String id, int storeId, String location, boolean isInStorage, LocalDate expirationDate, boolean isDamaged, ProductDetails type) {
         this.id = id;
+        this.storeId = storeId;
+        this.location = location;
         this.isInStorage = isInStorage;
         this.expirationDate = expirationDate;
         this.isDamaged = isDamaged;
@@ -61,6 +55,14 @@ public class Product implements Reportable {
 
     public void setInStorage(boolean inStorage) {
         isInStorage = inStorage;
+    }
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
     public LocalDate getExpirationDate() {

@@ -6,7 +6,7 @@ import Entities.Category;
 import java.util.List;
 
 public class CategoryInterface {
-    public static void addCategory(Category category, String superCatId) throws Exception{
+    public static void addCategory(Category category, String superCatId){
         CategoryController.addCategory(category, superCatId);
     }
     public static List<Category> getCategoriesByName(String name){

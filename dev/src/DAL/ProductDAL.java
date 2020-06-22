@@ -15,7 +15,7 @@ public class ProductDAL {
     public static HashMap<String, Product> mapper = new HashMap<>();
 
     public static void insertProduct(Product product){
-        String sql = "INSERT INTO Product(Id, Location, IsInStorage, IsDamaged, ExpirationDate, type) values (?,?,?,?,?,?);";
+        String sql = "INSERT INTO Product(Id, Location, IsInStorage, IsDamaged, ExpirationDate, type, StoreId) values (?,?,?,?,?,?,?);";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, product.getId());
@@ -24,6 +24,7 @@ public class ProductDAL {
             preparedStatement.setInt(4, product.isDamaged() ? 1 : 0);
             preparedStatement.setString(5, product.getExpirationDate().toString());
             preparedStatement.setString(6, product.getType().getId());
+            preparedStatement.setInt(7, product.getStoreId());
             preparedStatement.executeUpdate();
             mapper.put(product.getId(), product);
         }
@@ -68,11 +69,12 @@ public class ProductDAL {
         }
         return null;
     }
-    public static List<Product> getProductByType(String typeId){
-        String sql = "select * from Product where type = ?;";
+    public static List<Product> getStoreProductsByType(String typeId, int storeId){
+        String sql = "select * from Product where type = ? and StoreId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, typeId);
+            preparedStatement.setInt(2, storeId);
             List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -81,23 +83,11 @@ public class ProductDAL {
         }
         return null;
     }
-    public static List<Product> getDamagedProducts(){
-        String sql = "select * from Product where IsDamaged = 1;";
+    public static List<Product> getStoreDamagedProducts(int storeId){
+        String sql = "select * from Product where IsDamaged = 1 and StoreId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
-            return resultList;
-        }
-        catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return null;
-    }
-
-    public static List<Product> loadAll(){
-        String sql = "select * from Product;";
-        try {
-            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
             List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -107,10 +97,11 @@ public class ProductDAL {
         return null;
     }
 
-    public static List<Product> loadAllInStore(int storeID){
-        String sql = "select * from Product;";
+    public static List<Product> loadStoreAll(int storeId){
+        String sql = "select * from Product where StoreId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
             List<Product> resultList = resultSetToCategory(preparedStatement.executeQuery());
             return resultList;
         }
@@ -124,6 +115,7 @@ public class ProductDAL {
         List<Product> toReturn = new LinkedList<>();
         while(resultSet.next()){
             String id = resultSet.getString("Id");
+            int storeId = resultSet.getInt("StoreId");
             String location = resultSet.getString("Location");
             boolean inStorage = resultSet.getInt("IsInStorage") == 1;
             boolean isDamaged = resultSet.getInt("IsDamaged") == 1;
@@ -134,7 +126,7 @@ public class ProductDAL {
             }
             else {
                 ProductDetails typeObj = ProductDetailsDAL.getProductDetailsById(productDetailsId);
-                Product product = new Product(location, id, inStorage, expireDate, isDamaged, typeObj);
+                Product product = new Product(id, storeId, location, inStorage, expireDate, isDamaged, typeObj);
                 mapper.put(product.getId(), product);
                 toReturn.add(product);
             }

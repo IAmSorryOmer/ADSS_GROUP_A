@@ -6,7 +6,7 @@ import BL.*;
 import java.util.List;
 
 public class ProductDetailsInterface {
-    public static void addProductDetails(ProductDetails productDetails, String catId) throws Exception {
+    public static void addProductDetails(ProductDetails productDetails, String catId) {
         ProductDetailsController.addProductDetails(productDetails, catId);
     }
 
@@ -14,11 +14,11 @@ public class ProductDetailsInterface {
         return ProductDetailsController.getProductDetailsById(id);
     }
 
-    public static List<ProductDetails> getAllMissing(){
-        return ProductDetailsController.getAllMissing();
+    public static List<ProductDetails> getAllMissingsOfStore(int storeId){
+        return ProductDetailsController.getAllStoreMissing(storeId);
     }
 
-    public static void changeMinimalQuantity(String id, int newQuantity) throws Exception{
+    public static void changeMinimalQuantity(String id, int newQuantity){
         ProductDetailsController.changeMinimalQuantity(id, newQuantity);
     }
 
@@ -26,8 +26,8 @@ public class ProductDetailsInterface {
         return ProductDetailsController.getProductDetailsByName(name);
     }
 
-    public static List<ProductDetails> getProductDetailsByStock(){
-        return ProductDetailsController.getProductDetailsByStock();
+    public static List<ProductDetails> getStoreProductDetailsByStock(int storeId){
+        return ProductDetailsController.getStoreProductDetailsByStock(storeId);
     }
 
     public static String GetProductsDetails(ProductDetails productDetails){

@@ -6,35 +6,31 @@ import BL.*;
 import java.util.List;
 
 public class ProductInterface {
-    public static void addProduct(Product product, String typeId) throws Exception {
+    public static void addProduct(Product product, String typeId){
         ProductController.addProduct(product, typeId);
     }
 
-    public static Product getProductById(String Id){
-        return ProductController.getProductById(Id);
+    public static List<Product> getStoreProductsByType(int storeId, String id){
+        return ProductController.getStoreProductsByType(id, storeId);
     }
-
-    public static List<Product> getProductsByType(String id) throws Exception{
-        return ProductController.getProductsByType(id);
+    public static void moveProduct(String id, int storeId, String newLocation, boolean isInStorage){
+        ProductController.moveProduct(id, storeId, newLocation, isInStorage);
     }
-    public static void moveProduct(String id, String newLocation, boolean isInStorage) throws IllegalArgumentException {
-        ProductController.moveProduct(id, newLocation, isInStorage);
-    }
-    public static List<Product> getAllDamaged() {
-        return ProductController.getAllDamaged();
+    public static List<Product> getAllDamagedOfStore(int storeId) {
+        return ProductController.getAllDamagedInStore(storeId);
     }
 
     public static String GetProductsDetails(Product product){
         return ProductController.GetProductsDetails(product);
     }
 
-    public static void markAsDamaged(String id) throws Exception{
-        ProductController.markAsDamaged(id);
+    public static void markAsDamaged(String id, int storeId){
+        ProductController.markAsDamaged(id, storeId);
     }
-    public static String stringifyProducts(){
+    public static String stringifyStoreProducts(int storeId){
         StringBuilder stringBuilder = new StringBuilder("Products:\n");
 
-        for(Product product : ProductController.getAllProducts()){
+        for(Product product : ProductController.getAllStoreProducts(storeId)){
             stringBuilder.append("-").append(product.toString()).append("\n");
         }
         return stringBuilder.toString();

@@ -9,7 +9,7 @@ public class SingleProviderOrder{
 	
 	//fields
 	private final String orderID;
-	//private final int storeID;
+	private int storeId;
 	private Provider provider;
 	private Map<CatalogItem, Integer> orderItems; //catalog item - amount of item - total price
 	private LocalDate orderDate;
@@ -17,8 +17,9 @@ public class SingleProviderOrder{
 
 	
 	//consructors
-	public SingleProviderOrder (Provider provider, String orderId, LocalDate orderDate, int orderDays) {
+	public SingleProviderOrder (Provider provider, int storeId, String orderId, LocalDate orderDate, int orderDays) {
 		this.orderID = orderId;
+		this.storeId = storeId;
 		this.provider = provider;
 		this.orderItems = new HashMap<CatalogItem, Integer>();
 		this.orderDate = orderDate;
@@ -26,8 +27,9 @@ public class SingleProviderOrder{
 	}
 
 	//constructor for regular order with prepared items
-	public SingleProviderOrder(String orderID, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
+	public SingleProviderOrder(String orderID, int storeId, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
 		this.orderID = orderID;
+		this.storeId = storeId;
 		this.provider = provider;
 		this.orderItems = orderItems;
 		this.orderDate = orderDate;
@@ -51,6 +53,13 @@ public class SingleProviderOrder{
 		return orderID;
 	}
 
+	public int getStoreId() {
+		return storeId;
+	}
+
+	public void setStoreId(int storeId) {
+		this.storeId = storeId;
+	}
 
 	public Provider getProvider() {
 		return provider;
@@ -117,7 +126,7 @@ public class SingleProviderOrder{
 			stringBuilder.append("automatic order. come at days: ").append(stringifyArrivalDays())
 					.append(", order details: ").append("\n");
 		}
-		stringBuilder.append("Provider name: ").append(provider.getName()).append(", Provider Id: ").append(provider.getProviderID()).
+		stringBuilder.append("store id: ").append(storeId).append(", Provider name: ").append(provider.getName()).append(", Provider Id: ").append(provider.getProviderID()).
 				append(".\nProvider address: ").append(provider.getCommunicationDetails().getAddress())
 				.append(".\n").append("Order ID: ").append(orderID).append(", contact phone: ").append(provider.getCommunicationDetails().getPhoneNum()).append(".\n");
 		return stringBuilder.toString();

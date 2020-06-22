@@ -1,28 +1,24 @@
 package Entities;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.XPath;
+
 import java.util.List;
 
 public class Report {
     public enum reportType{Damaged, Inventory, Missings}
-    private reportType reportType;
     private String reportId;
+    private int storeId;
     private String employeeId;
     private String description;
     private List<? extends Reportable> subjects;
+    private reportType reportType;
 
-    public Report(Report.reportType reportType, String reportId, String employeeId, String description, List<? extends Reportable> subjects) {
-        this.reportType = reportType;
+    public Report(String reportId, int storeId, String employeeId, String description, List<? extends Reportable> subjects, Report.reportType reportType) {
         this.reportId = reportId;
+        this.storeId = storeId;
         this.employeeId = employeeId;
         this.description = description;
         this.subjects = subjects;
-    }
-
-    public Report.reportType getReportType() {
-        return reportType;
-    }
-
-    public void setReportType(Report.reportType reportType) {
         this.reportType = reportType;
     }
 
@@ -32,6 +28,14 @@ public class Report {
 
     public void setReportId(String reportId) {
         this.reportId = reportId;
+    }
+
+    public int getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(int storeId) {
+        this.storeId = storeId;
     }
 
     public String getEmployeeId() {
@@ -56,6 +60,14 @@ public class Report {
 
     public void setSubjects(List<? extends Reportable> subjects) {
         this.subjects = subjects;
+    }
+
+    public Report.reportType getReportType() {
+        return reportType;
+    }
+
+    public void setReportType(Report.reportType reportType) {
+        this.reportType = reportType;
     }
 
     @Override

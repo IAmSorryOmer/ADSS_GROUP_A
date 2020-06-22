@@ -14,8 +14,8 @@ public class AgreementController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(provider, catalogItemId);
-		if(catalogItem == null)
+		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(catalogItemId);
+		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId))
 			throw new IllegalArgumentException("there is no catalog item with id " + catalogItemId + " for provider with id " + providerId);
 		if(minAmount < 0 || discount < 0){
 			throw new IllegalArgumentException("illegal arguments when adding item to agreement");
@@ -30,8 +30,8 @@ public class AgreementController {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(provider, catalogItemId);
-		if(catalogItem == null)
+		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(catalogItemId);
+		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId))
 			throw new IllegalArgumentException("there is no catalog item with id " + catalogItemId + " for provider with id " + providerId);
 		if((minAmount != null && minAmount < 0) || (discount != null && discount < 0)){
 			throw new IllegalArgumentException("illegal arguments when adding item to agreement");
@@ -44,14 +44,15 @@ public class AgreementController {
 		if(discount != null){
 			provider.getCommunicationDetails().getAgreement().setItemDiscountPercent(catalogItem, discount);
 		}
-		AgreementDAL.editItem(catalogItem, discount, minAmount);
+		Agreement agreement = provider.getCommunicationDetails().getAgreement();
+		AgreementDAL.editItem(catalogItem, agreement.getItemDiscountPercent(catalogItem), agreement.getItemQuantityForDiscount(catalogItem));
 	}
 	public static void removeItemByIds(String providerId, String catalogItemId){
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
 			throw new IllegalArgumentException("there is no provider with id " + providerId);
-		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(provider, catalogItemId);
-		if(catalogItem == null)
+		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(catalogItemId);
+		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId))
 			throw new IllegalArgumentException("there is no catalog item with id " + catalogItemId + " for provider with id " + providerId);
 		removeItem(provider, catalogItem);
 	}

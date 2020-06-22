@@ -1,18 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="changed a little the automatic order">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/CatalogItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CatalogItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/CommunicationDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CommunicationDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProviderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProviderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/AgreementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/AgreementController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/DiscountController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/OrderTask.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ReportController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/CatalogItemDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CatalogItemDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/ProductDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/ReportDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ReportDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/AutomaticOrder.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Product.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/ProductDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entities/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Report.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IL/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/CategoryInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IL/DiscountInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/DiscountInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IL/OrdersInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/OrdersInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IL/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductDetailsInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IL/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IL/ReportInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ReportInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PL/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +88,7 @@
       <updated>1585037039812</updated>
       <workItem from="1592822422377" duration="1588000" />
       <workItem from="1592824331548" duration="3122000" />
-      <workItem from="1592827467640" duration="9135000" />
+      <workItem from="1592827467640" duration="21555000" />
     </task>
     <task id="LOCAL-00001" summary="Updated project structure">
       <created>1592666989004</created>
@@ -140,7 +153,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592828710819</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="changed a little the automatic order">
+      <created>1592836631314</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1592836631314</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,7 +184,8 @@
     <MESSAGE value="Updated classes (product/report) 2" />
     <MESSAGE value="Moved controllers of stock+providers" />
     <MESSAGE value="unified project directories" />
-    <option name="LAST_COMMIT_MESSAGE" value="unified project directories" />
+    <MESSAGE value="changed a little the automatic order" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed a little the automatic order" />
   </component>
   <component name="WindowStateProjectService">
     <state x="387" y="33" width="1024" height="845" key="#Project_Structure" timestamp="1592827382821">
@@ -176,10 +197,11 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="418" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592827127364" />
-    <state x="488" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1592674200092">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="686" y="69" width="374" height="626" key="#com.intellij.ide.util.MemberChooser" timestamp="1592837436017">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="488" y="49" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592674200092" />
+    <state x="686" y="69" width="374" height="626" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1592837436017" />
     <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1592666810131">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -192,40 +214,40 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592828710760">
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592848925803">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592735590701" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592828710760" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592848925803" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="537" height="506" key="DebuggerActiveHint/0.0.1920.1032@0.0.1920.1032" timestamp="1592828508219" />
-    <state x="100" y="98" width="1720" height="834" key="DiffContextDialog" timestamp="1592831596473">
+    <state x="100" y="98" width="1720" height="834" key="DiffContextDialog" timestamp="1592836797174">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="100" y="98" width="1720" height="834" key="DiffContextDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831596473" />
+    <state x="100" y="98" width="1720" height="834" key="DiffContextDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592836797174" />
     <state x="582" y="225" width="735" height="484" key="FileChooserDialogImpl" timestamp="1592827571577">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="414" y="159" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592667491314" />
     <state x="582" y="225" width="735" height="484" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1592827571577" />
-    <state width="937" height="335" key="GridCell.Tab.0.bottom" timestamp="1592831323569">
+    <state width="635" height="271" key="GridCell.Tab.0.bottom" timestamp="1592848933576">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323569" />
-    <state width="937" height="335" key="GridCell.Tab.0.center" timestamp="1592831323569">
+    <state width="635" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592848933576" />
+    <state width="635" height="271" key="GridCell.Tab.0.center" timestamp="1592848933576">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323569" />
-    <state width="937" height="335" key="GridCell.Tab.0.left" timestamp="1592831323568">
+    <state width="635" height="271" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592848933576" />
+    <state width="635" height="271" key="GridCell.Tab.0.left" timestamp="1592848933575">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323568" />
-    <state width="937" height="335" key="GridCell.Tab.0.right" timestamp="1592831323569">
+    <state width="635" height="271" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592848933575" />
+    <state width="635" height="271" key="GridCell.Tab.0.right" timestamp="1592848933576">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="335" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323569" />
+    <state width="635" height="271" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592848933576" />
     <state width="937" height="335" key="GridCell.Tab.1.bottom" timestamp="1592831323570">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -251,19 +273,19 @@
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1592827689855" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592828717267">
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592836642142">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592735594368" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592828717267" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592836642142" />
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592831302840">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1/0.0.1920.1032@0.0.1920.1032" timestamp="1592831302840" />
-    <state x="792" y="361" width="769" height="374" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1592831425002">
+    <state x="792" y="361" width="769" height="374" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1592837861806">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="792" y="361" width="769" height="374" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831425002" />
+    <state x="792" y="361" width="769" height="374" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592837861806" />
     <state x="100" y="98" width="1720" height="834" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1592831596473">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

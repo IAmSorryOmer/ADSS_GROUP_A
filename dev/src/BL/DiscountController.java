@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 
 public class DiscountController {
 
-    public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds) throws Exception{
+    public static void addDiscount(Discount discount, List<String> productsIds, List<String> categoriesIds){
         if (getDiscountById(discount.getId()) != null){
-            throw new Exception("A discount with id " + discount.getId() + " already exists");
+            throw new IllegalArgumentException("A discount with id " + discount.getId() + " already exists");
         }
         DiscountDAL.insertDiscount(discount);
         if(productsIds != null) {
@@ -37,7 +37,7 @@ public class DiscountController {
     private static Discount getDiscountById(String id){
         return DiscountDAL.getDiscountById(id);
     }
-    public static String getDiscountableDiscounts(String id, boolean productDetails, boolean retail) throws Exception{
+    public static String getDiscountableDiscounts(String id, boolean productDetails, boolean retail){
         Discountable discountable = productDetails ? ProductDetailsController.getProductDetailsById(id) : CategoryController.getCategoryByID(id);
         if(discountable == null){
             throw new IllegalArgumentException("there is no discountable with that id");
@@ -57,7 +57,7 @@ public class DiscountController {
         return DiscountDAL.getDisccountableDiscounts(discountable, isProductDetails);
     }
 
-    private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail) throws Exception{
+    private static List<Discount> getAllProductDiscounts(ProductDetails product, boolean retail){
         List<Discount> discounts = getDiscountableDiscounts(product, true);
         Discountable discountable = product.getCategory();
         while(discountable != null){
@@ -68,7 +68,7 @@ public class DiscountController {
         return discounts;
     }
 
-    public static double getProductDiscountPercentage(String id, boolean retail) throws Exception{
+    public static double getProductDiscountPercentage(String id, boolean retail){
         ProductDetails product = ProductDetailsController.getProductDetailsById(id);
         if(product == null){
             throw new IllegalArgumentException("there is no type with that id");
@@ -85,7 +85,7 @@ public class DiscountController {
         return max;
     }
 
-    public static List<Double> getProductPricingHistory(String id, boolean retail) throws Exception{
+    public static List<Double> getProductPricingHistory(String id, boolean retail){
         ProductDetails product = ProductDetailsController.getProductDetailsById(id);
         if(product == null){
             throw new IllegalArgumentException("there is no type with that id");
