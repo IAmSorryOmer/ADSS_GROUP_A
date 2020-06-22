@@ -150,10 +150,10 @@ public class OrdersDAL {
     }
     public static List<SingleProviderOrder> getOrdersToSupply(LocalDate localDate){
         String sql = "select * from SingleProviderOrder left join AutomaticOrder AO on SingleProviderOrder.OrderId = AO.OrderId and SingleProviderOrder.ProviderId = AO.ProviderId " +
-                "left join Provider P on SingleProviderOrder.ProviderId = P.ProviderId where P.NeedsTransport = 1;";
+                "left join Provider P on SingleProviderOrder.ProviderId = P.ProviderId where SingleProviderOrder.Date = ? and P.NeedsTransport = 1;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            //preparedStatement.setString(1, localDate.toString());
+            preparedStatement.setString(1, localDate.toString());
             List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
             return resultList;
         }
