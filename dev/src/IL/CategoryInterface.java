@@ -1,7 +1,7 @@
 package IL;
 
+import BL.CategoryController;
 import Entities.Category;
-import com.company.LogicLayer.CategoryController;
 
 import java.util.List;
 

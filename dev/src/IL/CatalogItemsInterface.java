@@ -1,9 +1,9 @@
 package IL;
 
 import Entities.CatalogItem;
-import com.company.LogicLayer.CatalogItemController;
-import com.company.LogicLayer.CommunicationDetailsController;
-import com.company.LogicLayer.ProviderController;
+import BL.CatalogItemController;
+import BL.CommunicationDetailsController;
+import BL.ProviderController;
 
 import java.util.List;
 

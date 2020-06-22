@@ -1,7 +1,7 @@
 package IL;
 
 import Entities.ProductDetails;
-import com.company.LogicLayer.*;
+import BL.*;
 
 import java.util.List;
 

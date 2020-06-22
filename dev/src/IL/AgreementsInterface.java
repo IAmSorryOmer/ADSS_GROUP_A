@@ -1,6 +1,7 @@
 package IL;
 
-import com.company.LogicLayer.AgreementController;
+
+import BL.AgreementController;
 
 public class AgreementsInterface {
     public static void addItemToAgreement(String providerId, String catalogItemId, int minAmount, double discount){

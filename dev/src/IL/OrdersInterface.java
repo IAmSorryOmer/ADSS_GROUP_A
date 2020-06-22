@@ -2,7 +2,7 @@ package IL;
 
 
 import Entities.*;
-import com.company.LogicLayer.SingleProviderOrderController;
+import BL.SingleProviderOrderController;
 
 import java.util.List;
 

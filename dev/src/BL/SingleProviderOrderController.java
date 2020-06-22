@@ -2,7 +2,6 @@ package BL;
 
 import DAL.OrdersDAL;
 import Entities.*;
-import org.junit.runners.model.TestTimedOutException;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
@@ -188,7 +187,7 @@ public class SingleProviderOrderController {
 		return toReturn.toString();
 	}
 
-	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder, int storeNum){
+	public static void autoOrderListOfProducts(List<ProductDetails> productDetailsToOrder){
 		HashMap<Provider, SingleProviderOrder> orders = new HashMap<>();
 		for(ProductDetails productDetails : productDetailsToOrder){
 			int amountToOrder = (productDetails.getMinimumQuantity() - productDetails.getQuantityInStorage() - productDetails.getQuantityInShelves()) + 10;
@@ -198,7 +197,7 @@ public class SingleProviderOrderController {
 			}
 			else{
 				if(!orders.containsKey(minProviderPair.getFirst())){
-					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), store.getStore_num(), LocalDate.now());
+					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), UUID.randomUUID().toString(), LocalDate.now());
 					createWithProviderObj(orderToAdd, minProviderPair.getFirst());
 					orders.put(minProviderPair.getFirst(), orderToAdd);
 				}

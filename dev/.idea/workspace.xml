@@ -2,62 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/AgreementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/AgreementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/CatalogItemController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CatalogItemController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/CommunicationDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CommunicationDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/DiscountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/OrderTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/OrderTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProviderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProviderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLi (copy)" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLi.sqbpro" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DB/SuperLiempty" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/AgreementDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CatalogItemDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CatalogItemDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/CategoryDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CategoryDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/DBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/DBHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/DiscountDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/DiscountDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProductDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProductDetailsDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ProviderDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProviderDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/DataAccessLayer/ReportDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ReportDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Agreement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Agreement.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/AutomaticOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/AutomaticOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/CatalogItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/CatalogItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/CommunicationDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/CommunicationDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Discount.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Discount.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Discountable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Discountable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Pair.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/ProductDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Provider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/Reportable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Reportable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Entities/SingleProviderOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/AgreementsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/AgreementsInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CatalogItemsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/CatalogItemsInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/CategoryInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/DiscountInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/DiscountInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/OrdersInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/OrdersInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductDetailsInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ProviderInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProviderInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/PresentationLayer/ReportInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ReportInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/StorageTests.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/company/Tests/TestsMain.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,10 +26,32 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="database.data.extractors.current.id" value="XML-Groovy.xml.groovy" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/sqlite-jdbc-3.30.1.jar!/" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="PL.Main" />
+      <module name="dev" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="PL.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -95,7 +63,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1585037039812</updated>
-      <workItem from="1592822422377" duration="553000" />
+      <workItem from="1592822422377" duration="1588000" />
+      <workItem from="1592824331548" duration="3122000" />
+      <workItem from="1592827467640" duration="1233000" />
     </task>
     <task id="LOCAL-00001" summary="Updated project structure">
       <created>1592666989004</created>
@@ -139,7 +109,21 @@
       <option name="project" value="LOCAL" />
       <updated>1592735592554</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="unified project directories">
+      <created>1592823004932</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1592823004932</updated>
+    </task>
+    <task id="LOCAL-00008" summary="unified project directories">
+      <created>1592828531909</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1592828531909</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,13 +146,19 @@
     <MESSAGE value="Updated classes (product/report)" />
     <MESSAGE value="Updated classes (product/report) 2" />
     <MESSAGE value="Moved controllers of stock+providers" />
-    <option name="LAST_COMMIT_MESSAGE" value="Moved controllers of stock+providers" />
+    <MESSAGE value="unified project directories" />
+    <option name="LAST_COMMIT_MESSAGE" value="unified project directories" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="275" y="23" key="#Project_Structure" timestamp="1592667893548">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="387" y="33" width="1024" height="845" key="#Project_Structure" timestamp="1592827382821">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="275" y="23" key="#Project_Structure/0.0.1366.728@0.0.1366.728" timestamp="1592667893548" />
+    <state x="387" y="33" width="1024" height="845" key="#Project_Structure/0.0.1920.1032@0.0.1920.1032" timestamp="1592827382821" />
+    <state x="418" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1592827127364">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="418" y="173" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592827127364" />
     <state x="488" y="49" key="#com.intellij.ide.util.MemberChooser" timestamp="1592674200092">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -181,26 +171,70 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="479" y="250" width="408" height="237" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.0.1366.728@0.0.1366.728" timestamp="1592673697773" />
-    <state x="333" y="0" key="CommitChangelistDialog2" timestamp="1592735590701">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592828531791">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592735590701" />
-    <state x="414" y="159" key="FileChooserDialogImpl" timestamp="1592667491314">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592828531791" />
+    <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="537" height="506" key="DebuggerActiveHint/0.0.1920.1032@0.0.1920.1032" timestamp="1592828508219" />
+    <state x="582" y="225" width="735" height="484" key="FileChooserDialogImpl" timestamp="1592827571577">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="414" y="159" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592667491314" />
+    <state x="582" y="225" width="735" height="484" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1592827571577" />
+    <state width="937" height="335" key="GridCell.Tab.0.bottom" timestamp="1592828451492">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451492" />
+    <state width="937" height="335" key="GridCell.Tab.0.center" timestamp="1592828451491">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451491" />
+    <state width="937" height="335" key="GridCell.Tab.0.left" timestamp="1592828451491">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451491" />
+    <state width="937" height="335" key="GridCell.Tab.0.right" timestamp="1592828451492">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451492" />
+    <state width="937" height="335" key="GridCell.Tab.1.bottom" timestamp="1592828451576">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451576" />
+    <state width="937" height="335" key="GridCell.Tab.1.center" timestamp="1592828451574">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451574" />
+    <state width="937" height="335" key="GridCell.Tab.1.left" timestamp="1592828451574">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451574" />
+    <state width="937" height="335" key="GridCell.Tab.1.right" timestamp="1592828451575">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state width="937" height="335" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592828451575" />
     <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592735568799">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592735568799" />
-    <state x="142" y="0" key="SettingsEditor" timestamp="1592666943017">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="200" y="0" width="1024" height="845" key="SettingsEditor" timestamp="1592827689855">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2" timestamp="1592735594368">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="200" y="0" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1592827689855" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592828538102">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592735594368" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592828538102" />
+    <state x="792" y="361" width="769" height="374" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1592825375124">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="792" y="361" width="769" height="374" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592825375124" />
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog" timestamp="1592735438796">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

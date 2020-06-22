@@ -39,7 +39,7 @@ public class OrderTask extends TimerTask {
         }
         try {
             //TODO maybe dont update automatically
-            ProductController.handleOrder(singleProviderOrder);
+            //ProductController.handleOrder(singleProviderOrder);
         }
         catch (Exception e) {
             System.out.println("there was a problem while handling items recieved from automatic order number " + automaticOrder.getOrderID());
