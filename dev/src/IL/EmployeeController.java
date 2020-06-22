@@ -1,11 +1,15 @@
 package IL;
 
-import BL.Employee;
-import BL.Store;
-import BL.Validation;
+import BL.*;
 import DAL.Mapper;
-import javafx.util.Pair;
+import Entities.Pair;
+import Entities.Provider;
+import Entities.SingleProviderOrder;
+import com.company.Entities.Product;
+import com.company.Entities.Report;
+import com.company.Entities.SingleProviderOrder;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class EmployeeController {
@@ -109,5 +113,27 @@ public class EmployeeController {
     public boolean isStorage(){
         return activeUserEmployee.isStorage();
     }
+    public void SingleProviderOrderCreator(SingleProviderOrder singleProviderOrder, String providerId) {
+        SingleProviderOrderController.SingleProviderOrderCreator(singleProviderOrder, providerId);
+        Provider p=ProviderController.getProvierByID(providerId);
+        if(p.isNeedsTransport()){
+            Pair<Integer[], LocalDate> info=store.findDateForOrder();
+            if(info==null){
+                //TODO Send message to human resource manager
+            }
+            //add details to order
+        }
+
+    }
+
+    //ORDER INTERFACE
+
+
+    //PRODUCT INTERFACE
+
+
+
+    //REPORT INTERFACE
+
 
 }

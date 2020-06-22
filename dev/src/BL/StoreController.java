@@ -503,11 +503,31 @@ public class StoreController {
 
     //------------------------------------- ass 3
     public void passDay() {
+
+        //removes all the orders that were set for yesterday but there were no drivers and no drivers were added
+        mapper.removeNoDeliveryOrders(current_date.toString());
+        current_date=current_date.plusDays(1);
+        Day_In_Week=((Day_In_Week)%7)+1;
         for (Store store :  stores)
         {
             store.passDay(mapper);
+
         }
+        //Checks every order and for each order set for today sets a delivery date
+       ;
+
+
+
+
+
+
+
 
     }
+
+
+
+
+
 }
 

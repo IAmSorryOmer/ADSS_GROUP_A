@@ -24,6 +24,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("there is already order with id " + singleProviderOrder.getOrderID());
 		}
 		singleProviderOrder.setProvider(provider);
+
 		OrdersDAL.insertOrder(singleProviderOrder);
 		if(singleProviderOrder.isAutomatic()){
 			handleAutomaticOrder(singleProviderOrder);

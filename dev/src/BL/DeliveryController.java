@@ -4,6 +4,7 @@ import DAL.DDelivery;
 import DAL.Mapper;
 import IL.Callback;
 
+import java.time.LocalDate;
 import java.util.*;
 
 public class DeliveryController {
@@ -52,9 +53,9 @@ public class DeliveryController {
 	}
 
 
-	public String addDelivery(Mapper mapper,String date, String time, String ID, String name, String source, int weight,
+	public String addDelivery(Mapper mapper, LocalDate date, String time, String ID, String name, String source, int weight,
 							  List<String> numberedFiles, HashMap<String,String> numDest,
-							  HashMap<String,HashMap<String,Integer>> products,int store_num, String returnHour){
+							  HashMap<String,HashMap<String,Integer>> products, int store_num, String returnHour){
 		for (String destination: numDest.values()){
 			if (!checkAddress(destination)){
 //				return (String d, String t, String i, String n, String s, int w, List<String> nf, HashMap<String,String> nd,
@@ -210,7 +211,7 @@ public class DeliveryController {
 		}
 		Delivery newDelivery = new Delivery(date, time, ID, name, source, weight,destinationList, numberedFileList);
 		deliveries.add(newDelivery);
-		mapper.saveDelivery(newDelivery.getId(),date,time,ID,name,source,weight,store_num,returnHour);
+		mapper.saveDelivery(newDelivery.getId(),date.toString(),time,ID,name,source,weight,store_num,returnHour);
 
 		for (NumberedFile numberedFile:newDelivery.getFiles()) {
 			mapper.saveNumberedFile(numberedFile.getNumber(), numberedFile.getAddress(), newDelivery.getId());

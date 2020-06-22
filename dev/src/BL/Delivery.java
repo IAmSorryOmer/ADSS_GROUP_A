@@ -3,6 +3,8 @@ package BL;
 import DAL.DDelivery;
 import DAL.Mapper;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,7 @@ import java.util.Objects;
 public class Delivery {
     private static int idGenerator=-1;
     private int id;
-    private String date;
+    private LocalDate date;
     private String dispatchTime;
     private String TID;
     private String DName;
@@ -20,7 +22,7 @@ public class Delivery {
     private List<NumberedFile> files;
     private String returnHour;
 
-    public Delivery(String date, String dispatchTime, String TID, String DName, String source, int preWeight, List<Destination> destinationList, List<NumberedFile> file) {
+    public Delivery(LocalDate date, String dispatchTime, String TID, String DName, String source, int preWeight, List<Destination> destinationList, List<NumberedFile> file) {
 
         this.id=idGenerator+1;
         this.date = date;
@@ -38,7 +40,9 @@ public class Delivery {
     public Delivery(DAL.DDelivery deliver) {
 
         this.files = new LinkedList<>();
-        this.date = deliver.getDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");//2005-nov-12
+        LocalDate date = LocalDate.parse(deliver.getDate(), formatter);
+        this.date =  date;
         this.dispatchTime = deliver.getDispatchTime();
         this.TID = deliver.getTID();
         this.DName = deliver.getDName();
@@ -88,7 +92,7 @@ public class Delivery {
     }
 
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 

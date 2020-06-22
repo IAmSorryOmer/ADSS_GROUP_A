@@ -5,6 +5,8 @@ import DAL.DRole_ID;
 import DAL.DRole_Needed;
 import DAL.Mapper;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,8 +15,8 @@ public class Day {
 
     private HashMap<String,Integer[]> morning; // string - Role ,  Integer[] = employeeIDs
     private HashMap<String,Integer[]> evening;
-    private String date;
-    public Day(String date)
+    private LocalDate date;
+    public Day(LocalDate date)
     {
         morning = new HashMap<>();
         evening = new HashMap<>();
@@ -28,20 +30,22 @@ public class Day {
     {
         morning = new HashMap<>();
         evening = new HashMap<>();
-        date = dDay.getDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");//2005-nov-12
+        date = LocalDate.parse(dDay.getDate(), formatter);
+
     }
     public void load(int dayNum,int store_num, Mapper mapper) {
 
         List<DRole_ID> dRole_ids1 = mapper.loadRole_ID(dayNum,store_num,0);
-        List<DRole_Needed> dRole_needed1 = mapper.loadRole_NumNeeded(date,store_num,"morning");
+        List<DRole_Needed> dRole_needed1 = mapper.loadRole_NumNeeded(date.toString(),store_num,"morning");
         makeMorning(dRole_ids1,dRole_needed1);
 
         List<DRole_ID> dRole_ids2 = mapper.loadRole_ID(dayNum,store_num,1);
-        List<DRole_Needed> dRole_needed2 = mapper.loadRole_NumNeeded(date,store_num,"evening");
+        List<DRole_Needed> dRole_needed2 = mapper.loadRole_NumNeeded(date.toString(),store_num,"evening");
         makeEvening(dRole_ids2,dRole_needed2);
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
