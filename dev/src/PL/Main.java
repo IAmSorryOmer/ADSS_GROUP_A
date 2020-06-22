@@ -400,7 +400,7 @@ public class Main {
 
     }
 
-    private static void manageReportsMenu(){
+    public static void manageReportsMenu(){
         while(true) {
             System.out.println("Please select an option to perform on reports:");
             String[] options = new String[]{"add report", "print all reports", "return to main"};
@@ -499,7 +499,7 @@ public class Main {
         }
 
     }
-    private static void manageProviderOrdersMenu(){
+    public static void manageProviderOrdersMenu(){
         String message = "please insert the id of the provider that you want to manage his orders";
         String providerId = selectProvider(message);
         while(true) {
