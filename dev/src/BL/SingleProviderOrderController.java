@@ -35,6 +35,31 @@ public class SingleProviderOrderController {
 		//TODO insert here automatic order logic
 	}
 
+	private static void scheduleOrder(SingleProviderOrder order, Provider provider){
+		//orders do not come at the days mentioned in the orderDays, only scheduled that day
+		if (provider.isNeedsTransport()){
+			Pair<Integer[], LocalDate> shiftDriverDate = StoreController.getStore(order.getStoreId()).getSchedule().findDateForOrder();
+			if (shiftDriverDate != null){
+				order.setDeliveryDate(shiftDriverDate.getSecond());
+				order.setShift(shiftDriverDate.getFirst()[0]);
+				order.setDriverId(shiftDriverDate.getFirst()[1]);
+			}
+		}
+		else{ //provider provides on his own
+			for(int i = 0;i<7;i++){
+				LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
+				if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week) %7)){ //is working i days from now.
+					//TODO: wait until the other module implements the following function isStorageInDate
+					order.setShift(StoreController.getStore(order.getStoreId()).getSchedule().isStorageInDate(date_i_DaysFromNow));
+					order.setDeliveryDate(date_i_DaysFromNow); //return the appropriate date
+					return;
+				}
+
+			}
+		}
+		return;
+	}
+
 	/*public static LocalDate getNextAutoOrderDate(AutomaticOrder automaticOrder){
 		LocalDate minDate = null;
 		for(int i = 0; i < 7 ;i++){
@@ -180,6 +205,7 @@ public class SingleProviderOrderController {
 	}
 
 	public static void autoOrderListOfProductsInStore(int storeId, List<ProductDetails> productDetailsToOrder){
+		//TODO: Maybe change this
 		HashMap<Provider, SingleProviderOrder> orders = new HashMap<>();
 		for(ProductDetails productDetails : productDetailsToOrder){
 			int amountToOrder = (productDetails.getMinimumQuantity() - ProductDetailsController.getProductDetailsQuantityInStore(storeId, productDetails.getId())) + 10;

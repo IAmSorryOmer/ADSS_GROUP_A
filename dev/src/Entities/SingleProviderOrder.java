@@ -10,9 +10,12 @@ public class SingleProviderOrder{
 	//fields
 	private final String orderID;
 	private int storeId;
+	private int driverId;
+	private int shift;
 	private Provider provider;
 	private Map<CatalogItem, Integer> orderItems; //catalog item - amount of item - total price
 	private LocalDate orderDate;
+	private LocalDate deliveryDate;
 	private int orderDays;
 
 	
@@ -26,13 +29,28 @@ public class SingleProviderOrder{
 		this.orderDays = orderDays;
 	}
 
+	public SingleProviderOrder(String orderID, int storeId, int driverId, int shift, Provider provider, LocalDate orderDate, LocalDate deliveryDate, int orderDays) {
+		this.orderID = orderID;
+		this.storeId = storeId;
+		this.driverId = driverId;
+		this.shift = shift;
+		this.provider = provider;
+		this.orderItems = new HashMap<CatalogItem, Integer>();
+		this.orderDate = orderDate;
+		this.deliveryDate = deliveryDate;
+		this.orderDays = orderDays;
+	}
+
 	//constructor for regular order with prepared items
 	public SingleProviderOrder(String orderID, int storeId, Provider provider, Map<CatalogItem, Integer> orderItems, LocalDate orderDate) {
 		this.orderID = orderID;
 		this.storeId = storeId;
+		this.driverId = 0;
+		this.shift = -1;
 		this.provider = provider;
 		this.orderItems = orderItems;
 		this.orderDate = orderDate;
+		this.deliveryDate = null;
 		this.orderDays = 0;
 	}
 
@@ -59,6 +77,30 @@ public class SingleProviderOrder{
 
 	public void setStoreId(int storeId) {
 		this.storeId = storeId;
+	}
+
+	public int getDriverId() {
+		return driverId;
+	}
+
+	public void setDriverId(int driverId) {
+		this.driverId = driverId;
+	}
+
+	public int getShift() {
+		return shift;
+	}
+
+	public void setShift(int shift) {
+		this.shift = shift;
+	}
+
+	public LocalDate getDeliveryDate() {
+		return deliveryDate;
+	}
+
+	public void setDeliveryDate(LocalDate deliveryDate) {
+		this.deliveryDate = deliveryDate;
 	}
 
 	public Provider getProvider() {

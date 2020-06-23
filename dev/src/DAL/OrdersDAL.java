@@ -15,14 +15,15 @@ public class OrdersDAL {
     public static HashMap<String, SingleProviderOrder> mapper = new HashMap<>();
 
     public static void insertOrder(SingleProviderOrder singleProviderOrder){
-        String sql = "INSERT INTO SingleProviderOrder(OrderId, ProviderId, Date, OrderDays, StoreId) VALUES (?,?,?,?,?)";
+        String sql = "INSERT INTO SingleProviderOrder(OrderId, ProviderId, OrderDate, DeliveryDate, OrderDays, StoreId, DriverId, Shift) VALUES (?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, singleProviderOrder.getOrderID());
             preparedStatement.setString(2, singleProviderOrder.getProvider().getProviderID());
             preparedStatement.setString(3, singleProviderOrder.getOrderDate() == null ? null : singleProviderOrder.getOrderDate().toString());
-            preparedStatement.setInt(4, singleProviderOrder.getOrderDays());
-            preparedStatement.setInt(5, singleProviderOrder.getStoreId());
+            preparedStatement.setString(4, singleProviderOrder.getDeliveryDate() == null ? null : singleProviderOrder.getDeliveryDate().toString());
+            preparedStatement.setInt(5, singleProviderOrder.getOrderDays());
+            preparedStatement.setInt(6, singleProviderOrder.getStoreId());
             preparedStatement.executeUpdate();
             mapper.put(singleProviderOrder.getOrderID(), singleProviderOrder);
             for(Map.Entry<CatalogItem, Integer> entry: singleProviderOrder.getOrderItems().entrySet()){
@@ -166,9 +167,13 @@ public class OrdersDAL {
         while(resultSet.next()){
             String orderId = resultSet.getString("OrderId");
             int storeId = resultSet.getInt("StoreId");
+            int driverId = resultSet.getInt("DriverId");
+            int shift = resultSet.getInt("Shift");
             String providerId = resultSet.getString("ProviderId");
-            String dateStr = resultSet.getString("Date");
-            LocalDate date = dateStr == null ? null : LocalDate.parse(dateStr);
+            String orderDateStr = resultSet.getString("OrderDate");
+            LocalDate orderDate = orderDateStr == null ? null : LocalDate.parse(orderDateStr);
+            String deliveryDateStr = resultSet.getString("DeliveryDate");
+            LocalDate deliveryDate = deliveryDateStr == null ? null : LocalDate.parse(deliveryDateStr);
             int orderDays = resultSet.getInt("OrderDays");
             if(mapper.containsKey(orderId)){
                 toReturn.add(mapper.get(orderId));

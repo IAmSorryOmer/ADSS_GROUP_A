@@ -59,7 +59,6 @@ public class StoreController {
         }
     }
     public static void addDriver(int store_num,int id,String name, License license,String LicenseName){
-
         Store store = getStore(store_num);
         store.addDriver(name,license,id);
         mapper.saveDriver(LicenseName,name,store_num,id);
