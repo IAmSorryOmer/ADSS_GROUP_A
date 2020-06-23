@@ -12,7 +12,6 @@ public class WeekSchedule {
 
     public WeekSchedule() {
         this.days = new Day[7];
-
     }
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
@@ -98,19 +97,69 @@ public class WeekSchedule {
 
     //-----------------
 
-    public void passDay(Mapper mapper) {
+    public void passDay(Mapper mapper,LocalDate curr) {
 
         // @TODO לשנות את השמה למשמרת שתפעל לפי היום שכרגע נמצא במיקום ה 0 לא להניח שזה ראשון
         //@TODO לשנות את יצירת התאריכים לימים לפונקציה של נריה
         //@TODO עובדים יכולים רק פעם אחת לשים משמרות לתמיד
 
-        mapper.setAssignments_History(days[0].getDate());// Makes all the assignments at this date to be history
-        mapper.setDay_History(days[0].getDate()); // Makes the Day history
+        mapper.setAssignments_History(days[0].getDate().toString());// Makes all the assignments at this date to be history
+        mapper.setDay_History(days[0].getDate().toString()); // Makes the Day history
         for (int i=0; i < 5; i++) //SHIFT RIGHT DAYS
         {
             days[i] = days[i+1];
         }
-        days[7] = new Day();
+        days[7] = new Day(curr);
+    }
+
+    public int isStorageInDay(LocalDate lcl){
+        boolean foundBoth=false;
+        int morOrEve=-1;
+        int id1=0;
+        int id2=0;
+        LocalDate d=null;
+        for(int i=0;i<7&&!foundBoth;++i) {
+            HashMap<String, Integer[]> m = days[i].getMorning();
+
+
+            if (days[i].getDate().equals(lcl)) {
+                for (String role : m.keySet()
+                ) {
+
+
+                    if (role.equals("storage")) {
+                        for (int id : m.get(role)
+                        ) {
+                            if (id != 0) {
+                                return 0;
+                            }
+                        }
+                    }
+
+                }
+
+
+
+                for (String role : m.keySet()
+                ) {
+
+
+                    if (role.equals("storage")) {
+                        for (int id : m.get(role)
+                        ) {
+                            if (id != 0) {
+                                return 1;
+                            }
+                        }
+                    }
+
+                }
+
+
+            }
+
+        }
+        return -1;
     }
 
 
