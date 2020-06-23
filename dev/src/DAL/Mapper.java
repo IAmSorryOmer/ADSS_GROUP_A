@@ -3,6 +3,7 @@ package DAL;
 import org.omg.PortableServer.IdAssignmentPolicy;
 import org.sqlite.SQLiteConfig;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 //package net.sqlitetutorial;
@@ -78,6 +79,19 @@ public class Mapper {
     public void removeEmployee(int id) {
         try {
             String query = "DELETE FROM Employees WHERE id="+id;
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            stmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+
+    public void removeNoDeliveryOrders(String lastDay){
+        try {
+            String query = "DELETE FROM SingleProviderOrder WHERE OrderDate="+lastDay;
             PreparedStatement stmt = conn.prepareStatement(query);
 
             stmt.executeUpdate();
@@ -760,4 +774,15 @@ public class Mapper {
         }
     }
 
+
+    public void saveCurrent_Date(String current_date) {
+        try{
+            String query="UPDATE CurrentDate SET date=?";
+            PreparedStatement stmt=conn.prepareStatement(query);
+            stmt.setString(1,current_date);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

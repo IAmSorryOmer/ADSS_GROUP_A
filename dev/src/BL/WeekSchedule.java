@@ -7,6 +7,8 @@ import Entities.Pair;
 import java.time.LocalDate;
 import java.util.HashMap;
 
+import static BL.StoreController.current_date;
+
 public class WeekSchedule {
     private Day[] days;
 
@@ -16,8 +18,8 @@ public class WeekSchedule {
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
         LocalDate localDate =  LocalDate.of(2020,6,21);
-        StoreController.current_date = localDate;
-        mapper.saveCurrent_Date();
+        current_date = localDate;
+        mapper.saveCurrent_Date(current_date.toString());
 
 //        LocalDate dt = LocalDate.now();
 //        dt.getDayOfMonth();
