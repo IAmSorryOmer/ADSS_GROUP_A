@@ -5,7 +5,6 @@ import Entities.*;
 
 import java.time.*;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.*;
 
 public class SingleProviderOrderController {
@@ -23,21 +22,25 @@ public class SingleProviderOrderController {
 		if(getOrderById(singleProviderOrder.getOrderID()) != null){
 			throw new IllegalArgumentException("there is already order with id " + singleProviderOrder.getOrderID());
 		}
-		singleProviderOrder.setProvider(provider);
-
-		OrdersDAL.insertOrder(singleProviderOrder);
-		if(singleProviderOrder.isAutomatic()){
-			handleAutomaticOrder(singleProviderOrder);
+		if(!singleProviderOrder.isAutomatic()){ //if it's not an automatic order, we need to schedule it
+			scheduleOrder(singleProviderOrder, provider);
 		}
+		OrdersDAL.insertOrder(singleProviderOrder);
 	}
 
-	private static void handleAutomaticOrder(SingleProviderOrder automaticOrder){
-		//TODO insert here automatic order logic
+	private static void handleAutomaticOrders(int storeId){
+		List<SingleProviderOrder> automaticOrders = OrdersDAL.getAutomaticOrdersOfStore(storeId);
+		for (SingleProviderOrder currentAutomaticOrder: automaticOrders){
+			SingleProviderOrder newOrder = new SingleProviderOrder(currentAutomaticOrder);
+			newOrder.setOrderDays(0);
+			newOrder.setOrderDate(StoreController.current_date);
+			SingleProviderOrderCreator(newOrder, newOrder.getProvider().getProviderID());
+		}
 	}
 
 	private static void scheduleOrder(SingleProviderOrder order, Provider provider){
 		//orders do not come at the days mentioned in the orderDays, only scheduled that day
-		if (provider.isNeedsTransport()){
+		if (provider.isNeedsTransport()){ //we need a delivery
 			Pair<Integer[], LocalDate> shiftDriverDate = StoreController.getStore(order.getStoreId()).getSchedule().findDateForOrder();
 			if (shiftDriverDate != null){
 				order.setDeliveryDate(shiftDriverDate.getSecond());
@@ -50,7 +53,7 @@ public class SingleProviderOrderController {
 				LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
 				if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week) %7)){ //is working i days from now.
 					//TODO: wait until the other module implements the following function isStorageInDate
-					order.setShift(StoreController.getStore(order.getStoreId()).getSchedule().isStorageInDate(date_i_DaysFromNow));
+					//order.setShift(StoreController.getStore(order.getStoreId()).getSchedule().isStorageInDate(date_i_DaysFromNow));
 					order.setDeliveryDate(date_i_DaysFromNow); //return the appropriate date
 					return;
 				}
@@ -58,6 +61,18 @@ public class SingleProviderOrderController {
 			}
 		}
 		return;
+	}
+
+	//returns the next date for providers
+	private static LocalDate getNextAutoOrderDate(Provider provider){
+		for(int i = 0;i<7;i++){
+			LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
+			if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week) %7)){ //is working i days from now.
+				return date_i_DaysFromNow;
+			}
+
+		}
+		return null;
 	}
 
 	/*public static LocalDate getNextAutoOrderDate(AutomaticOrder automaticOrder){
@@ -86,7 +101,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		//TODO what the meaning of this now?
-		ensureTimes(singleProviderOrder);
+		ensureTimesAutomatic(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
 		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
@@ -97,7 +112,7 @@ public class SingleProviderOrderController {
 		singleProviderOrder.addToItemList(catalogItem, orderAmount);
 		OrdersDAL.insertItemToOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
-		
+
 	public static void EditOrder (String providerId, String orderId, int storeId, String ItemID, int orderAmount) {
 		if (orderAmount < 1)
 			throw new IllegalArgumentException("order amount must be positive");
@@ -108,7 +123,7 @@ public class SingleProviderOrderController {
 		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId) || singleProviderOrder.getStoreId() != storeId){
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
-		ensureTimes(singleProviderOrder);
+		ensureTimesAutomatic(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
 		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
@@ -119,7 +134,9 @@ public class SingleProviderOrderController {
 		singleProviderOrder.editItemList(catalogItem, orderAmount);
 		OrdersDAL.editItemOnOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
-		
+
+
+
 	public static void RemoveFromOrder (String providerId, String orderId, int storeId, String ItemID) {
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
@@ -128,7 +145,7 @@ public class SingleProviderOrderController {
 		if(singleProviderOrder == null || !singleProviderOrder.getProvider().getProviderID().equals(providerId) || singleProviderOrder.getStoreId() != storeId){
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
-		ensureTimes(singleProviderOrder);
+		ensureTimesAutomatic(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
 		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
@@ -139,11 +156,12 @@ public class SingleProviderOrderController {
 		singleProviderOrder.removeFromItemList(catalogItem);
 		OrdersDAL.removeItemFromOrder(singleProviderOrder, catalogItem);
 	}
-	private static void ensureTimes(SingleProviderOrder singleProviderOrder){
+
+	//this function gets an order automatic and ensures that the current day is atleast a day before until the scheduled time.
+	private static void ensureTimesAutomatic(SingleProviderOrder singleProviderOrder){
 		if(singleProviderOrder.isAutomatic()){
-			//TODO replace logic here
-			LocalDate nextDate = null; //TODO here need to decide when is the next date. getNextAutoOrderDate((AutomaticOrder)singleProviderOrder);
-			long hoursUntil = LocalDateTime.now().until(nextDate, ChronoUnit.HOURS);
+			LocalDate nextDate = getNextAutoOrderDate(singleProviderOrder.getProvider());
+			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.HOURS);
 			if(hoursUntil <= 24){
 				throw new IllegalArgumentException("you cant edit automatic order less than a day before order");
 			}
@@ -218,7 +236,7 @@ public class SingleProviderOrderController {
 			}
 			else{
 				if(!orders.containsKey(minProviderPair.getFirst())){
-					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), storeId, UUID.randomUUID().toString(), LocalDate.now(), 0);
+					SingleProviderOrder orderToAdd = new SingleProviderOrder(minProviderPair.getFirst(), storeId, UUID.randomUUID().toString(), StoreController.current_date, 0);
 					orders.put(minProviderPair.getFirst(), orderToAdd);
 				}
 				orders.get(minProviderPair.getFirst()).addToItemList(minProviderPair.getSecond(), amountToOrder);

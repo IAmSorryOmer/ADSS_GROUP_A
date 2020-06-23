@@ -4,9 +4,7 @@
     <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="changed a little the automatic order">
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SuperLiUnified" beforeDir="false" afterPath="$PROJECT_DIR$/SuperLiUnified" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/StoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" afterDir="false" />
     </list>
@@ -154,7 +152,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592836631314</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Updated order logic">
+      <created>1592927809768</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592927809768</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -213,10 +218,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592848925803">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="333" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592927870258">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592735590701" />
+    <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592927870258" />
     <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592848925803" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -263,10 +268,14 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="937" height="335" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323570" />
-    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592909951575">
+    <state x="129" y="61" key="MergeDialog" timestamp="1592927841527">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592909951575" />
+    <state x="129" y="61" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592927841527" />
+    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592927841548">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592927841548" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor" timestamp="1592827689855">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -293,10 +302,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592735438796" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592909926219">
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592927812410">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592909926219" />
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592927812410" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592911536571">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
