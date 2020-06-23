@@ -509,7 +509,7 @@ public class StoreController {
         Day_In_Week=((Day_In_Week)%7)+1;
         for (Store store :  stores)
         {
-            store.passDay(mapper);
+            store.passDay(mapper,current_date);
 
         }
         //Checks every order and for each order set for today sets a delivery date

@@ -250,27 +250,29 @@ public class Store {
     //=----------------------------------------------ass3
 
 
-    public void passDay(Mapper mapper) {
+    public void passDay(Mapper mapper,LocalDate curr) {
 
 
-        checkAutomaticOrders(mapper);
-        schedule.passDay(mapper);
+        checkOrders(mapper,curr);
+        schedule.passDay(mapper,curr);
     }
 
     public Pair<Integer[],LocalDate> findDateForOrder(){
         return  schedule.findDateForOrder();
     }
 
-    public void checkAutomaticOrders(Mapper mapper){
-        List<SingleProviderOrder> orders;
+    public void checkOrders(Mapper mappe, LocalDate curr){
+        List<SingleProviderOrder> orders=SingleProviderOrderController.getAllAutomaticOrdersToSupply(curr);
 
         for(int i=0; i<orders.size();++i){
             SingleProviderOrder order=orders.get(i);
-            if(Integer.parseInt( order.getOrderID())==store_num){
+            if(order.getStoreId()==store_num){
 
                 Pair<Integer[], LocalDate> deliveryInfo=schedule.findDateForOrder();
                 if(deliveryInfo==null){
-                    //TODO @TODO Add alert to human resource manager
+                    List<String> alertHumanResource=new LinkedList<>();
+                    alertHumanResource.add("One of the orders(id:"+order.getOrderID()+") didn't manage to register because there were no drivers/storage workers working in the same shift");
+
                 }
                 else{
                     String hour="";
@@ -283,13 +285,21 @@ public class Store {
                     else{
                         hour="22:00";
                         returnhour="23:00";
-                    }
-                    //TODO Update order with new delivery details
 
+
+
+                    }
+                    order.setDeliveryDate(deliveryInfo.second);
+                    order.setDriverId(deliveryInfo.first[1]);
+                    order.setShift(deliveryInfo.first[0]);
+
+
+
+
+
+                    ;
 
                 }
-
-                deliveryController.addDelivery(mapper,order.getOrderDate(),)
             }
 
         }
