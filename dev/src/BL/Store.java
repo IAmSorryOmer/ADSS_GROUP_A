@@ -57,7 +57,7 @@ public class Store {
         hasLoaded = true;
 
     }
-    public String getDate(int day_num){
+    public LocalDate getDate(int day_num){
         return schedule.getDays()[day_num -1].getDate();
     }
 
@@ -126,14 +126,14 @@ public class Store {
                 if (schedule.getDayByDate(date).is_Assigned_To_Role("driver","morning")) {
                     if (chooseLower(hour,returnHour).equals(returnHour)) // return date is next day
                     {
-                        if (schedule.returnIfDayIsLastInTheWeek(day.getDate()))
+                        if (schedule.returnIfDayIsLastInTheWeek(day.getDate().toString()))
                             return "the return hour must be in the same week";
                         else
                         {
                             Day nextDay = schedule.getNextDay(date);
                             if (nextDay.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
                             {
-                                return deliveryController.addDelivery(mapper, date, hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
+                                return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
                             }
                             else
                             {
@@ -146,7 +146,7 @@ public class Store {
                     {
                         if (day.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
                         {
-                            return deliveryController.addDelivery(mapper, date, hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
+                            return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
                         }
                         else
                         {
@@ -171,14 +171,14 @@ public class Store {
                 if (schedule.getDayByDate(date).is_Assigned_To_Role("driver","evening")) {
                     if (chooseLower(hour,returnHour).equals(returnHour)) // return date is next day
                     {
-                        if (schedule.returnIfDayIsLastInTheWeek(day.getDate()))
+                        if (schedule.returnIfDayIsLastInTheWeek(day.getDate().toString()))
                             return "the return hour must be in the same week";
                         else
                         {
                             Day nextDay = schedule.getNextDay(date);
                             if (nextDay.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
                             {
-                                return deliveryController.addDelivery(mapper, date, hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
+                                return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
                             }
                             else
                             {
@@ -191,7 +191,7 @@ public class Store {
                     {
                         if (day.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
                         {
-                            return deliveryController.addDelivery(mapper, date, hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
+                            return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
                         }
                         else
                         {

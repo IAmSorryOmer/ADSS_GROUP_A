@@ -5,9 +5,6 @@ import DAL.Mapper;
 import Entities.Pair;
 import Entities.Provider;
 import Entities.SingleProviderOrder;
-import com.company.Entities.Product;
-import com.company.Entities.Report;
-import com.company.Entities.SingleProviderOrder;
 
 import java.time.LocalDate;
 import java.util.List;
