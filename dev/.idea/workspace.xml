@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="changed a little the automatic order">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/AgreementController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/AgreementController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/CategoryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/DiscountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/OrderTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductDetailsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ReportController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ReportController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ProductDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ReportDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ReportDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/ProductDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/ProductDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/CategoryInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/CategoryInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/DiscountInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/DiscountInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/OrdersInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/OrdersInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/ProductDetailsInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductDetailsInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/ProductInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ProductInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/ReportInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ReportInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PL/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Main.java" afterDir="false" />
-    </list>
+    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,7 +62,7 @@
       <updated>1585037039812</updated>
       <workItem from="1592822422377" duration="1588000" />
       <workItem from="1592824331548" duration="3122000" />
-      <workItem from="1592827467640" duration="21555000" />
+      <workItem from="1592827467640" duration="22428000" />
     </task>
     <task id="LOCAL-00001" summary="Updated project structure">
       <created>1592666989004</created>
@@ -160,7 +134,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592836631314</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="added support in multiple stores">
+      <created>1592849077710</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1592849077710</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -185,7 +166,8 @@
     <MESSAGE value="Moved controllers of stock+providers" />
     <MESSAGE value="unified project directories" />
     <MESSAGE value="changed a little the automatic order" />
-    <option name="LAST_COMMIT_MESSAGE" value="changed a little the automatic order" />
+    <MESSAGE value="added support in multiple stores" />
+    <option name="LAST_COMMIT_MESSAGE" value="added support in multiple stores" />
   </component>
   <component name="WindowStateProjectService">
     <state x="387" y="33" width="1024" height="845" key="#Project_Structure" timestamp="1592827382821">
@@ -214,11 +196,11 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592848925803">
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592849077610">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="333" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592735590701" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592848925803" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592849077610" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -264,20 +246,25 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="937" height="335" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323570" />
-    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592735568799">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="146" y="0" width="1536" height="855" key="MergeDialog" timestamp="1592849131129">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="146" y="0" width="1536" height="855" key="MergeDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592849131129" />
+    <state x="555" y="115" width="728" height="475" key="MultipleFileMergeDialog" timestamp="1592849131131">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592735568799" />
+    <state x="555" y="115" width="728" height="475" key="MultipleFileMergeDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592849131131" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor" timestamp="1592827689855">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1592827689855" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592836642142">
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592849145785">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592735594368" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592836642142" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592849145785" />
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592831302840">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
