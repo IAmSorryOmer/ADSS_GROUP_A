@@ -17,8 +17,10 @@ public class SingleProviderOrder{
 	private LocalDate orderDate;
 	private LocalDate deliveryDate;
 	private int orderDays;
+	private boolean isShipped;
+	private boolean hasArrived;
 
-	
+
 	//consructors
 	public SingleProviderOrder (Provider provider, int storeId, String orderId, LocalDate orderDate, int orderDays) {
 		this.orderID = orderId;
@@ -29,7 +31,7 @@ public class SingleProviderOrder{
 		this.orderDays = orderDays;
 	}
 
-	public SingleProviderOrder(String orderID, int storeId, int driverId, int shift, Provider provider, LocalDate orderDate, LocalDate deliveryDate, int orderDays) {
+	public SingleProviderOrder(Provider provider,  int storeId, int driverId, int shift, String orderID, LocalDate orderDate, LocalDate deliveryDate, int orderDays, boolean isShipped, boolean hasArrived) {
 		this.orderID = orderID;
 		this.storeId = storeId;
 		this.driverId = driverId;
@@ -39,6 +41,26 @@ public class SingleProviderOrder{
 		this.orderDate = orderDate;
 		this.deliveryDate = deliveryDate;
 		this.orderDays = orderDays;
+		this.isShipped = isShipped;
+		this.hasArrived = hasArrived;
+	}
+
+	//deep copy of the order items in another order (mostly for automatic orders)
+	public SingleProviderOrder(SingleProviderOrder other) {
+		this.orderID = other.orderID;
+		this.storeId = other.storeId;
+		this.driverId = other.driverId;
+		this.shift = other.shift;
+		this.provider = other.provider;
+		this.orderItems = new HashMap<CatalogItem, Integer>();
+		this.orderDate = other.orderDate;
+		this.deliveryDate = other.deliveryDate;
+		this.orderDays = other.orderDays;
+		this.isShipped = other.isShipped;
+		this.hasArrived = other.hasArrived;
+		for (CatalogItem key: other.orderItems.keySet()){
+			this.orderItems.put(key, other.orderItems.get(key));
+		}
 	}
 
 	//constructor for regular order with prepared items
@@ -52,17 +74,19 @@ public class SingleProviderOrder{
 		this.orderDate = orderDate;
 		this.deliveryDate = null;
 		this.orderDays = 0;
+		this.hasArrived = false;
+		this.isShipped = false;
 	}
 
 	//getters  & setters
 	public void addToItemList(CatalogItem catalogItem, int orderAmount) {
 		orderItems.put(catalogItem, orderAmount);
 	}
-	
+
 	public void editItemList(CatalogItem catalogItem, int orderAmount) {
 		orderItems.replace(catalogItem, orderAmount);
 	}
-	
+
 	public void removeFromItemList(CatalogItem catalogItem) {
 		orderItems.remove(catalogItem);
 	}
@@ -159,6 +183,22 @@ public class SingleProviderOrder{
 		if(result.length() != 0)
 			result = result.substring(0,result.length()-2);
 		return result;
+	}
+
+	public boolean isShipped() {
+		return isShipped;
+	}
+
+	public void setShipped(boolean shipped) {
+		isShipped = shipped;
+	}
+
+	public boolean hasArrived() {
+		return hasArrived;
+	}
+
+	public void setHasArrived(boolean hasArrived) {
+		this.hasArrived = hasArrived;
 	}
 
 	@Override
