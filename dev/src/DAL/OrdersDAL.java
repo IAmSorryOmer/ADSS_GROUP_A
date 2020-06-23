@@ -225,4 +225,19 @@ public class OrdersDAL {
 
     }
 
+    public static void removeOrder(SingleProviderOrder order){
+        if(mapper.containsKey(order.getOrderID())){
+            mapper.remove(order.getOrderID());
+        }
+        String sql = "delete from SingleProviderOrder where OrderId = ?";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, order.getOrderID());
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
 }

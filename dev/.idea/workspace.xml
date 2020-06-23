@@ -185,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592928922036</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Added rescheduleOrderDelivery">
+      <created>1592933205636</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1592933205636</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,7 +221,8 @@
     <MESSAGE value="updated order logic" />
     <MESSAGE value="updated order logic (added various fields, creating orders, scheduling orders, ensuring time for orders)" />
     <MESSAGE value="updated order constructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="updated order constructor" />
+    <MESSAGE value="Added rescheduleOrderDelivery" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added rescheduleOrderDelivery" />
   </component>
   <component name="WindowStateProjectService">
     <state x="387" y="33" width="1024" height="845" key="#Project_Structure" timestamp="1592827382821">
@@ -247,10 +255,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="322" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592928920743">
+    <state x="322" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592933203732">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592928920743" />
+    <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592933203732" />
     <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592848925803" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -310,10 +318,10 @@
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1592827689855" />
-    <state x="275" y="98" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592928925027">
+    <state x="275" y="98" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592933209833">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592928925027" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592933209833" />
     <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592836642142" />
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592831302840">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -331,10 +339,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="331" y="316" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592931696557" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592933172994">
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592935220139">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592933172994" />
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592935220139" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592911536571">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

@@ -34,7 +34,7 @@ public class SingleProviderOrderController {
 			SingleProviderOrder newOrder = new SingleProviderOrder(currentAutomaticOrder);
 			newOrder.setOrderDays(0);
 			newOrder.setOrderDate(StoreController.current_date);
-			SingleProviderOrderCreator(newOrder, newOrder.getProvider().getProviderID());
+			createWithProviderObj(newOrder, newOrder.getProvider());
 		}
 	}
 
@@ -146,6 +146,13 @@ public class SingleProviderOrderController {
 		ensureTimes(singleProviderOrder);
 		scheduleOrder(singleProviderOrder, singleProviderOrder.getProvider());
 		OrdersDAL.editOrderDeliveryDetails(singleProviderOrder, singleProviderOrder.getDeliveryDate(), singleProviderOrder.getDriverId(), singleProviderOrder.getShift());
+	}
+
+	public static void removeOrder(String orderId){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		ensureTimesAutomatic(singleProviderOrder);
+		ensureTimes(singleProviderOrder);
+		OrdersDAL.removeOrder(singleProviderOrder);
 	}
 
 	public static void RemoveFromOrder (String providerId, String orderId, int storeId, String ItemID) {
