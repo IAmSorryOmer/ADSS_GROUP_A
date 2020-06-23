@@ -69,6 +69,20 @@ public class OrdersDAL {
             System.out.println(e.getMessage());
         }
     }
+    public static void editOrderDeliveryDetails(SingleProviderOrder order, LocalDate deliveryDate, int driverId, int shift){
+        String sql = "update SingleProviderOrder set DeliveryDate = ?, DriverId = ?, Shift = ? where OrderId = ?";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, deliveryDate == null ? null : deliveryDate.toString());
+            preparedStatement.setInt(2, driverId);
+            preparedStatement.setInt(3, shift);
+            preparedStatement.setString(4, order.getOrderID());
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
     public static void removeItemFromOrder(SingleProviderOrder order, CatalogItem item){
         String sql = "delete from CatalogToOrders where OrderId = ? and CatalogNumber = ?";
         try {

@@ -28,7 +28,7 @@ public class SingleProviderOrderController {
 		OrdersDAL.insertOrder(singleProviderOrder);
 	}
 
-	private static void handleAutomaticOrders(int storeId){
+	public static void handleAutomaticOrders(int storeId){
 		List<SingleProviderOrder> automaticOrders = OrdersDAL.getAutomaticOrdersOfStore(storeId);
 		for (SingleProviderOrder currentAutomaticOrder: automaticOrders){
 			SingleProviderOrder newOrder = new SingleProviderOrder(currentAutomaticOrder);
@@ -102,6 +102,7 @@ public class SingleProviderOrderController {
 		}
 		//TODO what the meaning of this now?
 		ensureTimesAutomatic(singleProviderOrder);
+		ensureTimes(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
 		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
@@ -124,6 +125,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		ensureTimesAutomatic(singleProviderOrder);
+		ensureTimes(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
 		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
@@ -135,7 +137,16 @@ public class SingleProviderOrderController {
 		OrdersDAL.editItemOnOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
 
-
+	public static void rescheduleOrderDelivery(String orderId){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if (singleProviderOrder.getDeliveryDate() != null){
+			throw new IllegalArgumentException("The order" + orderId + "already has a valid delivery date ("+singleProviderOrder.getDeliveryDate()+").");
+		}
+		ensureTimesAutomatic(singleProviderOrder);
+		ensureTimes(singleProviderOrder);
+		scheduleOrder(singleProviderOrder, singleProviderOrder.getProvider());
+		OrdersDAL.editOrderDeliveryDetails(singleProviderOrder, singleProviderOrder.getDeliveryDate(), singleProviderOrder.getDriverId(), singleProviderOrder.getShift());
+	}
 
 	public static void RemoveFromOrder (String providerId, String orderId, int storeId, String ItemID) {
 		Provider provider = ProviderController.getProvierByID(providerId);
@@ -146,6 +157,7 @@ public class SingleProviderOrderController {
 			throw new IllegalArgumentException("there is no order with id " + orderId + " for provider with id "+provider.getProviderID() + " and store number " + storeId);
 		}
 		ensureTimesAutomatic(singleProviderOrder);
+		ensureTimes(singleProviderOrder);
 		CatalogItem catalogItem = CatalogItemController.getCatalogItemById(ItemID);
 		if(catalogItem == null || !catalogItem.getProviderID().equals(providerId)){
 			throw new IllegalArgumentException("there is no item with id " + ItemID + " for provider with id " + providerId);
@@ -157,13 +169,23 @@ public class SingleProviderOrderController {
 		OrdersDAL.removeItemFromOrder(singleProviderOrder, catalogItem);
 	}
 
-	//this function gets an order automatic and ensures that the current day is atleast a day before until the scheduled time.
+	//this function gets an automatic order and ensures that the current day is atleast a day before until the scheduled time.
 	private static void ensureTimesAutomatic(SingleProviderOrder singleProviderOrder){
 		if(singleProviderOrder.isAutomatic()){
 			LocalDate nextDate = getNextAutoOrderDate(singleProviderOrder.getProvider());
 			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.HOURS);
 			if(hoursUntil <= 24){
-				throw new IllegalArgumentException("you cant edit automatic order less than a day before order");
+				throw new IllegalArgumentException("you cant edit an automatic order less than a day before order");
+			}
+		}
+	}
+	//this function gets an order and ensures that the current day is atleast a day before until the scheduled time.
+	private static void ensureTimes(SingleProviderOrder singleProviderOrder){
+		if(singleProviderOrder.isAutomatic()){
+			LocalDate nextDate = singleProviderOrder.getDeliveryDate();
+			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.HOURS);
+			if(hoursUntil <= 24){
+				throw new IllegalArgumentException("you cant edit an order less than a day before order");
 			}
 		}
 	}
