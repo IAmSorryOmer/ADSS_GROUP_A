@@ -148,7 +148,7 @@ public class StoreController {
 
                         }
                         else
-                            mapper.saveAssignments_To_Shifts(store.getDate(dayNum),role,dayPartInt,dayNum-1,employeeId,0,store_num);
+                            mapper.saveAssignments_To_Shifts(store.getDate(dayNum).toString(),role,dayPartInt,dayNum-1,employeeId,0,store_num);
 
                     }
 
