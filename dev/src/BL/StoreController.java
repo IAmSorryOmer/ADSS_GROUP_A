@@ -11,10 +11,10 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class StoreController {
-    List<Store> stores;
-    private int storeNumbers = 2;
-    private Mapper mapper;
-    private String sundayDate;
+    static List<Store> stores;
+    static private int storeNumbers = 2;
+    static private Mapper mapper;
+    static private String sundayDate;
 
     static LocalDate current_date;
     static int Day_In_Week = 1;
@@ -32,7 +32,7 @@ public class StoreController {
 
 
 
-    public String addDriverEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date,String license)
+    public static String addDriverEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date,String license)
     {
         Store store = getStore(store_num);
         if (store != null)
@@ -58,14 +58,14 @@ public class StoreController {
             return "store doesn't exists";
         }
     }
-    public void addDriver(int store_num,int id,String name, License license,String LicenseName){
+    public static void addDriver(int store_num,int id,String name, License license,String LicenseName){
 
         Store store = getStore(store_num);
         store.addDriver(name,license,id);
         mapper.saveDriver(LicenseName,name,store_num,id);
 
     }
-    public String addEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date) {
+    public static String addEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date) {
 
         String result;
         Store store = getStore(store_num);
@@ -91,7 +91,7 @@ public class StoreController {
     }
 
 
-    public String updateEmployee(int store_num , String name, int id, String bankAccount, int salary, String employee_conditions) {
+    public static  String updateEmployee(int store_num , String name, int id, String bankAccount, int salary, String employee_conditions) {
         Store store = getStore(store_num);
         String result;
         if (store != null) {
@@ -123,7 +123,7 @@ public class StoreController {
 
     }
 
-    public String addToShift(int store_num, int employeeId, int dayNum, String dayPart, String role) {
+    public static  String addToShift(int store_num, int employeeId, int dayNum, String dayPart, String role) {
         String result;
         Store store = getStore(store_num);
 
@@ -144,8 +144,8 @@ public class StoreController {
                         if (dayPart.equals("evening"))
                             dayPartInt = 1;
                         if(role.equals("shift manager")) {
-                            String date = store.getSchedule().getDays()[dayNum -1].getDate();
-                            mapper.saveShiftManger(date,role,dayPartInt,dayNum-1,employeeId,0,store_num);
+                            LocalDate date = store.getSchedule().getDays()[dayNum -1].getDate();
+                            mapper.saveShiftManger(date.toString(),role,dayPartInt,dayNum-1,employeeId,0,store_num);
 
                         }
                         else
@@ -165,7 +165,7 @@ public class StoreController {
         return  result;
     }
 
-    public String addRoleToShift(int store_num, int dayNum, String dayPart, String role, int amount)
+    public static String addRoleToShift(int store_num, int dayNum, String dayPart, String role, int amount)
     {
         String result;
         Store store = getStore(store_num);
@@ -180,8 +180,8 @@ public class StoreController {
                 //
                 //DALLLLL
             //    mapper.save
-                String date = store.getSchedule().getDays()[dayNum -1].getDate();
-                mapper.saveRoleInShift(role,date,dayPart,store_num,amount);
+                LocalDate date = store.getSchedule().getDays()[dayNum -1].getDate();
+                mapper.saveRoleInShift(role,date.toString(),dayPart,store_num,amount);
             }
         }
         else {
@@ -206,7 +206,7 @@ public class StoreController {
 
 
     //LOADS ALL THE STORES -------
-    public String getEmployeesDetails()
+    public static String getEmployeesDetails()
     {
         String str = "";
         List<DEmployee_Details> dEmployee_details = mapper.loadEmployeesDetails();
@@ -222,7 +222,7 @@ public class StoreController {
         return str;
     }
 
-    public String getShiftsDetails(int store_num)
+    public static String getShiftsDetails(int store_num)
     {
         Store store = getStore(store_num);
         String str ="";
@@ -269,7 +269,7 @@ public class StoreController {
         return str;
     }
 
-    public String getCapableShiftsByEmployees(int store_num)
+    public static String getCapableShiftsByEmployees(int store_num)
     {
         Store store = getStore(store_num);
         if (store != null) {
@@ -334,7 +334,7 @@ public class StoreController {
 
 
 
-    public String removeEmployee(int id)
+    public static String removeEmployee(int id)
     {
 
         List<String> roles = mapper.loadRolesByID(id);
@@ -349,7 +349,7 @@ public class StoreController {
     }
 
 
-    public String addDelivery(int store_num,String date, String hour, String tid, String driverName, String source, int weightBeforeGo,
+    public static String addDelivery(int store_num,String date, String hour, String tid, String driverName, String source, int weightBeforeGo,
                               List<String> numberedFiles, HashMap<String,String> adresses, HashMap<String,HashMap<String,Integer>> products,String returnHour)
     {
 
@@ -365,7 +365,7 @@ public class StoreController {
 
     }
 
-    public Store getStore(int store_num)
+    public static Store getStore(int store_num)
     {
 
         for (int i = 0; i < storeNumbers; i++) {
@@ -377,7 +377,7 @@ public class StoreController {
         return null;
     }
 
-    public void saveCapableShifts(Employee employee)
+    public static void saveCapableShifts(Employee employee)
     {
         for (int i=0; i< 7; i++) {
             if (employee.getCapable_shifts()[i].contains("morning"))
@@ -389,7 +389,7 @@ public class StoreController {
 
     }
 
-    public Store returnStoreIfEmployeeExists(int storeNum, int employeeId)
+    public static Store returnStoreIfEmployeeExists(int storeNum, int employeeId)
     {
         Store store = getStore(storeNum);
         if (store != null) {
@@ -409,7 +409,7 @@ public class StoreController {
 
 
 
-    public String getEmployeeDetails(int store_num, int id) {
+    public static String getEmployeeDetails(int store_num, int id) {
         Store store = getStore(store_num);
         if (store != null) {
             if(!store.hasLoaded())
@@ -435,7 +435,7 @@ public class StoreController {
 
 
 
-    public String addTruck(int store_num,String id, int weight, int maxWeight, String model){
+    public static String addTruck(int store_num,String id, int weight, int maxWeight, String model){
         Store store = getStore(store_num);
         if (store != null) {
             if (!store.hasLoaded())
@@ -447,7 +447,7 @@ public class StoreController {
         }
         return "store doesn't exists";
     }
-    public String viewDeliveries (int store_num){
+    public static String viewDeliveries (int store_num){
         Store store = getStore(store_num);
         if (store != null) {
             if (!store.hasLoaded())
@@ -457,7 +457,7 @@ public class StoreController {
         return "store doesn't exists";
     }
 
-    public void initializeStores(int month, int day,int storeNumber) {
+    public static void initializeStores(int month, int day,int storeNumber) {
 
 
         for (int i =1; i <= storeNumber; i++)
@@ -474,7 +474,7 @@ public class StoreController {
         }
 
     }
-    public  boolean  LoadStores()
+    public static boolean  LoadStores()
     {
 
         List<DAL.DStore> Dstores = mapper.LoadStores();
@@ -491,12 +491,12 @@ public class StoreController {
 
     }
 
-    public void addDestination(String address, String contact, String phone, String area) {
+    public static void addDestination(String address, String contact, String phone, String area) {
         DestController.getInstance().addDestination(address,contact,phone,area);
         mapper.saveDestination(address,contact,phone,area);
     }
 
-    public String getSundayDate() {
+    public static String getSundayDate() {
         return "sunday is : " +mapper.getSundayDate();
     }
 

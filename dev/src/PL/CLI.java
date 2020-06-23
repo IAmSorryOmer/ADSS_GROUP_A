@@ -38,8 +38,10 @@ public class CLI {
     }
     public static void print_store_manager_menu()
     {
-       // @TODO
+        System.out.println("What do you want to do manager?");
+        while(true) {
 
+        }
     }
     public static void print_logistic_manager_menu()
     {
@@ -47,41 +49,15 @@ public class CLI {
     }
 
 
-
-    public static boolean isCorrectHour(String x){
-        if(x.length()!=5){return false;}
-        if(x.charAt(0)=='2'){
-            if(x.charAt(1)<'0' || x.charAt(1)>'3'){
-                return false;
-            }
-        }
-        else if(x.charAt(0)=='1' || x.charAt(0)=='0'){
-            if(x.charAt(1)<'0' || x.charAt(1)>'9'){
-                return false;
-            }
-        }
-        else{
-            return false;
-        }
-        if(x.charAt(2)!=':'){
-            return false;
-        }
-        if(x.charAt(3)<'0' || x.charAt(3)>'5'){
-            return false;
-        }
-        if(x.charAt(4)<'0'||x.charAt(4)>'9'){
-            return false;
-        }
-        return true;
-    }
     public static void main(String[] args) {
 
 
 
         Scanner scanner = new Scanner(System.in);
+
         ManagerController managerController = ManagerController.getInstance();
         EmployeeController employeeController = EmployeeController.getInstance();
-        if (!managerController.loadStores())
+        if (!managerController.loadStores())//Initializing the day
         {
             System.out.println("Initializing System..");
             System.out.println("ENTER MONTH");
@@ -92,7 +68,7 @@ public class CLI {
             managerController.initializeStores(month, day);
         }
 
-
+        //CHOOSE ROLE IN THE SYSTEM
         int choice = 0;
         while (choice != 5) {
             System.out.println("Hello, Welcome To Super-Li System");
@@ -110,7 +86,7 @@ public class CLI {
                 System.out.println("Please enter Your ID:");
                 int id = scanner.nextInt();
 
-
+                //Super-manager menu
                 int operationNum = 20;
                 while (operationNum != 0) {
                     System.out.println("Hello Manager, choose operation:");
@@ -136,9 +112,10 @@ public class CLI {
                     switch (operationNum) {
                         case 0: {
                             System.out.println("logging out");
-                            break;
+                            
                         }
-                        case 1: {
+                        //Entering new employee
+                        void enterEmployee() {
                             System.out.println("enter the following details, as in the example:");
                             System.out.println("name,employee id,bank account,store num,salary,employee conditions,start date");
                             System.out.println("aviv,5,6045,1,3000,no special conditions,12/4/2020");
@@ -146,7 +123,7 @@ public class CLI {
                             String[] detailsStringArr = details.split(",");
                             if (detailsStringArr.length != 7) {
                                 System.out.println("un appropriate amount of details inserted");
-                                break;
+                                
                             }
                             System.out.println("is the new employee a driver? y/n");
                             String answer = scanner.nextLine();
@@ -177,9 +154,10 @@ public class CLI {
                                         Integer.parseInt(detailsStringArr[4]), detailsStringArr[5], detailsStringArr[6]);
                                 System.out.println(addingNewEmployee);
                             }
-                            break;
+                            
                         }
-                        case 2: {
+                        //Assigning employee to shift
+                        void assignEmployeeToShift() {
                             System.out.println("enter the following details, as in the example:");
                             System.out.println("store num,employee id,day num(1-7),day part(morning-evening),role");
                             System.out.println("1,5,2,morning,cashier");
@@ -187,14 +165,15 @@ public class CLI {
                             String[] detailsStringArr = details.split(",");
                             if (detailsStringArr.length != 5) {
                                 System.out.println("un appropriate amount of details inserted");
-                                break;
+                                
                             }
 
                             String addingEmployeeToShift = managerController.addToShift(Integer.parseInt(detailsStringArr[0]), Integer.parseInt(detailsStringArr[1]), Integer.parseInt(detailsStringArr[2]), detailsStringArr[3], detailsStringArr[4]);
                             System.out.println(addingEmployeeToShift);
-                            break;
+                            
                         }
-                        case 3: {
+                        //Adding a role to a shift, still need someone to fill that role
+                        void addRoleToShift(){
                             System.out.println("enter the following details, as in the example:");
                             System.out.println("store num,day num(1-7),day part(morning-evening),role,amount");
                             System.out.println("1,3,evening,shift manager,2");
@@ -202,13 +181,14 @@ public class CLI {
                             String[] detailsStringArr = details.split(",");
                             if (detailsStringArr.length != 5) {
                                 System.out.println("un appropriate amount of details inserted");
-                                break;
+                                
                             }
                             String addingRoleToShift = managerController.addRoleToShift(Integer.parseInt(detailsStringArr[0]), Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], detailsStringArr[3], Integer.parseInt(detailsStringArr[4]));
                             System.out.println(addingRoleToShift);
-                            break;
+                            
                         }
-                        case 4: {
+                        //update details of employee
+                        void updateEmployeeDetails() {
 
                             System.out.println("Enter Employee ID:");
                             int eID = scanner.nextInt();
@@ -224,7 +204,7 @@ public class CLI {
                             String[] detailsStringArr = details.split(",");
                             if (detailsStringArr.length != 4) {
                                 System.out.println("un appropriate amount of details inserted");
-                                break;
+                                
                             }
 //                            System.out.println("enter capable jobs, as in the example:");
 //                            System.out.println("cashier,shift manager");
@@ -254,7 +234,7 @@ public class CLI {
                                 String[] detailsStringArr = details.split(",");
                                 if (detailsStringArr.length != 6) {
                                     System.out.println("un appropriate amount of details inserted");
-                                    break;
+                                    
                                 }
                                 System.out.println("enter capable jobs, as in the example:");
                                 System.out.println("cashier,shift manager");
@@ -266,35 +246,40 @@ public class CLI {
                                         detailsStringArr[4], detailsStringArr[5]);
                                 System.out.println(updatingEmployee); */
 
-                            break;
+                            
                         }
-                        case 5: {
+                        //Watch all the hours that people are capable to work in
+                        void watchCapableHours() {
                             System.out.println("enter the store num");
                             int store_num = scanner.nextInt();
                             scanner.nextLine();
                             System.out.println(managerController.getCapableShiftsByEmployees(store_num));
-                            break;
+                            
                         }
-                        case 6: {
+                        //Watch all the details of all the employees
+                        void watchEmployeeDetails {
                             System.out.println(managerController.getEmployeesDetails());
-                            break;
+                            
                         }
-                        case 7: {
+                        //Watch details of all the shifts
+                        void watchShiftDetails {
 
                             System.out.println("enter store num");
                             int store_num = scanner.nextInt();
                             scanner.nextLine();
                             System.out.println(managerController.getShiftsDetails(store_num));
-                            break;
+                            
                         }
-                        case 8: {
+                        //Remove employee from system
+                        void removeEmployee() {
                             System.out.println("enter employee id");
                             int ID = scanner.nextInt();
                             scanner.nextLine();
                             System.out.println(managerController.removeEmployee(ID));
-                            break;
+                            
                         }
-                        case 9: {
+                        //Add new destination, delivery can go to that destination now
+                        void addDestination() {
                             System.out.println("enter address");
                             String address = scanner.nextLine();
 
@@ -335,81 +320,20 @@ public class CLI {
                                         System.out.println("invalid phone number, please enter a new one");
                                         phone = scanner.nextLine();
                                         goodInput = false;
-                                        break;
+                                        
                                     }
                                 }
                             }
                             managerController.addDestination(address, contact, phone, area);
-                            break;
+                            
                         }
-                        case 10: {
-                            System.out.println("Delivery can be added to this week only");
-                            System.out.println("Please enter date, of a day in this week, for example : 1.5 (it's a random date)");
-                            String date = scanner.nextLine();
-
-                            System.out.println("Please enter hour in format of: 23:40 (4 digits) ..");
-                            String hour = scanner.nextLine();
-                            while (!isCorrectHour(hour))
-                            {
-                                System.out.println("illegal hour, insert again");
-                                hour = scanner.nextLine();
-                            }
-                            System.out.println("Please enter *return* hour in format of: 23:40 (4 digits) ..");
-                            String returnHour = scanner.nextLine();
-                            while (!isCorrectHour(returnHour))
-                            {
-                                System.out.println("illegal hour, insert again");
-                                returnHour = scanner.nextLine();
-                            }
-
-
-                            System.out.println("Please enter truck id:");
-                            String truckid = scanner.nextLine();
-
-                            System.out.println("Please enter the name of the driver:");
-                            String driver = scanner.nextLine();
-
-                            System.out.println("Please enter the source of the delivery:");
-                            String src = scanner.nextLine();
-
-                            System.out.println("Please enter the total weight of the stuff you want to deliver:");
-                            int weight = Integer.parseInt(scanner.nextLine());
-                            boolean stop = false;
-                            List<String> numberlst = new LinkedList<>();
-                            HashMap<String, String> destlst = new HashMap<>();
-                            HashMap<String, HashMap<String, Integer>> productlst = new HashMap<>();
-                            while (true) {
-
-                                System.out.println("Please enter the number of the file or \"r\" to stop entering files");
-                                String number = scanner.nextLine();
-                                if (number.equals("r")) {
-                                    break;
-                                }
-                                numberlst.add(number);
-                                System.out.println("Please enter address of a destination for that file:");
-                                String dest = scanner.nextLine();
-                                destlst.put(number, dest);
-                                productlst.put(number, new HashMap<String, Integer>());
-                                while (true) {
-                                    System.out.println("Please enter name of product or \"r\" to stop entering products");
-                                    String product = scanner.nextLine();
-                                    if (product.equals("r")) {
-                                        break;
-                                    }
-
-                                    System.out.println("Please enter quantity of that product");
-                                    int quantity = Integer.parseInt(scanner.nextLine());
-                                    productlst.get(number).put(product, quantity);
-
-                                }
-                            }
-                            System.out.println("Enter Store Num");
-                            int store_num = scanner.nextInt();
-                            System.out.println(managerController.addDelivery(store_num,date,hour,truckid,driver,src,weight,numberlst,destlst,productlst,returnHour));
-                            break;
+                        //Add a new delivery to the system
+                        void addDelivery() {
+                                sendDelivery();
+                              
                         }
-
-                        case 11:
+                        //Add a new truck to the system
+                        void addTruck()
                         {
                             System.out.println("enter model");
                             String model = scanner.nextLine();
@@ -443,24 +367,28 @@ public class CLI {
                                 }
                             }
                             managerController.addTruck(store_num,truckId, weight, maxWeight, model);
-                            break;
+                            
                         }
-                        case 12:
+                        //View all the deliveries
+                        void viewDeliveries()
                         {
                             System.out.println("enter store number");
                             int store_num = scanner.nextInt();
 
                             System.out.println(managerController.viewDeliveries(store_num));
-                            break;
+                            
                         }
-                        case 13:
+                        //Watch the date of the first day in the week(for some reason)
+                        void WatchSunday()
                         {
                             System.out.println(managerController.getSundayDate());
-                            break;
+                            
                         }
                     }
                 }
             }
+
+            //If you are an employee which is not a manager, you enter this menu
             if (choice == 2) {
                 System.out.println("Enter Employee ID:");
                 int eID = scanner.nextInt();
@@ -469,7 +397,7 @@ public class CLI {
 
 
                 if (employeeController.connect(eID,store_num)) {
-
+                    //If you are a storage worker, you enter here the storage worker menu
                     if (employeeController.isStorage())
                     {
                         System.out.println("hello storage employee " + employeeController.getActiveName() + "\nchoose operation:");
@@ -483,7 +411,7 @@ public class CLI {
 
                         }
                     }
-
+                    //menu for normal employees(non storage)
                     System.out.println("hello employee " + employeeController.getActiveName() + "\nchoose operation:");
                     int operationNum = 0;
                     while (operationNum != 3) {
@@ -508,16 +436,16 @@ public class CLI {
                                 else {
                                     System.out.println("you already assigned shifts");
                                 }
-                                break;
+                                
                             }
                             case 2: {
                                 System.out.println(employeeController.watchMyShifts());
-                                break;
+                                
                             }
                             case 3:
                             {
                                 System.out.println("logging out");
-                                break;
+                                
                             }
                         }
                     }
@@ -526,7 +454,7 @@ public class CLI {
                 }
 
             }
-            if (choice ==3) //STORE MANAGER
+            if (choice ==3) //STORE MANAGER-NOT IMPLEMENTED
             {
                 print_store_manager_menu();
                 System.out.println("hello Store manager" + "\nchoose operation:");
@@ -537,7 +465,7 @@ public class CLI {
                 }
 
             }
-            if (choice ==4) //LOGISTIC
+            if (choice ==4) //LOGISTIC-NOT IMPLEMENTED
             {
                 print_logistic_manager_menu();
                 System.out.println("hello Logistic Manager" + employeeController.getActiveName() + "\nchoose operation:");
@@ -548,5 +476,71 @@ public class CLI {
             }
         }
         System.out.println("BYE BYE");
+    }
+    public static void sendDelivery(){
+        Scanner scanner=new Scanner(System.in);
+        System.out.println("Delivery can be added to this week only");
+        System.out.println("Please enter date, of a day in this week, for example : 1.5 (it's a random date)");
+        String date = scanner.nextLine();
+
+        System.out.println("Please enter hour in format of: 23:40 (4 digits) ..");
+        String hour = scanner.nextLine();
+        while (!isCorrectHour(hour))
+        {
+            System.out.println("illegal hour, insert again");
+            hour = scanner.nextLine();
+        }
+        System.out.println("Please enter *return* hour in format of: 23:40 (4 digits) ..");
+        String returnHour = scanner.nextLine();
+        while (!isCorrectHour(returnHour))
+        {
+            System.out.println("illegal hour, insert again");
+            returnHour = scanner.nextLine();
+        }
+
+
+        System.out.println("Please enter truck id:");
+        String truckid = scanner.nextLine();
+
+        System.out.println("Please enter the name of the driver:");
+        String driver = scanner.nextLine();
+
+        System.out.println("Please enter the source of the delivery:");
+        String src = scanner.nextLine();
+
+        System.out.println("Please enter the total weight of the stuff you want to deliver:");
+        int weight = Integer.parseInt(scanner.nextLine());
+        boolean stop = false;
+        List<String> numberlst = new LinkedList<>();
+        HashMap<String, String> destlst = new HashMap<>();
+        HashMap<String, HashMap<String, Integer>> productlst = new HashMap<>();
+        while (true) {
+
+            System.out.println("Please enter the number of the file or \"r\" to stop entering files");
+            String number = scanner.nextLine();
+            if (number.equals("r")) {
+                
+            }
+            numberlst.add(number);
+            System.out.println("Please enter address of a destination for that file:");
+            String dest = scanner.nextLine();
+            destlst.put(number, dest);
+            productlst.put(number, new HashMap<String, Integer>());
+            while (true) {
+                System.out.println("Please enter name of product or \"r\" to stop entering products");
+                String product = scanner.nextLine();
+                if (product.equals("r")) {
+                    
+                }
+
+                System.out.println("Please enter quantity of that product");
+                int quantity = Integer.parseInt(scanner.nextLine());
+                productlst.get(number).put(product, quantity);
+
+            }
+        }
+        System.out.println("Enter Store Num");
+        int store_num = scanner.nextInt();
+        System.out.println(ManagerController.getInstance().addDelivery(store_num,date,hour,truckid,driver,src,weight,numberlst,destlst,productlst,returnHour));
     }
 }

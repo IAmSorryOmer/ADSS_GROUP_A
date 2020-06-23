@@ -38,11 +38,11 @@ public class ManagerController {
     }
     public void initializeStores(int month, int day)
     {
-        storeController.initializeStores(month, day,storeNumber);
+        StoreController.initializeStores(month, day,storeNumber);
     }
     public boolean loadStores()
     {
-       return storeController.LoadStores();
+       return StoreController.LoadStores();
     }
     public void  setActiveUserManager(Manager manager)
     {
@@ -52,30 +52,30 @@ public class ManagerController {
 
     public String addEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date) {
 
-        return storeController.addEmployee(jobs,name,id, bankAccount,store_num,salary,employee_conditions,start_date);
+        return StoreController.addEmployee(jobs,name,id, bankAccount,store_num,salary,employee_conditions,start_date);
 
     }
     public String addDriverEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date,String license){
-        return storeController.addDriverEmployee(jobs,name,id,bankAccount,store_num,salary,employee_conditions,start_date,license);
+        return StoreController.addDriverEmployee(jobs,name,id,bankAccount,store_num,salary,employee_conditions,start_date,license);
     }
 
     public String getEmployeeDetails(int store_num, int id) {
 
-       return storeController.getEmployeeDetails(store_num,id);
+       return StoreController.getEmployeeDetails(store_num,id);
 
     }
     public static Store connect(int employeeId, int storeId)
     {
-        return  storeController.returnStoreIfEmployeeExists(storeId,employeeId);
+        return  StoreController.returnStoreIfEmployeeExists(storeId,employeeId);
     }
     public static void saveCapableShifts(Employee employee)
     {
-        storeController.saveCapableShifts(employee);
+        StoreController.saveCapableShifts(employee);
     }
 
     public String updateEmployee(int store_num, String name, int id, String bankAccount, int salary, String employee_conditions) {
 
-        return storeController.updateEmployee(store_num,name,id,bankAccount,salary,employee_conditions);
+        return StoreController.updateEmployee(store_num,name,id,bankAccount,salary,employee_conditions);
       /*  String result;
         Employee employee = getEmployeeById(id);
         if (employee != null) {
@@ -94,7 +94,7 @@ public class ManagerController {
 
     public String addToShift(int store_num, int employeeId, int dayNum, String dayPart, String role) {
 
-        return storeController.addToShift(store_num,employeeId,dayNum,dayPart,role);
+        return StoreController.addToShift(store_num,employeeId,dayNum,dayPart,role);
 
         /*
             String result;
@@ -127,7 +127,7 @@ public class ManagerController {
     } */
     public String addRoleToShift(int store_num, int dayNum, String dayPart, String role, int amount)
     {
-      return storeController.addRoleToShift(store_num,dayNum,dayPart,role,amount);
+      return StoreController.addRoleToShift(store_num,dayNum,dayPart,role,amount);
     }
 
    /* public List<List<Employee>> getAllEmployees()
@@ -141,17 +141,17 @@ public class ManagerController {
 
     public String getEmployeesDetails()
     {
-       return storeController.getEmployeesDetails();
+       return StoreController.getEmployeesDetails();
     }
     public String getShiftsDetails(int store_num)
     {
-        return storeController.getShiftsDetails(store_num);
+        return StoreController.getShiftsDetails(store_num);
 
     }
 
     public String getCapableShiftsByEmployees(int store_num)
     {
-        return storeController.getCapableShiftsByEmployees(store_num);
+        return StoreController.getCapableShiftsByEmployees(store_num);
        /* String val = "";
         for (Employee employee : getStore(store_num).getEmployees())
         {
@@ -214,7 +214,7 @@ public class ManagerController {
 
     public String removeEmployee(int id)
     {
-       return storeController.removeEmployee(id);
+       return StoreController.removeEmployee(id);
 
     }
 
@@ -229,24 +229,24 @@ public class ManagerController {
                               HashMap<String,HashMap<String,Integer>> products,String returnHour)
     {
 
-        return storeController.addDelivery(store_num,date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products,returnHour);
+        return StoreController.addDelivery(store_num,date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products,returnHour);
 
     }
 
     public String viewDeliveries (int store_num){
-        return storeController.viewDeliveries(store_num);
+        return StoreController.viewDeliveries(store_num);
     }
 
     public String addTruck(int store_num,String id, int weight, int maxWeight, String model){
-        return storeController.addTruck(store_num,id,weight,maxWeight,model);
+        return StoreController.addTruck(store_num,id,weight,maxWeight,model);
     }
     public void addDestination(String address, String contact, String phone, String area){
-        storeController.addDestination(address,contact,phone,area);
+        StoreController.addDestination(address,contact,phone,area);
 
     }
 
     public String getSundayDate() {
-        return  storeController.getSundayDate();
+        return  StoreController.getSundayDate();
     }
 
 
