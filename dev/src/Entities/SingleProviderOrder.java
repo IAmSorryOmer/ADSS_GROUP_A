@@ -29,6 +29,11 @@ public class SingleProviderOrder{
 		this.orderItems = new HashMap<CatalogItem, Integer>();
 		this.orderDate = orderDate;
 		this.orderDays = orderDays;
+		this.deliveryDate = null;
+		this.hasArrived = false;
+		this.isShipped = false;
+		this.driverId = 0;
+		this.shift = -1;
 	}
 
 	public SingleProviderOrder(Provider provider,  int storeId, int driverId, int shift, String orderID, LocalDate orderDate, LocalDate deliveryDate, int orderDays, boolean isShipped, boolean hasArrived) {
