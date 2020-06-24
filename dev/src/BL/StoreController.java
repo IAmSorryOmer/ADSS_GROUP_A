@@ -350,9 +350,12 @@ public class StoreController {
     }
 
 
-    public static String addDelivery(String date,  int weightBeforeGo, SingleProviderOrder order,int store_num)
+    public static String addDelivery(String date,  int weightBeforeGo, String orderId,int store_num)
     {
-
+        SingleProviderOrder singleProviderOrder = SingleProviderOrderController.getOrderById(orderId);
+        if(singleProviderOrder == null || singleProviderOrder.getStoreId() != store_num){
+            throw new IllegalArgumentException("there is no order with id " + orderId + " for store number " + store_num);
+        }
         Store store = getStore(store_num);
         if (store != null) {
            String result =  store.addDelivery(mapper,date,weightBeforeGo,order);

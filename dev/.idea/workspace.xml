@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/PL/WatchMenues.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/WeekSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/WeekSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/AgreementDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/CatalogItemDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CatalogItemDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/CategoryDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/CategoryDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/DBHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/DBHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/DiscountDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/DiscountDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ProductDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProductDetailsDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ProviderDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ProviderDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/ReportDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/ReportDAL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BL/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/StoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PL/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -207,7 +194,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592999412938</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Added rescheduleOrderDelivery">
+      <created>1593013660393</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1593013660393</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -269,11 +263,11 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592999412853">
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1593013660304">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592933203732" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592999412853" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1593013660304" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -319,14 +313,16 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="937" height="335" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323570" />
-    <state x="129" y="61" key="MergeDialog" timestamp="1592927841527">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="181" y="86" width="1536" height="855" key="MergeDialog" timestamp="1593013851612">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="129" y="61" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592927841527" />
-    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592927841548">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="181" y="86" width="1536" height="855" key="MergeDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1593013851612" />
+    <state x="555" y="115" width="728" height="475" key="MultipleFileMergeDialog" timestamp="1593013851615">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592927841548" />
+    <state x="555" y="115" width="728" height="475" key="MultipleFileMergeDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1593013851615" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor" timestamp="1592827689855">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -361,10 +357,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="657" y="267" width="758" height="652" key="find.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1593013457881" />
-    <state x="596" y="303" width="718" height="423" key="git4idea.merge.GitPullDialog" timestamp="1593001785959">
+    <state x="596" y="303" width="728" height="423" key="git4idea.merge.GitPullDialog" timestamp="1593013688957">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="596" y="303" width="718" height="423" key="git4idea.merge.GitPullDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1593001785959" />
+    <state x="596" y="303" width="728" height="423" key="git4idea.merge.GitPullDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1593013688957" />
     <state x="486" y="69" width="945" height="962" key="search.everywhere.popup" timestamp="1593005184109">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

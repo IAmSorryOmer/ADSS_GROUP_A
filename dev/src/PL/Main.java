@@ -1569,22 +1569,6 @@ public class Main {
         System.out.println("Please enter date, of a day in this week, for example : 1.5 (it's a random date)");
         String date = reader.nextLine();
 
-        System.out.println("Please enter hour in format of: 23:40 (4 digits) ..");
-        String hour = reader.nextLine();
-        while (!isCorrectHour(hour))
-        {
-            System.out.println("illegal hour, insert again");
-            hour = reader.nextLine();
-        }
-        System.out.println("Please enter *return* hour in format of: 23:40 (4 digits) ..");
-        String returnHour = reader.nextLine();
-        while (!isCorrectHour(returnHour))
-        {
-            System.out.println("illegal hour, insert again");
-            returnHour = reader.nextLine();
-        }
-
-
         System.out.println("Please enter truck id:");
         String truckid = reader.nextLine();
 
@@ -1605,7 +1589,7 @@ public class Main {
             System.out.println("Please enter the number of the file or \"r\" to stop entering files");
             String number = reader.nextLine();
             if (number.equals("r")) {
-
+                break;
             }
             numberlst.add(number);
             System.out.println("Please enter address of a destination for that file:");
@@ -1616,13 +1600,12 @@ public class Main {
                 System.out.println("Please enter name of product or \"r\" to stop entering products");
                 String product = reader.nextLine();
                 if (product.equals("r")) {
-
+                    break;
                 }
 
                 System.out.println("Please enter quantity of that product");
                 int quantity = Integer.parseInt(reader.nextLine());
                 productlst.get(number).put(product, quantity);
-
             }
         }
         System.out.println(ManagerController.getInstance().addDelivery(store_num,date,hour,truckid,driver,src,weight,numberlst,destlst,productlst,returnHour));
