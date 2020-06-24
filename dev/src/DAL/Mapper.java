@@ -20,18 +20,16 @@ public class Mapper {
     private Connection conn;
 
     public void connect() {
-        try {
-            // db parameters
-            String url = "jdbc:sqlite:./Database.db";
-
-            // create a connection to the database
-            SQLiteConfig config= new  SQLiteConfig();
-            config.enforceForeignKeys(true);
-            conn = DriverManager.getConnection(url,config.toProperties());
-
+        try{
+            String url = "jdbc:sqlite:SuperLiUnified";
+            SQLiteConfig sqLiteConfig = new SQLiteConfig();
+            sqLiteConfig.enforceForeignKeys(true);
+            conn = DriverManager.getConnection(url, sqLiteConfig.toProperties());
+            System.out.println("opened database successfully");
         }
-        catch (SQLException e) {
-            e.printStackTrace();
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
         }
     }
 
@@ -260,7 +258,7 @@ public class Mapper {
     public List<DDelivery> loadDeliveries(int store_num) {
         List<DDelivery> dDelivery = new LinkedList<>();
         try {
-            String query = "SELECT id,date,dispatchTime,TID,DName,source,preWeight, returnHour  FROM Deliveries WHERE store_num=?";
+            String query = "SELECT id,date,dispatchTime,TID,DName,source,preWeight, returnHour,Address, OrderId  FROM Deliveries WHERE store_num=?";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, store_num);
             ResultSet rs = stmt.executeQuery();
@@ -268,7 +266,7 @@ public class Mapper {
             // loop through the result set
             while (rs.next()) {
                 dDelivery.add(new DDelivery(rs.getInt("id"), rs.getString("date"), rs.getString("dispatchTime"),
-                        rs.getString("TID"), rs.getString("DName"), rs.getString("source"), rs.getInt("preWeight"),rs.getString("returnHour")));
+                        rs.getString("TID"), rs.getString("DName"), rs.getString("source"), rs.getInt("preWeight"),rs.getString("Address"),rs.getString("OrderId")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -457,9 +455,9 @@ public class Mapper {
         }
     }
 
-    public void saveDelivery( int id, String date, String dispatchTime, String TID, String DName, String source, int preWeight, int store_num,String retHour) {
+    public void saveDelivery( int id, String date, String dispatchTime, String TID, String DName, String source, int preWeight, String address,String orderId) {
         try {
-            String query = "INSERT INTO Deliveries(date, dispatchTime, DName, source, TID, id, preWeight, store_num, returnHour) VALUES(?,?,?,?,?,?,?,?,?)";
+            String query = "INSERT INTO Deliveries(date, dispatchTime, DName, source, TID, id, preWeight, store_num, Address,OrderId) VALUES(?,?,?,?,?,?,?,?,?,?)";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setString(1, date);
             stmt.setString(2, dispatchTime);
@@ -468,8 +466,10 @@ public class Mapper {
             stmt.setString(5, TID);
             stmt.setInt(6, id);
             stmt.setInt(7, preWeight);
-            stmt.setInt(8, store_num);
-            stmt.setString(9, retHour);
+            stmt.setInt(8, Integer.parseInt(source));
+            stmt.setString(9,address);
+            stmt.setString(10,orderId);
+
             stmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
