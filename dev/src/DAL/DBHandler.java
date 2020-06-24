@@ -14,9 +14,8 @@ public class DBHandler {
             connection = DriverManager.getConnection(url, sqLiteConfig.toProperties());
             System.out.println("opened database successfully");
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

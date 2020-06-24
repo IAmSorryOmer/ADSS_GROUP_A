@@ -28,7 +28,7 @@ public class ProductDetailsDAL {
             mapper.put(productDetails.getId(), productDetails);
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ public class ProductDetailsDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -64,10 +64,9 @@ public class ProductDetailsDAL {
                 return resultList.get(0);
             }
             catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
     public static List<ProductDetails> getStoreMissingProducts(int storeId){
@@ -81,9 +80,8 @@ public class ProductDetailsDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static List<ProductDetails> getProductDetailsByName(String name){
@@ -95,9 +93,8 @@ public class ProductDetailsDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
     public static List<ProductDetails> getStoreProductDetailsInStock(int storeId){
         String sql = "select ProductDetails.* from ProductDetails " +
@@ -110,9 +107,8 @@ public class ProductDetailsDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static int getStoreProductDetailsQuantity(int storeId, String productDetailsId){
@@ -126,9 +122,8 @@ public class ProductDetailsDAL {
             return resultSet.getInt("quantity");
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return -1;
     }
 
     public static List<ProductDetails> loadAll(){
@@ -139,10 +134,8 @@ public class ProductDetailsDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
-
     }
 
     private static List<ProductDetails> resultSetToCategory(ResultSet resultSet) throws SQLException{

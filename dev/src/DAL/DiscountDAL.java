@@ -25,7 +25,7 @@ public class DiscountDAL {
             mapper.put(discount.getId(), discount);
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class DiscountDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -54,7 +54,7 @@ public class DiscountDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -70,9 +70,8 @@ public class DiscountDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static Discount getDiscountById(String id){
@@ -90,10 +89,9 @@ public class DiscountDAL {
                 return resultList.get(0);
             }
             catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
     private static List<Discount> resultSetToCategory(ResultSet resultSet) throws SQLException{

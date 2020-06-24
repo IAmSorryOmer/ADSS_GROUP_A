@@ -19,7 +19,7 @@ public class AgreementDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -34,7 +34,7 @@ public class AgreementDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
     public static void removeItem(CatalogItem catalogItem){
@@ -46,7 +46,7 @@ public class AgreementDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -62,7 +62,7 @@ public class AgreementDAL {
             provider.getCommunicationDetails().getAgreement().setUpdated(true);
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

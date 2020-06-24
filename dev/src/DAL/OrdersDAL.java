@@ -24,8 +24,10 @@ public class OrdersDAL {
             preparedStatement.setString(4, singleProviderOrder.getDeliveryDate() == null ? null : singleProviderOrder.getDeliveryDate().toString());
             preparedStatement.setInt(5, singleProviderOrder.getOrderDays());
             preparedStatement.setInt(6, singleProviderOrder.getStoreId());
-            preparedStatement.setBoolean(7, singleProviderOrder.isShipped());
-            preparedStatement.setBoolean(8, singleProviderOrder.hasArrived());
+            preparedStatement.setInt(7, singleProviderOrder.getDriverId());
+            preparedStatement.setInt(8, singleProviderOrder.getShift());
+            preparedStatement.setInt(9, singleProviderOrder.isShipped() ? 1 : 0);
+            preparedStatement.setInt(10, singleProviderOrder.hasArrived() ? 1 : 0);
             preparedStatement.executeUpdate();
             mapper.put(singleProviderOrder.getOrderID(), singleProviderOrder);
             for(Map.Entry<CatalogItem, Integer> entry: singleProviderOrder.getOrderItems().entrySet()){
@@ -38,7 +40,23 @@ public class OrdersDAL {
             }
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public static void editOrder(SingleProviderOrder singleProviderOrder){
+        String sql = "update SingleProviderOrder set DeliveryDate = ?, DriverId = ?, Shift = ?, isShipped = ?, hasArrived = ? where OrderId = ?";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, singleProviderOrder.getDeliveryDate() == null ? null : singleProviderOrder.getDeliveryDate().toString());
+            preparedStatement.setInt(2, singleProviderOrder.getDriverId());
+            preparedStatement.setInt(3, singleProviderOrder.getShift());
+            preparedStatement.setInt(4, singleProviderOrder.isShipped() ? 1 : 0);
+            preparedStatement.setInt(5, singleProviderOrder.hasArrived() ? 1 : 0);
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -52,7 +70,7 @@ public class OrdersDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -66,7 +84,7 @@ public class OrdersDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
     public static void editOrderDeliveryDetails(SingleProviderOrder order, LocalDate deliveryDate, int driverId, int shift){
@@ -80,7 +98,7 @@ public class OrdersDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
     public static void removeItemFromOrder(SingleProviderOrder order, CatalogItem item){
@@ -92,7 +110,7 @@ public class OrdersDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -111,10 +129,9 @@ public class OrdersDAL {
                 return resultList.get(0);
             }
             catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
 
@@ -127,9 +144,8 @@ public class OrdersDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static List<SingleProviderOrder> getAutomaticOrdersOfStore(int storeId){
@@ -142,9 +158,8 @@ public class OrdersDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static List<SingleProviderOrder> getAutomaticOrdersOfStoreAndDay(int storeId, int day){
@@ -157,9 +172,63 @@ public class OrdersDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
+    }
+
+    public static List<SingleProviderOrder> getNotScheduledOrders(int storeId, LocalDate date){
+        String sql = "select * from SingleProviderOrder where OrderDays = 0 and DeliveryDate is null and OrderDate = ? and StoreId = ?;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, date.toString());
+            preparedStatement.setInt(2, storeId);
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public static List<SingleProviderOrder> getNotShippedOrders(int storeId, LocalDate date){
+        String sql = "select * from SingleProviderOrder where OrderDays = 0 and DeliveryDate = ? and StoreId = ? and IsShipped != 1;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setString(1, date.toString());
+            preparedStatement.setInt(2, storeId);
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public static List<SingleProviderOrder> getNotHandledOrders(int storeId){
+        String sql = "select * from SingleProviderOrder where OrderDays = 0 and StoreId = ? and IsShipped = 1 and HasArrived != 1;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public static List<SingleProviderOrder> getAllProviderTransportedDeliveries(int storeId){
+        String sql = "select SingleProviderOrder.* from SingleProviderOrder join Provider P on SingleProviderOrder.ProviderId = P.ProviderId " +
+                "where OrderDays = 0 and StoreId = ? and IsShipped = 0 and P.NeedsTransport = 1;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     public static List<SingleProviderOrder> getStoreOrdersOfProvider(int storeId, String providerId){
@@ -172,9 +241,8 @@ public class OrdersDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static List<SingleProviderOrder> getOrdersToSupply(LocalDate localDate){
@@ -186,10 +254,8 @@ public class OrdersDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
-
     }
 
 
@@ -236,7 +302,7 @@ public class OrdersDAL {
             }
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
 
     }
@@ -252,7 +318,7 @@ public class OrdersDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

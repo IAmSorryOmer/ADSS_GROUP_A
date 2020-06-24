@@ -1,8 +1,12 @@
 package BL;
 
+import DAL.DBHandler;
 import DAL.OrdersDAL;
 import Entities.*;
+import com.sun.xml.internal.bind.v2.runtime.unmarshaller.XsiNilLoader;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.*;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -49,43 +53,48 @@ public class SingleProviderOrderController {
 				order.setDriverId(shiftDriverDate.getFirst()[1]);
 			}
 		}
-		else if(provider.getArrivalDays() <= 0){ //provider provides on his own
-			for(int i = 0;i<7;i++){
-				LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
-				if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week) %7)){ //is working i days from now.
-					//TODO: wait until the other module implements the following function isStorageInDate
-					Store store = StoreController.getStore(order.getStoreId());
-					int shift = store.getSchedule().isStorageInDay(date_i_DaysFromNow);
-					if(shift == -1){
-						continue;
+		else{
+			if(provider.getArrivalDays() <= 0){ //provider provides on his own
+				for(int i = 1;i<7;i++){
+					LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
+					if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week - 1) %7)){ //is working i days from now.
+						//TODO: wait until the other module implements the following function isStorageInDate
+						Store store = StoreController.getStore(order.getStoreId());
+						int shift = store.getSchedule().isStorageInDay(date_i_DaysFromNow);
+						if(shift == -1){
+							continue;
+						}
+						order.setShift(shift);
+						order.setDeliveryDate(date_i_DaysFromNow); //return the appropriate date
+						break;
 					}
-					order.setShift(shift);
-					order.setDeliveryDate(date_i_DaysFromNow); //return the appropriate date
-					break;
 				}
 			}
-		}
-		else{
-			LocalDate DeliveryDate = StoreController.current_date.plus(provider.getDelayDays(), ChronoUnit.DAYS); //calculate the date i days from now
-			Store store = StoreController.getStore(order.getStoreId());
-			int shift = store.getSchedule().isStorageInDay(DeliveryDate);
-			if(shift >= 0){
-				order.setShift(shift);
-				order.setDeliveryDate(DeliveryDate); //return the appropriate date
+			else{
+				LocalDate DeliveryDate = StoreController.current_date.plus(provider.getDelayDays(), ChronoUnit.DAYS); //calculate the date i days from now
+				Store store = StoreController.getStore(order.getStoreId());
+				int shift = store.getSchedule().isStorageInDay(DeliveryDate);
+				if(shift >= 0){
+					order.setShift(shift);
+					order.setDeliveryDate(DeliveryDate); //return the appropriate date
+				}
 			}
 		}
 	}
 
 	//returns the next date for providers
-	private static LocalDate getNextAutoOrderDate(Provider provider){
+	private static LocalDate getNextAutoOrderDate(SingleProviderOrder singleProviderOrder){
 		for(int i = 0;i<7;i++){
 			LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
-			if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week) %7)){ //is working i days from now.
+			if(singleProviderOrder.isComingAtDay((i + StoreController.Day_In_Week - 1) %7)){ //is working i days from now.
 				return date_i_DaysFromNow;
 			}
-
 		}
 		return null;
+	}
+
+	public static void editOrder(SingleProviderOrder singleProviderOrder){
+		OrdersDAL.editOrder(singleProviderOrder);
 	}
 
 	/*public static LocalDate getNextAutoOrderDate(AutomaticOrder automaticOrder){
@@ -192,19 +201,19 @@ public class SingleProviderOrderController {
 	//this function gets an automatic order and ensures that the current day is atleast a day before until the scheduled time.
 	private static void ensureTimesAutomatic(SingleProviderOrder singleProviderOrder){
 		if(singleProviderOrder.isAutomatic()){
-			LocalDate nextDate = getNextAutoOrderDate(singleProviderOrder.getProvider());
-			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.HOURS);
-			if(hoursUntil <= 24){
-				throw new IllegalArgumentException("you cant edit an automatic order less than a day before order");
+			LocalDate nextDate = getNextAutoOrderDate(singleProviderOrder);
+			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.DAYS);
+			if(hoursUntil < 1){
+				throw new IllegalArgumentException("you cant edit an order less than a day before order");
 			}
 		}
 	}
 	//this function gets an order and ensures that the current day is atleast a day before until the scheduled time.
 	private static void ensureTimes(SingleProviderOrder singleProviderOrder){
-		if(singleProviderOrder.isAutomatic()){
+		if(!singleProviderOrder.isAutomatic()){
 			LocalDate nextDate = singleProviderOrder.getDeliveryDate();
-			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.HOURS);
-			if(hoursUntil <= 24){
+			long hoursUntil = StoreController.current_date.until(nextDate, ChronoUnit.DAYS);
+			if(hoursUntil < 1){
 				throw new IllegalArgumentException("you cant edit an order less than a day before order");
 			}
 		}
@@ -299,6 +308,21 @@ public class SingleProviderOrderController {
 	}
 	public static List<SingleProviderOrder> getAllStoreOrders(int storeId){
 		return OrdersDAL.getOrdersOfStore(storeId);
+	}
+
+	public static List<SingleProviderOrder> getNotScheduledOrders(int storeId, LocalDate date){
+		return OrdersDAL.getNotScheduledOrders(storeId, date);
+	}
+
+	public static List<SingleProviderOrder> getNotShippedOrders(int storeId, LocalDate date){
+		return OrdersDAL.getNotShippedOrders(storeId, date);
+	}
+
+	public static List<SingleProviderOrder> getNotHandledOrders(int storeId){
+		return OrdersDAL.getNotHandledOrders(storeId);
+	}
+	public static List<SingleProviderOrder> getAllProviderTransportedDeliveries(int storeId){
+		return OrdersDAL.getAllProviderTransportedDeliveries(storeId);
 	}
 	public static List<SingleProviderOrder> getAllStoreAutomaticsOrders(int storeId){
 		return OrdersDAL.getAutomaticOrdersOfStore(storeId);

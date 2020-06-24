@@ -24,7 +24,7 @@ public class CatalogItemDAL {
             mapper.put(catalogItem.getCatalogNum(), catalogItem);
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
     public static void editItem(CatalogItem catalogItem){
@@ -36,7 +36,7 @@ public class CatalogItemDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -54,10 +54,9 @@ public class CatalogItemDAL {
                     return null;
                 return toReturn.get(0);
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
     public static CatalogItem getProviderCatalogItemByProductDetail(String providerId, String productDetailsId){
@@ -71,9 +70,8 @@ public class CatalogItemDAL {
                 return null;
             return toReturn.get(0);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static void loadProviderItems(CommunicationDetails communicationDetails){
@@ -85,7 +83,7 @@ public class CatalogItemDAL {
             communicationDetails.setCatalogItems(toReturn);
             communicationDetails.setUpdated(true);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 

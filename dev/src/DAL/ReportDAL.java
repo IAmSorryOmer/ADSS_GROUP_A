@@ -36,7 +36,7 @@ public class ReportDAL {
             }
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -55,10 +55,9 @@ public class ReportDAL {
                 return resultList.get(0);
             }
             catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
 
@@ -71,9 +70,8 @@ public class ReportDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     private static List<Report> resultSetToCategory(ResultSet resultSet) throws SQLException{
@@ -119,7 +117,7 @@ public class ReportDAL {
             report.setSubjects(toSet);
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
 
     }

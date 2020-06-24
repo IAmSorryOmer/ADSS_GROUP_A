@@ -29,7 +29,7 @@ public class ProductDAL {
             mapper.put(product.getId(), product);
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -45,7 +45,7 @@ public class ProductDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -64,10 +64,9 @@ public class ProductDAL {
                 return resultList.get(0);
             }
             catch (SQLException e) {
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
     public static List<Product> getStoreProductsByType(String typeId, int storeId){
         String sql = "select * from Product where type = ? and StoreId = ?;";
@@ -79,9 +78,8 @@ public class ProductDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
     public static List<Product> getStoreDamagedProducts(int storeId){
         String sql = "select * from Product where IsDamaged = 1 and StoreId = ?;";
@@ -92,9 +90,8 @@ public class ProductDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static List<Product> loadStoreAll(int storeId){
@@ -106,9 +103,8 @@ public class ProductDAL {
             return resultList;
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     private static List<Product> resultSetToCategory(ResultSet resultSet) throws SQLException{

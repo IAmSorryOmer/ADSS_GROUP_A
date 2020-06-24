@@ -252,6 +252,11 @@ public class Store {
 
     public void passDay(Mapper mapper,LocalDate curr) {
         SingleProviderOrderController.handleAutomaticOrders(store_num);
+        List<SingleProviderOrder> providerSuppliedOrders = SingleProviderOrderController.getAllProviderTransportedDeliveries(store_num);
+        for(SingleProviderOrder singleProviderOrder : providerSuppliedOrders){
+            singleProviderOrder.setShipped(true);
+            SingleProviderOrderController.editOrder(singleProviderOrder);
+        }
         //TODO ask aviv what the fuck??
         //checkOrders(mapper,curr);
         schedule.passDay(mapper,curr);

@@ -17,7 +17,8 @@ public class WeekSchedule {
     }
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
-        LocalDate localDate =  LocalDate.of(2020,6,21);
+        //TODO what the fuck
+        LocalDate localDate = LocalDate.now();// LocalDate.of(2020,6,21);
         current_date = localDate;
         mapper.saveCurrent_Date(current_date.toString());
 
@@ -107,11 +108,11 @@ public class WeekSchedule {
 
         mapper.setAssignments_History(days[0].getDate().toString());// Makes all the assignments at this date to be history
         mapper.setDay_History(days[0].getDate().toString()); // Makes the Day history
-        for (int i=0; i < 5; i++) //SHIFT RIGHT DAYS
+        days[6] = new Day(days[5].getDate().plusDays(1));
+        for (int i=0; i < 6; i++) //SHIFT RIGHT DAYS
         {
             days[i] = days[i+1];
         }
-        days[6] = new Day(curr);
     }
 
     public int isStorageInDay(LocalDate lcl){

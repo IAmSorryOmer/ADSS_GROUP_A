@@ -20,9 +20,8 @@ public class CategoryDAL {
             return resultSetToCategory(preparedStatement.executeQuery());
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     public static void insertCategory(Category category){
@@ -36,7 +35,7 @@ public class CategoryDAL {
             mapper.put(category.getID(), category);
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
     public static Category getCategoryById(String id){
@@ -54,10 +53,9 @@ public class CategoryDAL {
                 return toReturn.get(0);
             }
             catch (SQLException e){
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
     public static void loadCategorySubs(Category category){
@@ -68,7 +66,7 @@ public class CategoryDAL {
             category.setSubCategories(resultSetToCategory(preparedStatement.executeQuery()));
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
     public static List<Category> loadAll(){
@@ -80,9 +78,8 @@ public class CategoryDAL {
             return toReturn;
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
     private static List<Category> resultSetToCategory(ResultSet resultSet) throws SQLException{

@@ -36,7 +36,7 @@ public class ProviderDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
         String sql2 = "Insert into CommunicationDetails(Adress, PhoneNumber, IsFixedDays, ProviderId) values (?, ?, ?, ?);";
         try {
@@ -48,7 +48,7 @@ public class ProviderDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
 
         mapper.put(provider.getProviderID(), provider);
@@ -66,7 +66,7 @@ public class ProviderDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
         String sql2 = "update CommunicationDetails set Adress = ?, PhoneNumber = ?, IsFixedDays = ? where ProviderId = ?;";
         try {
@@ -78,7 +78,7 @@ public class ProviderDAL {
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -97,10 +97,9 @@ public class ProviderDAL {
                 return result.get(0);
             }
             catch (SQLException e){
-                System.out.println(e.getMessage());
+                throw new IllegalArgumentException(e.getMessage());
             }
         }
-        return null;
     }
 
     public static List<Provider> loadAll(){
@@ -112,9 +111,8 @@ public class ProviderDAL {
             return toReturn;
         }
         catch (SQLException e){
-            System.out.println(e.getMessage());
+            throw new IllegalArgumentException(e.getMessage());
         }
-        return null;
     }
 
 

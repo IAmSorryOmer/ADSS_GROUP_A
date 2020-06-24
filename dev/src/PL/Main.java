@@ -1,8 +1,6 @@
 package PL;
 
-import BL.Employee;
 import DAL.DBHandler;
-import DAL.OrdersDAL;
 import Entities.*;
 import IL.*;
 
@@ -10,14 +8,20 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
+import static PL.WatchMenues.*;
+
 public class Main {
     public static Scanner reader = new Scanner(System.in);
     public static  ManagerController managerController = ManagerController.getInstance();
     
     public static void main(String[] args) {
-        DBHandler.connect();
-        boolean dummyLoaded = false;
-        initialSelection();
+        try {
+            DBHandler.connect();
+            initialSelection();
+        }
+        catch (Exception e){
+            System.out.println("error. " + e.getMessage());
+        }
     }
 
 
@@ -26,169 +30,93 @@ public class Main {
         EmployeeController employeeController = EmployeeController.getInstance();
         if (!managerController.loadStores())//Initializing the day
         {
-            System.out.println("Initializing System..");
-            System.out.println("ENTER MONTH");
-            int month = reader.nextInt();
-            System.out.println("ENTER DAY");
-            int day = reader.nextInt();
-
-            managerController.initializeStores(month, day);
+            selectDay();
         }
 
         //CHOOSE ROLE IN THE SYSTEM
-        int choice = 0;
-        while (choice != 5) {
+        String[] options = new String[]{"General actions", "Store specific actions", "exit"};
+        while (true) {
             System.out.println("Hello, Welcome To Super-Li System");
-            System.out.println("Choose Your Role Manager/Employee or exit program");
-            System.out.println("1.Manager");
-            System.out.println("2.Employee");
-            System.out.println("3.Store manager");
-            System.out.println("4.Logistic manager");
-            System.out.println("5.Exit");
-            choice = reader.nextInt();
-
-            switch(choice){
-                case 1:
-                    managerMenu();
-                    break;
-                case 2:
-                    employeeMenu();
-                    break;
-                case 3:
-                    storeManagerMenu();
-                    break;
-                case 4:
-                    logisticManagerMenu();
-                    break;
-                case 5:
-                    return;
-                    break;
-                case 6:
-                    System.out.println("Please choose a number between 1 and 5");
-                    break;
-            }
-        }
-    }
-    private static void managerMenu(){
-        System.out.println("Choose part to work on:");
-        String[] options=new String[]{"workers","deliveries","supplies/products"};
-        printOptions(options);
-        int option = Integer.parseInt(reader.nextLine());
-        try {
-            switch(option){
-                case 1:
-                    manageWorkers();
-                    break;
-                case 2:
-                    manageDeliveries();
-                    break;
-                case 3:
-                    manageProductsDeliveries();
-                    break;
-                default:
-                    System.out.println("choose an option between 1 to 3");
-            }
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
-    }
-    private static void manageWorkers(){
-        System.out.println("1.Add new employee");
-        System.out.println("2.Add employee to a shift");
-        System.out.println("3.Add a role to a shift");
-        System.out.println("4.Update employee details");
-        System.out.println("5.Watch capable hours and capable roles of employees for shifts");
-        System.out.println("6.Watch employees");
-        System.out.println("7.Watch shifts");
-        System.out.println("8.Remove Employee");
-        int choice=reader.nextInt();
-        switch(choice){
-            case 1:
-                enterEmployee();
-                break;
-            case 2:
-                assignEmployeeToShift();
-                break;
-            case 3:
-                addRoleToShift();
-                break;
-            case 4:
-                updateEmployeeDetails();
-                break;
-            case 5:
-                watchCapableHours();
-                break;
-            case 6:
-                watchEmployeeDetails();
-                break;
-            case 7:
-                watchShiftDetails();
-
-            case 8:
-                removeEmployee();
-
-
-             default:
-                System.out.println("Please choose a number between 1 and 8");
-        }
-    }
-
-
-
-    private static void manageDeliveries(){
-    ;   System.out.println("1.Add Destination");
-        System.out.println("2.Add Delivery");
-        System.out.println("3.Add Truck");
-        System.out.println("4.View Deliveries");
-        int choice=reader.nextInt();
-        switch(choice){
-            case 1:
-                addDestination();
-                break;
-            case 2:
-                addDelivery();
-                break;
-            case 3:
-                addTruck();
-                break;
-            case 4:
-                viewDeliveries();
-                break;
-
-
-
-            default:
-                System.out.println("Please choose a number between 1 and 4");
-        }
-    }
-
-    private static void manageProductsDeliveries(){
-        DBHandler.connect();
-        boolean dummyLoaded = false;
-        while(true) {
-            System.out.println("Please select a category to manage or operation to perform:");
-            String[] options = new String[]{"product types", "discounts", "categories", "providers and catalogs", "agreements", "manage store(reports, products, orders, more...)", "exit"};
+            System.out.println("Choose which actions you want to preform:");
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int choice = Integer.parseInt(reader.nextLine());
+                switch(choice){
+                    case 1:
+                        generalManagerMenu();
+                        break;
+                    case 2:
+                        storeSpecificMenu();
+                        break;
+                    case 3:
+                        return;
+                    default:
+                        System.out.println("Please choose a number between 1 and 3");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+    }
+    private static void generalManagerMenu(){
+        String[] options = new String[]{"products details", "categories", "discounts", "providers", "agreements", "return to main menu"};
+        while (true) {
+            System.out.println("chooses category to manage:");
+            printOptions(options);
+            try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         manageProductTypesMenu();
                         break;
                     case 2:
-                        manageDiscountsMenu();
+                        manageCategoriesMenu();
                         break;
                     case 3:
-                        manageCategoriesMenu();
+                        manageDiscountsMenu();
                         break;
                     case 4:
                         manageProvidersMenu();
-                        break;
                     case 5:
                         manageAgreementsMenu();
                         break;
                     case 6:
-                        manageStoreMenu();
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 6");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+    }
+    private static void storeSpecificMenu(){
+        int storeId = selectStore();
+        String[] options = new String[]{"Store manager", "Stock keeper", "Logistic manager", "Human resource manager", "Regular employee", "select another store", "return to main menu"};
+        while (true) {
+            System.out.println("please chooses your role:");
+            printOptions(options);
+            try {
+                int option = Integer.parseInt(reader.nextLine());
+                switch(option){
+                    case 1:
+                        storeManagerMenu(storeId);
+                        break;
+                    case 2:
+                        stockKeeperMenu(storeId);
+                        break;
+                    case 3:
+                        logisticManagerMenu(storeId);
+                        break;
+                    case 4:
+                        humanResourceManagerMenu(storeId);
+                        break;
+                    case 5:
+                        employeeMenu(storeId);
+                        break;
+                    case 6:
+                        storeId = selectStore();
                         break;
                     case 7:
                         return;
@@ -200,18 +128,55 @@ public class Main {
             }
         }
     }
-    private static void manageStoreMenu(){
-        int storeId = selectStore();
-        System.out.println("please insert your employee id:");
-        String employeeId = reader.nextLine();
-        //TODO here validate the employee id
-        String[] options = new String[]{"manage products", "manage orders(and auto orders)", "manage reports(including auto order missing items)", "change store", "change employee id", "return to main menu"};
-        while(true) {
-            System.out.println("Please select a category to manage or operation to perform:");
+
+    private static void storeManagerMenu(int storeId){
+        String[] options = new String[]{"Trucks", "Deliveries", "Employees", "Shifts", "Products", "Orders", "Reports", "return to specific store actions menu"};
+        while (true) {
+            System.out.println("please chooses the category that you want to examine:");
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
-                switch (option){
+                int option = Integer.parseInt(reader.nextLine());
+                switch(option){
+                    case 1:
+                        watchTrucks(storeId);
+                        break;
+                    case 2:
+                        watchDeliveries(storeId);
+                        break;
+                    case 3:
+                        watchEmployees(storeId);
+                        break;
+                    case 4:
+                        watchShifts(storeId);
+                        break;
+                    case 5:
+                        watchProducts(storeId);
+                        break;
+                    case 6:
+                        watchOrders(storeId);
+                        break;
+                    case 7:
+                        watchReports(storeId);
+                        break;
+                    case 8:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 8");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+    }
+
+    private static void stockKeeperMenu(int storeId){
+        String[] options = new String[]{"products", "orders", "reports(including auto order missing products)", "return to specific store actions menu"};
+        while (true) {
+            System.out.println("please chooses the category that you want to manage:");
+            printOptions(options);
+            try {
+                int option = Integer.parseInt(reader.nextLine());
+                switch(option){
                     case 1:
                         manageProductsMenu(storeId);
                         break;
@@ -219,33 +184,209 @@ public class Main {
                         manageOrdersMenu(storeId);
                         break;
                     case 3:
-                        manageReportsMenu(storeId, employeeId);
+                        manageReportsMenu(storeId);
                         break;
                     case 4:
-                        storeId = selectStore();
-                        break;
-                    case 5:
-                        System.out.println("please insert new employee id:");
-                        employeeId = reader.nextLine();
-                        //TODO here validate the employee id
-                        break;
-                    case 6:
                         return;
                     default:
-                        System.out.println("please insert option between 1 to 6");
+                        System.out.println("choose an option between 1 to 4");
                 }
             } catch (Exception e) {
                 System.out.println("error. " + e.getMessage());
             }
         }
+
     }
+
+    private static void logisticManagerMenu(int storeId){
+        String[] options = new String[]{"manage deliveries", "return to specific store actions menu"};
+        while (true) {
+            System.out.println("please chooses action to preform:");
+            printOptions(options);
+            try {
+                int option = Integer.parseInt(reader.nextLine());
+                switch(option){
+                    case 1:
+                        manageDeliveries(storeId);
+                        break;
+                    case 2:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 2");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+
+    }
+
+    private static void humanResourceManagerMenu(int storeId){
+        String[] options = new String[]{"manage workers", "return to specific store actions menu"};
+        while (true) {
+            System.out.println("please chooses action to preform:");
+            printOptions(options);
+            try {
+                int option = Integer.parseInt(reader.nextLine());
+                switch(option){
+                    case 1:
+                        manageWorkers(storeId);
+                        break;
+                    case 2:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 2");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+
+    }
+
+    private static void employeeMenu(int store_num){
+        System.out.println("Enter Employee ID:");
+        int eID = reader.nextInt();
+        EmployeeController employeeController=EmployeeController.getInstance();
+        if (employeeController.connect(eID,store_num)) {
+            //If you are a storage worker, you enter here the storage worker menu
+            //TODO probebly remove this loop
+            if (employeeController.isStorage())
+            {
+                System.out.println("hello storage employee " + employeeController.getActiveName() + "\nchoose operation:");
+                int operationNum = 0;
+                operationNum = reader.nextInt();
+                reader.nextLine();
+                print_Storage_employee_menu();
+                while (operationNum != 3) {
+
+                }
+            }
+            //menu for normal employees(non storage)
+            System.out.println("hello employee " + employeeController.getActiveName() + "\nchoose operation:");
+            int operationNum = 0;
+            while (operationNum != 3) {
+
+                print_employee_menu();
+                operationNum = reader.nextInt();
+                reader.nextLine();
+                switch (operationNum) {
+                    case 1: {
+                        if (!employeeController.hasActiveUserAssignedShifts()) {
+                            print_shifts();
+                            System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
+                            System.out.println("1,2,4,12");
+                            String input = reader.nextLine();
+                            String[] detailsStringArr = input.split(",");
+                            int[] capableShifts = new int[detailsStringArr.length];
+                            for (int i = 0; i < detailsStringArr.length; i++) {
+                                capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
+                            }
+                            System.out.println(employeeController.enterMyCapableShifts(capableShifts));
+                        }
+                        else {
+                            System.out.println("you already assigned shifts");
+                        }
+
+                    }
+                    case 2: {
+                        System.out.println(employeeController.watchMyShifts());
+
+                    }
+                    case 3:
+                    {
+                        System.out.println("logging out");
+
+                    }
+                }
+            }
+        } else {
+            System.out.println("there is no employee with that id \n");
+        }
+    }
+
+    private static void manageWorkers(int storeId){
+        String[] options = new String[]{"Add new employee", "Add employee to a shift", "Add a role to a shift", "Update employee details",
+                "Watch capable hours and capable roles of employees for shifts", "Watch employees", "Watch shifts", "Remove Employee", "return to human resource manager menu"};
+        while (true){
+            System.out.println("please choose action to perform:");
+            printOptions(options);
+            try {
+                int choice= Integer.parseInt(reader.nextLine());
+                switch(choice){
+                    case 1:
+                        enterEmployee(storeId);
+                        break;
+                    case 2:
+                        assignEmployeeToShift(storeId);
+                        break;
+                    case 3:
+                        addRoleToShift(storeId);
+                        break;
+                    case 4:
+                        updateEmployeeDetails(storeId);
+                        break;
+                    case 5:
+                        watchCapableHours(storeId);
+                        break;
+                    case 6:
+                        watchEmployeeDetails(storeId);
+                        break;
+                    case 7:
+                        watchShiftDetails(storeId);
+                    case 8:
+                        removeEmployee(storeId);
+                    case 9:
+                        return;
+                    default:
+                        System.out.println("Please choose a number between 1 and 8");
+                }
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+    }
+
+    private static void manageDeliveries(int storeId){
+        String[] options = new String[]{"Add Destination", "Add delivery", "Add truck", "View Deliveries", "return to logistic manager menu"};
+        while (true){
+            System.out.println("please choose action to perform:");
+            printOptions(options);
+            try {
+                int choice= Integer.parseInt(reader.nextLine());
+                switch(choice){
+                    case 1:
+                        addDestination(storeId);
+                        break;
+                    case 2:
+                        addDelivery(storeId);
+                        break;
+                    case 3:
+                        addTruck(storeId);
+                        break;
+                    case 4:
+                        viewDeliveries(storeId);
+                        break;
+                    case 5:
+                        return;
+                    default:
+                        System.out.println("Please choose a number between 1 and 5");
+                }
+            }
+            catch (Exception e){
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+    }
+
     private static void manageProductTypesMenu(){
         while(true) {
             System.out.println("Please select an option to perform on products types:");
             String[] options = new String[]{"add type", "modify minimum quantity", "print all products with name", "print all products", "return to main"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch (option) {
                     case 1:
                         addProductDetailsFromUser();
@@ -306,8 +447,8 @@ public class Main {
             System.out.println("Please select an option to perform on products:");
             String[] options = new String[]{"add product", "move product", "prints all products of type", "print all products within storage", "print all missings products", "print all damaged products", "mark product as damaged", "print all products", "return to stores menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addProductFromUser(storeId);
@@ -343,7 +484,7 @@ public class Main {
             }
         }
     }
-    private static void printAllStoreProductsOfType(int storeId) {
+    public  static void printAllStoreProductsOfType(int storeId) {
         System.out.println("please insert the id of the product type(to print all the products types insert @print):");
         String productId = reader.nextLine();
         if(productId.equals("@print")){
@@ -400,8 +541,8 @@ public class Main {
             System.out.println("Please select an option to perform on discounts:");
             String[] options = new String[]{"add discount", "print discounts of certain type or category", "print current discount percentage of certain type","print pricing history of certain type",  "return to main menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addDiscountFromUser();
@@ -425,7 +566,6 @@ public class Main {
             }
         }
     }
-
     private static void printDiscountsOfDiscountable() {
         System.out.println("is this product type?(y for product, else for category):");
         String ans = reader.nextLine();
@@ -508,8 +648,8 @@ public class Main {
             System.out.println("Please select an option to perform on categories:");
             String[] options = new String[]{"add category", "print all categories", "return to main menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addCategoryFromUser();
@@ -548,16 +688,16 @@ public class Main {
         CategoryInterface.addCategory(category, catId);
     }
 
-    private static void manageReportsMenu(int storeId, String employeeId){
+    private static void manageReportsMenu(int storeId){
         while(true) {
             System.out.println("Please select an option to perform on reports:");
             String[] options = new String[]{"add report", "print all reports", "return to store menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
-                        addReportFromUser(storeId, employeeId);
+                        addReportFromUser(storeId);
                         break;
                     case 2:
                         System.out.println(ReportInterface.stringifyStoreReports(storeId));
@@ -572,9 +712,11 @@ public class Main {
             }
         }
     }
-    private static void addReportFromUser(int storeId, String employeeId){
+    private static void addReportFromUser(int storeId){
         System.out.println("please insert report id:");
         String id = reader.nextLine();
+        System.out.println("please insert employee id:");
+        String employeeId = reader.nextLine();
         System.out.println("please insert description:");
         String description = reader.nextLine();
         Report report = new Report(id, storeId, employeeId, description, null, Report.reportType.Inventory);
@@ -601,7 +743,6 @@ public class Main {
                 System.out.println("this isnt an option. operation canceled");
         }
     }
-
     private static void createInventoryReportFromUser(Report report){
         report.setReportType(Report.reportType.Inventory);
         System.out.println("please insert the id's of the category to track separated by line breaks.");
@@ -620,8 +761,8 @@ public class Main {
             System.out.println("Please select an option to perform on orders of the selected store: ");
             String[] options = new String[]{"manage store orders of specific provider", "print all store orders", "print all store automatic orders", "return to store menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         manageProviderOrdersMenu(storeId);
@@ -679,7 +820,6 @@ public class Main {
             }
         }
     }
-
     private static void addOrderFromUser(int storeId, String providerId){
         System.out.println("please insert the order id: ");
         String orderId = reader.nextLine();
@@ -737,8 +877,8 @@ public class Main {
             System.out.println("Please select an option to perform on items of the selected order: ");
             String[] options = new String[]{"add item to order", "edit item on order", "remove item from order", "choose another order to manage", "return to manage provider orders"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addItemToOrder(storeId, providerId, orderId);
@@ -821,8 +961,8 @@ public class Main {
             System.out.println("Please select an option to perform on providers:");
             String[] options = new String[]{"add provider", "edit provider details", "manage provider catalog", "print all providers", "return to main"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addProviderFromUser();
@@ -942,8 +1082,8 @@ public class Main {
             System.out.println("Please select an option to perform on items of the selected provider: ");
             String[] options = new String[]{"add item to catalog", "edit item on catalog", "print provider catalog","choose another provider to manage", "return to manage provider menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addItemToCatalog(providerId);
@@ -1045,8 +1185,8 @@ public class Main {
             System.out.println("Please select an option to perform on agreements:");
             String[] options = new String[]{"add item to agreement", "edit item of agreement", "remove item from agreement", "print all items of agreement", "select another provider to manage his agreement", "return to main"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addItemToAgreement(providerId);
@@ -1155,47 +1295,7 @@ public class Main {
         }
     }
 
-    private static int selectStore(){
-        System.out.println("please insert the store id:");
-        int storeId = Integer.parseInt(reader.nextLine());
-        while(storeId != 1 && storeId != 2){
-            System.out.println("there is no store with that id. please insert again.");
-            storeId = Integer.parseInt(reader.nextLine());
-        }
-        return storeId;
-    }
-    private static String selectOrder(int storeId, String providerId) throws Exception{
-        System.out.println("please insert the id of the order that you want to manage her items(to print all the orders of provider insert @print): ");
-        String orderId = reader.nextLine();
-        if(orderId.equals("@print")){
-            printNumberedList(OrdersInterface.getAllStoreProviderOrders(storeId, providerId));
-            System.out.println("now insert the id of the provider: ");
-            orderId = reader.nextLine();
-        }
-        return orderId;
-    }
-    private static String selectProvider(String message){
-        System.out.println(message + "(to print all providers insert @print):");
-        String providerId = reader.nextLine();
-        if(providerId.equals("@print")){
-            printProviders();
-            System.out.println("now insert the id of the provider: ");
-            providerId = reader.nextLine();
-        }
-        return providerId;
-    }
-    private static void printOptions(String[] array){
-        int i = 1;
-        for(String str: array)
-            System.out.println(i++ + ") " + str);
-    }
-    private static void printNumberedList(List<? extends Object> objects){
-        int i = 1;
-        for(Object object : objects)
-            System.out.println(i++ + ") " + object.toString());
-    }
-
-    static void enterEmployee() {
+    static void enterEmployee(int store_num) {
         System.out.println("enter the following details, as in the example:");
         System.out.println("name,employee id,bank account,store num,salary,employee conditions,start date");
         System.out.println("aviv,5,6045,1,3000,no special conditions,12/4/2020");
@@ -1219,7 +1319,7 @@ public class Main {
 
             String[] role = {"driver"};
             System.out.println(managerController.addDriverEmployee(role,detailsStringArr[0],
-                    Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], Integer.parseInt(detailsStringArr[3]),
+                    Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], store_num,
                     Integer.parseInt(detailsStringArr[4]), detailsStringArr[5], detailsStringArr[6],license));
         }
         else {
@@ -1230,14 +1330,14 @@ public class Main {
             String[] rolesArr = roles.split(",");
 
             String addingNewEmployee = managerController.addEmployee(rolesArr, detailsStringArr[0],
-                    Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], Integer.parseInt(detailsStringArr[3]),
+                    Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], store_num,
                     Integer.parseInt(detailsStringArr[4]), detailsStringArr[5], detailsStringArr[6]);
             System.out.println(addingNewEmployee);
         }
 
     }
     //Assigning employee to shift
-    static void assignEmployeeToShift() {
+    static void assignEmployeeToShift(int store_num) {
         System.out.println("enter the following details, as in the example:");
         System.out.println("store num,employee id,day num(1-7),day part(morning-evening),role");
         System.out.println("1,5,2,morning,cashier");
@@ -1248,12 +1348,12 @@ public class Main {
 
         }
 
-        String addingEmployeeToShift = managerController.addToShift(Integer.parseInt(detailsStringArr[0]), Integer.parseInt(detailsStringArr[1]), Integer.parseInt(detailsStringArr[2]), detailsStringArr[3], detailsStringArr[4]);
+        String addingEmployeeToShift = managerController.addToShift(store_num, Integer.parseInt(detailsStringArr[1]), Integer.parseInt(detailsStringArr[2]), detailsStringArr[3], detailsStringArr[4]);
         System.out.println(addingEmployeeToShift);
 
     }
     //Adding a role to a shift, still need someone to fill that role
-    static void addRoleToShift(){
+    static void addRoleToShift(int store_num){
         System.out.println("enter the following details, as in the example:");
         System.out.println("store num,day num(1-7),day part(morning-evening),role,amount");
         System.out.println("1,3,evening,shift manager,2");
@@ -1263,18 +1363,15 @@ public class Main {
             System.out.println("un appropriate amount of details inserted");
 
         }
-        String addingRoleToShift = managerController.addRoleToShift(Integer.parseInt(detailsStringArr[0]), Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], detailsStringArr[3], Integer.parseInt(detailsStringArr[4]));
+        String addingRoleToShift = managerController.addRoleToShift(store_num, Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], detailsStringArr[3], Integer.parseInt(detailsStringArr[4]));
         System.out.println(addingRoleToShift);
 
     }
     //update details of employee
-    static void updateEmployeeDetails() {
+    static void updateEmployeeDetails(int store_num) {
 
         System.out.println("Enter Employee ID:");
         int eID = reader.nextInt();
-        System.out.println("Enter Store Number:");
-        int store_num = reader.nextInt();
-        reader.nextLine();
 
         System.out.println(managerController.getEmployeeDetails(store_num, eID));
         System.out.println("enter the following details, as in the example:");
@@ -1314,7 +1411,7 @@ public class Main {
                                 String[] detailsStringArr = details.split(",");
                                 if (detailsStringArr.length != 6) {
                                     System.out.println("un appropriate amount of details inserted");
-                                    
+
                                 }
                                 System.out.println("enter capable jobs, as in the example:");
                                 System.out.println("cashier,shift manager");
@@ -1329,29 +1426,23 @@ public class Main {
 
     }
     //Watch all the hours that people are capable to work in
-    static void watchCapableHours() {
-        System.out.println("enter the store num");
-        int store_num = reader.nextInt();
-        reader.nextLine();
+    static void watchCapableHours(int store_num) {
         System.out.println(managerController.getCapableShiftsByEmployees(store_num));
 
     }
     //Watch all the details of all the employees
-    static void watchEmployeeDetails() {
+    static void watchEmployeeDetails(int store_num) {
+        //TODO change to print store specific employees
         System.out.println(managerController.getEmployeesDetails());
-
     }
     //Watch details of all the shifts
-    static void watchShiftDetails() {
+    static void watchShiftDetails(int store_num) {
 
-        System.out.println("enter store num");
-        int store_num = reader.nextInt();
-        reader.nextLine();
         System.out.println(managerController.getShiftsDetails(store_num));
 
     }
     //Remove employee from system
-    static void removeEmployee() {
+    static void removeEmployee(int store_num) {
         System.out.println("enter employee id");
         int ID = reader.nextInt();
         reader.nextLine();
@@ -1359,7 +1450,7 @@ public class Main {
 
     }
     //Add new destination, delivery can go to that destination now
-    static void addDestination() {
+    static void addDestination(int store_num) {
         System.out.println("enter address");
         String address = reader.nextLine();
 
@@ -1408,21 +1499,18 @@ public class Main {
 
     }
     //Add a new delivery to the system
-    static void addDelivery() {
-        sendDelivery();
+    static void addDelivery(int store_num) {
+        sendDelivery(store_num);
 
     }
     //Add a new truck to the system
-    static void addTruck()
+    static void addTruck(int store_num)
     {
         System.out.println("enter model");
         String model = reader.nextLine();
 
         System.out.println("enter Truck id");
         String truckId = reader.nextLine();
-
-        System.out.println("enter store number");
-        int store_num = reader.nextInt();
 
         System.out.println("enter weight");
         int weight = reader.nextInt();
@@ -1450,11 +1538,8 @@ public class Main {
 
     }
     //View all the deliveries
-    static void viewDeliveries()
+    static void viewDeliveries(int store_num)
     {
-        System.out.println("enter store number");
-        int store_num = reader.nextInt();
-
         System.out.println(managerController.viewDeliveries(store_num));
 
     }
@@ -1479,7 +1564,7 @@ public class Main {
     }
 
 
-    public static void sendDelivery(){
+    public static void sendDelivery(int store_num){
         System.out.println("Delivery can be added to this week only");
         System.out.println("Please enter date, of a day in this week, for example : 1.5 (it's a random date)");
         String date = reader.nextLine();
@@ -1540,8 +1625,6 @@ public class Main {
 
             }
         }
-        System.out.println("Enter Store Num");
-        int store_num = reader.nextInt();
         System.out.println(ManagerController.getInstance().addDelivery(store_num,date,hour,truckid,driver,src,weight,numberlst,destlst,productlst,returnHour));
     }
 
@@ -1556,76 +1639,52 @@ public class Main {
         System.out.println("13.saturday morning   14.saturday evening");
 
     }
-    private static void employeeMenu(){
-        System.out.println("Enter Employee ID:");
-        int eID = reader.nextInt();
-        EmployeeController employeeController=EmployeeController.getInstance();
-        System.out.println("Enter Store Number:");
-        int store_num = reader.nextInt();
 
-
-        if (employeeController.connect(eID,store_num)) {
-            //If you are a storage worker, you enter here the storage worker menu
-            if (employeeController.isStorage())
-            {
-                System.out.println("hello storage employee " + employeeController.getActiveName() + "\nchoose operation:");
-                int operationNum = 0;
-                operationNum = reader.nextInt();
-                reader.nextLine();
-                print_Storage_employee_menu();
-                while (operationNum != 3) {
-
-
-
-                }
-            }
-
-
-
-            //menu for normal employees(non storage)
-            System.out.println("hello employee " + employeeController.getActiveName() + "\nchoose operation:");
-            int operationNum = 0;
-            while (operationNum != 3) {
-
-                print_employee_menu();
-                operationNum = reader.nextInt();
-                reader.nextLine();
-                switch (operationNum) {
-                    case 1: {
-                        if (!employeeController.hasActiveUserAssignedShifts()) {
-                            print_shifts();
-                            System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
-                            System.out.println("1,2,4,12");
-                            String input = reader.nextLine();
-                            String[] detailsStringArr = input.split(",");
-                            int[] capableShifts = new int[detailsStringArr.length];
-                            for (int i = 0; i < detailsStringArr.length; i++) {
-                                capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
-                            }
-                            System.out.println(employeeController.enterMyCapableShifts(capableShifts));
-                        }
-                        else {
-                            System.out.println("you already assigned shifts");
-                        }
-
-                    }
-                    case 2: {
-                        System.out.println(employeeController.watchMyShifts());
-
-                    }
-                    case 3:
-                    {
-                        System.out.println("logging out");
-
-                    }
-                }
-            }
-        } else {
-            System.out.println("there is no employee with that id \n");
-        }
-
+    private static void selectDay(){
+        System.out.println("Initializing System..");
+        System.out.println("ENTER MONTH");
+        int month = Integer.parseInt(reader.nextLine());
+        System.out.println("ENTER DAY");
+        int day = Integer.parseInt(reader.nextLine());;
+        managerController.initializeStores(month, day);
     }
-    
-    
-    
+    private static int selectStore(){
+        System.out.println("please insert the store id:");
+        int storeId = Integer.parseInt(reader.nextLine());
+        while(storeId != 1 && storeId != 2){
+            System.out.println("there is no store with that id. please insert again.");
+            storeId = Integer.parseInt(reader.nextLine());
+        }
+        return storeId;
+    }
+    private static String selectOrder(int storeId, String providerId) throws Exception{
+        System.out.println("please insert the id of the order that you want to manage her items(to print all the orders of provider insert @print): ");
+        String orderId = reader.nextLine();
+        if(orderId.equals("@print")){
+            printNumberedList(OrdersInterface.getAllStoreProviderOrders(storeId, providerId));
+            System.out.println("now insert the id of the provider: ");
+            orderId = reader.nextLine();
+        }
+        return orderId;
+    }
+    private static String selectProvider(String message){
+        System.out.println(message + "(to print all providers insert @print):");
+        String providerId = reader.nextLine();
+        if(providerId.equals("@print")){
+            printProviders();
+            System.out.println("now insert the id of the provider: ");
+            providerId = reader.nextLine();
+        }
+        return providerId;
+    }
+    public static void printOptions(String[] array){
+        int i = 1;
+        for(String str: array)
+            System.out.println(i++ + ") " + str);
+    }
+    public static void printNumberedList(List<? extends Object> objects){
+        int i = 1;
+        for(Object object : objects)
+            System.out.println(i++ + ") " + object.toString());
+    }
 }
