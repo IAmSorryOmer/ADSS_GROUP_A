@@ -63,6 +63,7 @@ public class SingleProviderOrderController {
 					order.setDeliveryDate(date_i_DaysFromNow); //return the appropriate date
 					break;
 				}
+
 			}
 		}
 		else{
@@ -101,6 +102,12 @@ public class SingleProviderOrderController {
 		}
 		return minDate;
 	}*/
+
+	public static void shipOrder(String orderId){
+	    SingleProviderOrder order = OrdersDAL.getOrderById(orderId);
+	    order.setShipped(true);
+		OrdersDAL.shipOrder(order);
+    }
 
 	//methods
 	public  static void AddToOrder (String providerId, String orderId, int storeId, String ItemID, int orderAmount) {

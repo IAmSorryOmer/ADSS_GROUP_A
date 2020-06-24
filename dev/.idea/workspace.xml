@@ -2,15 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/79c44574-720a-4245-833b-7bf5c97d43d7.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/79c44574-720a-4245-833b-7bf5c97d43d7.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/StoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/WeekSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/WeekSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Mapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/SingleProviderOrder.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +28,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="database.data.extractors.current.id" value="XML-Groovy.xml.groovy" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../ADSS_GROUP_A/dev" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -59,6 +53,18 @@
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -186,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1592933205636</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Mostly done with order logic (added removeOrder and rescheduleOrder)">
+      <created>1592935258006</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1592935258006</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -197,12 +210,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated project structure" />
@@ -215,7 +229,8 @@
     <MESSAGE value="updated order logic (added various fields, creating orders, scheduling orders, ensuring time for orders)" />
     <MESSAGE value="updated order constructor" />
     <MESSAGE value="Added rescheduleOrderDelivery" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added rescheduleOrderDelivery" />
+    <MESSAGE value="Mostly done with order logic (added removeOrder and rescheduleOrder)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Mostly done with order logic (added removeOrder and rescheduleOrder)" />
   </component>
   <component name="WindowStateProjectService">
     <state x="387" y="33" width="1024" height="845" key="#Project_Structure" timestamp="1592827382821">
@@ -231,11 +246,11 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="448" y="168" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1592908427474" />
-    <state x="686" y="69" width="374" height="626" key="#com.intellij.ide.util.MemberChooser" timestamp="1592998788883">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state x="852" y="125" width="374" height="626" key="#com.intellij.ide.util.MemberChooser" timestamp="1592908164183">
+      <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="852" y="125" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592908164183" />
-    <state x="686" y="69" width="374" height="626" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1592998788883" />
+    <state x="686" y="69" width="374" height="626" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1592837436017" />
     <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1592904036766">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -248,10 +263,10 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="322" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592933203732">
+    <state x="322" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1592935256566">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592933203732" />
+    <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1592935256566" />
     <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1592848925803" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -298,23 +313,23 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state width="937" height="335" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323570" />
-    <state x="129" y="61" key="MergeDialog" timestamp="1592927841527">
+    <state x="129" y="61" key="MergeDialog" timestamp="1592999672368">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="129" y="61" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592927841527" />
-    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592927841548">
+    <state x="129" y="61" key="MergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592999672368" />
+    <state x="395" y="81" key="MultipleFileMergeDialog" timestamp="1592999677002">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592927841548" />
+    <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1592999677002" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor" timestamp="1592827689855">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1592827689855" />
-    <state x="275" y="98" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592933209833">
+    <state x="275" y="98" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1592935270507">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592933209833" />
+    <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1592935270507" />
     <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592836642142" />
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592831302840">
       <screen x="0" y="0" width="1920" height="1032" />
@@ -328,18 +343,14 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="100" y="98" width="1720" height="834" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831596473" />
-    <state x="331" y="316" key="com.intellij.ide.util.TipDialog" timestamp="1592931696557">
+    <state x="331" y="316" key="com.intellij.ide.util.TipDialog" timestamp="1592990368772">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="331" y="316" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592931696557" />
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1592935220139">
+    <state x="331" y="316" key="com.intellij.ide.util.TipDialog/0.0.1366.728@0.0.1366.728" timestamp="1592990368772" />
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1593001702266">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1592935220139" />
-    <state x="651" y="254" width="618" height="522" key="find.popup" timestamp="1592996406103">
-      <screen x="0" y="0" width="1920" height="1032" />
-    </state>
-    <state x="651" y="254" width="618" height="522" key="find.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1592996406103" />
+    <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1593001702266" />
     <state x="346" y="49" width="672" height="678" key="search.everywhere.popup" timestamp="1592911536571">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
