@@ -227,6 +227,10 @@ public class DeliveryController {
 	public void addTruck(String id, int weight, int maxWeight, String model) {
 		tControl.addTruck(id,weight,maxWeight,model);
 	}
+	public void printAllTrucks(){
+		tControl.printAllTrucks();
+	}
+
 }
 
 

@@ -148,6 +148,9 @@ public class ManagerController {
         return StoreController.getShiftsDetails(store_num);
 
     }
+    public static void printAllTrucks(int id){
+        StoreController.printAllTrucks(id);
+    }
 
     public String getCapableShiftsByEmployees(int store_num)
     {
@@ -224,12 +227,10 @@ public class ManagerController {
 
     //---------------------------------------------------------------
 
-    public String addDelivery(int store_num,String date, String hour, String tid, String driverName, String source, int weightBeforeGo,
-                              List<String> numberedFiles, HashMap<String,String> adresses,
-                              HashMap<String,HashMap<String,Integer>> products,String returnHour)
+    public String addDelivery(String date,  int weightBeforeGo, SingleProviderOrder order,int store_num)
     {
 
-        return StoreController.addDelivery(store_num,date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products,returnHour);
+        return StoreController.addDelivery(date,  weightBeforeGo,  order,store_num);
 
     }
 

@@ -120,6 +120,9 @@ public class Store {
                                return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate().toString(),weightBeforeGo,order,store_num);
 
     }
+    public void printAllTrucks(){
+        deliveryController.printAllTrucks();
+    }
     public static String morningOrEvening(String x){
         if(x.charAt(0)=='1'&&x.charAt(1)>'1'){
             return "evening";

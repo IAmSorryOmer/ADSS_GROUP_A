@@ -33,6 +33,7 @@ public class StoreController {
 
 
 
+
     public static String addDriverEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date,String license)
     {
         Store store = getStore(store_num);
@@ -349,7 +350,7 @@ public class StoreController {
     }
 
 
-    public static String addDelivery(Mapper mapper, String date,  int weightBeforeGo, SingleProviderOrder order,int store_num)
+    public static String addDelivery(String date,  int weightBeforeGo, SingleProviderOrder order,int store_num)
     {
 
         Store store = getStore(store_num);
@@ -446,6 +447,16 @@ public class StoreController {
         }
         return "store doesn't exists";
     }
+
+
+    public static void printAllTrucks(int id){
+        Store store = getStore(id);
+        if (store != null) {
+            if (!store.hasLoaded())
+                store.Load(mapper);
+        }
+        System.out.println( "store doesn't exists");
+    }
     public static String viewDeliveries (int store_num){
         Store store = getStore(store_num);
         if (store != null) {
@@ -455,6 +466,7 @@ public class StoreController {
         }
         return "store doesn't exists";
     }
+
 
     public static void initializeStores(int month, int day,int storeNumber) {
 
