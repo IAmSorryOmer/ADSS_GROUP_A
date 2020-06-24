@@ -21,11 +21,12 @@ public class Driver{
         id = dDriver.getId();
     }
 
+
     public License getLicense() {
         return license;
     }
 
-
+    public int getID(){return id;}
     public String getName() {
         return name;
     }

@@ -115,99 +115,13 @@ public class Store {
         return k;
     }
 
-    public String  addDelivery(Mapper mapper, String date, String hour, String tid, String driverName, String source, int weightBeforeGo, List<String> numberedFiles,
-                               HashMap<String,String> adresses, HashMap<String,HashMap<String,Integer>> products,String returnHour){
+    public String  addDelivery(Mapper mapper, String date,  int weightBeforeGo, SingleProviderOrder order){
 
-        if (morningOrEvening(hour).equals("morning"))
-        {
-            Day day = schedule.getDayByDate(date);
-            if( day!= null)
-            {
-                if (schedule.getDayByDate(date).is_Assigned_To_Role("driver","morning")) {
-                    if (chooseLower(hour,returnHour).equals(returnHour)) // return date is next day
-                    {
-                        if (schedule.returnIfDayIsLastInTheWeek(day.getDate().toString()))
-                            return "the return hour must be in the same week";
-                        else
-                        {
-                            Day nextDay = schedule.getNextDay(date);
-                            if (nextDay.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
-                            {
-                                return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
-                            }
-                            else
-                            {
-                                return "there must be an employee with role 'storage' at the shift of the return hour";
-                            }
-                        }
+                               return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate().toString(),weightBeforeGo,order,store_num);
 
-                    }
-                    else
-                    {
-                        if (day.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
-                        {
-                            return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
-                        }
-                        else
-                        {
-                            return "there must be an employee with role 'storage' at the shift of the return hour";
-                        }
-                    }
-                }
-                else
-                    return "there is no assigned driver for the shift of the delivery";
-            }
-            else
-            {
-                return "no day with that date in this week";
-            }
-        }
-
-        else
-        {
-            Day day = schedule.getDayByDate(date);
-            if( day!= null)
-            {
-                if (schedule.getDayByDate(date).is_Assigned_To_Role("driver","evening")) {
-                    if (chooseLower(hour,returnHour).equals(returnHour)) // return date is next day
-                    {
-                        if (schedule.returnIfDayIsLastInTheWeek(day.getDate().toString()))
-                            return "the return hour must be in the same week";
-                        else
-                        {
-                            Day nextDay = schedule.getNextDay(date);
-                            if (nextDay.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
-                            {
-                                return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
-                            }
-                            else
-                            {
-                                return "there must be an employee with role 'storage' at the shift of the return hour";
-                            }
-                        }
-
-                    }
-                    else
-                    {
-                        if (day.is_Assigned_To_Role("storage",morningOrEvening(returnHour)))
-                        {
-                            return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate(), hour, tid, driverName, source, weightBeforeGo, numberedFiles, adresses, products, store_num, returnHour);
-                        }
-                        else
-                        {
-                            return "there must be an employee with role 'storage' at the shift of the return hour";
-                        }
-                    }
-                }
-                else
-                    return "there is no assigned driver for the shift of the delivery";
-            }
-            else
-            {
-                return "no day with that date in this week";
-            }
-        }
-
+    }
+    public void printAllTrucks(){
+        deliveryController.printAllTrucks();
     }
     public static String morningOrEvening(String x){
         if(x.charAt(0)=='1'&&x.charAt(1)>'1'){
@@ -297,7 +211,6 @@ public class Store {
                     order.setDeliveryDate(deliveryInfo.second);
                     order.setDriverId(deliveryInfo.first[1]);
                     order.setShift(deliveryInfo.first[0]);
-
 
 
 

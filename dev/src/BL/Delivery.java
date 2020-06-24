@@ -18,28 +18,28 @@ public class Delivery {
     private String DName;
     private String source;
     private int preWeight;
-    private List<Destination> destinationList;
-    private List<NumberedFile> files;
+    private String address;
+    private String orderId;
+
     private String returnHour;
 
-    public Delivery(LocalDate date, String dispatchTime, String TID, String DName, String source, int preWeight, List<Destination> destinationList, List<NumberedFile> file) {
+    public Delivery(LocalDate date, String dispatchTime, String TID, String DName, String source, int preWeight, String address,String orderId) {
 
         this.id=idGenerator+1;
+        this.address=address;
         this.date = date;
         this.dispatchTime = dispatchTime;
         this.TID = TID;
         this.DName = DName;
         this.source = source;
         this.preWeight = preWeight;
-        this.destinationList = destinationList;
-        this.files=file;
+        this.orderId=orderId;
     }
 
 
 
     public Delivery(DAL.DDelivery deliver) {
 
-        this.files = new LinkedList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");//2005-nov-12
         LocalDate date = LocalDate.parse(deliver.getDate(), formatter);
         this.date =  date;
@@ -48,9 +48,9 @@ public class Delivery {
         this.DName = deliver.getDName();
         this.source = deliver.getSource();
         this.preWeight = deliver.getPreWeight();
-        destinationList = new LinkedList<>();
+        this.address=deliver.getAddress();
+        this.orderId=deliver.getOrderId();
         this.id=deliver.getId();
-        this.returnHour = deliver.getReturnHour();
         if(id>=deliver.getId()){
             idGenerator=deliver.getId()+1;
         }
@@ -58,25 +58,10 @@ public class Delivery {
 
     public  void Load( Mapper mapper)
     {
-        this.files = new LinkedList<>();
       // List<DAL.DDestination> destinations = mapper.loadDestinations();
-       List<DAL.DNumberedFile> numberedFiles = mapper.loadNumberedFiles(id);
 
 
-        for (int i = 0; i < numberedFiles.size(); i++)
-        {
-            NumberedFile numberedFile = new NumberedFile(numberedFiles.get(i));
-            files.add(numberedFile);
-            numberedFile.load(id,mapper);
-        }
-        for (int j = 0; j < numberedFiles.size(); j++) {
 
-            for (Destination destination : DestController.getInstance().getDestinations()) {
-                if (numberedFiles.get(j).getAddress().equals(destination.getAddress())) {
-                    destinationList.add(destination);
-                }
-            }
-        }
     }
 
     public int getId() {
@@ -87,9 +72,7 @@ public class Delivery {
     {
         return idGenerator;
     }
-    public List<NumberedFile> getFiles() {
-        return files;
-    }
+
 
 
     public LocalDate getDate() {
@@ -119,10 +102,7 @@ public class Delivery {
         return preWeight;
     }
 
-
-    public List<Destination> getDestinationList() {
-        return destinationList;
-    }
+    public String getAddress(){return  address;}
 
 
 

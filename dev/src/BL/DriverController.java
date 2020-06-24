@@ -32,7 +32,14 @@ public class DriverController {
 		}
 		return null;
 	}
-
+	public String getDriverName(int id){
+		for (Driver driver : drivers){
+			if (driver.getID()==id){
+				return driver.getName();
+			}
+		}
+		return null;
+	}
     public void load(int store_num, Mapper mapper) {
 		List<DDriver> dDrivers= mapper.loadDrivers(store_num);
 		for(int i=0;i< dDrivers.size();++i){

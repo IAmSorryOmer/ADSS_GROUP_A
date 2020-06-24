@@ -69,6 +69,7 @@ public class SingleProviderOrderController {
 						break;
 					}
 				}
+
 			}
 			else{
 				LocalDate DeliveryDate = StoreController.current_date.plus(provider.getDelayDays(), ChronoUnit.DAYS); //calculate the date i days from now
@@ -110,6 +111,12 @@ public class SingleProviderOrderController {
 		}
 		return minDate;
 	}*/
+
+	public static void shipOrder(String orderId){
+	    SingleProviderOrder order = OrdersDAL.getOrderById(orderId);
+	    order.setShipped(true);
+		OrdersDAL.shipOrder(order);
+    }
 
 	//methods
 	public  static void AddToOrder (String providerId, String orderId, int storeId, String ItemID, int orderAmount) {

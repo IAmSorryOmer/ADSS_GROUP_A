@@ -25,7 +25,13 @@ public class TruckController {
 		}
 		return getTruck(ID).getMaxWeight();
 	}
+	public void printAllTrucks(){
+		for (Truck t: trucks
+			 ) {
+			System.out.println("ID:"+t.getId()+"Model:"+t.getModel()+"Max weight"+t.getMaxWeight()+"Weight of truck"+t.getWeight());
 
+		}
+	}
 	private Truck getTruck(String ID){
 		for (Truck truck:trucks){
 			if (truck.getId().equals(ID)){

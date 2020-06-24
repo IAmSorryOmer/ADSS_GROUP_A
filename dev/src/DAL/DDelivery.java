@@ -8,9 +8,10 @@ public class DDelivery {
     private String DName;
     private String source;
     private int preWeight;
-    private String returnHour;
+    private String address;
+    private String orderId;
 
-    public DDelivery(int id, String date, String dispatchTime, String TID, String DName, String source, int preWeight,String returnHour) {
+    public DDelivery(int id, String date, String dispatchTime, String TID, String DName, String source, int preWeight,String address, String orderId) {
         this.id = id;
         this.date = date;
         this.dispatchTime = dispatchTime;
@@ -18,11 +19,12 @@ public class DDelivery {
         this.DName = DName;
         this.source = source;
         this.preWeight = preWeight;
-        this.returnHour = returnHour;
+        this.address=address;
+        this.orderId=orderId;
     }
-
-    public String getReturnHour() {
-        return returnHour;
+    public String getAddress(){ return address;}
+    public String getOrderId() {
+        return orderId;
     }
 
     public int getId() {

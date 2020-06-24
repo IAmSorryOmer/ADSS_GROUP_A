@@ -2,6 +2,7 @@ package BL;
 
 import DAL.DDelivery;
 import DAL.Mapper;
+import Entities.SingleProviderOrder;
 import IL.Callback;
 
 import java.time.LocalDate;
@@ -44,20 +45,17 @@ public class DeliveryController {
 			ret += "\nsource: " + delivery.getSource();
 			ret += "\nweight: " + delivery.getPreWeight();
 			int i = 0;
-			for (Destination destination:delivery.getDestinationList()){
-				ret += "\ndestination " + ++i + ": " + destination.getAddress();
-			}
+				ret += "\ndestination " + ++i + ": " + delivery.getAddress();
+
 			ret += "\n";
 		}
 		return ret;
 	}
 
 
-	public String addDelivery(Mapper mapper, LocalDate date, String time, String ID, String name, String source, int weight,
-							  List<String> numberedFiles, HashMap<String,String> numDest,
-							  HashMap<String,HashMap<String,Integer>> products, int store_num, String returnHour){
-		for (String destination: numDest.values()){
-			if (!checkAddress(destination)){
+	public String addDelivery(Mapper mapper, String ID, int weight, SingleProviderOrder order, int store_num){
+
+			if (!checkAddress(order.getProvider().getCommunicationDetails().getAddress())){
 //				return (String d, String t, String i, String n, String s, int w, List<String> nf, HashMap<String,String> nd,
 //						HashMap<String,HashMap<String,Integer>> p)-> {
 //					Scanner scanner = new Scanner(System.in);
@@ -86,39 +84,9 @@ public class DeliveryController {
 //				};
 				return "The destination entered does not exist. Operation code: 1";
 			}
-		}
-		if (!checkAreas(numDest.values())){
-//			return (String d, String t, String i, String n, String s, int w, List<String> nf, HashMap<String,String> nd,
-//					HashMap<String,HashMap<String,Integer>> p)->{
-//				Scanner scanner = new Scanner(System.in);
-//				System.out.println("two destinations with different areas, please choose destinations to remove, insert \"s\" to stop");
-//				while(true){
-//					String str = scanner.nextLine();
-//					if (str.equals("s"))
-//						break;
-//					if (!nd.containsValue(str)){
-//						continue;
-//					}
-//					String number = "";
-//					for (String num : nd.keySet()){
-//						if (nd.get(num).equals(str)){
-//							number = num;
-//							break;
-//						}
-//					}
-//					nf.remove(number);
-//					nd.remove(number);
-//					p.remove(str);
-//				}
-//				System.out.println("insert new weight");
-//				String string = scanner.nextLine();
-//				w = Integer.parseInt(string);
-//				Callback c = addDelivery(d, t, i, n, s, w, nf, nd, p);
-//				c.run(d ,t, i, n, s, w, nf, nd, p);
-//			};
-			return "Two destination with different areas. Operation code: 2";
-		}
-		if (!checkLicense(name, ID)){
+
+
+		if (!checkLicense(driverControl.getDriverName(order.getDriverId()), ID)){
 //			return (String d, String t, String i, String n, String s, int w, List<String> nf, HashMap<String,String> nd,
 //					HashMap<String,HashMap<String,Integer>> p)->{
 //				Scanner scanner = new Scanner(System.in);
@@ -200,26 +168,17 @@ public class DeliveryController {
 //			};
 			return "The given weight exceeds the max weight of the truck. Operation code: 4";
 		}
-		List<NumberedFile> numberedFileList=new LinkedList<>();
-
-		for(String num:numberedFiles){
-			numberedFileList.add(new NumberedFile(num,numDest.get(num),products.get(num)));
+		String hour="";
+		if(order.getShift()==0){
+			hour="6:00";
 		}
-		List<Destination> destinationList=new LinkedList<>();
-		for(String dest:numDest.values()){
-			destinationList.add(dControl.getDest(dest));
+		else{
+			hour="10:00";
 		}
-		Delivery newDelivery = new Delivery(date, time, ID, name, source, weight,destinationList, numberedFileList);
+		Delivery newDelivery = new Delivery(order.getOrderDate(),hour,ID,driverControl.getDriverName(order.getDriverId()),new Integer(store_num).toString(),weight,order.getProvider().getCommunicationDetails().getAddress(),order.getOrderID());
 		deliveries.add(newDelivery);
-		mapper.saveDelivery(newDelivery.getId(),date.toString(),time,ID,name,source,weight,store_num,returnHour);
+		mapper.saveDelivery(newDelivery.getId(),newDelivery.getDate().toString(),newDelivery.getDispatchTime(),newDelivery.getTID(),newDelivery.getDName(),newDelivery.getSource(),newDelivery.getPreWeight(),order.getProvider().getCommunicationDetails().getAddress(),order.getOrderID());
 
-		for (NumberedFile numberedFile:newDelivery.getFiles()) {
-			mapper.saveNumberedFile(numberedFile.getNumber(), numberedFile.getAddress(), newDelivery.getId());
-			for (String product : numberedFile.getProductNames().keySet())
-			{
-				mapper.saveProduct(numberedFile.getNumber(),product,numberedFile.getProductNames().get(product),newDelivery.getId());
-			}
-		}
 
 
 		/// -----------------------
@@ -268,6 +227,10 @@ public class DeliveryController {
 	public void addTruck(String id, int weight, int maxWeight, String model) {
 		tControl.addTruck(id,weight,maxWeight,model);
 	}
+	public void printAllTrucks(){
+		tControl.printAllTrucks();
+	}
+
 }
 
 
