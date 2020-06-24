@@ -1,5 +1,6 @@
 package PL;
 
+import BL.StoreController;
 import DAL.DBHandler;
 import Entities.*;
 import IL.*;
@@ -277,6 +278,7 @@ public class Main {
                             System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
                             System.out.println("1,2,4,12");
                             String input = reader.nextLine();
+                            //TODO -- to check correct input for slection of shifts
                             String[] detailsStringArr = input.split(",");
                             int[] capableShifts = new int[detailsStringArr.length];
                             for (int i = 0; i < detailsStringArr.length; i++) {
@@ -1296,6 +1298,7 @@ public class Main {
     }
 
     static void enterEmployee(int store_num) {
+        //TODO check for every input to be correct (int not string)
         System.out.println("enter the following details, as in the example:");
         System.out.println("name,employee id,bank account,store num,salary,employee conditions,start date");
         System.out.println("aviv,5,6045,1,3000,no special conditions,12/4/2020");
@@ -1338,6 +1341,8 @@ public class Main {
     }
     //Assigning employee to shift
     static void assignEmployeeToShift(int store_num) {
+        //TODO check for every input to be correct (int not string)
+
         System.out.println("enter the following details, as in the example:");
         System.out.println("store num,employee id,day num(1-7),day part(morning-evening),role");
         System.out.println("1,5,2,morning,cashier");
@@ -1354,6 +1359,8 @@ public class Main {
     }
     //Adding a role to a shift, still need someone to fill that role
     static void addRoleToShift(int store_num){
+        //TODO check for every input to be correct (int not string)
+
         System.out.println("enter the following details, as in the example:");
         System.out.println("store num,day num(1-7),day part(morning-evening),role,amount");
         System.out.println("1,3,evening,shift manager,2");
@@ -1369,6 +1376,7 @@ public class Main {
     }
     //update details of employee
     static void updateEmployeeDetails(int store_num) {
+        //TODO check for every input to be correct (int not string)
 
         System.out.println("Enter Employee ID:");
         int eID = reader.nextInt();
@@ -1432,7 +1440,8 @@ public class Main {
     }
     //Watch all the details of all the employees
     static void watchEmployeeDetails(int store_num) {
-        //TODO change to print store specific employees
+        //TODO change to print store specific employees   --- aviv: more comfortable to keep it for all stores
+
         System.out.println(managerController.getEmployeesDetails());
     }
     //Watch details of all the shifts
@@ -1443,6 +1452,8 @@ public class Main {
     }
     //Remove employee from system
     static void removeEmployee(int store_num) {
+        //TODO check for every input to be correct (int not string)
+
         System.out.println("enter employee id");
         int ID = reader.nextInt();
         reader.nextLine();
@@ -1506,6 +1517,8 @@ public class Main {
     //Add a new truck to the system
     static void addTruck(int store_num)
     {
+        //TODO check for every input to be correct (int not string)
+
         System.out.println("enter model");
         String model = reader.nextLine();
 
@@ -1565,6 +1578,8 @@ public class Main {
 
 
     public static void sendDelivery(int store_num){
+        //TODO check for every input to be correct (int not string)
+
         System.out.println("Delivery can be added to this week only");
 
         System.out.println("Please enter truck id:");
@@ -1592,15 +1607,17 @@ public class Main {
     }
 
     private static void selectDay(){
+        //TODO check for every input to be correct (int not string)
+
         System.out.println("Initializing System..");
         System.out.println("ENTER MONTH");
         int month = Integer.parseInt(reader.nextLine());
         System.out.println("ENTER DAY");
-        int day = Integer.parseInt(reader.nextLine());;
+        int day = Integer.parseInt(reader.nextLine());
         managerController.initializeStores(month, day);
     }
     private static int selectStore(){
-        System.out.println("please insert the store id:");
+        System.out.println("please insert the store num:");
         int storeId = Integer.parseInt(reader.nextLine());
         while(storeId != 1 && storeId != 2){
             System.out.println("there is no store with that id. please insert again.");

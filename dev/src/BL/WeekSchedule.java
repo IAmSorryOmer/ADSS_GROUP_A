@@ -18,7 +18,7 @@ public class WeekSchedule {
     public void initializeDays(int month, int day,int store_num, Mapper mapper)
     {
         //TODO what the fuck
-        LocalDate localDate = LocalDate.now();// LocalDate.of(2020,6,21);
+        LocalDate localDate = LocalDate.of(2020,month,day);// LocalDate.of(2020,6,21);
         current_date = localDate;
         mapper.saveCurrent_Date(current_date.toString());
 
