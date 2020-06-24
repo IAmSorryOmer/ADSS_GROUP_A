@@ -350,7 +350,7 @@ public class StoreController {
     }
 
 
-    public static String addDelivery(String date,  int weightBeforeGo, String orderId,int store_num)
+    public static String addDelivery(int weightBeforeGo, String tid,String orderId,int store_num)
     {
         SingleProviderOrder singleProviderOrder = SingleProviderOrderController.getOrderById(orderId);
         if(singleProviderOrder == null || singleProviderOrder.getStoreId() != store_num){
@@ -358,7 +358,7 @@ public class StoreController {
         }
         Store store = getStore(store_num);
         if (store != null) {
-           String result =  store.addDelivery(mapper,date,weightBeforeGo,singleProviderOrder);
+           String result =  store.addDelivery(mapper,tid,weightBeforeGo,singleProviderOrder);
             return result;
         }
         else

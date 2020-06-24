@@ -115,9 +115,9 @@ public class Store {
         return k;
     }
 
-    public String  addDelivery(Mapper mapper, String date,  int weightBeforeGo, SingleProviderOrder order){
+    public String  addDelivery(Mapper mapper, String tid,  int weightBeforeGo, SingleProviderOrder order){
 
-                               return deliveryController.addDelivery(mapper, schedule.getDayByDate(date).getDate().toString(),weightBeforeGo,order,store_num);
+                               return deliveryController.addDelivery(mapper, tid,weightBeforeGo,order,store_num);
 
     }
     public void printAllTrucks(){

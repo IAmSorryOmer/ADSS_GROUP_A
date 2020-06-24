@@ -227,10 +227,10 @@ public class ManagerController {
 
     //---------------------------------------------------------------
 
-    public String addDelivery(String date,  int weightBeforeGo, String order,int store_num)
+    public String addDelivery( int weightBeforeGo,String tid, String order,int store_num)
     {
 
-        return StoreController.addDelivery(date,  weightBeforeGo, order,store_num);
+        return StoreController.addDelivery(weightBeforeGo,tid, order,store_num);
 
     }
 

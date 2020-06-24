@@ -1566,49 +1566,17 @@ public class Main {
 
     public static void sendDelivery(int store_num){
         System.out.println("Delivery can be added to this week only");
-        System.out.println("Please enter date, of a day in this week, for example : 1.5 (it's a random date)");
-        String date = reader.nextLine();
 
         System.out.println("Please enter truck id:");
         String truckid = reader.nextLine();
 
-        System.out.println("Please enter the name of the driver:");
-        String driver = reader.nextLine();
-
-        System.out.println("Please enter the source of the delivery:");
-        String src = reader.nextLine();
+        System.out.println("Please enter order id:");
+        String orderid = reader.nextLine();
 
         System.out.println("Please enter the total weight of the stuff you want to deliver:");
         int weight = Integer.parseInt(reader.nextLine());
         boolean stop = false;
-        List<String> numberlst = new LinkedList<>();
-        HashMap<String, String> destlst = new HashMap<>();
-        HashMap<String, HashMap<String, Integer>> productlst = new HashMap<>();
-        while (true) {
-
-            System.out.println("Please enter the number of the file or \"r\" to stop entering files");
-            String number = reader.nextLine();
-            if (number.equals("r")) {
-                break;
-            }
-            numberlst.add(number);
-            System.out.println("Please enter address of a destination for that file:");
-            String dest = reader.nextLine();
-            destlst.put(number, dest);
-            productlst.put(number, new HashMap<String, Integer>());
-            while (true) {
-                System.out.println("Please enter name of product or \"r\" to stop entering products");
-                String product = reader.nextLine();
-                if (product.equals("r")) {
-                    break;
-                }
-
-                System.out.println("Please enter quantity of that product");
-                int quantity = Integer.parseInt(reader.nextLine());
-                productlst.get(number).put(product, quantity);
-            }
-        }
-        System.out.println(ManagerController.getInstance().addDelivery(store_num,date,hour,truckid,driver,src,weight,numberlst,destlst,productlst,returnHour));
+        System.out.println(ManagerController.getInstance().addDelivery(weight,truckid,orderid,store_num));
     }
 
     public static void print_shifts()
