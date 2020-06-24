@@ -358,7 +358,7 @@ public class StoreController {
         }
         Store store = getStore(store_num);
         if (store != null) {
-           String result =  store.addDelivery(mapper,date,weightBeforeGo,order);
+           String result =  store.addDelivery(mapper,date,weightBeforeGo,singleProviderOrder);
             return result;
         }
         else
