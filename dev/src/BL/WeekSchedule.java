@@ -111,7 +111,7 @@ public class WeekSchedule {
         {
             days[i] = days[i+1];
         }
-        days[7] = new Day(curr);
+        days[6] = new Day(curr);
     }
 
     public int isStorageInDay(LocalDate lcl){

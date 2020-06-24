@@ -90,6 +90,7 @@ public class Mapper {
 
 
     public void removeNoDeliveryOrders(String lastDay){
+        //TODO cancel this
         try {
             String query = "DELETE FROM SingleProviderOrder WHERE OrderDate="+lastDay;
             PreparedStatement stmt = conn.prepareStatement(query);

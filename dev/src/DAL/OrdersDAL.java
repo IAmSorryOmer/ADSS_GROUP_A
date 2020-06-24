@@ -147,6 +147,21 @@ public class OrdersDAL {
         return null;
     }
 
+    public static List<SingleProviderOrder> getAutomaticOrdersOfStoreAndDay(int storeId, int day){
+        String sql = "select * from SingleProviderOrder where OrderDays != 0 and StoreId = ? and (OrderDays & ?) != 0;";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, storeId);
+            preparedStatement.setInt(2, 1 << (day - 1));
+            List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
+            return resultList;
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+    }
+
     public static List<SingleProviderOrder> getStoreOrdersOfProvider(int storeId, String providerId){
         String sql = "select * from SingleProviderOrder where SingleProviderOrder.ProviderId =  ? and SingleProviderOrder.StoreId = ?;";
         try {
@@ -161,8 +176,9 @@ public class OrdersDAL {
         }
         return null;
     }
+
     public static List<SingleProviderOrder> getOrdersToSupply(LocalDate localDate){
-        String sql = "select * from SingleProviderOrder left join Provider P on SingleProviderOrder.ProviderId = P.ProviderId where SingleProviderOrder.OrderDays = 0 and SingleProviderOrder.Date = ? and P.NeedsTransport = 1;";
+        String sql = "select * from SingleProviderOrder left join Provider P on SingleProviderOrder.ProviderId = P.ProviderId where SingleProviderOrder.OrderDays = 0 and SingleProviderOrder.OrderDate = ? and P.NeedsTransport = 1;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setString(1, localDate.toString());

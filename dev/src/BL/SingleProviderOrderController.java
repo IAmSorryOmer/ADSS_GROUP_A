@@ -29,9 +29,10 @@ public class SingleProviderOrderController {
 	}
 
 	public static void handleAutomaticOrders(int storeId){
-		List<SingleProviderOrder> automaticOrders = OrdersDAL.getAutomaticOrdersOfStore(storeId);
+		List<SingleProviderOrder> automaticOrders = OrdersDAL.getAutomaticOrdersOfStoreAndDay(storeId, StoreController.Day_In_Week);
 		for (SingleProviderOrder currentAutomaticOrder: automaticOrders){
 			SingleProviderOrder newOrder = new SingleProviderOrder(currentAutomaticOrder);
+			newOrder.setOrderID(UUID.randomUUID().toString());
 			newOrder.setOrderDays(0);
 			newOrder.setOrderDate(StoreController.current_date);
 			createWithProviderObj(newOrder, newOrder.getProvider());
@@ -48,19 +49,31 @@ public class SingleProviderOrderController {
 				order.setDriverId(shiftDriverDate.getFirst()[1]);
 			}
 		}
-		else{ //provider provides on his own
+		else if(provider.getArrivalDays() <= 0){ //provider provides on his own
 			for(int i = 0;i<7;i++){
 				LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
 				if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week) %7)){ //is working i days from now.
 					//TODO: wait until the other module implements the following function isStorageInDate
-					//order.setShift(StoreController.getStore(order.getStoreId()).getSchedule().isStorageInDate(date_i_DaysFromNow));
+					Store store = StoreController.getStore(order.getStoreId());
+					int shift = store.getSchedule().isStorageInDay(date_i_DaysFromNow);
+					if(shift == -1){
+						continue;
+					}
+					order.setShift(shift);
 					order.setDeliveryDate(date_i_DaysFromNow); //return the appropriate date
-					return;
+					break;
 				}
-
 			}
 		}
-		return;
+		else{
+			LocalDate DeliveryDate = StoreController.current_date.plus(provider.getDelayDays(), ChronoUnit.DAYS); //calculate the date i days from now
+			Store store = StoreController.getStore(order.getStoreId());
+			int shift = store.getSchedule().isStorageInDay(DeliveryDate);
+			if(shift >= 0){
+				order.setShift(shift);
+				order.setDeliveryDate(DeliveryDate); //return the appropriate date
+			}
+		}
 	}
 
 	//returns the next date for providers

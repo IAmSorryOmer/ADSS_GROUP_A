@@ -251,9 +251,9 @@ public class Store {
 
 
     public void passDay(Mapper mapper,LocalDate curr) {
-
-
-        checkOrders(mapper,curr);
+        SingleProviderOrderController.handleAutomaticOrders(store_num);
+        //TODO ask aviv what the fuck??
+        //checkOrders(mapper,curr);
         schedule.passDay(mapper,curr);
     }
 

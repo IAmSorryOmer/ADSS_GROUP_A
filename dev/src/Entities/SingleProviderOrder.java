@@ -8,7 +8,7 @@ import java.util.Map;
 public class SingleProviderOrder{
 	
 	//fields
-	private final String orderID;
+	private String orderID;
 	private int storeId;
 	private int driverId;
 	private int shift;
@@ -57,15 +57,12 @@ public class SingleProviderOrder{
 		this.driverId = other.driverId;
 		this.shift = other.shift;
 		this.provider = other.provider;
-		this.orderItems = new HashMap<CatalogItem, Integer>();
+		this.orderItems = new HashMap<CatalogItem, Integer>(other.getOrderItems());
 		this.orderDate = other.orderDate;
 		this.deliveryDate = other.deliveryDate;
 		this.orderDays = other.orderDays;
 		this.isShipped = other.isShipped;
 		this.hasArrived = other.hasArrived;
-		for (CatalogItem key: other.orderItems.keySet()){
-			this.orderItems.put(key, other.orderItems.get(key));
-		}
 	}
 
 	//constructor for regular order with prepared items
@@ -84,6 +81,16 @@ public class SingleProviderOrder{
 	}
 
 	//getters  & setters
+
+
+	public void setOrderID(String orderID) {
+		this.orderID = orderID;
+	}
+
+	public boolean isHasArrived() {
+		return hasArrived;
+	}
+
 	public void addToItemList(CatalogItem catalogItem, int orderAmount) {
 		orderItems.put(catalogItem, orderAmount);
 	}
