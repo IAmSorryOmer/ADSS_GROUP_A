@@ -3,6 +3,7 @@ package BL;
 import DAL.DDestination;
 import DAL.DEmployee_Details;
 import DAL.Mapper;
+import Entities.SingleProviderOrder;
 import IL.Callback;
 
 import java.time.LocalDate;
@@ -348,13 +349,12 @@ public class StoreController {
     }
 
 
-    public static String addDelivery(int store_num,String date, String hour, String tid, String driverName, String source, int weightBeforeGo,
-                              List<String> numberedFiles, HashMap<String,String> adresses, HashMap<String,HashMap<String,Integer>> products,String returnHour)
+    public static String addDelivery(Mapper mapper, String date,  int weightBeforeGo, SingleProviderOrder order,int store_num)
     {
 
         Store store = getStore(store_num);
         if (store != null) {
-           String result =  store.addDelivery(mapper,date,hour,tid,driverName,source,weightBeforeGo,numberedFiles,adresses,products,returnHour);
+           String result =  store.addDelivery(mapper,date,weightBeforeGo,order);
             return result;
         }
         else
