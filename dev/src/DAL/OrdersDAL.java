@@ -24,8 +24,8 @@ public class OrdersDAL {
             preparedStatement.setString(4, singleProviderOrder.getDeliveryDate() == null ? null : singleProviderOrder.getDeliveryDate().toString());
             preparedStatement.setInt(5, singleProviderOrder.getOrderDays());
             preparedStatement.setInt(6, singleProviderOrder.getStoreId());
-            preparedStatement.setBoolean(7, singleProviderOrder.isShipped());
-            preparedStatement.setBoolean(8, singleProviderOrder.hasArrived());
+            preparedStatement.setInt(7, singleProviderOrder.isShipped()? 1 : 0);
+            preparedStatement.setInt(8, singleProviderOrder.hasArrived()? 1 : 0);
             preparedStatement.executeUpdate();
             mapper.put(singleProviderOrder.getOrderID(), singleProviderOrder);
             for(Map.Entry<CatalogItem, Integer> entry: singleProviderOrder.getOrderItems().entrySet()){
@@ -206,8 +206,8 @@ public class OrdersDAL {
             LocalDate orderDate = orderDateStr == null ? null : LocalDate.parse(orderDateStr);
             String deliveryDateStr = resultSet.getString("DeliveryDate");
             LocalDate deliveryDate = deliveryDateStr == null ? null : LocalDate.parse(deliveryDateStr);
-            boolean isShipped = resultSet.getBoolean("IsShipped");
-            boolean hasArrived = resultSet.getBoolean("HasArrived");
+            boolean isShipped = resultSet.getInt("IsShipped") == 1? true : false;
+            boolean hasArrived = resultSet.getInt("HasArrived") == 1 ? true: false;
             int orderDays = resultSet.getInt("OrderDays");
             if(mapper.containsKey(orderId)){
                 toReturn.add(mapper.get(orderId));
@@ -256,4 +256,16 @@ public class OrdersDAL {
         }
     }
 
+    public static void shipOrder(SingleProviderOrder order){
+        String sql = "update SingleProviderOrder set IsShipped = ? where OrderId = ?";
+        try {
+            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
+            preparedStatement.setInt(1, order.isShipped()? 1 : 0);
+            preparedStatement.setString(2, order.getOrderID());
+            preparedStatement.executeUpdate();
+        }
+        catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
