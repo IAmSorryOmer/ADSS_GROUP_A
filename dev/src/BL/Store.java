@@ -171,8 +171,6 @@ public class Store {
             singleProviderOrder.setShipped(true);
             SingleProviderOrderController.editOrder(singleProviderOrder);
         }
-        //TODO ask aviv what the fuck??
-        //checkOrders(mapper,curr);
         schedule.passDay(mapper,curr);
     }
 

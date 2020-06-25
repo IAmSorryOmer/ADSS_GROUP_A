@@ -88,13 +88,11 @@ public class Mapper {
 
 
     public void removeNoDeliveryOrders(String lastDay){
-        //TODO cancel this
         try {
-            String query = "DELETE FROM SingleProviderOrder WHERE OrderDate="+lastDay;
+            String query = "DELETE FROM SingleProviderOrder WHERE OrderDate = ? and DeliveryDate is null";
             PreparedStatement stmt = conn.prepareStatement(query);
-
+            stmt.setString(1, lastDay);
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

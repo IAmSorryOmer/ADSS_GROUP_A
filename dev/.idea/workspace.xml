@@ -1,24 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="Mostly done with order logic (added removeOrder and rescheduleOrder)">
-      <change afterPath="$PROJECT_DIR$/src/PL/Alerts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SuperLiUnified" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/DeliveryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/DeliveryController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/DiscountController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/DiscountController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/Store.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/Store.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/StoreController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/TruckController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/TruckController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/WeekSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/WeekSchedule.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Mapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/IL/ManagerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/ManagerController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/IL/OrdersInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IL/OrdersInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PL/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -221,7 +209,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593001723846</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Mostly done with order logic (added removeOrder and rescheduleOrder)">
+      <created>1593084150158</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1593084150158</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -284,11 +279,11 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1593084002109">
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1593084150003">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593070245610" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1593084002109" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1593084150003" />
     <state width="537" height="506" key="DebuggerActiveHint" timestamp="1592828508219">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -347,11 +342,11 @@
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
     <state x="200" y="0" width="1024" height="845" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1593073168047" />
-    <state x="275" y="98" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1593070160558">
-      <screen x="0" y="0" width="1366" height="728" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1593084277666">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593070160558" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1592836642142" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1593084277666" />
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592831302840">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>

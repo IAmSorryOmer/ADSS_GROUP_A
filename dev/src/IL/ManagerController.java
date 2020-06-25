@@ -253,6 +253,9 @@ public class ManagerController {
     public static void acceptDelivery(String orderId, String truckId, int storeId, int weight){
         StoreController.acceptDelivery(orderId, truckId, storeId, weight);
     }
+    public static void passDay(){
+        StoreController.passDay();
+    }
 
     public static void validateRole(int employeeId, String specialRole){
         //TODO

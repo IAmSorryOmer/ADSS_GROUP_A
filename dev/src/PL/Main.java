@@ -52,8 +52,7 @@ public class Main {
                         storeSpecificMenu();
                         break;
                     case 3:
-                        break;
-                        //ManagerController.
+                        ManagerController.
                     case 3:
                         return;
                     default:
