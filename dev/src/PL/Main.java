@@ -37,7 +37,7 @@ public class Main {
         //CHOOSE ROLE IN THE SYSTEM
         String[] options = new String[]{"General actions", "Store specific actions", "pass day", "exit"};
         while (true) {
-            System.out.println("Hello, Welcome To Super-Li System");
+            System.out.println("Hello, Welcome To Super-Li System. current date: " + StoreController.current_date.toString());
             System.out.println("Choose which actions you want to preform:");
             printOptions(options);
             try {
@@ -293,7 +293,7 @@ public class Main {
                     operationNum = Integer.parseInt(reader.nextLine());
                 }
                 catch (Exception e){
-                    System.out.println(e.getMessage());
+                    System.out.println("error. " + e.getMessage());
                     continue;
                 }
                 switch (operationNum) {
@@ -315,7 +315,7 @@ public class Main {
                                     capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
                                 }
                                 catch (Exception e){
-                                    System.out.println(e.getMessage());
+                                    System.out.println("error. " + e.getMessage());
                                     badInput = true;
                                     break;
                                 }
@@ -1271,8 +1271,7 @@ public class Main {
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
         if (detailsStringArr.length != 6) {
-            System.out.println("un appropriate amount of details inserted");
-            return;
+            throw new IllegalArgumentException("un appropriate amount of details inserted");
         }
         System.out.println("is the new employee a driver? y/n");
         String answer = reader.nextLine();
@@ -1289,14 +1288,8 @@ public class Main {
             String[] role = {"driver"};
             int eID = 0;
             int salary = 0;
-            try {
-                eID = Integer.parseInt(detailsStringArr[1]);
-                salary = Integer.parseInt(detailsStringArr[3]);
-            }
-            catch (Exception e){
-                System.out.println(e.getMessage());
-                return;
-            }
+            eID = Integer.parseInt(detailsStringArr[1]);
+            salary = Integer.parseInt(detailsStringArr[3]);
             System.out.println(managerController.addDriverEmployee(role,detailsStringArr[0],
                     eID, detailsStringArr[2], store_num,
                     salary, detailsStringArr[4], detailsStringArr[5],license));
@@ -1308,7 +1301,9 @@ public class Main {
             String roles = reader.nextLine();
 
             String[] rolesArr = roles.split(",");
-
+            if(rolesArr.length == 0 ){
+                throw new IllegalArgumentException("must input at least one role");
+            }
             String addingNewEmployee = managerController.addEmployee(rolesArr, detailsStringArr[0],
                     Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], store_num,
                     Integer.parseInt(detailsStringArr[3]), detailsStringArr[4], detailsStringArr[5]);
@@ -1326,19 +1321,15 @@ public class Main {
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
         if (detailsStringArr.length != 4) {
-            System.out.println("un appropriate amount of details inserted");
-
+            throw new IllegalArgumentException("un appropriate amount of details inserted");
         }
 
         int eID = 0;
         int dayNum = 0;
-        try {
-            eID = Integer.parseInt(detailsStringArr[0]);
-            dayNum = Integer.parseInt(detailsStringArr[1]);
-        }
-        catch (Exception e){
-            System.out.println("Error " + e.getMessage());
-            return;
+        eID = Integer.parseInt(detailsStringArr[0]);
+        dayNum = Integer.parseInt(detailsStringArr[1]);
+        if(dayNum < 1 || dayNum > 7){
+            throw new IllegalArgumentException("day must be between 1 to 7");
         }
 
         String addingEmployeeToShift = managerController.addToShift(store_num, eID, dayNum, detailsStringArr[2], detailsStringArr[3]);
@@ -1354,35 +1345,22 @@ public class Main {
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
         if (detailsStringArr.length != 4) {
-            System.out.println("un appropriate amount of details inserted");
-
+            throw new IllegalArgumentException("un appropriate amount of details inserted");
         }
         int dayNum = 0;
         int amount = 0;
-        try {
-            dayNum = Integer.parseInt(detailsStringArr[0]);
-            amount = Integer.parseInt(detailsStringArr[3]);
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
+        dayNum = Integer.parseInt(detailsStringArr[0]);
+        amount = Integer.parseInt(detailsStringArr[3]);
+        if(dayNum < 1 || dayNum > 7)
+            throw new IllegalArgumentException("day must be between 1 to 7");
         String addingRoleToShift = managerController.addRoleToShift(store_num, dayNum, detailsStringArr[1], detailsStringArr[2], amount);
         System.out.println(addingRoleToShift);
-
     }
     //update details of employee
     static void updateEmployeeDetails(int store_num) {
-
         System.out.println("Enter Employee ID:");
         int eID = 0;
-        try {
-            eID = Integer.parseInt(reader.nextLine());
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
+        eID = Integer.parseInt(reader.nextLine());
 
         System.out.println(managerController.getEmployeeDetails(store_num, eID));
         System.out.println("enter the following details, as in the example:");
@@ -1391,33 +1369,13 @@ public class Main {
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
         if (detailsStringArr.length != 4) {
-            System.out.println("un appropriate amount of details inserted");
-
+            throw new IllegalArgumentException("un appropriate amount of details inserted");
         }
-        int salary = 0;
-        try {
-            salary = Integer.parseInt(detailsStringArr[2]);
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
-//                            System.out.println("enter capable jobs, as in the example:");
-//                            System.out.println("cashier,shift manager");
-//                            String roles = reader.nextLine();
-//                            String[] rolesArr = roles.split(",");
-
+        int salary = Integer.parseInt(detailsStringArr[2]);
         String updatingEmployee = managerController.updateEmployee(store_num, detailsStringArr[0],
                 eID, detailsStringArr[1], salary,
                 detailsStringArr[3]);
         System.out.println(updatingEmployee);
-
-
-
-
-
-
-
     }
     //Watch all the hours that people are capable to work in
     static void watchCapableHours(int store_num) {
@@ -1426,30 +1384,17 @@ public class Main {
     }
     //Watch all the details of all the employees
     static void watchEmployeeDetails(int store_num) {
-        //TODO change to print store specific employees   --- aviv: more comfortable to keep it for all stores
-
         System.out.println(managerController.getEmployeesDetails());
     }
     //Watch details of all the shifts
     static void watchShiftDetails(int store_num) {
-
         System.out.println(managerController.getShiftsDetails(store_num));
-
     }
     //Remove employee from system
     static void removeEmployee(int store_num) {
-
         System.out.println("enter employee id");
-        int ID = 0;
-        try {
-            ID = Integer.parseInt(reader.nextLine());
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
+        int ID = Integer.parseInt(reader.nextLine());
         System.out.println(managerController.removeEmployee(ID));
-
     }
     //Add new destination, delivery can go to that destination now
     static void addDestination(int store_num) {
@@ -1498,13 +1443,13 @@ public class Main {
             }
         }
         managerController.addDestination(address, contact, phone, area);
-
+        System.out.println("destination added successfuly");
     }
     //Add a new delivery to the system
     static void addDelivery(int store_num) {
         sendDelivery(store_num);
-
     }
+
     //Add a new truck to the system
     static void addTruck(int store_num)
     {
@@ -1515,20 +1460,9 @@ public class Main {
         String truckId = reader.nextLine();
 
         System.out.println("enter weight");
-        int weight = 0;
-        int maxWeight = 0;
-        try {
-            weight = Integer.parseInt(reader.nextLine());
-            System.out.println("enter max weight");
-            maxWeight = Integer.parseInt(reader.nextLine());
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
-
-
-
+        int weight = Integer.parseInt(reader.nextLine());
+        System.out.println("enter max weight");
+        int maxWeight = Integer.parseInt(reader.nextLine());
         boolean goodInput = false;
         while (!goodInput) {
             goodInput = true;
@@ -1543,27 +1477,12 @@ public class Main {
                 goodInput = false;
             }
         }
-        managerController.addTruck(store_num,truckId, weight, maxWeight, model);
-
+        System.out.println(managerController.addTruck(store_num,truckId, weight, maxWeight, model));
     }
     //View all the deliveries
     static void viewDeliveries(int store_num)
     {
         System.out.println(managerController.viewDeliveries(store_num));
-
-    }
-    //Watch the date of the first day in the week(for some reason)
-    void WatchSunday()
-    {
-        System.out.println(managerController.getSundayDate());
-
-    }
-
-    public static void print_Storage_employee_menu()
-    {
-        System.out.println("1. Insert available times for shifts");
-        System.out.println("2. Watch shifts of this week");
-        System.out.println("3. Log out");
     }
     public static void print_employee_menu()
     {
@@ -1584,15 +1503,7 @@ public class Main {
         String orderid = reader.nextLine();
 
         System.out.println("Please enter the total weight of the stuff you want to deliver:");
-        int weight = 0;
-        try {
-            weight = Integer.parseInt(reader.nextLine());
-        }
-        catch (Exception e){
-            System.out.println(e.getMessage());
-            return;
-        }
-        boolean stop = false;
+        int weight = Integer.parseInt(reader.nextLine());
         System.out.println(ManagerController.getInstance().addDelivery(weight,truckid,orderid,store_num));
     }
 
