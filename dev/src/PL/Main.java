@@ -282,7 +282,7 @@ public class Main {
 
     private static void employeeMenu(int store_num){
         System.out.println("Enter Employee ID:");
-        int eID = reader.nextInt();
+        int eID = Integer.parseInt(reader.nextLine());
         EmployeeController employeeController=EmployeeController.getInstance();
         if (employeeController.connect(eID,store_num)) {
             //If you are a storage worker, you enter here the storage worker menu
@@ -313,9 +313,10 @@ public class Main {
                                 String[] detailsStringArr = input.split(",");
                                 int[] capableShifts = new int[detailsStringArr.length];
                                 if (detailsStringArr.length != 4) {
-                                    System.out.println("un appropriate amount of details inserted");
-                                    continue;
+//                                    System.out.println("un appropriate amount of details inserted");
+//                                    continue;
                                 }
+                                //TODO FIX THIS!!!!!!!!!!!!!!!!
                                 for (int i = 0; i < detailsStringArr.length; i++) {
                                     try {
                                         capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
@@ -1422,32 +1423,7 @@ public class Main {
 
 
 
-                            /*
-                            System.out.println("Enter Employee ID:");
-                            int eID = reader.nextInt();
-                            System.out.println("Enter Store Number:");
-                            int store_num = reader.nextInt();
-                            reader.nextLine();
 
-                                System.out.println(managerController.getEmployeeDetails(store_num,eID));
-                                System.out.println("enter the following details, as in the example:");
-                                System.out.println("name,bank account,salary,employee conditions,start date");
-                                System.out.println("tal,6156,3000,no special conditions,12/4/2020");
-                                String details = reader.nextLine();
-                                String[] detailsStringArr = details.split(",");
-                                if (detailsStringArr.length != 6) {
-                                    System.out.println("un appropriate amount of details inserted");
-
-                                }
-                                System.out.println("enter capable jobs, as in the example:");
-                                System.out.println("cashier,shift manager");
-                                String roles = reader.nextLine();
-                                String[] rolesArr = roles.split(",");
-
-                                String updatingEmployee = managerController.updateEmployee(Integer.parseInt(detailsStringArr[0]), rolesArr, detailsStringArr[1],
-                                        eID, detailsStringArr[2], Integer.parseInt(detailsStringArr[3]),
-                                        detailsStringArr[4], detailsStringArr[5]);
-                                System.out.println(updatingEmployee); */
 
 
     }

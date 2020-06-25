@@ -487,7 +487,7 @@ public class StoreController {
     }
     public static boolean  LoadStores()
     {
-
+        current_date = mapper.getCurrentDate();
         List<DAL.DStore> Dstores = mapper.LoadStores();
         for (DAL.DStore dStore : Dstores)
         {

@@ -4,6 +4,7 @@ import org.omg.PortableServer.IdAssignmentPolicy;
 import org.sqlite.SQLiteConfig;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 import java.util.List;
 //package net.sqlitetutorial;
@@ -36,6 +37,25 @@ public class Mapper {
 
     public Mapper() {
         connect();
+    }
+
+
+    public LocalDate getCurrentDate(){
+        try {
+            String query = "SELECT date  FROM CurrentDate ";
+            PreparedStatement stmt = conn.prepareStatement(query);
+
+            ResultSet rs = stmt.executeQuery();
+
+            // loop through the result set
+            String d=rs.getString("date");
+            LocalDate date = LocalDate.parse(d);
+            return date;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+
+        }
+        return null;
     }
 
     public List<DStore> LoadStores() {
