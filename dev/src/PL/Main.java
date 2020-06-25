@@ -28,7 +28,6 @@ public class Main {
         }
     }
 
-
     private static void initialSelection() {
         if (!managerController.loadStores())//Initializing the day
         {
@@ -285,52 +284,45 @@ public class Main {
         int eID = Integer.parseInt(reader.nextLine());
         EmployeeController employeeController=EmployeeController.getInstance();
         if (employeeController.connect(eID,store_num)) {
-            //If you are a storage worker, you enter here the storage worker menu
             //menu for normal employees(non storage)
             System.out.println("hello employee " + employeeController.getActiveName() + "\nchoose operation:");
             int operationNum = 0;
             while (operationNum != 3) {
-
                 print_employee_menu();
-                while (true){
-                    try {
-                        operationNum = Integer.parseInt(reader.nextLine());
-                        break;
-                    }
-                    catch (Exception e){
-                        System.out.println("not this time Irad! " + e.getMessage());
-                    }
+                try {
+                    operationNum = Integer.parseInt(reader.nextLine());
+                }
+                catch (Exception e){
+                    System.out.println(e.getMessage());
+                    continue;
                 }
                 switch (operationNum) {
                     case 1: {
                         if (!employeeController.hasActiveUserAssignedShifts()) {
-                            while (true){
-                                boolean badInput = false;
-                                print_shifts();
-                                System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
-                                System.out.println("1,2,4,12");
-                                String input = reader.nextLine();
-                                String[] detailsStringArr = input.split(",");
-                                int[] capableShifts = new int[detailsStringArr.length];
-                                if (detailsStringArr.length != 4) {
-//                                    System.out.println("un appropriate amount of details inserted");
-//                                    continue;
+                            boolean badInput = false;
+                            print_shifts();
+                            System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
+                            System.out.println("1,2,4,12");
+                            String input = reader.nextLine();
+                            String[] detailsStringArr = input.split(",");
+                            if(detailsStringArr.length > 14 || detailsStringArr.length == 0){
+                                System.out.println("you should enter between 1 to 14 numbers");
+                                break;
+                            }
+                            int[] capableShifts = new int[detailsStringArr.length];
+                            for (int i = 0; i < detailsStringArr.length; i++) {
+                                try {
+                                    capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
                                 }
-                                //TODO FIX THIS!!!!!!!!!!!!!!!!
-                                for (int i = 0; i < detailsStringArr.length; i++) {
-                                    try {
-                                        capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
-                                    }
-                                    catch (Exception e){
-                                        System.out.println(e.getMessage());
-                                        badInput = true;
-                                        break;
-                                    }
-                                }
-                                if (!badInput){
-                                    System.out.println(employeeController.enterMyCapableShifts(capableShifts));
+                                catch (Exception e){
+                                    System.out.println(e.getMessage());
+                                    badInput = true;
                                     break;
                                 }
+                            }
+                            if (!badInput){
+                                System.out.println(employeeController.enterMyCapableShifts(capableShifts));
+                                break;
                             }
                         }
                         else {
