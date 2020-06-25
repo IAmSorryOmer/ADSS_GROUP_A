@@ -382,8 +382,10 @@ public class Main {
                         break;
                     case 7:
                         watchShiftDetails(storeId);
+                        break;
                     case 8:
                         removeEmployee(storeId);
+                        break;
                     case 9:
                         return;
                     default:
@@ -1277,7 +1279,7 @@ public class Main {
         String[] detailsStringArr = details.split(",");
         if (detailsStringArr.length != 6) {
             System.out.println("un appropriate amount of details inserted");
-
+            return;
         }
         System.out.println("is the new employee a driver? y/n");
         String answer = reader.nextLine();
@@ -1308,16 +1310,18 @@ public class Main {
         }
         else {
             System.out.println("enter capable jobs, as in the example:");
-            System.out.println("cashier,shift manager");
+            System.out.println("cashier,shift manager, 'storage' for an employee that will be stock keeper");
+            System.out.println("stock keeper has more options");
             String roles = reader.nextLine();
 
             String[] rolesArr = roles.split(",");
 
             String addingNewEmployee = managerController.addEmployee(rolesArr, detailsStringArr[0],
                     Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], store_num,
-                    Integer.parseInt(detailsStringArr[4]), detailsStringArr[5], detailsStringArr[6]);
+                    Integer.parseInt(detailsStringArr[3]), detailsStringArr[4], detailsStringArr[5]);
             System.out.println(addingNewEmployee);
         }
+
 
     }
     //Assigning employee to shift
@@ -1340,7 +1344,7 @@ public class Main {
             dayNum = Integer.parseInt(detailsStringArr[1]);
         }
         catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("Error " + e.getMessage());
             return;
         }
 
