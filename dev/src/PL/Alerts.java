@@ -43,6 +43,7 @@ public class Alerts {
         System.out.println("please insert the weight of the delivery:");
         int weight = Integer.parseInt(reader.nextLine());
         ManagerController.acceptDelivery(orderId, truckId, storeId, weight);
+        System.out.println("delivery accepted successfully");
     }
 
     public static void rescheduleDelivery(int storeId){
@@ -77,5 +78,6 @@ public class Alerts {
         }
         OrdersInterface.modifyItemsBeforeAccept(orderId, storeId, toChange);
         OrdersInterface.acceptOrder(orderId, storeId);
+        System.out.println("order accepted successfully");
     }
 }

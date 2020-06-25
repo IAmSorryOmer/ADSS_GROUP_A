@@ -113,6 +113,7 @@ public class WatchMenues {
                         break;
                     case 3:
                         printNumberedList(ProductDetailsInterface.getAllMissingsOfStore(storeId));
+                        break;
                     case 4:
                         printNumberedList(ProductInterface.getAllDamagedOfStore(storeId));
                         break;
