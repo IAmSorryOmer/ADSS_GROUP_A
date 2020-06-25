@@ -128,7 +128,7 @@ public class Employee {
 
     public boolean isStorage() {
         for (int i = 0; i < capable_jobs.length; ++i) {
-            if (capable_jobs[i].equals("Storage")) {
+            if (capable_jobs[i].equals("storage")) {
                 return true;
             }
         }
