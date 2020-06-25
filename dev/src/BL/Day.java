@@ -30,9 +30,7 @@ public class Day {
     {
         morning = new HashMap<>();
         evening = new HashMap<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");//2005-nov-12
-        date = LocalDate.parse(dDay.getDate(), formatter);
-
+        date = LocalDate.parse(dDay.getDate());
     }
     public void load(int dayNum,int store_num, Mapper mapper) {
 

@@ -182,7 +182,7 @@ public class WeekSchedule {
 
             for ( String role:m.keySet()
                  ) {
-                if(role.equals("Driver")){
+                if(role.equals("driver")){
                     for (int id: m.get(role)
                          ) {
                         if(id!=0){
@@ -222,7 +222,7 @@ public class WeekSchedule {
 
             for ( String role:m.keySet()
             ) {
-                if(role.equals("Driver")){
+                if(role.equals("driver")){
                     for (int id: m.get(role)
                     ) {
                         if(id!=0){

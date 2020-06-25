@@ -53,6 +53,7 @@ public class OrdersDAL {
             preparedStatement.setInt(3, singleProviderOrder.getShift());
             preparedStatement.setInt(4, singleProviderOrder.isShipped() ? 1 : 0);
             preparedStatement.setInt(5, singleProviderOrder.hasArrived() ? 1 : 0);
+            preparedStatement.setString(6, singleProviderOrder.getOrderID());
             preparedStatement.executeUpdate();
         }
         catch (SQLException e) {

@@ -442,7 +442,7 @@ public class Mapper {
         List<DRole_Needed> dRoles_need = new LinkedList<>();
         try {
             //TODO this query has errors
-            String query = "SELECT role, needed FROM Role_Shift WHERE date =" + date + " AND store_num=" + store_num + " AND day_part=\"" + day_part + "\"";
+            String query = "SELECT role, needed FROM Role_Shift WHERE date =\"" + date + "\" AND store_num=" + store_num + " AND day_part=\"" + day_part + "\"";
             //String query = "SELECT role, needed FROM Role_Shift WHERE date =" + date + " AND store_num=" + store_num + " AND day_part=" + day_part;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);

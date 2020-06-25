@@ -23,6 +23,7 @@ public class SingleProviderOrderController {
 	}
 
 	public static void createWithProviderObj(SingleProviderOrder singleProviderOrder, Provider provider){
+		singleProviderOrder.setProvider(provider);
 		if(getOrderById(singleProviderOrder.getOrderID()) != null){
 			throw new IllegalArgumentException("there is already order with id " + singleProviderOrder.getOrderID());
 		}
@@ -30,6 +31,12 @@ public class SingleProviderOrderController {
 			scheduleOrder(singleProviderOrder, provider);
 		}
 		OrdersDAL.insertOrder(singleProviderOrder);
+		if(!singleProviderOrder.isAutomatic() && singleProviderOrder.getDeliveryDate() != null){
+			System.out.println("scheduled successfuly to " + singleProviderOrder.getDeliveryDate().toString());
+		}
+		else if(!singleProviderOrder.isAutomatic()){
+			System.out.println("failed to schedual delivery. assign drivers or storage to the fitting days(according to the provider transport way)");
+		}
 	}
 
 	public static void handleAutomaticOrders(int storeId){
@@ -54,7 +61,7 @@ public class SingleProviderOrderController {
 			}
 		}
 		else{
-			if(provider.getArrivalDays() <= 0){ //provider provides on his own
+			if(provider.getArrivalDays() > 0){ //provider provides on his own
 				for(int i = 1;i<7;i++){
 					LocalDate date_i_DaysFromNow = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
 					if(provider.isWorkingAtDay((i+ StoreController.Day_In_Week - 1) %7)){ //is working i days from now.
@@ -178,6 +185,12 @@ public class SingleProviderOrderController {
 		}
 		scheduleOrder(singleProviderOrder, singleProviderOrder.getProvider());
 		OrdersDAL.editOrder(singleProviderOrder);
+		if(singleProviderOrder.getDeliveryDate() != null){
+			System.out.println("scheduled successfuly to " + singleProviderOrder.getDeliveryDate().toString());
+		}
+		else if(!singleProviderOrder.isAutomatic()){
+			System.out.println("failed to schedual delivery. assign drivers or storage to the fitting days(according to the provider transport way)");
+		}
 	}
 
 	public static void RemoveFromOrder (String providerId, String orderId, int storeId, String ItemID) {

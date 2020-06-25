@@ -457,8 +457,9 @@ public class StoreController {
         if (store != null) {
             if (!store.hasLoaded())
                 store.Load(mapper);
+            store.printAllTrucks();
+            return;
         }
-
         System.out.println( "store doesn't exists");
     }
     public static String viewDeliveries (int store_num){
@@ -488,6 +489,7 @@ public class StoreController {
     public static boolean  LoadStores()
     {
         current_date = mapper.getCurrentDate();
+        Day_In_Week = ((current_date.getDayOfWeek().getValue()%7) + 1);
         List<DAL.DStore> Dstores = mapper.LoadStores();
         for (DAL.DStore dStore : Dstores)
         {

@@ -24,6 +24,7 @@ public class Provider {
 		this.ProviderID = providerID;
 		this.CreditCardNumber = CreditCardNumber;
 		this.NeedsTransport = NeedsTransport;
+		this.DelayDays = DelayDays;
 		this.ArrivalDays = ArrivalDays;
 		this.Name = Name;
 		this.communicationDetails = CommunicationDetails;
