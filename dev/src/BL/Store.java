@@ -20,7 +20,7 @@ public class Store {
     private boolean hasLoaded;
 
 
-    public Store(int month,int day,int store_num, Mapper mapper)
+    public Store(int store_num, Mapper mapper)
     {
         this.store_num = store_num;
         this.employees = new LinkedList<>();

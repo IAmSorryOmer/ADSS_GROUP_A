@@ -13,7 +13,7 @@ import java.util.List;
 
 public class StoreController {
     static List<Store> stores;
-    static private int storeNumbers = 2;
+    static public int storeNumbers = 2;
     static private Mapper mapper;
     static private String sundayDate;
 
@@ -476,14 +476,11 @@ public class StoreController {
 
         for (int i =1; i <= storeNumber; i++)
         {
-            Store store = new Store(month, day,i,mapper);
+            Store store = new Store(i,mapper);
             mapper.saveStore(i);
             stores.add(store);
             store.initializeDays(month,day,i,mapper);
             store.setHasLoaded(true);
-
-
-
 
         }
 
