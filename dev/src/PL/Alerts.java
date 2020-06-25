@@ -70,8 +70,12 @@ public class Alerts {
         System.out.println("now start to insert the ids of the items that you want to modify in the order(due to damage or missings).\n" +
                 "insert @stop when you done and you want to add the order to stock:");
         List<Pair<String, Integer>> toChange = new LinkedList<>();
-        String itemId = reader.nextLine();
-        while (!itemId.equals("@stop")){
+        String itemId = "a";
+        while (true){
+            System.out.println("please insert item id(or @stop):");
+            itemId = reader.nextLine();
+            if(itemId.equals("@stop"))
+                break;
             System.out.println("now insert the new amount:");
             int newAmount = Integer.parseInt(reader.nextLine());
             toChange.add(new Pair<>(itemId, newAmount));

@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="dev:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="start Debug">
+    <list default="true" id="58db8880-260f-4411-b088-9690ca0bb4b0" name="Default Changelist" comment="commit suicide">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/dev_jar.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/manifest/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/SuperLiUnified" beforeDir="false" afterPath="$PROJECT_DIR$/SuperLiUnified" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/initializeddb/SuperLiUnified" beforeDir="false" afterPath="$PROJECT_DIR$/initializeddb/SuperLiUnified" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dev/BL/Day.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/BL/Day.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dev/BL/SingleProviderOrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/BL/SingleProviderOrderController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/dev/BL/StoreController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/BL/StoreController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/dev/DAL/Mapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/DAL/Mapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/Day.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/Day.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/SingleProviderOrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dev/BL/WeekSchedule.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/BL/WeekSchedule.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dev/DAL/OrdersDAL.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/DAL/OrdersDAL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dev/Entities/Provider.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/Entities/Provider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/dev/PL/Alerts.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/dev/PL/Alerts.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/StoreController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/StoreController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BL/WeekSchedule.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BL/WeekSchedule.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAL/Mapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/Mapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAL/OrdersDAL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entities/Provider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entities/Provider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PL/Alerts.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PL/Alerts.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,12 +40,6 @@
     <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="85" />
-    <option name="y" value="25" />
-    <option name="width" value="1750" />
-    <option name="height" value="980" />
-  </component>
   <component name="ProjectId" id="1ZZC4lEncAxyjptAxVSFYb4pQYC" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
@@ -51,7 +55,7 @@
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1593099524082" />
     <property name="database.data.extractors.current.id" value="XML-Groovy.xml.groovy" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
@@ -95,7 +99,8 @@
       <workItem from="1592824331548" duration="3122000" />
       <workItem from="1592827467640" duration="21555000" />
       <workItem from="1593093842603" duration="5674000" />
-      <workItem from="1593100779462" duration="9900000" />
+      <workItem from="1593100779462" duration="11461000" />
+      <workItem from="1593112529355" duration="1682000" />
     </task>
     <task id="LOCAL-00001" summary="Updated project structure">
       <created>1592666989004</created>
@@ -293,7 +298,14 @@
       <option name="project" value="LOCAL" />
       <updated>1593103995849</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="commit suicide">
+      <created>1593110813490</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1593110813490</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -338,7 +350,8 @@
     <MESSAGE value="Added rescheduleOrderDelivery" />
     <MESSAGE value="Mostly done with order logic (added removeOrder and rescheduleOrder)" />
     <MESSAGE value="start Debug" />
-    <option name="LAST_COMMIT_MESSAGE" value="start Debug" />
+    <MESSAGE value="commit suicide" />
+    <option name="LAST_COMMIT_MESSAGE" value="commit suicide" />
   </component>
   <component name="WindowStateProjectService">
     <state x="387" y="33" width="1024" height="845" key="#Project_Structure" timestamp="1592827382821">
@@ -359,6 +372,10 @@
     </state>
     <state x="852" y="125" key="#com.intellij.ide.util.MemberChooser/0.0.1366.728@0.0.1366.728" timestamp="1592908164183" />
     <state x="686" y="69" width="374" height="626" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1032@0.0.1920.1032" timestamp="1592837436017" />
+    <state x="490" y="245" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1593113849166">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="490" y="245" width="525" height="416" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1593113849166" />
     <state x="531" y="254" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1593091879468">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -371,11 +388,11 @@
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="693" y="264" width="524" height="502" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1592831323355" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1593109390626">
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2" timestamp="1593110813397">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="322" y="0" key="CommitChangelistDialog2/0.0.1366.728@0.0.1366.728" timestamp="1593070245610" />
-    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1593109390626" />
+    <state x="468" y="0" width="1068" height="904" key="CommitChangelistDialog2/0.0.1920.1032@0.0.1920.1032" timestamp="1593110813397" />
     <state width="543" height="506" key="DebuggerActiveHint" timestamp="1593109033913">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -389,38 +406,38 @@
     </state>
     <state x="414" y="159" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1592905391248" />
     <state x="582" y="225" width="735" height="484" key="FileChooserDialogImpl/0.0.1920.1032@0.0.1920.1032" timestamp="1593076325590" />
-    <state width="937" height="483" key="GridCell.Tab.0.bottom" timestamp="1593110529124">
+    <state width="937" height="800" key="GridCell.Tab.0.bottom" timestamp="1593113664258">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="483" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1593110529124" />
-    <state width="937" height="483" key="GridCell.Tab.0.center" timestamp="1593110529124">
+    <state width="937" height="800" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1593113664258" />
+    <state width="937" height="800" key="GridCell.Tab.0.center" timestamp="1593113664258">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="483" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1593110529124" />
-    <state width="937" height="483" key="GridCell.Tab.0.left" timestamp="1593110529123">
+    <state width="937" height="800" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1593113664258" />
+    <state width="937" height="800" key="GridCell.Tab.0.left" timestamp="1593113664257">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="483" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1593110529123" />
-    <state width="937" height="483" key="GridCell.Tab.0.right" timestamp="1593110529124">
+    <state width="937" height="800" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1593113664257" />
+    <state width="937" height="800" key="GridCell.Tab.0.right" timestamp="1593113664258">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="483" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1593110529124" />
-    <state width="937" height="433" key="GridCell.Tab.1.bottom" timestamp="1593110231301">
+    <state width="937" height="800" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1593113664258" />
+    <state width="1451" height="444" key="GridCell.Tab.1.bottom" timestamp="1593113215881">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="433" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1593110231301" />
-    <state width="937" height="433" key="GridCell.Tab.1.center" timestamp="1593110231301">
+    <state width="1451" height="444" key="GridCell.Tab.1.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1593113215881" />
+    <state width="1451" height="444" key="GridCell.Tab.1.center" timestamp="1593113215880">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="433" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1593110231301" />
-    <state width="937" height="433" key="GridCell.Tab.1.left" timestamp="1593110231300">
+    <state width="1451" height="444" key="GridCell.Tab.1.center/0.0.1920.1032@0.0.1920.1032" timestamp="1593113215880" />
+    <state width="1451" height="444" key="GridCell.Tab.1.left" timestamp="1593113215880">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="433" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1593110231300" />
-    <state width="937" height="433" key="GridCell.Tab.1.right" timestamp="1593110231301">
+    <state width="1451" height="444" key="GridCell.Tab.1.left/0.0.1920.1032@0.0.1920.1032" timestamp="1593113215880" />
+    <state width="1451" height="444" key="GridCell.Tab.1.right" timestamp="1593113215881">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state width="937" height="433" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1593110231301" />
+    <state width="1451" height="444" key="GridCell.Tab.1.right/0.0.1920.1032@0.0.1920.1032" timestamp="1593113215881" />
     <state x="129" y="61" key="MergeDialog" timestamp="1592999672368">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -429,16 +446,16 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="395" y="81" key="MultipleFileMergeDialog/0.0.1366.728@0.0.1366.728" timestamp="1593070221951" />
-    <state x="200" y="0" width="1125" height="905" key="SettingsEditor" timestamp="1593103186884">
+    <state x="200" y="0" width="1125" height="905" key="SettingsEditor" timestamp="1593113878357">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1366.728@0.0.1366.728" timestamp="1592666943017" />
-    <state x="200" y="0" width="1125" height="905" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1593103186884" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1593104002380">
+    <state x="200" y="0" width="1125" height="905" key="SettingsEditor/0.0.1920.1032@0.0.1920.1032" timestamp="1593113878357" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2" timestamp="1593110820714">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="275" y="98" key="Vcs.Push.Dialog.v2/0.0.1366.728@0.0.1366.728" timestamp="1593070160558" />
-    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1593104002380" />
+    <state x="387" y="139" width="800" height="528" key="Vcs.Push.Dialog.v2/0.0.1920.1032@0.0.1920.1032" timestamp="1593110820714" />
     <state x="821" y="404" width="367" height="248" key="com.intellij.database.actions.DdlActions$DeleteProvider2$1" timestamp="1592831302840">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -467,10 +484,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="492" y="282" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.728@0.0.1366.728" timestamp="1593093612491" />
-    <state x="651" y="254" width="618" height="522" key="find.popup" timestamp="1593108822531">
+    <state x="651" y="254" width="618" height="522" key="find.popup" timestamp="1593113802659">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
-    <state x="651" y="254" width="618" height="522" key="find.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1593108822531" />
+    <state x="651" y="254" width="618" height="522" key="find.popup/0.0.1920.1032@0.0.1920.1032" timestamp="1593113802659" />
     <state x="596" y="303" width="718" height="423" key="git4idea.merge.GitPullDialog" timestamp="1593086910480">
       <screen x="0" y="0" width="1920" height="1032" />
     </state>
@@ -490,23 +507,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/BL/SingleProviderOrderController.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BL/SingleProviderOrderController.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="16" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BL/SingleProviderOrderController.java</url>
           <line>82</line>
           <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/BL/Store.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="22" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

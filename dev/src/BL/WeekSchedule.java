@@ -106,14 +106,13 @@ public class WeekSchedule {
 
         mapper.setAssignments_History(days[0].getDate().toString());// Makes all the assignments at this date to be history
         mapper.setDay_History(days[0].getDate().toString()); // Makes the Day history
-        days[6] = new Day(days[5].getDate().plusDays(1));
-        int newDay = ((StoreController.Day_In_Week+5)%7)+1;
+        days[6] = new Day(days[6].getDate().plusDays(1));
+        int newDay = days[6].getDate().getDayOfWeek().getValue()%7;
         mapper.saveDay(days[6].getDate().toString(), store_num, newDay, 0);
         for (int i=0; i < 6; i++) //SHIFT RIGHT DAYS
         {
             days[i] = days[i+1];
         }
-
     }
 
     public int isStorageInDay(LocalDate lcl){

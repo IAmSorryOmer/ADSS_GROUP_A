@@ -205,7 +205,7 @@ public class OrdersDAL {
 
     public static List<SingleProviderOrder> getAllProviderTransportedDeliveries(int storeId){
         String sql = "select SingleProviderOrder.* from SingleProviderOrder join Provider P on SingleProviderOrder.ProviderId = P.ProviderId " +
-                "where OrderDays = 0 and StoreId = ? and IsShipped = 0 and P.NeedsTransport = 1;";
+                "where OrderDays = 0 and StoreId = ? and IsShipped = 0 and P.NeedsTransport = 0;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
             preparedStatement.setInt(1, storeId);

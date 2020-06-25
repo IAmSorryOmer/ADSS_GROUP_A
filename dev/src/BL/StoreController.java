@@ -519,6 +519,7 @@ public class StoreController {
         //removes all the orders that were set for yesterday but there were no drivers and no drivers were added
         mapper.removeNoDeliveryOrders(current_date.toString());
         current_date=current_date.plusDays(1);
+        mapper.saveCurrent_Date(current_date.toString());
         Day_In_Week=((Day_In_Week)%7)+1;
         for (Store store :  stores)
         {
