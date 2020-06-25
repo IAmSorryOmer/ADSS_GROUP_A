@@ -5,6 +5,7 @@ import DAL.DBHandler;
 import Entities.*;
 import IL.*;
 
+import java.lang.annotation.RetentionPolicy;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -251,40 +252,51 @@ public class Main {
         EmployeeController employeeController=EmployeeController.getInstance();
         if (employeeController.connect(eID,store_num)) {
             //If you are a storage worker, you enter here the storage worker menu
-            //TODO probebly remove this loop
-            if (employeeController.isStorage())
-            {
-                System.out.println("hello storage employee " + employeeController.getActiveName() + "\nchoose operation:");
-                int operationNum = 0;
-                operationNum = reader.nextInt();
-                reader.nextLine();
-                print_Storage_employee_menu();
-                while (operationNum != 3) {
-
-                }
-            }
             //menu for normal employees(non storage)
             System.out.println("hello employee " + employeeController.getActiveName() + "\nchoose operation:");
             int operationNum = 0;
             while (operationNum != 3) {
 
                 print_employee_menu();
-                operationNum = reader.nextInt();
-                reader.nextLine();
+                while (true){
+                    try {
+                        operationNum = Integer.parseInt(reader.nextLine());
+                        break;
+                    }
+                    catch (Exception e){
+                        System.out.println("not this time Irad! " + e.getMessage());
+                    }
+                }
                 switch (operationNum) {
                     case 1: {
                         if (!employeeController.hasActiveUserAssignedShifts()) {
-                            print_shifts();
-                            System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
-                            System.out.println("1,2,4,12");
-                            String input = reader.nextLine();
-                            //TODO -- to check correct input for slection of shifts
-                            String[] detailsStringArr = input.split(",");
-                            int[] capableShifts = new int[detailsStringArr.length];
-                            for (int i = 0; i < detailsStringArr.length; i++) {
-                                capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
+                            while (true){
+                                boolean badInput = false;
+                                print_shifts();
+                                System.out.println("enter numbers of the capable shifts with ',' between each number, for example: ");
+                                System.out.println("1,2,4,12");
+                                String input = reader.nextLine();
+                                String[] detailsStringArr = input.split(",");
+                                int[] capableShifts = new int[detailsStringArr.length];
+                                if (detailsStringArr.length != 4) {
+                                    System.out.println("un appropriate amount of details inserted");
+                                    continue;
+                                }
+                                for (int i = 0; i < detailsStringArr.length; i++) {
+                                    try {
+                                        capableShifts[i] = Integer.parseInt(detailsStringArr[i]);
+                                    }
+                                    catch (Exception e){
+                                        System.out.println(e.getMessage());
+                                        badInput = true;
+                                        break;
+                                    }
+                                }
+                                if (!badInput){
+                                    System.out.println(employeeController.enterMyCapableShifts(capableShifts));
+                                    break;
+                                }
                             }
-                            System.out.println(employeeController.enterMyCapableShifts(capableShifts));
                         }
                         else {
                             System.out.println("you already assigned shifts");
@@ -1298,13 +1310,12 @@ public class Main {
     }
 
     static void enterEmployee(int store_num) {
-        //TODO check for every input to be correct (int not string)
         System.out.println("enter the following details, as in the example:");
-        System.out.println("name,employee id,bank account,store num,salary,employee conditions,start date");
-        System.out.println("aviv,5,6045,1,3000,no special conditions,12/4/2020");
+        System.out.println("name,employee id,bank account,salary,employee conditions,start date");
+        System.out.println("aviv,5,6045,3000,no special conditions,12/4/2020");
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
-        if (detailsStringArr.length != 7) {
+        if (detailsStringArr.length != 6) {
             System.out.println("un appropriate amount of details inserted");
 
         }
@@ -1321,9 +1332,19 @@ public class Main {
             String license = reader.nextLine();
 
             String[] role = {"driver"};
+            int eID = 0;
+            int salary = 0;
+            try {
+                eID = Integer.parseInt(detailsStringArr[1]);
+                salary = Integer.parseInt(detailsStringArr[3]);
+            }
+            catch (Exception e){
+                System.out.println(e.getMessage());
+                return;
+            }
             System.out.println(managerController.addDriverEmployee(role,detailsStringArr[0],
-                    Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], store_num,
-                    Integer.parseInt(detailsStringArr[4]), detailsStringArr[5], detailsStringArr[6],license));
+                    eID, detailsStringArr[2], store_num,
+                    salary, detailsStringArr[4], detailsStringArr[5],license));
         }
         else {
             System.out.println("enter capable jobs, as in the example:");
@@ -1341,45 +1362,70 @@ public class Main {
     }
     //Assigning employee to shift
     static void assignEmployeeToShift(int store_num) {
-        //TODO check for every input to be correct (int not string)
 
         System.out.println("enter the following details, as in the example:");
-        System.out.println("store num,employee id,day num(1-7),day part(morning-evening),role");
-        System.out.println("1,5,2,morning,cashier");
+        System.out.println("employee id,day num(1-7),day part(morning-evening),role");
+        System.out.println("5,2,morning,cashier");
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
-        if (detailsStringArr.length != 5) {
+        if (detailsStringArr.length != 4) {
             System.out.println("un appropriate amount of details inserted");
 
         }
 
-        String addingEmployeeToShift = managerController.addToShift(store_num, Integer.parseInt(detailsStringArr[1]), Integer.parseInt(detailsStringArr[2]), detailsStringArr[3], detailsStringArr[4]);
+        int eID = 0;
+        int dayNum = 0;
+        try {
+            eID = Integer.parseInt(detailsStringArr[0]);
+            dayNum = Integer.parseInt(detailsStringArr[1]);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
+
+        String addingEmployeeToShift = managerController.addToShift(store_num, eID, dayNum, detailsStringArr[2], detailsStringArr[3]);
         System.out.println(addingEmployeeToShift);
 
     }
     //Adding a role to a shift, still need someone to fill that role
     static void addRoleToShift(int store_num){
-        //TODO check for every input to be correct (int not string)
 
         System.out.println("enter the following details, as in the example:");
-        System.out.println("store num,day num(1-7),day part(morning-evening),role,amount");
-        System.out.println("1,3,evening,shift manager,2");
+        System.out.println("day num(1-7),day part(morning-evening),role,amount");
+        System.out.println("3,evening,shift manager,2");
         String details = reader.nextLine();
         String[] detailsStringArr = details.split(",");
-        if (detailsStringArr.length != 5) {
+        if (detailsStringArr.length != 4) {
             System.out.println("un appropriate amount of details inserted");
 
         }
-        String addingRoleToShift = managerController.addRoleToShift(store_num, Integer.parseInt(detailsStringArr[1]), detailsStringArr[2], detailsStringArr[3], Integer.parseInt(detailsStringArr[4]));
+        int dayNum = 0;
+        int amount = 0;
+        try {
+            dayNum = Integer.parseInt(detailsStringArr[0]);
+            amount = Integer.parseInt(detailsStringArr[3]);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
+        String addingRoleToShift = managerController.addRoleToShift(store_num, dayNum, detailsStringArr[1], detailsStringArr[2], amount);
         System.out.println(addingRoleToShift);
 
     }
     //update details of employee
     static void updateEmployeeDetails(int store_num) {
-        //TODO check for every input to be correct (int not string)
 
         System.out.println("Enter Employee ID:");
-        int eID = reader.nextInt();
+        int eID = 0;
+        try {
+            eID = Integer.parseInt(reader.nextLine());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
 
         System.out.println(managerController.getEmployeeDetails(store_num, eID));
         System.out.println("enter the following details, as in the example:");
@@ -1391,13 +1437,21 @@ public class Main {
             System.out.println("un appropriate amount of details inserted");
 
         }
+        int salary = 0;
+        try {
+            salary = Integer.parseInt(detailsStringArr[2]);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
 //                            System.out.println("enter capable jobs, as in the example:");
 //                            System.out.println("cashier,shift manager");
 //                            String roles = reader.nextLine();
 //                            String[] rolesArr = roles.split(",");
 
         String updatingEmployee = managerController.updateEmployee(store_num, detailsStringArr[0],
-                eID, detailsStringArr[1], Integer.parseInt(detailsStringArr[2]),
+                eID, detailsStringArr[1], salary,
                 detailsStringArr[3]);
         System.out.println(updatingEmployee);
 
@@ -1452,11 +1506,16 @@ public class Main {
     }
     //Remove employee from system
     static void removeEmployee(int store_num) {
-        //TODO check for every input to be correct (int not string)
 
         System.out.println("enter employee id");
-        int ID = reader.nextInt();
-        reader.nextLine();
+        int ID = 0;
+        try {
+            ID = Integer.parseInt(reader.nextLine());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
         System.out.println(managerController.removeEmployee(ID));
 
     }
@@ -1517,8 +1576,6 @@ public class Main {
     //Add a new truck to the system
     static void addTruck(int store_num)
     {
-        //TODO check for every input to be correct (int not string)
-
         System.out.println("enter model");
         String model = reader.nextLine();
 
@@ -1526,10 +1583,17 @@ public class Main {
         String truckId = reader.nextLine();
 
         System.out.println("enter weight");
-        int weight = reader.nextInt();
-
-        System.out.println("enter max weight");
-        int maxWeight = reader.nextInt();
+        int weight = 0;
+        int maxWeight = 0;
+        try {
+            weight = Integer.parseInt(reader.nextLine());
+            System.out.println("enter max weight");
+            maxWeight = Integer.parseInt(reader.nextLine());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
 
 
 
@@ -1578,7 +1642,6 @@ public class Main {
 
 
     public static void sendDelivery(int store_num){
-        //TODO check for every input to be correct (int not string)
 
         System.out.println("Delivery can be added to this week only");
 
@@ -1589,7 +1652,14 @@ public class Main {
         String orderid = reader.nextLine();
 
         System.out.println("Please enter the total weight of the stuff you want to deliver:");
-        int weight = Integer.parseInt(reader.nextLine());
+        int weight = 0;
+        try {
+            weight = Integer.parseInt(reader.nextLine());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
         boolean stop = false;
         System.out.println(ManagerController.getInstance().addDelivery(weight,truckid,orderid,store_num));
     }
@@ -1607,13 +1677,20 @@ public class Main {
     }
 
     private static void selectDay(){
-        //TODO check for every input to be correct (int not string)
 
         System.out.println("Initializing System..");
         System.out.println("ENTER MONTH");
-        int month = Integer.parseInt(reader.nextLine());
-        System.out.println("ENTER DAY");
-        int day = Integer.parseInt(reader.nextLine());
+        int month = 0;
+        int day = 0;
+        try {
+            month = Integer.parseInt(reader.nextLine());
+            System.out.println("ENTER DAY");
+            day = Integer.parseInt(reader.nextLine());
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            return;
+        }
         managerController.initializeStores(month, day);
     }
     private static int selectStore(){
