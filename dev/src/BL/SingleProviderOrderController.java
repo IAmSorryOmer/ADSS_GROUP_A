@@ -115,7 +115,7 @@ public class SingleProviderOrderController {
 	public static void shipOrder(String orderId){
 	    SingleProviderOrder order = OrdersDAL.getOrderById(orderId);
 	    order.setShipped(true);
-		OrdersDAL.shipOrder(order);
+	    OrdersDAL.editOrder(order);
     }
 
 	//methods
