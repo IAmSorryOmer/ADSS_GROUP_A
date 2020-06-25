@@ -17,7 +17,7 @@ import java.sql.*;
 
 public class Mapper {
 
-    private  Connection conn;
+    public static   Connection conn;
 
     public void connect() {
         try{
@@ -26,6 +26,7 @@ public class Mapper {
             sqLiteConfig.enforceForeignKeys(true);
             conn = DriverManager.getConnection(url, sqLiteConfig.toProperties());
             System.out.println("opened database successfully");
+            DBHandler.connection = conn;
         }
         catch (SQLException e) {
             throw new IllegalArgumentException(e.getMessage());
@@ -317,6 +318,7 @@ public class Mapper {
         try {
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
+            stmt.setString(2,role);
             ResultSet rs = stmt.executeQuery();
             if (!rs.next()) {
                 throw new Exception("You are not " + role);
