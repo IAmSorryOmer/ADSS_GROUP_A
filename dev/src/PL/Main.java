@@ -52,11 +52,11 @@ public class Main {
                         storeSpecificMenu();
                         break;
                     case 3:
-                        ManagerController.
-                    case 3:
+                        ManagerController.passDay();
+                    case 4:
                         return;
                     default:
-                        System.out.println("Please choose a number between 1 and 3");
+                        System.out.println("Please choose a number between 1 and 4");
                         break;
                 }
             } catch (Exception e) {
