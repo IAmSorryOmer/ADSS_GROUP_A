@@ -8,7 +8,7 @@ public class DBHandler {
     public static Connection connection = null;
     public static void connect(){
         try{
-            String url = "jdbc:sqlite:SuperLiUnified";
+            String url = "jdbc:sqlite:SuperLiUnified.db";
             SQLiteConfig sqLiteConfig = new SQLiteConfig();
             sqLiteConfig.enforceForeignKeys(true);
             connection = DriverManager.getConnection(url, sqLiteConfig.toProperties());

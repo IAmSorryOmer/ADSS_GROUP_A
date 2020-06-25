@@ -458,6 +458,7 @@ public class StoreController {
             if (!store.hasLoaded())
                 store.Load(mapper);
         }
+
         System.out.println( "store doesn't exists");
     }
     public static String viewDeliveries (int store_num){

@@ -52,7 +52,7 @@ public class ManagerController {
 
     public String addEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date) {
 
-        return StoreController.addEmployee(jobs,name,id, bankAccount,store_num,salary,employee_conditions,start_date);
+       return StoreController.addEmployee(jobs,name,id, bankAccount,store_num,salary,employee_conditions,start_date);
 
     }
     public String addDriverEmployee(String[] jobs, String name, int id, String bankAccount, int store_num, int salary, String employee_conditions, String start_date,String license){

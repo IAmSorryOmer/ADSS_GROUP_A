@@ -17,7 +17,7 @@ import java.sql.*;
 
 public class Mapper {
 
-    private Connection conn;
+    private static Connection conn;
 
     public void connect() {
         try{
@@ -27,9 +27,8 @@ public class Mapper {
             conn = DriverManager.getConnection(url, sqLiteConfig.toProperties());
             System.out.println("opened database successfully");
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(1);
+        catch (SQLException e) {
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -310,6 +309,18 @@ public class Mapper {
         }
 
         return dNumberedFiles;
+    }
+
+
+    public static void isSpecialRole(int id,String role) throws Exception {
+        String query = "SELECT id  FROM SpecialRole WHERE id=? AND role=?";
+        PreparedStatement stmt = conn.prepareStatement(query);
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if (!rs.next()){
+            throw new Exception("You are not "+role);
+        }
+
     }
 
     public List<DDestination> loadDestinations() {
