@@ -17,7 +17,7 @@ import java.sql.*;
 
 public class Mapper {
 
-    private static Connection conn;
+    private  Connection conn;
 
     public void connect() {
         try{
@@ -312,7 +312,7 @@ public class Mapper {
     }
 
 
-    public static void isSpecialRole(int id,String role) throws Exception {
+    public  void isSpecialRole(int id,String role) throws Exception {
         String query = "SELECT id  FROM SpecialRole WHERE id=? AND role=?";
         PreparedStatement stmt = conn.prepareStatement(query);
         stmt.setInt(1, id);
