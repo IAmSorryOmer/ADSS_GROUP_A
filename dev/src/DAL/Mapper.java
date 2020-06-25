@@ -312,15 +312,19 @@ public class Mapper {
     }
 
 
-    public  void isSpecialRole(int id,String role) throws Exception {
-        String query = "SELECT id  FROM SpecialRole WHERE id=? AND role=?";
-        PreparedStatement stmt = conn.prepareStatement(query);
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-        if (!rs.next()){
-            throw new Exception("You are not "+role);
+    public  void isSpecialRole(int id,String role) {
+        String query = "SELECT employeeId FROM SpecialRole WHERE employeeId=? AND role=?";
+        try {
+            PreparedStatement stmt = conn.prepareStatement(query);
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            if (!rs.next()) {
+                throw new Exception("You are not " + role);
+            }
         }
-
+        catch (Exception e){
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     public List<DDestination> loadDestinations() {

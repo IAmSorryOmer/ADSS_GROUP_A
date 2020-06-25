@@ -257,7 +257,7 @@ public class ManagerController {
         StoreController.passDay();
     }
 
-    public static void validateRole(int employeeId, String specialRole) throws Exception {
+    public static void validateRole(int employeeId, String specialRole) {
         StoreController.validateSpecialRole(employeeId,specialRole);
     }
 

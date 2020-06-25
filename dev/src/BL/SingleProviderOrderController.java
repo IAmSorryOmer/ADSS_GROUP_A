@@ -72,12 +72,15 @@ public class SingleProviderOrderController {
 
 			}
 			else{
-				LocalDate DeliveryDate = StoreController.current_date.plus(provider.getDelayDays(), ChronoUnit.DAYS); //calculate the date i days from now
-				Store store = StoreController.getStore(order.getStoreId());
-				int shift = store.getSchedule().isStorageInDay(DeliveryDate);
-				if(shift >= 0){
-					order.setShift(shift);
-					order.setDeliveryDate(DeliveryDate); //return the appropriate date
+				for(int i = provider.getDelayDays(); i<7;i++){
+					LocalDate DeliveryDate = StoreController.current_date.plus(i, ChronoUnit.DAYS); //calculate the date i days from now
+					Store store = StoreController.getStore(order.getStoreId());
+					int shift = store.getSchedule().isStorageInDay(DeliveryDate);
+					if(shift >= 0){
+						order.setShift(shift);
+						order.setDeliveryDate(DeliveryDate); //return the appropriate date
+						break;
+					}
 				}
 			}
 		}

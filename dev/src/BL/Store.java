@@ -171,7 +171,7 @@ public class Store {
             singleProviderOrder.setShipped(true);
             SingleProviderOrderController.editOrder(singleProviderOrder);
         }
-        schedule.passDay(mapper,curr);
+        schedule.passDay(mapper,curr,store_num);
     }
 
     public Pair<Integer[],LocalDate> findDateForOrder(){

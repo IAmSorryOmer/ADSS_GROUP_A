@@ -15,7 +15,8 @@ import static PL.WatchMenues.*;
 
 public class Main {
     public static Scanner reader = new Scanner(System.in);
-    public static  ManagerController managerController = ManagerController.getInstance();
+    public static ManagerController managerController = ManagerController.getInstance();
+    public static EmployeeController employeeController = EmployeeController.getInstance();
     
     public static void main(String[] args) {
         try {
@@ -29,8 +30,6 @@ public class Main {
 
 
     private static void initialSelection() {
-        ManagerController managerController = ManagerController.getInstance();
-        EmployeeController employeeController = EmployeeController.getInstance();
         if (!managerController.loadStores())//Initializing the day
         {
             selectDay();
@@ -53,6 +52,8 @@ public class Main {
                         break;
                     case 3:
                         ManagerController.passDay();
+                        System.out.println("you passed a day successfully, current day is: " + StoreController.current_date.toString());
+                        break;
                     case 4:
                         return;
                     default:
@@ -65,6 +66,7 @@ public class Main {
         }
     }
     private static void generalManagerMenu(){
+        validateRole("please insert your id(only logistic manager can access this menu):", "Logistic manager");
         String[] options = new String[]{"products details", "categories", "discounts", "providers", "agreements", "return to main menu"};
         while (true) {
             System.out.println("chooses category to manage:");
@@ -123,6 +125,7 @@ public class Main {
                         break;
                     case 6:
                         storeId = selectStore();
+                        System.out.println("switched store successfully");
                         break;
                     case 7:
                         return;
@@ -136,6 +139,7 @@ public class Main {
     }
 
     private static void storeManagerMenu(int storeId){
+        validateRole("please insert your id:", "Store manager");
         String[] options = new String[]{"Trucks", "Deliveries", "Employees", "Shifts", "Products", "Orders", "Reports", "return to specific store actions menu"};
         while (true) {
             System.out.println("please chooses the category that you want to examine:");
@@ -176,6 +180,12 @@ public class Main {
     }
 
     private static void stockKeeperMenu(int storeId){
+        System.out.println("please insert your employee id:");
+        int employeeId = Integer.parseInt(reader.nextLine());
+        boolean answer = employeeController.connect(employeeId, storeId);
+        if(!answer || !employeeController.isStorage()){
+            throw new IllegalArgumentException("there is no storage employee with id " + employeeId);
+        }
         String[] options = new String[]{"products", "orders", "reports(including auto order missing products)", "show alerts(orders waiting to be accepted to stock)", "accept waiting orders", "return to specific store actions menu"};
         while (true) {
             System.out.println("please chooses the category that you want to manage:");
@@ -211,9 +221,7 @@ public class Main {
     }
 
     private static void logisticManagerMenu(int storeId){
-        System.out.println("please insert employee id:");
-        String employeeId = reader.nextLine();
-
+        validateRole("please insert your id:", "Logistic manager");
         String[] options = new String[]{"manage deliveries", "show alerts(orders which should be delivered today)", "accept deliveries", "return to specific store actions menu"};
         while (true) {
             System.out.println("please chooses action to preform:");
@@ -243,6 +251,7 @@ public class Main {
     }
 
     private static void humanResourceManagerMenu(int storeId){
+        validateRole("please insert your id:", "Human resource manager");
         String[] options = new String[]{"manage workers", "show alerts(orders which should be rescheduled due to shifts problems)", "reschedule order", "return to specific store actions menu"};
         while (true) {
             System.out.println("please chooses action to preform:");
@@ -326,16 +335,16 @@ public class Main {
                         else {
                             System.out.println("you already assigned shifts");
                         }
-
+                        break;
                     }
                     case 2: {
                         System.out.println(employeeController.watchMyShifts());
-
+                        break;
                     }
                     case 3:
                     {
                         System.out.println("logging out");
-
+                        break;
                     }
                 }
             }
@@ -436,6 +445,7 @@ public class Main {
                         System.out.println("please insert new minimum quantity");
                         int newQuantity = Integer.parseInt(reader.nextLine());
                         ProductDetailsInterface.changeMinimalQuantity(id, newQuantity);
+                        System.out.println("action preformed successfully");
                         break;
                     case 3:
                         System.out.println("please insert name:");
@@ -479,6 +489,7 @@ public class Main {
         }
         ProductDetails productDetails = new ProductDetails(id, name, manufacturer, retailPrice, daysUntilExpiration, null, minimumQuantity);
         ProductDetailsInterface.addProductDetails(productDetails, catId);
+        System.out.println("product type added successfully");
     }
 
     private static void manageProductsMenu(int storeId){
@@ -503,12 +514,14 @@ public class Main {
                         break;
                     case 5:
                         printNumberedList(ProductDetailsInterface.getAllMissingsOfStore(storeId));
+                        break;
                     case 6:
                         printNumberedList(ProductInterface.getAllDamagedOfStore(storeId));
                         break;
                     case 7:
                         System.out.println("please insert product id:");
                         ProductInterface.markAsDamaged(reader.nextLine(), storeId);
+                        System.out.println("action preformed successfully");
                         break;
                     case 8:
                         System.out.println(ProductInterface.stringifyStoreProducts(storeId));
@@ -542,6 +555,7 @@ public class Main {
         System.out.println("is the new location in the storage?(y for yes, else no):");
         String ans = reader.nextLine();
         ProductInterface.moveProduct(id, storeId, newLocation, ans.equals("y"));
+        System.out.println("action preformed successfully");
     }
     private static void addProductFromUser(int storeId){
         System.out.println("please insert id:");
@@ -554,6 +568,7 @@ public class Main {
             multiples = Integer.parseInt(reader.nextLine());
             if(multiples <= 0){
                 System.out.println("the number must be greater than zero. canceling operation");
+                return;
             }
         }
         System.out.println("please insert the id of the product type which this product is a type of(to print all the products types insert @print): ");
@@ -567,12 +582,9 @@ public class Main {
         for(int i = 1; i<= multiples; i++){
             String idToAssign = multiples != 1 ? id + i:id;
             Product product = new Product(idToAssign, storeId, "storage", true, false, null);
-            try {
-                ProductInterface.addProduct(product, productId);
-            } catch (Exception e) {
-                System.out.println("error. " + e.getMessage());
-            }
+            ProductInterface.addProduct(product, productId);
         }
+        System.out.println("action preformed successfully");
     }
 
     private static void manageDiscountsMenu(){
@@ -725,6 +737,7 @@ public class Main {
         Category category = new Category(id, name);
         category.setUpdated(true);
         CategoryInterface.addCategory(category, catId);
+        System.out.println("category added successfully");
     }
 
     private static void manageReportsMenu(int storeId){
@@ -781,6 +794,7 @@ public class Main {
             default:
                 System.out.println("this isnt an option. operation canceled");
         }
+        System.out.println("report added successfully");
     }
     private static void createInventoryReportFromUser(Report report){
         report.setReportType(Report.reportType.Inventory);
@@ -831,8 +845,8 @@ public class Main {
             System.out.println("Please select an option to perform on orders of the selected provider in the selected store: ");
             String[] options = new String[]{"add order(regular or automatic)", "manage order items", "print all orders of provider", "print expanded order(with items)", "select another provider to manage", "return to order manage menu"};
             printOptions(options);
-            int option = Integer.parseInt(reader.nextLine());
             try {
+                int option = Integer.parseInt(reader.nextLine());
                 switch(option){
                     case 1:
                         addOrderFromUser(storeId, providerId);
@@ -885,33 +899,22 @@ public class Main {
         }
         SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, storeId, orderId, answer ? null:StoreController.current_date, orderDays);
         OrdersInterface.SingleProviderOrderCreator(singleProviderOrder, providerId);
+        System.out.println("order added successfully");
     }
     private static void printSpecificOrder(int storeId, String providerId){
         System.out.println("please insert the order id(to print all the orders of the provider insert @print): ");
         String orderId = reader.nextLine();
         if(orderId.equals("@print")){
-            try {
-                printNumberedList(OrdersInterface.getAllStoreProviderOrders(storeId, providerId));
-                System.out.println("now insert the order id: ");
-                orderId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(OrdersInterface.getAllStoreProviderOrders(storeId, providerId));
+            System.out.println("now insert the order id: ");
+            orderId = reader.nextLine();
         }
         System.out.println(OrdersInterface.printOrderExpanded(providerId, orderId, storeId));
     }
 
     private static void manageOrderItemsMenu(int storeId, String providerId){
         String orderId = null;
-        try {
-            orderId = selectOrder(storeId, providerId);
-        }
-        catch (Exception e){
-            System.out.println("error. " + e.getMessage());
-            return;
-        }
+        orderId = selectOrder(storeId, providerId);
         while(true) {
             System.out.println("Please select an option to perform on items of the selected order: ");
             String[] options = new String[]{"add item to order", "edit item on order", "remove item from order", "choose another order to manage", "return to manage provider orders"};
@@ -945,53 +948,38 @@ public class Main {
         System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
         System.out.println("please insert the amount to order: ");
         int orderAmount = Integer.parseInt(reader.nextLine());
         OrdersInterface.AddToOrder(providerId, orderId, storeId, catalogItemId, orderAmount);
+        System.out.println("item added successfully");
     }
     private static void editItemOfOrder(int storeId, String providerId, String orderId){
         System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
         System.out.println("please insert the new amount: ");
         int orderAmount = Integer.parseInt(reader.nextLine());
         OrdersInterface.EditOrder(providerId, orderId, storeId, catalogItemId, orderAmount);
+        System.out.println("item modified successfully");
     }
     private static void removeItemFromOrder(int storeId, String providerId, String orderId){
         System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
         OrdersInterface.RemoveFromOrder(providerId, orderId, storeId, catalogItemId);
+        System.out.println("item removed successfully");
     }
 
 
@@ -1024,7 +1012,6 @@ public class Main {
                 System.out.println("error. " + e.getMessage());
             }
         }
-
     }
     private static void addProviderFromUser(){
         System.out.println("please insert id:");
@@ -1051,6 +1038,10 @@ public class Main {
                     }
                     try {
                         arrivalDays = Integer.parseInt(arrivalString, 2);
+                        if(arrivalDays == 0){
+                            arrivalDays = -1;
+                            System.out.println("provider must come at some day. try again:");
+                        }
                     } catch (Exception e) {
                         System.out.println("you inserted invalid binary string. try again:");
                     }
@@ -1069,6 +1060,7 @@ public class Main {
         communicationDetails.setUpdated(true);
         provider.setCommunicationDetails(communicationDetails);
         ProviderInterface.ProviderCreator(provider, communicationDetails);
+        System.out.println("provider added successfully");
     }
     private static void editProviderDetails(){
         String providerId = selectProvider("please insert the id of the provider to edit");
@@ -1110,6 +1102,7 @@ public class Main {
         if(address.equals("@none"))
             address = null;
         ProviderInterface.editDetails(providerId, needTransport, null, arrivalDays, providerName, fixedDays, phoneNumber, address);
+        System.out.println("provider edited successfully");
     }
     private static void printProviders(){
         printNumberedList(ProviderInterface.getAllProviders());
@@ -1160,61 +1153,35 @@ public class Main {
             productDetailsId = reader.nextLine();
         }
         CatalogItem catalogItem = new CatalogItem(providerId, catalogItemId, price, null);
-        try {
-            CatalogItemsInterface.addItem(providerId, catalogItem, productDetailsId);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
+        CatalogItemsInterface.addItem(providerId, catalogItem, productDetailsId);
+        System.out.println("item added successfully");
     }
     private static void editItemOfCatalog(String providerId){
         System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
         System.out.println("please insert the new price: ");
         double newPrice = Double.parseDouble(reader.nextLine());
-        try {
-            CatalogItemsInterface.editItem(providerId, catalogItemId, newPrice);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
+        CatalogItemsInterface.editItem(providerId, catalogItemId, newPrice);
+        System.out.println("item modified successfully");
     }
     private static void removeItemFromCatalog(String providerId){
         System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
-        try {
-            CatalogItemsInterface.removeItem(providerId, catalogItemId);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
+        CatalogItemsInterface.removeItem(providerId, catalogItemId);
+        System.out.println("item removed successfully");
     }
     private static void printProviderCatalog(String providerId){
-        try {
-            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-        }
-        catch (Exception e){
-            System.out.println("error. " + e.getMessage());
-        }
+        printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
     }
 
     private static void manageAgreementsMenu(){
@@ -1256,40 +1223,25 @@ public class Main {
         System.out.println("please insert the catalog item id(to print all the items of provider insert @print): ");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            printNumberedList(CatalogItemsInterface.getAllItemsOfProvider(providerId));
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
         System.out.println("please insert minimum amount to get discount:");
         int minAmount = Integer.parseInt(reader.nextLine());
         System.out.println("please insert percentage of discount:");
         double discount = Double.parseDouble(reader.nextLine());
-        try {
-            AgreementsInterface.addItemToAgreement(providerId, catalogItemId, minAmount, discount);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
+        AgreementsInterface.addItemToAgreement(providerId, catalogItemId, minAmount, discount);
+        System.out.println("item added successfully");
     }
     private static void editItemOfAgreement(String providerId){
         System.out.println("please insert the catalog item id(to print all the items of agreement insert @print):");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
-                System.out.println(stringifiedItems);
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
+            String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
+            System.out.println(stringifiedItems);
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
         System.out.println("please insert the new minimum amount to get discount(or @none to keep it unchanged):");
         String minAmountStr = reader.nextLine();
@@ -1297,41 +1249,24 @@ public class Main {
         System.out.println("please insert the new percentage of discount(or @none to keep it unchanged):");
         String discountStr = reader.nextLine();
         Double discount = discountStr.equals("@none") ? null : Double.parseDouble(discountStr);
-        try {
-            AgreementsInterface.editItemAgreement(providerId, catalogItemId, minAmount, discount);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
+        AgreementsInterface.editItemAgreement(providerId, catalogItemId, minAmount, discount);
+        System.out.println("item modified successfully");
     }
     private static void removeItemFromAgreement(String providerId){
         System.out.println("please insert the catalog item id(to print all the items of agreement insert @print):");
         String catalogItemId = reader.nextLine();
         if(catalogItemId.equals("@print")){
-            try {
-                String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
-                System.out.println(stringifiedItems);
-                System.out.println("now insert the catalog item id: ");
-                catalogItemId = reader.nextLine();
-            }
-            catch (Exception e){
-                System.out.println("error. " + e.getMessage());
-                return;
-            }
-        }
-        try {
-            AgreementsInterface.removeItemFromAgreement(providerId, catalogItemId);
-        } catch (Exception e) {
-            System.out.println("error. " + e.getMessage());
-        }
-    }
-    private static void printItemsOfAgreement(String providerId){
-        try {
             String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
             System.out.println(stringifiedItems);
+            System.out.println("now insert the catalog item id: ");
+            catalogItemId = reader.nextLine();
         }
-        catch (Exception e){
-            System.out.println("error. " + e.getMessage());
-        }
+        AgreementsInterface.removeItemFromAgreement(providerId, catalogItemId);
+        System.out.println("item removed successfully");
+    }
+    private static void printItemsOfAgreement(String providerId){
+        String stringifiedItems = AgreementsInterface.stringifyAgreementItems(providerId);
+        System.out.println(stringifiedItems);
     }
 
     static void enterEmployee(int store_num) {
@@ -1701,6 +1636,12 @@ public class Main {
 
     }
 
+    private static int validateRole(String message, String wantedRole){
+        System.out.println(message);
+        int employeeId = Integer.parseInt(reader.nextLine());
+        ManagerController.validateRole(employeeId, wantedRole);
+        return employeeId;
+    }
     private static void selectDay(){
 
         System.out.println("Initializing System..");
@@ -1727,7 +1668,7 @@ public class Main {
         }
         return storeId;
     }
-    private static String selectOrder(int storeId, String providerId) throws Exception{
+    private static String selectOrder(int storeId, String providerId){
         System.out.println("please insert the id of the order that you want to manage her items(to print all the orders of provider insert @print): ");
         String orderId = reader.nextLine();
         if(orderId.equals("@print")){

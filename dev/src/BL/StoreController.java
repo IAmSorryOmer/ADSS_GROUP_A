@@ -531,7 +531,7 @@ public class StoreController {
             store.Load(mapper);
         store.acceptDelivery(mapper, orderId, truckId, storeId, weight);
     }
-    public static void validateSpecialRole(int employeeId, String specialRole) throws Exception {
+    public static void validateSpecialRole(int employeeId, String specialRole) {
         mapper.isSpecialRole(employeeId,specialRole);
     }
 }
