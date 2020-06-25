@@ -221,9 +221,9 @@ public class Store {
             }
 
         }
-
-
-
+    }
+    public void acceptDelivery(Mapper mapper, String orderId, String truckId, int storeId, int weight){
+        deliveryController.acceptDelivery(mapper, orderId, truckId, storeId, weight);
     }
 }
 

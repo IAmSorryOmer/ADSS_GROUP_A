@@ -17,7 +17,7 @@ public class StoreController {
     static private Mapper mapper;
     static private String sundayDate;
 
-    static LocalDate current_date;
+    public static LocalDate current_date;
     static int Day_In_Week = 1;
 
     public StoreController()
@@ -472,8 +472,8 @@ public class StoreController {
 
 
     public static void initializeStores(int month, int day,int storeNumber) {
-
-
+        current_date = LocalDate.of(2020, month, day);
+        mapper.saveCurrent_Date(current_date.toString());
         for (int i =1; i <= storeNumber; i++)
         {
             Store store = new Store(i,mapper);
@@ -481,7 +481,6 @@ public class StoreController {
             stores.add(store);
             store.initializeDays(month,day,i,mapper);
             store.setHasLoaded(true);
-
         }
 
     }
@@ -524,19 +523,12 @@ public class StoreController {
         }
         //Checks every order and for each order set for today sets a delivery date
        ;
-
-
-
-
-
-
-
-
     }
-
-
-
-
-
+    public static void acceptDelivery(String orderId, String truckId, int storeId, int weight){
+        Store store = getStore(storeId);
+        if (!store.hasLoaded())
+            store.Load(mapper);
+        store.acceptDelivery(mapper, orderId, truckId, storeId, weight);
+    }
 }
 

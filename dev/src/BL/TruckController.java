@@ -32,7 +32,7 @@ public class TruckController {
 
 		}
 	}
-	private Truck getTruck(String ID){
+	public Truck getTruck(String ID){
 		for (Truck truck:trucks){
 			if (truck.getId().equals(ID)){
 				return truck;

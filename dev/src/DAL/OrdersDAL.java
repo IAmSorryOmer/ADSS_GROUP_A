@@ -87,20 +87,6 @@ public class OrdersDAL {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
-    public static void editOrderDeliveryDetails(SingleProviderOrder order, LocalDate deliveryDate, int driverId, int shift){
-        String sql = "update SingleProviderOrder set DeliveryDate = ?, DriverId = ?, Shift = ? where OrderId = ?";
-        try {
-            PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, deliveryDate == null ? null : deliveryDate.toString());
-            preparedStatement.setInt(2, driverId);
-            preparedStatement.setInt(3, shift);
-            preparedStatement.setString(4, order.getOrderID());
-            preparedStatement.executeUpdate();
-        }
-        catch (SQLException e) {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-    }
     public static void removeItemFromOrder(SingleProviderOrder order, CatalogItem item){
         String sql = "delete from CatalogToOrders where OrderId = ? and CatalogNumber = ?";
         try {
@@ -176,12 +162,11 @@ public class OrdersDAL {
         }
     }
 
-    public static List<SingleProviderOrder> getNotScheduledOrders(int storeId, LocalDate date){
-        String sql = "select * from SingleProviderOrder where OrderDays = 0 and DeliveryDate is null and OrderDate = ? and StoreId = ?;";
+    public static List<SingleProviderOrder> getNotScheduledOrders(int storeId){
+        String sql = "select * from SingleProviderOrder where OrderDays = 0 and DeliveryDate is null and StoreId = ?;";
         try {
             PreparedStatement preparedStatement = DBHandler.getConnection().prepareStatement(sql);
-            preparedStatement.setString(1, date.toString());
-            preparedStatement.setInt(2, storeId);
+            preparedStatement.setInt(1, storeId);
             List<SingleProviderOrder> resultList = resultSetToOrders(preparedStatement.executeQuery());
             return resultList;
         }

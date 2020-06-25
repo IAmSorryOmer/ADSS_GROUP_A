@@ -76,7 +76,7 @@ public class DiscountController {
         List<Discount> discounts = getAllProductDiscounts(product, retail);
         double max = discounts.stream()
                 .reduce(0.0, (accumulatedDouble, discount) -> {
-                    if(LocalDate.now().compareTo(discount.getFromDate()) >= 0 && LocalDate.now().compareTo(discount.getToDate()) <= 0) {
+                    if(StoreController.current_date.compareTo(discount.getFromDate()) >= 0 && StoreController.current_date.compareTo(discount.getToDate()) <= 0) {
                         return Math.max(accumulatedDouble, discount.getPercentage());
                     }
                     return accumulatedDouble;

@@ -250,25 +250,13 @@ public class ManagerController {
         return  StoreController.getSundayDate();
     }
 
-
-
-
-    //AGREEMENT INTERFACE
-    public static void addItemToAgreement(String providerId, String catalogItemId, int minAmount, double discount){
-        AgreementController.addItem(providerId, catalogItemId, minAmount, discount);
+    public static void acceptDelivery(String orderId, String truckId, int storeId, int weight){
+        StoreController.acceptDelivery(orderId, truckId, storeId, weight);
     }
 
-    public static void editItemAgreement(String providerId, String catalogItemId, Integer minAmount, Double discount){
-        AgreementController.editItem(providerId, catalogItemId, minAmount, discount);
+    public static void validateRole(int employeeId, String specialRole){
+        //TODO
     }
-
-    public static void removeItemFromAgreement(String providerId, String catalogItemId){
-        AgreementController.removeItemByIds(providerId, catalogItemId);
-    }
-    public static String stringifyAgreementItems(String providerId){
-        return AgreementController.stringifyAgreementItems(providerId);
-    }
-
 
 
 

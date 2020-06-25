@@ -231,6 +231,27 @@ public class DeliveryController {
 		tControl.printAllTrucks();
 	}
 
+	public void acceptDelivery(Mapper mapper, String orderId, String truckId, int storeId, int weight){
+		SingleProviderOrder singleProviderOrder = SingleProviderOrderController.getOrderById(orderId);
+		if(singleProviderOrder == null || singleProviderOrder.getStoreId() != storeId ||
+			singleProviderOrder.getDeliveryDate() == null || singleProviderOrder.getDeliveryDate().compareTo(StoreController.current_date) > 0 ||
+			singleProviderOrder.isShipped()){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for store number " + storeId + " which is waiting to be accepted");
+		}
+		Truck truck = tControl.getTruck(truckId);
+		if(truck == null){
+			throw new IllegalArgumentException("there is no truck with id " + truckId + " for store number " + storeId);
+		}
+		if(weight < 0){
+			throw new IllegalArgumentException("the weight must be positive");
+		}
+		if(weight > truck.getMaxWeight()){
+			throw new IllegalArgumentException("the truck with number " + truckId + " cant transport order with weight of " + weight);
+		}
+		addDelivery(mapper, truckId, weight, singleProviderOrder, storeId);
+		singleProviderOrder.setShipped(true);
+		SingleProviderOrderController.editOrder(singleProviderOrder);
+	}
 }
 
 

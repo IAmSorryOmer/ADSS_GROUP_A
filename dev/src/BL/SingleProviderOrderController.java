@@ -166,22 +166,15 @@ public class SingleProviderOrderController {
 		OrdersDAL.editItemOnOrder(singleProviderOrder, catalogItem, orderAmount);
 	}
 
-	public static void rescheduleOrderDelivery(String orderId){
+	public static void rescheduleOrderDelivery(String orderId, int storeId){
 		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
-		if (singleProviderOrder.getDeliveryDate() != null){
-			throw new IllegalArgumentException("The order" + orderId + "already has a valid delivery date ("+singleProviderOrder.getDeliveryDate()+").");
+		if(singleProviderOrder == null || singleProviderOrder.getStoreId() != storeId ||
+			singleProviderOrder.getDeliveryDate() != null || singleProviderOrder.isAutomatic() ||
+			singleProviderOrder.isShipped()){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for store number " + storeId + " which waiting to reschedule");
 		}
-		ensureTimesAutomatic(singleProviderOrder);
-		ensureTimes(singleProviderOrder);
 		scheduleOrder(singleProviderOrder, singleProviderOrder.getProvider());
-		OrdersDAL.editOrderDeliveryDetails(singleProviderOrder, singleProviderOrder.getDeliveryDate(), singleProviderOrder.getDriverId(), singleProviderOrder.getShift());
-	}
-
-	public static void removeOrder(String orderId){
-		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
-		ensureTimesAutomatic(singleProviderOrder);
-		ensureTimes(singleProviderOrder);
-		OrdersDAL.removeOrder(singleProviderOrder);
+		OrdersDAL.editOrder(singleProviderOrder);
 	}
 
 	public static void RemoveFromOrder (String providerId, String orderId, int storeId, String ItemID) {
@@ -280,6 +273,21 @@ public class SingleProviderOrderController {
 		return toReturn.toString();
 	}
 
+	public static String printOrderToHandle(String orderId, int storeId){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || singleProviderOrder.getStoreId() != storeId ||
+			!singleProviderOrder.isShipped() || singleProviderOrder.isHasArrived() || singleProviderOrder.isAutomatic()){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for store number " + storeId + " which waiting to be handled");
+		}
+		StringBuilder toReturn = new StringBuilder();
+		for(Map.Entry<CatalogItem, Integer> entry : singleProviderOrder.getOrderItems().entrySet()) {
+			CatalogItem catalogItem = entry.getKey();
+			toReturn.append("Item Id: ").append(catalogItem.getCatalogNum()).append(", Item Name: ").append(catalogItem.GetDescribedProductName()).
+					append(", amount: ").append(entry.getValue()).append("\n");
+		}
+		return toReturn.toString();
+	}
+
 	public static void autoOrderListOfProductsInStore(int storeId, List<ProductDetails> productDetailsToOrder){
 		//TODO: Maybe change this
 		HashMap<Provider, SingleProviderOrder> orders = new HashMap<>();
@@ -304,6 +312,45 @@ public class SingleProviderOrderController {
 			SingleProviderOrderController.createWithProviderObj(entry.getValue(), entry.getKey());
 		}
 	}
+
+	public static void modifyAmountsBeforeAccept(String orderId, int storeId, List<Pair<String, Integer>> items){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || singleProviderOrder.getStoreId() != storeId ||
+				!singleProviderOrder.isShipped() || singleProviderOrder.isHasArrived() || singleProviderOrder.isAutomatic()){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for store number " + storeId + " which waiting to be handled");
+		}
+		List<Pair<CatalogItem, Integer>> itemsToModify = new LinkedList<>();
+		for(Pair<String, Integer> pair : items){
+			CatalogItem catalogItem = CatalogItemController.getCatalogItemById(pair.getFirst());
+			if(catalogItem == null || !singleProviderOrder.isItemExist(catalogItem)){
+				throw new IllegalArgumentException("the item with id " + pair.getFirst() + " isnt exist or not included in the order");
+			}
+			if(pair.getSecond() > singleProviderOrder.getSpecificItemAmount(catalogItem)){
+				throw new IllegalArgumentException("the new amount for item with id " + pair.getFirst() + " is higher than the original which is invalid");
+			}
+			itemsToModify.add(new Pair<>(catalogItem, pair.getSecond()));
+		}
+		for(Pair<CatalogItem, Integer> pair : itemsToModify){
+			singleProviderOrder.editItemList(pair.getFirst(), pair.getSecond());
+			OrdersDAL.editItemOnOrder(singleProviderOrder, pair.getFirst(), pair.getSecond());
+		}
+	}
+
+	public static void acceptOrder(String orderId, int storeId){
+		SingleProviderOrder singleProviderOrder = getOrderById(orderId);
+		if(singleProviderOrder == null || singleProviderOrder.getStoreId() != storeId ||
+				!singleProviderOrder.isShipped() || singleProviderOrder.isHasArrived() || singleProviderOrder.isAutomatic()){
+			throw new IllegalArgumentException("there is no order with id " + orderId + " for store number " + storeId + " which waiting to be handled");
+		}
+		for(Map.Entry<CatalogItem, Integer> pair : singleProviderOrder.getOrderItems().entrySet()){
+			ProductDetails productDetails = pair.getKey().getProductDetails();
+			for(int i = 1; i <= pair.getValue();i++){
+				Product product = new Product(UUID.randomUUID().toString(), storeId, "storage", true, StoreController.current_date.plusDays(productDetails.getDaysToExpiration()), false, productDetails);
+				ProductController.addProductWithObject(product, productDetails);
+			}
+		}
+	}
+
 	public static List<SingleProviderOrder> getAllStoreOrdersOfProvider(int storeId, String providerId){
 		Provider provider = ProviderController.getProvierByID(providerId);
 		if(provider == null)
@@ -317,8 +364,8 @@ public class SingleProviderOrderController {
 		return OrdersDAL.getOrdersOfStore(storeId);
 	}
 
-	public static List<SingleProviderOrder> getNotScheduledOrders(int storeId, LocalDate date){
-		return OrdersDAL.getNotScheduledOrders(storeId, date);
+	public static List<SingleProviderOrder> getNotScheduledOrders(int storeId){
+		return OrdersDAL.getNotScheduledOrders(storeId);
 	}
 
 	public static List<SingleProviderOrder> getNotShippedOrders(int storeId, LocalDate date){

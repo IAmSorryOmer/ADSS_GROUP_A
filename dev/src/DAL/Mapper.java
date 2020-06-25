@@ -102,7 +102,7 @@ public class Mapper {
     public void updateShiftManagerID(int id){
 
         try {
-            String query = "UPDATE Assigments_To_Shifts SET id=0  WHERE id=? AND role=\"shift manager\"";
+            String query = "UPDATE Assigments_To_Shifts SET id=0  WHERE id=? AND role='shift manager'";
             PreparedStatement stmt = conn.prepareStatement(query);
             stmt.setInt(1, id);
             stmt.executeUpdate();
@@ -292,24 +292,6 @@ public class Mapper {
         }
     }
 
-    public List<DProduct> loadProducts(int number) {
-        List<DProduct> dProducts = new LinkedList<>();
-        try {
-            String query = "SELECT name,quantity  FROM Products WHERE number=?";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setInt(1, number);
-            ResultSet rs = stmt.executeQuery();
-
-            // loop through the result set
-            while (rs.next()) {
-                dProducts.add(new DProduct(rs.getString("name"), rs.getInt("quantity")));
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-
-        return dProducts;
-    }
 
 
 
@@ -424,7 +406,9 @@ public class Mapper {
     {
         List<DRole_Needed> dRoles_need = new LinkedList<>();
         try {
+            //TODO this query has errors
             String query = "SELECT role, needed FROM Role_Shift WHERE date =" + date + " AND store_num=" + store_num + " AND day_part=\"" + day_part + "\"";
+            //String query = "SELECT role, needed FROM Role_Shift WHERE date =" + date + " AND store_num=" + store_num + " AND day_part=" + day_part;
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(query);
 
@@ -682,30 +666,6 @@ public class Mapper {
     }
 
 
-    public void saveDeliveryNumberedFile(int id, String number){
-        try {
-            String query = "INSERT INTO Deliveries_NumberedFiles(number, deliveryId) VALUES(?,?)";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, number);
-            stmt.setInt(2, id);
-            stmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
-    public void saveProduct(String number, String name, int quantity, int deliveryId){
-        try{
-            String query = "INSERT INTO Products(name, quantity, number, deliveryId) VALUES(?,?,?,?)";
-            PreparedStatement stmt = conn.prepareStatement(query);
-            stmt.setString(1, name);
-            stmt.setInt(2, quantity);
-            stmt.setString(3, number);
-            stmt.setInt(4,deliveryId);
-            stmt.executeUpdate();
-        }catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-    }
 
     public void updateEmployee(String name, int id, String bankAccount, int salary, String employee_conditions) {
 
@@ -751,15 +711,10 @@ public class Mapper {
 
     public void setAssignments_History(String date){
         try{
-            String query="UPDATE Assignments_To_Shifts SET is_history=1 WHERE date=?";
+            String query="UPDATE Assigments_To_Shifts SET is_history=1 WHERE date=?";
             PreparedStatement stmt=conn.prepareStatement(query);
             stmt.setString(1,date);
             stmt.executeUpdate();
-
-            String query2="UPDATE Role_Shift SET is_history=1 WHERE date=?";
-            PreparedStatement stmt2=conn.prepareStatement(query2);
-            stmt2.setString(1,date);
-            stmt2.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

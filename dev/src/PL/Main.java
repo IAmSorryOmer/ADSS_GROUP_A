@@ -4,6 +4,7 @@ import BL.StoreController;
 import DAL.DBHandler;
 import Entities.*;
 import IL.*;
+import javafx.scene.control.Alert;
 
 import java.lang.annotation.RetentionPolicy;
 import java.time.LocalDate;
@@ -36,7 +37,7 @@ public class Main {
         }
 
         //CHOOSE ROLE IN THE SYSTEM
-        String[] options = new String[]{"General actions", "Store specific actions", "exit"};
+        String[] options = new String[]{"General actions", "Store specific actions", "pass day", "exit"};
         while (true) {
             System.out.println("Hello, Welcome To Super-Li System");
             System.out.println("Choose which actions you want to preform:");
@@ -50,6 +51,9 @@ public class Main {
                     case 2:
                         storeSpecificMenu();
                         break;
+                    case 3:
+                        break;
+                        //ManagerController.
                     case 3:
                         return;
                     default:
@@ -80,6 +84,7 @@ public class Main {
                         break;
                     case 4:
                         manageProvidersMenu();
+                        break;
                     case 5:
                         manageAgreementsMenu();
                         break;
@@ -172,7 +177,7 @@ public class Main {
     }
 
     private static void stockKeeperMenu(int storeId){
-        String[] options = new String[]{"products", "orders", "reports(including auto order missing products)", "return to specific store actions menu"};
+        String[] options = new String[]{"products", "orders", "reports(including auto order missing products)", "show alerts(orders waiting to be accepted to stock)", "accept waiting orders", "return to specific store actions menu"};
         while (true) {
             System.out.println("please chooses the category that you want to manage:");
             printOptions(options);
@@ -189,6 +194,44 @@ public class Main {
                         manageReportsMenu(storeId);
                         break;
                     case 4:
+                        Alerts.stockKeeperAlert(storeId);
+                        break;
+                    case 5:
+                        Alerts.acceptSupply(storeId);
+                        break;
+                    case 6:
+                        return;
+                    default:
+                        System.out.println("choose an option between 1 to 6");
+                }
+            } catch (Exception e) {
+                System.out.println("error. " + e.getMessage());
+            }
+        }
+
+    }
+
+    private static void logisticManagerMenu(int storeId){
+        System.out.println("please insert employee id:");
+        String employeeId = reader.nextLine();
+
+        String[] options = new String[]{"manage deliveries", "show alerts(orders which should be delivered today)", "accept deliveries", "return to specific store actions menu"};
+        while (true) {
+            System.out.println("please chooses action to preform:");
+            printOptions(options);
+            try {
+                int option = Integer.parseInt(reader.nextLine());
+                switch(option){
+                    case 1:
+                        manageDeliveries(storeId);
+                        break;
+                    case 2:
+                        Alerts.logisticManagerAlertMenu(storeId);
+                        break;
+                    case 3:
+                        Alerts.accceptDelivery(storeId);
+                        break;
+                    case 4:
                         return;
                     default:
                         System.out.println("choose an option between 1 to 4");
@@ -200,31 +243,8 @@ public class Main {
 
     }
 
-    private static void logisticManagerMenu(int storeId){
-        String[] options = new String[]{"manage deliveries", "return to specific store actions menu"};
-        while (true) {
-            System.out.println("please chooses action to preform:");
-            printOptions(options);
-            try {
-                int option = Integer.parseInt(reader.nextLine());
-                switch(option){
-                    case 1:
-                        manageDeliveries(storeId);
-                        break;
-                    case 2:
-                        return;
-                    default:
-                        System.out.println("choose an option between 1 to 2");
-                }
-            } catch (Exception e) {
-                System.out.println("error. " + e.getMessage());
-            }
-        }
-
-    }
-
     private static void humanResourceManagerMenu(int storeId){
-        String[] options = new String[]{"manage workers", "return to specific store actions menu"};
+        String[] options = new String[]{"manage workers", "show alerts(orders which should be rescheduled due to shifts problems)", "reschedule order", "return to specific store actions menu"};
         while (true) {
             System.out.println("please chooses action to preform:");
             printOptions(options);
@@ -235,9 +255,15 @@ public class Main {
                         manageWorkers(storeId);
                         break;
                     case 2:
+                        Alerts.humanResourceAlert(storeId);
+                        break;
+                    case 3:
+                        Alerts.rescheduleDelivery(storeId);
+                        break;
+                    case 4:
                         return;
                     default:
-                        System.out.println("choose an option between 1 to 2");
+                        System.out.println("choose an option between 1 to 4");
                 }
             } catch (Exception e) {
                 System.out.println("error. " + e.getMessage());
@@ -858,7 +884,7 @@ public class Main {
                 }
             }
         }
-        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, storeId, orderId, answer ? null:LocalDate.now(), orderDays);
+        SingleProviderOrder singleProviderOrder = new SingleProviderOrder(null, storeId, orderId, answer ? null:StoreController.current_date, orderDays);
         OrdersInterface.SingleProviderOrderCreator(singleProviderOrder, providerId);
     }
     private static void printSpecificOrder(int storeId, String providerId){

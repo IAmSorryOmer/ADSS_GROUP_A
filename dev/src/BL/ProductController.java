@@ -22,7 +22,7 @@ public class ProductController {
             throw new IllegalArgumentException("product with that id " + product.getId() + " already exists");
         }
         product.setType(productDetails);
-        product.setExpirationDate(LocalDate.now().plusDays(productDetails.getDaysToExpiration()));
+        product.setExpirationDate(StoreController.current_date.plusDays(productDetails.getDaysToExpiration()));
         ProductDAL.insertProduct(product);
     }
 
